@@ -1,0 +1,35 @@
+\contentsline {chapter}{\hspace {-1.5em} {ACKNOWLEDGMENTS} \vspace {12pt}}{ii}
+\contentsline {chapter}{\hspace {-1.5em} LIST OF TABLES \vspace {12pt}}{iv}
+\contentsline {chapter}{\hspace {-1.5em} LIST OF FIGURES \vspace {12pt}}{v}
+\contentsline {chapter}{\hspace {-1.5em} ABSTRACT}{vi}
+\vspace {12pt} \hspace {-1.8em} CHAPTER \vspace {-1em}
+\vskip 12\p@ \relax 
+\contentsline {chapter}{\uppercase {\numberline {1}Chap1}}{1}
+\contentsline {section}{\numberline {1.1}Introduction}{1}
+\contentsline {section}{\numberline {1.2}Problem Statement}{2}
+\contentsline {subsection}{\numberline {1.2.1}HPX}{3}
+\contentsline {section}{\numberline {1.3}Literature Review}{3}
+\contentsline {section}{\numberline {1.4}Blaze}{6}
+\contentsline {subsubsection}{\numberline {1.4.0.1}Blazemark}{7}
+\contentsline {subsubsection}{\numberline {1.4.0.2}Implementation of HPX Backend}{8}
+\contentsline {paragraph}{\numberline {1.4.0.2.1}HPX \textit {for\textunderscore loop}}{8}
+\contentsline {paragraph}{\numberline {1.4.0.2.2}Intuition}{8}
+\contentsline {section}{\numberline {1.5}Setup}{8}
+\contentsline {section}{\numberline {1.6}methods}{11}
+\vskip 12\p@ \relax 
+\contentsline {chapter}{\uppercase {\numberline {2}Chap2}}{12}
+\vskip 12\p@ \relax 
+\contentsline {chapter}{\uppercase {\numberline {3}Chap3}}{13}
+\vskip 12\p@ \relax 
+\contentsline {chapter}{\uppercase {\numberline {4}Chap4}}{14}
+\vskip 12\p@ \relax 
+\contentsline {chapter}{\uppercase {\numberline {5}Chap5}}{15}
+\vskip 12\p@ \relax 
+\contentsline {chapter}{\uppercase {\numberline {6}Chap6}}{16}
+\vspace {12pt}
+\contentsline {chapter}{\hspace {-1.6em} REFERENCES}{17}
+\vspace {12pt} \hspace {-1.8em} APPENDIX \vspace {-1em}
+\vskip 12\p@ \relax 
+\contentsline {chapter}{\uppercase {\numberline {A}Copyright Information}}{21}
+\vspace {12pt}
+\contentsline {chapter}{\hspace {-1.5em} VITA}{22}

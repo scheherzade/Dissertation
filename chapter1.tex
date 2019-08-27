@@ -1,0 +1,362 @@
+\section{Introduction}
+
+Linear algebra libraries like ATLAS, SPIRAL,... try to use hardware-specific optimizations to improve their performance. In this work, we are trying to optimize the performance based on the application parameters such as matrix size, operation, and data layout.   
+
+Scientific applications tend to contain a lot of task parallelism, performing same set of operations on different chunks of the data. Using a parallel for-loop for this purpose can lead to significant speed-ups.
+
+Defining chunk as the group of iterations that would be assigned to a
+processor, loop scheduling methods propose different approaches for creation and assignment of these chunks to the processors.
+
+
+Loop scheduling refers to different ways iterations could be assigned to the processors and the order of their execution. 
+The main reason for performance degradation in loop scheduling is load imbalance, which refers to situations where different amount of work is assigned to different processors\cite{ciorba2018openmp}.    
+
+The simplest loop scheduling method is static scheduling, in which, the iterations are divided evenly among all the processors statically, either as a consecutive block -also called cyclic- or in a round-robin manner\cite{liu1994safe}. Since all the assignments happen at compile time or before execution of the application, this method imposes no runtime scheduling overhead. Several factors including interprocessor communication, cache misses, and page faults can lead to different execution times for different iterations, leading to load imbalance among the processors\cite{philip1995increasing}.
+
+In the meanwhile, dynamic scheduling methods postpone the assignment to runtime, which tends to improve load balancing, at the cost of higher scheduling overhead. Some of dynamic scheduling methods include: Pure Self-scheduling, Chunk Self-scheduling, Guided Self-scheduling\cite{polychronopoulos1987guided}, Factoring\cite{hummel1992factoring} and Trapazoid Self-scheduling\cite{tzen1993trapezoid},\cite{liu1994safe}.We briefly go over some of these loop scheduling techniques here.
+
+
+In Pure Self-scheduling everytime a processors becomes idle, it fetches one loop iteration. This approach, while achieving a high load balance, imposes a considerable amount of scheduling overhead when we are dealing with a fine-grain workload, and a large number of iterations. Also frequent access to shared variables like loop index could lead to memory contention\cite{liu1994safe}. 
+
+In order to decrease the high scheduling overhead of Pure Self-scheduling methods, Chunk Self-scheduling method assigns a certain number of iterations(called chunk size) to each idle processor. This method trades lower scheduling overhead with higher load imbalance. Selection of the chunk size plays a very important role in the performance, as so a large chunk size increases the scheduling overhead decreases and causes load imbalance, while a small chunk size increases memory contention and scheduling overhead\cite{liu1994safe}. 
+
+As an adaptive loop scheduling technique, Guided Self-scheduling\cite{polychronopoulos1987guided} divides the remaining number of iterations at each request evenly among the processors, and assigns it to the processor that made the request, while updating the number of remaining iterations. This causes larger number of iterations to be assigned to the processors at the beginning of the loop execution, which results in lower scheduling overhead. The number of iterations assigned to each processor decreases as it approaches to the end of the execution, generating tasks containing only one or two iterations, causing an increase in the scheduling overhead. In order to tackle this issue, a minimum number of chunks could be set to avoid creation of very small chunks\cite{lilja1994exploiting}. 
+
+Very similar to Guided Self-scheduling, Factoring also decreases the chunk size as the loop execution proceeds, with this difference that   
+-dynamic
+-self-scheduling
+-factoring
+
+talk about load balancing and work stealing
+
+
+But each of these methods work well for specific problem. We are looking for a general solution which can automatically decide on the chunk size parameter to achieve the best performance.
+
+
+\section{Problem Statement}
+Importance of compile time configuration on task scheduling
+
+\subsection{HPX}
+HPX\cite{kaiser2014hpx} is a C++ runtime system for parallel and distributed applications based on ParalleX execution model\cite{kaiser2009parallex}. 
+HPX contains 5 main modules: Performance Monitoring System, Local Control Objects(LCOs), Thread Scheduling System, Parcel Transport Layer, Active Global Address Space (AGAS).
+
+
+\section{Literature Review}
+
+Loop scheduling techniques has been extensively studied by different researchers. In \cite{donfack2012hybrid} the authors propose a hybrid static/dynamic method for loop scheduling that improves the performance of dense matrix factorization, compared to both fully static and fully dynamic scheduling. The authors of \cite{donfack2012hybrid}, divide the dependency graph into two subgraphs, one of which is scheduled dynamically and the other one is scheduled statically. The tasks on the critical path are scheduled statically and each thread is forced to prioritize the static tasks\cite{donfack2012hybrid}. They were able to improve data locality and scheduling overhead, while creating a more balanced workload. 
+
+\cite{xue2007locality}
+ \cite{tang1986processor},\cite{polychronopoulos1987guided},\cite{hummel1992factoring},\cite{kruskal1985allocating}
+	
+
+
+
+
+The previous work on predicting the performance of a parallel application mainly focuses on three major types of models: analytical,  trace-based, and empirical models\cite{malakar2018benchmarking}. 
+
+The analytical models\cite{blagojevic2008modeling},\cite{kerbyson2001predictive},\cite{valiant1990bridging}, while providing an arithmetic formula to represent the execution time of an application, require a deep understanding of the application, to apply platform-specific optimizations, and can not be generalized to different domains and architectures\cite{lee2007methods},\cite{sun2017automated},\cite{pllana2007performance}.
+Traced-based models, on the other hand, use the traces collected through instrumentation, to predict the performance. These models, opposed to analytical models, do not rely on an expert's knowledge of the application, but while adding some overhead to the runtime, these models require a large storage space to save the traces, and are hard to interpret\cite{sun2017automated}.   
+In empirical modeling, the results obtained from running an application with a set of parameters on a specific set of machines to build a model for unknown set of application and system parameters\cite{malakar2018benchmarking}. This type of modeling includes machine learning based approaches.
+
+In \cite{ipek2005approach}, the authors use neural networks to predict the performance focusing on SMG2000 application, a parallel multigrid solver for linear systems\cite{falgout2002hypre}, on two different platforms. Defining application parameters $N_x$, $N_y$, $N_z$, representing the working set size per processor, and $P_x$, $P_y$, $P_z$, describing the three-dimension processor topology, as the features, \cite{ipek2005approach} uses a fully connected neural network to learn the model. Since they use absolute mean square error as the loss function, they use stratification to replicate samples with lower values by a factor which is proportional to their target value. They also apply bagging technique to decrease the variance in the model. As they increase the size of the training set to 5K points, they reach an error rate of 4.9\%. 
+
+As a trace-based model, \cite{sun2017automated} analyzes the abstract syntax tree of the code and collects data through inserting special code for instrumentation when encounters 4 different situations, namely, assignments, branches, loops, and MPI communications. The authors then use 5 different machine learning methods including random forests, support vector machine, and ridge regression to build a prediction model from the collected data. Through applying two filtration processes, they were able to decrease the amount of overhead introduced along with the storage space requirement. Their results were inclined towards random forest, mainly because of the lower impact of categorical features on it, which is helpful in general cases where we do not have any knowledge about the type of features\cite{sun2017automated}.  
+	
+In \cite{malakar2018benchmarking} the authors investigate a set of machine learning techniques, including deep neural networks, support vector machine, decision tree, random forest, and k-nearest neighbor to predict the execution time of 4 different applications. Each of these applications require a certain set of features as input, for example, for the miniMD application in molecular dynamics, the number of processes and the number of atoms were considered as the input features, while for miniAMR, an application for studying adaptive mesh refinement, number of processes and also block sizes in $x$, $y$, and $z$ direction, where used as the input features. While achieving promising results especially for deep neural networks, bagging, and boosting methods, \cite{malakar2018benchmarking} suggest utilizing transfer learning through deep neural networks to predict performance on other platforms.
+	
+	
+\cite{pusukuri2011thread}
+\cite{marin2004cross}
+
+
+Although concentrating on GPUs,	\cite{liu2018runtime} proposes a lightweight machine learning based performance model to choose the number of threads to use for parallelization for a specific data size and operation. With the final goal of improving the training time in a neural network, \cite{liu2018runtime} selects 4 performance features collected by hardware counters namely, number of CPU cycles, number of cache misses, cache accesses for the last cache level, and number of level 1 cache hits. Then they take two different approaches to build their model. In the first on they try 10 different regression models including random forest, and in the second one they use hill climbing algorithm to choose the number of threads. In addition to hardware independent, and not requiring the training process, hill climbing algorithm achieves a much higher accuracy compared to the best performing regression model.
+
+In this paper, we suggest using machine learning to directly predict the optimal chunk-size to achieve the best performance instead of predicting the execution time or the optimal number of cores to run the application on. For this purpose, we have offered a set of general features that are not specific to an application and could easily be extracted at compile time or at run time. Once the data has been collected and our model has been created, the prediction results could be easily applied to a new application with a negligible overhead. 
+
+
+\cite{sun2017automated}
+
+
+	
+As another field to use machine learning, \cite{qawasmeh2015adaptive} collects seven runtime events and uses machine learning not to predict the performance, but to schedule the tasks. These events include, task creation, suspension, execution, completion, implicit/explicit barrier, parallel region, and finally loop/master/single region runtime events, collected through the OMPT using ORA API. Experimenting with four different machine learning techniques, including support vector machine, random forest, neural networks, and naive bayes, they would select one specific task pool configuration out of the three pre-defined options as the final classification result. Testing this framework on a real life molecular dynamics application, they observed an up to 31\% improvement in performance. 
+
+
+Compiler-based methods:
+
+The authors of \cite{wang2009mapping} propose using machine learning to predict the optimal number of threads, and also the optimal scheduling policy for running an OpenMP application. Through that, they were able to develop an automatic compiler-based method to map a parallel application to a multicore processor. They collect three type of features namely, code, data, and run-time features. Code features are extracted from the code directly, and they include cycles per instruction, number of branches, load and store instructions, and computations per instruction. While the code features could be collected statically at compile time, the data and run-time features are collected through low-cost profiling runs. This group of features include loop iteration count, branch miss rate, and $L1$ data cache miss rate. The authors of \cite{wang2009mapping} then use an artificial neural network to predict the speedup achieved for a program with certain number of threads, and at the same time they use a support vector machine model to predict the best scheduling policy, out of block, cyclic, dynamic, and guided scheduling policies, for an unseen program.
+
+
+
+	
+	
+	
+	
+\cite{treibig2012performance} 
+profiling information about the application on a given architecture
+\cite{cammarota2012just},\cite{zhang2005runtime},\cite{thoman2012automatic}
+
+Machine learning models 
+\cite{singh2009real}, \cite{zomaya2001observations}, \cite{qawasmeh2015adaptive}
+
+
+
+	
+
+	
+
+\cite{li2009machine}
+	
+
+\section{Blaze}
+Blaze Math Library\cite{iglberger2012expression} is a C++ library for linear algebra. Blaze, based upon Expression Templates(ETs)\cite{veldhuizen1995expression}, introduces "smart" expression templates(SETs)\cite{iglberger2012expression} to optimize the performance for array-based operations. Expression Templates\cite{veldhuizen1995expression} is an abstraction technique that uses overloaded operators in C++ to prevent creation of unnecessary temporaries, while evaluating arithmetic expressions, in order to improve the performance\cite{iglberger2012expression}. The ET-based approaches create a parse tree of the expression at compile time and postpone the actual evaluation to when the expression is assigned to a target. 
+
+Although being able to achieve promising performances for element-wise operations, these methods are not suitable for high performance computing for the following reasons. Due to their abstraction from both the data type and also the operation itself, they do not allow optimizations specific to the type of the arrays, alongside the operation\cite{iglberger2012expression}. As a solution, Blaze proposes smart ETs with these two main additions: integration with highly optimized compute kernels, and creation of intermediate temporaries when needed\cite{iglberger2012expression}. 
+Some of the ET-based linear algebra libraries are: Blitz++\cite{Blitz}, Boost uBLAS\cite{ublas}, MTL\cite{MTL}, and Eigen\cite{guennebaud2010eigen}. Among these libraries, Eigen, MTL, alongside Blaze, impose different conceptual changes to ETs in order to make them suitable for HPC.    
+
+As stated earlier, as an ET-based library, blaze performs the calculations when an expression is assigned to a target, which is implemented through the \textit{blaze::Assign} function. Depending on the operation and the size of operands, this assignment could be parallelized through four different backends, namely, HPX, OpenMP\cite{dagum1998openmp}, C++ threads, and Boost\cite{Boost}. 
+
+
+
+\subsubsection{Blazemark}
+Blazemark is a benchmark suite provided by Blaze to compare the performance of Blaze with other linear algebra libraries. 
+
+In this experiment we were trying to reach the performance achieved by OpenMP backend. In order to do that we used the benchmarks offered by Blazemark. Starting from level 1 blas functions, we chose daxpy and dvecdvecadd benchmarks to start with. 
+Implementation-wise we introduced two parameters namely block\textunderscore size and chunk\textunderscore size. chunk\textunderscore size was used to specify the number of iterations of the for loop being executed by each thread, and vector\textunderscore block\textunderscore size denotes the number of consecutive elements from the vector on which we perform the operation at each iteration, and matrix \textunderscore block\textunderscore size represents a block of matrix selected at each iteration.
+We ran the benchmarks with different chunk\textunderscore sizes and block\textunderscore sizes. The results suggested a range of values for chunk\textunderscore size and block\textunderscore size with which the results are improved rather than one optimum value. 
+
+
+
+\subsubsection{Implementation of HPX Backend}
+
+Different backends are implemented in Blaze through a for-loop in which at each iteration a section of the vector or matrix is selected and the result of the operation is assigned to the corresponding section of the result. 
+Each backend uses their own method for parallelizing this for loop. For HPX backend the HPX \textit{parallel::for\textunderscore loop} is used for this purpose. 
+Listing ~\ref{hpx_backend} shows the modified implementation of HPX backend in Blaze.
+
+
+
+\begin{lstlisting}[float,floatplacement=H,caption= {Previous implementation of Assign function for HPX backend in Blaze.}, label={old_hpx_backend}]
+template< typename MT1   // Type of the left-hand side dense matrix
+, bool SO1       // Storage order of the left-hand side dense matrix
+, typename MT2   // Type of the right-hand side dense matrix
+, bool SO2       // Storage order of the right-hand side dense matrix
+, typename OP >  // Type of the assignment operation
+void hpxAssign( DenseMatrix<MT1,SO1>& lhs, const DenseMatrix<MT2,SO2>& rhs, OP op )
+{
+using hpx::parallel::for_loop;
+using hpx::parallel::execution::par;
+
+BLAZE_FUNCTION_TRACE;
+
+using ET1 = ElementType_t<MT1>;
+using ET2 = ElementType_t<MT2>;
+
+constexpr bool simdEnabled( MT1::simdEnabled && MT2::simdEnabled && IsSIMDCombinable_v<ET1,ET2> );
+constexpr size_t SIMDSIZE( SIMDTrait< ElementType_t<MT1> >::size );
+
+const bool lhsAligned( (~lhs).isAligned() );
+const bool rhsAligned( (~rhs).isAligned() );
+
+const size_t threads    ( getNumThreads() );
+const ThreadMapping threadmap( createThreadMapping( threads, ~rhs ) );
+
+const size_t addon1     ( ( ( (~rhs).rows() % threadmap.first ) != 0UL )? 1UL : 0UL );
+const size_t equalShare1( (~rhs).rows() / threadmap.first + addon1 );
+const size_t rest1      ( equalShare1 & ( SIMDSIZE - 1UL ) );
+const size_t rowsPerThread( ( simdEnabled && rest1 )?( equalShare1 - rest1 + SIMDSIZE ):( equalShare1 ) );
+
+const size_t addon2     ( ( ( (~rhs).columns() % threadmap.second ) != 0UL )? 1UL : 0UL );
+const size_t equalShare2( (~rhs).columns() / threadmap.second + addon2 );
+const size_t rest2      ( equalShare2 & ( SIMDSIZE - 1UL ) );
+const size_t colsPerThread( ( simdEnabled && rest2 )?( equalShare2 - rest2 + SIMDSIZE ):( equalShare2 ) );
+
+for_loop( par, size_t(0), threads, [&](int i)
+{
+const size_t row   ( ( i / threadmap.second ) * rowsPerThread );
+const size_t column( ( i % threadmap.second ) * colsPerThread );
+
+if( row >= (~rhs).rows() || column >= (~rhs).columns() )
+return;
+
+const size_t m( min( rowsPerThread, (~rhs).rows()    - row    ) );
+const size_t n( min( colsPerThread, (~rhs).columns() - column ) );
+
+if( simdEnabled && lhsAligned && rhsAligned ) {
+auto       target( submatrix<aligned>( ~lhs, row, column, m, n ) );
+const auto source( submatrix<aligned>( ~rhs, row, column, m, n ) );
+op( target, source );
+}
+else if( simdEnabled && lhsAligned ) {
+auto       target( submatrix<aligned>( ~lhs, row, column, m, n ) );
+const auto source( submatrix<unaligned>( ~rhs, row, column, m, n ) );
+op( target, source );
+}
+else if( simdEnabled && rhsAligned ) {
+auto       target( submatrix<unaligned>( ~lhs, row, column, m, n ) );
+const auto source( submatrix<aligned>( ~rhs, row, column, m, n ) );
+op( target, source );
+}
+else {
+auto       target( submatrix<unaligned>( ~lhs, row, column, m, n ) );
+const auto source( submatrix<unaligned>( ~rhs, row, column, m, n ) );
+op( target, source );
+}
+} );
+}
+\end{lstlisting}
+
+\begin{lstlisting}[float,floatplacement=H,caption= {New implementation of Assign function for HPX backend in Blaze.}, label={newd_hpx_backend}]
+template< typename MT1   // Type of the left-hand side dense matrix
+, bool SO1       // Storage order of the left-hand side dense matrix
+, typename MT2   // Type of the right-hand side dense matrix
+, bool SO2       // Storage order of the right-hand side dense matrix
+, typename OP >  // Type of the assignment operation
+void hpxAssign( DenseMatrix<MT1,SO1>& lhs, const DenseMatrix<MT2,SO2>& rhs, OP op )
+{
+using hpx::parallel::for_loop;
+using hpx::parallel::execution::par;
+
+BLAZE_FUNCTION_TRACE;
+
+using ET1 = ElementType_t<MT1>;
+using ET2 = ElementType_t<MT2>;
+
+constexpr bool simdEnabled( MT1::simdEnabled && MT2::simdEnabled && IsSIMDCombinable_v<ET1,ET2> );
+constexpr size_t SIMDSIZE( SIMDTrait< ElementType_t<MT1> >::size );
+
+const bool lhsAligned( (~lhs).isAligned() );
+const bool rhsAligned( (~rhs).isAligned() );
+
+const size_t threads    ( getNumThreads() );
+const size_t numRows ( min( static_cast<std::size_t>( BLAZE_HPX_MATRIX_BLOCK_SIZE_ROW ), (~rhs).rows() ) );
+const size_t numCols ( min( static_cast<std::size_t>( BLAZE_HPX_MATRIX_BLOCK_SIZE_COLUMN ), (~rhs).columns() ) );
+
+const size_t rest1      ( numRows & ( SIMDSIZE - 1UL ) );
+const size_t rowsPerIter( ( simdEnabled && rest1 )?( numRows - rest1 + SIMDSIZE ):( numRows ) );
+const size_t addon1     ( ( ( (~rhs).rows() % rowsPerIter ) != 0UL )? 1UL : 0UL );
+const size_t equalShare1( (~rhs).rows() / rowsPerIter + addon1 );
+
+const size_t rest2      ( numCols & ( SIMDSIZE - 1UL ) );
+const size_t colsPerIter( ( simdEnabled && rest2 )?( numCols - rest2 + SIMDSIZE ):( numCols ) );
+const size_t addon2     ( ( ( (~rhs).columns() % colsPerIter ) != 0UL )? 1UL : 0UL );
+const size_t equalShare2( (~rhs).columns() / colsPerIter + addon2 );
+
+hpx::parallel::execution::dynamic_chunk_size chunkSize ( BLAZE_HPX_MATRIX_CHUNK_SIZE );
+
+for_loop( par.with( chunkSize ), size_t(0), equalShare1 * equalShare2, [&](int i)
+{
+const size_t row   ( ( i / equalShare2 ) * rowsPerIter );
+const size_t column( ( i % equalShare2 ) * colsPerIter );
+
+if( row >= (~rhs).rows() || column >= (~rhs).columns() )
+return;
+
+const size_t m( min( rowsPerIter, (~rhs).rows()    - row    ) );
+const size_t n( min( colsPerIter, (~rhs).columns() - column ) );
+
+if( simdEnabled && lhsAligned && rhsAligned ) {
+auto       target( submatrix<aligned>( ~lhs, row, column, m, n ) );
+const auto source( submatrix<aligned>( ~rhs, row, column, m, n ) );
+op( target, source );
+}
+else if( simdEnabled && lhsAligned ) {
+auto       target( submatrix<aligned>( ~lhs, row, column, m, n ) );
+const auto source( submatrix<unaligned>( ~rhs, row, column, m, n ) );
+op( target, source );
+}
+else if( simdEnabled && rhsAligned ) {
+auto       target( submatrix<unaligned>( ~lhs, row, column, m, n ) );
+const auto source( submatrix<aligned>( ~rhs, row, column, m, n ) );
+op( target, source );
+}
+else {
+auto       target( submatrix<unaligned>( ~lhs, row, column, m, n ) );
+const auto source( submatrix<unaligned>( ~rhs, row, column, m, n ) );
+op( target, source );
+}
+} );
+}
+\end{lstlisting}
+
+\paragraph{HPX \textit{for\textunderscore loop}}
+HPX \textit{for\textunderscore loop} takes an execution policy as first argument, which is set to \textit{dynamic\textunderscore chunk\textunderscore size} execution policy in case of HPX backend for Blaze.
+
+
+
+\paragraph{Intuition}
+It's hard to write a code that performs very well for all the application, here we are interested to make the whole process as automatic as possible(without interference of a human expert), so that scientists could run their applications which highly depend on linear algebra libraries 
+
+\section{Setup}
+Marvin:
+cache level 1
+coherency line size: 64
+number of sets: 512
+ways of associativity: 8
+type: Instruction
+size: 32K
+
+cache level 2
+coherency line size: 64
+number of sets: 512
+ways of associativity: 8
+type: Unified
+size: 256K
+
+cache level 3
+coherency line size: 64
+number of sets: 512
+ways of associativity: 20
+type: Unified
+size: 20480K
+
+
+Trillian:
+cache level 1
+coherency line size: 64
+number of sets: 64
+ways of associativity: 4
+type: Data
+size: 16K
+
+cache level 1
+coherency line size: 64
+number of sets: 512
+ways of associativity: 2
+type: Instruction
+size: 64K
+
+cache level 2
+coherency line size: 64
+number of sets: 2048
+ways of associativity: 16
+type: Unified
+size: 2048K
+
+cache level 3
+coherency line size: 64
+number of sets: 2048
+ways of associativity: 48
+type: Unified
+size: 6144K
+\section{methods}
+
+
+
+
+
+
+
+
+
+
+
+
+
+To start, after collecting the data I tried to build a simple regression model to predict the performance based on the input features, only for the 'dmatdmatadd' benchmark. 
+
+features:
+
+option1: Random Forest
+
+option2: neural networks
+
+option3: XGBoost
