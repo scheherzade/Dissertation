@@ -9,29 +9,35 @@
 \contentsline {section}{\numberline {1.2}Problem Statement}{3}% 
 \contentsline {subsection}{\numberline {1.2.1}HPX}{3}% 
 \contentsline {section}{\numberline {1.3}Literature Review}{3}% 
-\contentsline {section}{\numberline {1.4}Blaze}{6}% 
-\contentsline {subsubsection}{\numberline {1.4.0.1}Blazemark}{7}% 
-\contentsline {subsubsection}{\numberline {1.4.0.2}Implementation of HPX Backend}{8}% 
-\contentsline {paragraph}{\numberline {1.4.0.2.1}HPX \textit {for\textunderscore loop}}{8}% 
-\contentsline {paragraph}{\numberline {1.4.0.2.2}Intuition}{8}% 
-\contentsline {section}{\numberline {1.5}Setup}{8}% 
-\contentsline {section}{\numberline {1.6}methods}{11}% 
+\contentsline {section}{\numberline {1.4}Background}{6}% 
+\contentsline {subsection}{\numberline {1.4.1}Task Granularity}{6}% 
+\contentsline {subsection}{\numberline {1.4.2}Universal Scalibility Law}{7}% 
+\contentsline {section}{\numberline {1.5}Blaze}{8}% 
+\contentsline {subsection}{\numberline {1.5.1}Parallelization in Blaze}{9}% 
+\contentsline {subsubsection}{\numberline {1.5.1.1}Implementation of HPX Backend}{9}% 
+\contentsline {paragraph}{\numberline {1.5.1.1.1}HPX \textit {for\textunderscore loop}}{9}% 
+\contentsline {paragraph}{\numberline {1.5.1.1.2}Intuition}{9}% 
+\contentsline {section}{\numberline {1.6}Setup}{12}% 
+\contentsline {section}{\numberline {1.7}methods}{12}% 
 \vskip 12\p@ \relax 
-\contentsline {chapter}{\uppercase {\numberline {2}Chap2}}{12}% 
-\contentsline {subsection}{\numberline {2.0.1}Experiments}{12}% 
-\contentsline {subsection}{\numberline {2.0.2}L2 cache miss analysis}{12}% 
+\contentsline {chapter}{\uppercase {\numberline {2}Chap2}}{13}% 
+\contentsline {subsubsection}{\numberline {2.0.0.1}Blazemark}{13}% 
+\contentsline {subsection}{\numberline {2.0.1}Method}{13}% 
+\contentsline {subsection}{\numberline {2.0.2}Experiments}{13}% 
+\contentsline {subsection}{\numberline {2.0.3}Observation}{14}% 
+\contentsline {subsection}{\numberline {2.0.4}L2 cache miss analysis}{14}% 
 \vskip 12\p@ \relax 
-\contentsline {chapter}{\uppercase {\numberline {3}Chap3}}{13}% 
+\contentsline {chapter}{\uppercase {\numberline {3}Chap3}}{15}% 
 \vskip 12\p@ \relax 
-\contentsline {chapter}{\uppercase {\numberline {4}Chap4}}{14}% 
+\contentsline {chapter}{\uppercase {\numberline {4}Chap4}}{16}% 
 \vskip 12\p@ \relax 
-\contentsline {chapter}{\uppercase {\numberline {5}Chap5}}{15}% 
+\contentsline {chapter}{\uppercase {\numberline {5}Chap5}}{17}% 
 \vskip 12\p@ \relax 
-\contentsline {chapter}{\uppercase {\numberline {6}Chap6}}{16}% 
+\contentsline {chapter}{\uppercase {\numberline {6}Chap6}}{18}% 
 \vspace {12pt}
-\contentsline {chapter}{\hspace {-1.6em} REFERENCES}{17}% 
+\contentsline {chapter}{\hspace {-1.6em} REFERENCES}{19}% 
 \vspace {12pt} \hspace {-1.8em} APPENDIX \vspace {-1em}
 \vskip 12\p@ \relax 
-\contentsline {chapter}{\uppercase {\numberline {A}Copyright Information}}{21}% 
+\contentsline {chapter}{\uppercase {\numberline {A}Copyright Information}}{23}% 
 \vspace {12pt}
-\contentsline {chapter}{\hspace {-1.5em} VITA}{22}% 
+\contentsline {chapter}{\hspace {-1.5em} VITA}{24}% 

@@ -52,7 +52,7 @@ Loop scheduling techniques has been extensively studied by different researchers
 
 
 
-The previous work on predicting the performance of a parallel application mainly focuses on three major types of models: analytical,  trace-based, and empirical models\cite{malakar2018benchmarking}. 
+The previous work on predicting the performance of a parallel application mainly focuses on three major types of models: analytical, trace-based, and empirical models\cite{malakar2018benchmarking}. 
 
 The analytical models\cite{blagojevic2008modeling},\cite{kerbyson2001predictive},\cite{valiant1990bridging}, while providing an arithmetic formula to represent the execution time of an application, require a deep understanding of the application, to apply platform-specific optimizations, and can not be generalized to different domains and architectures\cite{lee2007methods},\cite{sun2017automated},\cite{pllana2007performance}.
 Traced-based models, on the other hand, use the traces collected through instrumentation, to predict the performance. These models, opposed to analytical models, do not rely on an expert's knowledge of the application, but while adding some overhead to the runtime, these models require a large storage space to save the traces, and are hard to interpret\cite{sun2017automated}.   
@@ -71,7 +71,7 @@ In \cite{malakar2018benchmarking} the authors investigate a set of machine learn
 
 Although concentrating on GPUs,	\cite{liu2018runtime} proposes a lightweight machine learning based performance model to choose the number of threads to use for parallelization for a specific data size and operation. With the final goal of improving the training time in a neural network, \cite{liu2018runtime} selects 4 performance features collected by hardware counters namely, number of CPU cycles, number of cache misses, cache accesses for the last cache level, and number of level 1 cache hits. Then they take two different approaches to build their model. In the first on they try 10 different regression models including random forest, and in the second one they use hill climbing algorithm to choose the number of threads. In addition to hardware independent, and not requiring the training process, hill climbing algorithm achieves a much higher accuracy compared to the best performing regression model.
 
-In this paper, we suggest using machine learning to directly predict the optimal chunk-size to achieve the best performance instead of predicting the execution time or the optimal number of cores to run the application on. For this purpose, we have offered a set of general features that are not specific to an application and could easily be extracted at compile time or at run time. Once the data has been collected and our model has been created, the prediction results could be easily applied to a new application with a negligible overhead. 
+In this paper, we suggest using machine learning to directly predict the optimal chunk size to achieve the best performance instead of predicting the execution time or the optimal number of cores to run the application on. For this purpose, we have offered a set of general features that are not specific to an application and could easily be extracted at compile time or at run time. Once the data has been collected and our model has been created, the prediction results could be easily applied to a new application with a negligible overhead. 
 
 
 \cite{sun2017automated}
@@ -83,7 +83,7 @@ As another field to use machine learning, \cite{qawasmeh2015adaptive} collects s
 
 Compiler-based methods:
 
-The authors of \cite{wang2009mapping} propose using machine learning to predict the optimal number of threads, and also the optimal scheduling policy for running an OpenMP application. Through that, they were able to develop an automatic compiler-based method to map a parallel application to a multicore processor. They collect three type of features namely, code, data, and run-time features. Code features are extracted from the code directly, and they include cycles per instruction, number of branches, load and store instructions, and computations per instruction. While the code features could be collected statically at compile time, the data and run-time features are collected through low-cost profiling runs. This group of features include loop iteration count, branch miss rate, and $L1$ data cache miss rate. The authors of \cite{wang2009mapping} then use an artificial neural network to predict the speedup achieved for a program with certain number of threads, and at the same time they use a support vector machine model to predict the best scheduling policy, out of block, cyclic, dynamic, and guided scheduling policies, for an unseen program.
+The authors of \cite{wang2009mapping} propose using machine learning to predict the optimal number of threads, and also the optimal scheduling policy for running an OpenMP application. Through that, they were able to develop an automatic compiler-based method to map a parallel application to a multicore processor. They collect three type of features namely, code, data, and runtime features. Code features are extracted from the code directly, and they include cycles per instruction, number of branches, load and store instructions, and computations per instruction. While the code features could be collected statically at compile time, the data and run-time features are collected through low-cost profiling runs. This group of features include loop iteration count, branch miss rate, and $L1$ data cache miss rate. The authors of \cite{wang2009mapping} then use an artificial neural network to predict the speedup achieved for a program with certain number of threads, and at the same time they use a support vector machine model to predict the best scheduling policy, out of block, cyclic, dynamic, and guided scheduling policies, for an unseen program.
 
 
 
@@ -105,29 +105,60 @@ Machine learning models
 	
 
 \cite{li2009machine}
+
+\section{Background}
+\subsection{Task Granularity}
+Here we define grain size as the amount of work assigned to a HPX thread.
+Studying the effect of grain size on the execution time for a fixed number of cores shows that, for small grain sizes the overhead of creating the tasks, and for large grain sizes the starvation, is the dominant factor affecting the execution time. When grain size is small, to perform same amount of work, higher number of tasks is created, and there is an overhead associated with creation of each task. Although this overhead is very small (order of microseconds), when the amount of work performed by each thread is also small, this overhead becomes significant. A the grain size increases, these overheads are amortized by the time it takes to execute the task. 
+
+On the other hand, when grain size is increases, the number of tasks being created decreases, up until a point where the number of tasks being created is smaller than the number of cores. At this point another factor would interfere with the performance, which is referred to as starvation. Starvation happens where a large amount of work is assigned to some of the cores while the other cores are idling. At this point we are not using our resources efficiently. 
+
+While overheads of creating tasks degrades the performance for small grain sizes and starvation causes the execution time to increase for large grain sizes, there is a region in between where changing the grain size does not affect the performance. 
 	
 
+
+
+\subsection{Universal Scalibility Law}
+Amdahl's law\cite{amdahl1967validity}, states that the amount of achievable speed up by adding more processors when running a parallel application, is restricted by the amount of code that could actually be parallelized. 
+Equation \ref{Amdahl}, shows the relationship between speedup and number of processors, where $\sigma$ is the serial fraction of the execution time, based on Amdahl's law\cite{gunther2007guerrilla}. 
+
+\begin{equation}\label{Amdahl}
+S(p) = \frac{p}{1+\sigma(p-1)}\\
+\end{equation}
+
+On the other hand, Gunther\cite{gunther2007guerrilla} extends Amdahl's law by incorporating the effect of three factors, namely concurrency, contention, and coherency, as shown in equation \ref{USL}.
+
+\begin{equation}\label{USL}
+S(p) = \frac{p}{1+\sigma(p-1)+\kappa{p}(p-1)}\\
+\end{equation}
+
+Concurrency($p$) represents the linear speedup that could have been achieved if no interaction existed among the processors, contention($\sigma$) represents the serialization effect of shared writable data, and finally coherency($\kappa$) represents the effort that needs to be made for keeping shared writable data consistent\cite{gunther2007guerrilla}.    
+
+Figure~\ref{fig_Amdahl} shows an example of the ideal linear speedup we expect to see when increasing the number of the processors, against the actual achievable speedup based on Amdahl's law and USL.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{images/Amdahls.png}
+	\caption{An example of the achievable speedup based on Amdahl's law and USL compared to the ideal linear speedup where $\sigma=0.04$ and $\kappa=0.005$.}	
+	\label{fig_Amdahl}
+\end{figure}
+
+Universal scalibility law also suggests that for some values of $\sigma$ and $\kappa$ there could be a certain number of processors that yield to maximum performance\cite{gunther2007guerrilla}. Increasing the number of processor beyond that point would only cause performance degradation.  
+	
 \section{Blaze}
 Blaze Math Library\cite{iglberger2012expression} is a C++ library for linear algebra. Blaze, based upon Expression Templates(ETs)\cite{veldhuizen1995expression}, introduces "smart" expression templates(SETs)\cite{iglberger2012expression} to optimize the performance for array-based operations. Expression Templates\cite{veldhuizen1995expression} is an abstraction technique that uses overloaded operators in C++ to prevent creation of unnecessary temporaries, while evaluating arithmetic expressions, in order to improve the performance\cite{iglberger2012expression}. The ET-based approaches create a parse tree of the expression at compile time and postpone the actual evaluation to when the expression is assigned to a target. 
 
 Although being able to achieve promising performances for element-wise operations, these methods are not suitable for high performance computing for the following reasons. Due to their abstraction from both the data type and also the operation itself, they do not allow optimizations specific to the type of the arrays, alongside the operation\cite{iglberger2012expression}. As a solution, Blaze proposes smart ETs with these two main additions: integration with highly optimized compute kernels, and creation of intermediate temporaries when needed\cite{iglberger2012expression}. 
 Some of the ET-based linear algebra libraries are: Blitz++\cite{Blitz}, Boost uBLAS\cite{ublas}, MTL\cite{MTL}, and Eigen\cite{guennebaud2010eigen}. Among these libraries, Eigen, MTL, alongside Blaze, impose different conceptual changes to ETs in order to make them suitable for HPC.    
 
-As stated earlier, as an ET-based library, blaze performs the calculations when an expression is assigned to a target, which is implemented through the \textit{blaze::Assign} function. Depending on the operation and the size of operands, this assignment could be parallelized through four different backends, namely, HPX, OpenMP\cite{dagum1998openmp}, C++ threads, and Boost\cite{Boost}. 
 
+\subsection{Parallelization in Blaze}
+Depending on the operation and the size of operands, this assignment could be parallelized through four different backends, namely, HPX, OpenMP\cite{dagum1998openmp}, C++ threads, and Boost\cite{Boost}. 
 
-
-\subsubsection{Blazemark}
-Blazemark is a benchmark suite provided by Blaze to compare the performance of Blaze with other linear algebra libraries. 
-
-In this experiment we were trying to reach the performance achieved by OpenMP backend. In order to do that we used the benchmarks offered by Blazemark. Starting from level 1 blas functions, we chose daxpy and dvecdvecadd benchmarks to start with. 
-Implementation-wise we introduced two parameters namely block\textunderscore size and chunk\textunderscore size. chunk\textunderscore size was used to specify the number of iterations of the for loop being executed by each thread, and vector\textunderscore block\textunderscore size denotes the number of consecutive elements from the vector on which we perform the operation at each iteration, and matrix \textunderscore block\textunderscore size represents a block of matrix selected at each iteration.
-We ran the benchmarks with different chunk\textunderscore sizes and block\textunderscore sizes. The results suggested a range of values for chunk\textunderscore size and block\textunderscore size with which the results are improved rather than one optimum value. 
-
-
+Blaze offers parallelization through 4 different backends
 
 \subsubsection{Implementation of HPX Backend}
-
+As stated earlier, as an ET-based library, blaze performs the calculations when an expression is assigned to a target, which is implemented through the \textit{blaze::Assign} function
 Different backends are implemented in Blaze through a for-loop in which at each iteration a section of the vector or matrix is selected and the result of the operation is assigned to the corresponding section of the result. 
 Each backend uses their own method for parallelizing this for loop. For HPX backend the HPX \textit{parallel::for\textunderscore loop} is used for this purpose. 
 Listing ~\ref{hpx_backend} shows the modified implementation of HPX backend in Blaze.

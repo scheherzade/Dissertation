@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2018)
+This is BibTeX, Version 0.99d (TeX Live 2019)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: mainfile.aux
 The style file: unsrt.bst
@@ -27,45 +27,45 @@ Warning--there's a number but no volume in kruskal1985allocating
 Warning--can't use both volume and number fields in marin2004cross
 Warning--can't use both volume and number fields in wang2009mapping
 Warning--there's a number but no volume in dagum1998openmp
-You've used 42 entries,
+You've used 44 entries,
             1791 wiz_defined-function locations,
-            687 strings with 11826 characters,
-and the built_in function-call counts, 12267 in all, are:
-= -- 1211
-> -- 439
-< -- 26
-+ -- 163
-- -- 121
-* -- 755
-:= -- 1715
-add.period$ -- 144
-call.type$ -- 42
-change.case$ -- 41
+            696 strings with 12100 characters,
+and the built_in function-call counts, 12767 in all, are:
+= -- 1263
+> -- 447
+< -- 27
++ -- 167
+- -- 123
+* -- 774
+:= -- 1781
+add.period$ -- 151
+call.type$ -- 44
+change.case$ -- 42
 chr.to.int$ -- 0
-cite$ -- 46
-duplicate$ -- 604
-empty$ -- 1224
-format.name$ -- 121
-if$ -- 2933
+cite$ -- 48
+duplicate$ -- 635
+empty$ -- 1281
+format.name$ -- 123
+if$ -- 3059
 int.to.chr$ -- 0
-int.to.str$ -- 42
-missing$ -- 37
-newline$ -- 209
-num.names$ -- 38
-pop$ -- 180
+int.to.str$ -- 44
+missing$ -- 40
+newline$ -- 219
+num.names$ -- 40
+pop$ -- 193
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 353
+skip$ -- 369
 stack$ -- 0
-substring$ -- 901
-swap$ -- 247
-text.length$ -- 26
+substring$ -- 933
+swap$ -- 259
+text.length$ -- 27
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 4
-while$ -- 129
-width$ -- 44
-write$ -- 471
+while$ -- 134
+width$ -- 46
+write$ -- 493
 (There were 5 error messages)

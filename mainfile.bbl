@@ -226,6 +226,18 @@ Jiangtian Li, Xiaosong Ma, Karan Singh, Martin Schulz, Bronis~R de~Supinski,
 \newblock In {\em 2009 IEEE International Symposium on Performance Analysis of
   Systems and Software}, pages 89--100. IEEE, 2009.
 
+\bibitem{amdahl1967validity}
+Gene~M Amdahl.
+\newblock Validity of the single processor approach to achieving large scale
+  computing capabilities.
+\newblock In {\em Proceedings of the April 18-20, 1967, spring joint computer
+  conference}, pages 483--485. ACM, 1967.
+
+\bibitem{gunther2007guerrilla}
+Neil~J Gunther.
+\newblock {\em What is guerrilla capacity planning?}
+\newblock Springer, 2007.
+
 \bibitem{iglberger2012expression}
 Klaus Iglberger, Georg Hager, Jan Treibig, and Ulrich R{\"u}de.
 \newblock Expression templates revisited: a performance analysis of current
