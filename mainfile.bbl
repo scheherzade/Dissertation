@@ -56,6 +56,54 @@ Hartmut Kaiser, Maciek Brodowicz, and Thomas Sterling.
 \newblock In {\em 2009 International Conference on Parallel Processing
   Workshops}, pages 394--401. IEEE, 2009.
 
+\bibitem{iglberger2012expression}
+Klaus Iglberger, Georg Hager, Jan Treibig, and Ulrich R{\"u}de.
+\newblock Expression templates revisited: a performance analysis of current
+  methodologies.
+\newblock {\em SIAM Journal on Scientific Computing}, 34(2):C42--C69, 2012.
+
+\bibitem{veldhuizen1995expression}
+Todd Veldhuizen.
+\newblock Expression templates.
+\newblock {\em C++ Report}, 7(5):26--31, 1995.
+
+\bibitem{Blitz}
+{Blitz++ Library}.
+\newblock \url{http://www.oonumerics.org/blitz/}.
+
+\bibitem{ublas}
+{Boost uBLAS Library}.
+\newblock
+  \url{http://www.boost.org/doc/libs/1_45_0/libs/numeric/ublas/doc/index.htm.}
+
+\bibitem{MTL}
+{MTL4 Library}.
+\newblock \url{http://www.simunova.com/de/mtl4}.
+
+\bibitem{guennebaud2010eigen}
+Ga{\"e}l Guennebaud, Benoit Jacob, et~al.
+\newblock Eigen.
+\newblock {\em URl: http://eigen. tuxfamily. org}, 2010.
+
+\bibitem{grubel2015performance}
+Patricia Grubel, Hartmut Kaiser, Jeanine Cook, and Adrian Serio.
+\newblock The performance implication of task size for applications on the hpx
+  runtime system.
+\newblock In {\em 2015 IEEE International Conference on Cluster Computing},
+  pages 682--689. IEEE, 2015.
+
+\bibitem{amdahl1967validity}
+Gene~M Amdahl.
+\newblock Validity of the single processor approach to achieving large scale
+  computing capabilities.
+\newblock In {\em Proceedings of the April 18-20, 1967, spring joint computer
+  conference}, pages 483--485. ACM, 1967.
+
+\bibitem{gunther2007guerrilla}
+Neil~J Gunther.
+\newblock {\em What is guerrilla capacity planning?}
+\newblock Springer, 2007.
+
 \bibitem{donfack2012hybrid}
 Simplice Donfack, Laura Grigori, William~D Gropp, and Vivek Kale.
 \newblock Hybrid static/dynamic scheduling for already optimized dense matrix
@@ -225,47 +273,6 @@ Jiangtian Li, Xiaosong Ma, Karan Singh, Martin Schulz, Bronis~R de~Supinski,
   parallelization and task scheduling.
 \newblock In {\em 2009 IEEE International Symposium on Performance Analysis of
   Systems and Software}, pages 89--100. IEEE, 2009.
-
-\bibitem{amdahl1967validity}
-Gene~M Amdahl.
-\newblock Validity of the single processor approach to achieving large scale
-  computing capabilities.
-\newblock In {\em Proceedings of the April 18-20, 1967, spring joint computer
-  conference}, pages 483--485. ACM, 1967.
-
-\bibitem{gunther2007guerrilla}
-Neil~J Gunther.
-\newblock {\em What is guerrilla capacity planning?}
-\newblock Springer, 2007.
-
-\bibitem{iglberger2012expression}
-Klaus Iglberger, Georg Hager, Jan Treibig, and Ulrich R{\"u}de.
-\newblock Expression templates revisited: a performance analysis of current
-  methodologies.
-\newblock {\em SIAM Journal on Scientific Computing}, 34(2):C42--C69, 2012.
-
-\bibitem{veldhuizen1995expression}
-Todd Veldhuizen.
-\newblock Expression templates.
-\newblock {\em C++ Report}, 7(5):26--31, 1995.
-
-\bibitem{Blitz}
-{Blitz++ Library}.
-\newblock \url{http://www.oonumerics.org/blitz/}.
-
-\bibitem{ublas}
-{Boost uBLAS Library}.
-\newblock
-  \url{http://www.boost.org/doc/libs/1_45_0/libs/numeric/ublas/doc/index.htm.}
-
-\bibitem{MTL}
-{MTL4 Library}.
-\newblock \url{http://www.simunova.com/de/mtl4}.
-
-\bibitem{guennebaud2010eigen}
-Ga{\"e}l Guennebaud, Benoit Jacob, et~al.
-\newblock Eigen.
-\newblock {\em URl: http://eigen. tuxfamily. org}, 2010.
 
 \bibitem{dagum1998openmp}
 Leonardo Dagum and Ramesh Menon.
