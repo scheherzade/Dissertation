@@ -1,2 +1,0 @@
-\contentsline {figure}{\numberline {2.1}{\ignorespaces An example of the achievable speedup based on Amdahl's law and USL compared to the ideal linear speedup where $\sigma =0.04$ and $\kappa =0.005$.\relax }}{7}% 
-\contentsline {figure}{\numberline {4.1}{\ignorespaces An example of results obtained from Blazemark running $DMATDMATADD$ benchmark for matrix of size 690$\times $690 from two different angles\relax }}{16}% 

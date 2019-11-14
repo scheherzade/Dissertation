@@ -1,0 +1,13 @@
+# directories
+.vscode/
+
+# files
+*.aux
+*.bbl
+*.blg
+*.lof
+*.log
+*.lot
+*.toc
+mainfile.pdf
+mainfile.synctex.gz
