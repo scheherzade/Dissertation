@@ -6,5 +6,7 @@ clean:
 	rm -f *.log
 	rm -f *.lot
 	rm -f *.toc
-	rm -f mainfile.pdf
-	rm -f mainfile.synctex.gz
+	rm -f proposal.pdf
+	rm -f proposal.synctex.gz
+	rm -f *.fdb_latexmk
+	rm -f *.fls
