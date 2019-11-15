@@ -19,7 +19,7 @@ Repeated entry---line 357 of file bibliography.bib
  : @inproceedings{kaiser2014hpx
  :                             ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 400 of file bibliography.bib
+Repeated entry---line 418 of file bibliography.bib
  : @inproceedings{ciorba2018openmp
  :                                ,
 I'm skipping whatever remains of this entry
@@ -27,45 +27,45 @@ Warning--there's a number but no volume in kruskal1985allocating
 Warning--can't use both volume and number fields in marin2004cross
 Warning--can't use both volume and number fields in wang2009mapping
 Warning--there's a number but no volume in dagum1998openmp
-You've used 45 entries,
+You've used 51 entries,
             1791 wiz_defined-function locations,
-            701 strings with 12339 characters,
-and the built_in function-call counts, 13165 in all, are:
-= -- 1304
-> -- 461
+            725 strings with 12863 characters,
+and the built_in function-call counts, 13847 in all, are:
+= -- 1359
+> -- 474
 < -- 28
-+ -- 172
-- -- 127
-* -- 797
-:= -- 1833
-add.period$ -- 155
-call.type$ -- 45
-change.case$ -- 43
++ -- 180
+- -- 129
+* -- 810
+:= -- 1909
+add.period$ -- 168
+call.type$ -- 51
+change.case$ -- 49
 chr.to.int$ -- 0
-cite$ -- 49
-duplicate$ -- 656
-empty$ -- 1319
-format.name$ -- 127
-if$ -- 3158
+cite$ -- 55
+duplicate$ -- 690
+empty$ -- 1428
+format.name$ -- 129
+if$ -- 3333
 int.to.chr$ -- 0
-int.to.str$ -- 45
-missing$ -- 41
-newline$ -- 224
-num.names$ -- 41
-pop$ -- 199
+int.to.str$ -- 51
+missing$ -- 42
+newline$ -- 249
+num.names$ -- 42
+pop$ -- 230
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 383
+skip$ -- 417
 stack$ -- 0
-substring$ -- 965
-swap$ -- 270
+substring$ -- 971
+swap$ -- 276
 text.length$ -- 28
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 4
-while$ -- 138
-width$ -- 47
-write$ -- 505
+while$ -- 140
+width$ -- 53
+write$ -- 551
 (There were 5 error messages)

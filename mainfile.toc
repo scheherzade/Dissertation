@@ -5,16 +5,17 @@
 \vspace {12pt} \hspace {-1.8em} CHAPTER \vspace {-1em}
 \vskip 12\p@ \relax 
 \contentsline {chapter}{\uppercase {\numberline {1}Introduction}}{1}% 
-\contentsline {section}{\numberline {1.1}Problem Statement}{3}% 
+\contentsline {section}{\numberline {1.1}Problem Statement}{1}% 
 \vskip 12\p@ \relax 
-\contentsline {chapter}{\uppercase {\numberline {2}Background}}{4}% 
-\contentsline {section}{\numberline {2.1}Asynchronous Many Task Runtime Systems}{4}% 
-\contentsline {section}{\numberline {2.2}HPX}{4}% 
-\contentsline {section}{\numberline {2.3}Blaze}{4}% 
-\contentsline {section}{\numberline {2.4}Task Granularity}{5}% 
-\contentsline {section}{\numberline {2.5}Modeling performance}{5}% 
-\contentsline {subsection}{\numberline {2.5.1}Universal Scalibility Law}{6}% 
-\contentsline {subsection}{\numberline {2.5.2}Other Models}{7}% 
+\contentsline {chapter}{\uppercase {\numberline {2}Background}}{2}% 
+\contentsline {section}{\numberline {2.1}Loop Scheduling}{2}% 
+\contentsline {section}{\numberline {2.2}Asynchronous Many Task Runtime Systems}{3}% 
+\contentsline {section}{\numberline {2.3}HPX}{3}% 
+\contentsline {section}{\numberline {2.4}Blaze}{4}% 
+\contentsline {section}{\numberline {2.5}Task Granularity}{4}% 
+\contentsline {section}{\numberline {2.6}Modeling performance}{5}% 
+\contentsline {subsection}{\numberline {2.6.1}Universal Scalibility Law}{5}% 
+\contentsline {subsection}{\numberline {2.6.2}Other Models}{7}% 
 \vskip 12\p@ \relax 
 \contentsline {chapter}{\uppercase {\numberline {3}Literature Review}}{8}% 
 \contentsline {section}{\numberline {3.1}Literature Review}{8}% 
@@ -22,17 +23,15 @@
 \contentsline {chapter}{\uppercase {\numberline {4}Method}}{12}% 
 \contentsline {subsection}{\numberline {4.0.1}Blazemark}{12}% 
 \contentsline {section}{\numberline {4.1}Parallelization in Blaze}{12}% 
-\contentsline {subsection}{\numberline {4.1.1}Implementation of HPX Backend}{12}% 
-\contentsline {paragraph}{\numberline {4.1.1.0.1}HPX \textit {for\textunderscore loop}}{12}% 
-\contentsline {paragraph}{\numberline {4.1.1.0.2}Intuition}{12}% 
-\contentsline {section}{\numberline {4.2}Experiments}{15}% 
-\contentsline {subsection}{\numberline {4.2.1}Observation}{17}% 
-\contentsline {subsection}{\numberline {4.2.2}L2 cache miss analysis}{17}% 
+\contentsline {subsection}{\numberline {4.1.1}Implementation of HPX Backend}{13}% 
+\contentsline {subsection}{\numberline {4.1.2}HPX \textit {for\textunderscore loop}}{16}% 
+\contentsline {section}{\numberline {4.2}Experiments}{16}% 
+\contentsline {subsection}{\numberline {4.2.1}Observation}{19}% 
 \vskip 12\p@ \relax 
-\contentsline {chapter}{\uppercase {\numberline {5}Results}}{18}% 
-\contentsline {section}{\numberline {5.1}Setup}{18}% 
+\contentsline {chapter}{\uppercase {\numberline {5}Results}}{24}% 
+\contentsline {section}{\numberline {5.1}Setup}{24}% 
 \vskip 12\p@ \relax 
-\contentsline {chapter}{\uppercase {\numberline {6}Future Plans}}{19}% 
+\contentsline {chapter}{\uppercase {\numberline {6}Future Plans}}{25}% 
 \vspace {12pt}
-\contentsline {chapter}{\hspace {-1.6em} REFERENCES}{20}% 
+\contentsline {chapter}{\hspace {-1.6em} REFERENCES}{26}% 
 \vspace {12pt} \hspace {-1.8em} APPENDIX \vspace {-1em}
