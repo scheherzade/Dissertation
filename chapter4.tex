@@ -226,13 +226,12 @@ Table~\ref{table1} show the matrix sizes and the number of cores chosen for our 
 		\label{table1}
 \end{table}
 
-
-
-
+\vspace{\baselineskip}	
 Figure~\ref{fig1} shows the results of running $DMatDMatADD$ benchmark for matrix sizes and number of cores listed in \tablename{name} based on grain size. 
 
 On the other hand, Figure~\ref{fig4} integrates the results obtained from running the same benchmark with different matrix sizes. Each color in this graph represents a specific matrix size. 
 
+\vspace{\baselineskip}	
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{images/fig2.png}
@@ -248,7 +247,7 @@ On the other hand, Figure~\ref{fig4} integrates the results obtained from runnin
 	\label{fig4}
 \end{figure}
 
-
+\vspace{\baselineskip}	
 \subsection{Observation}
 The final purpose of our experiments is to find a chunk size that gives us the best performance for a given matrix size on a given machine. This chunk size should also be tailored to the expression being executed, and this all is based on assuming that we have already fixed the block size.
 So the first step appeared to be selecting the block size. For this purpose, we ran the experiments with a selection of block sizes as shown in Table~\ref{table1}.
@@ -296,7 +295,7 @@ By changing our focus to the grain size instead of the block size and the chunk 
 	\subfloat[]{
 	\centering\includegraphics[scale=.75]{images/fig12.png}
 	\label{fig8:b}}
-	\caption{Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark  on $4$ cores for matrix sizes (a) smaller than 912$\times$912 and (b) larger than 912$\times$912}
+	\caption{Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark  on $4$ cores for matrix sizes (a) smaller than 793$\times$793 and (b) larger than 793$\times$793}
 	\label{fig8}	
 \end{figure}
 
@@ -307,10 +306,140 @@ By changing our focus to the grain size instead of the block size and the chunk 
 	\label{fig9}
 \end{figure}
 
+\vspace{\baselineskip}	
+\section{Method}
+Looking at the throughput vs. grain size graphs and the consistent pattern observable motivated us to try to model the relationship between throughput and grain size. 
+In order to simplify the process and eliminate the effect of different possible factors, we started with limiting the problem to a fixed matrix size. 
 
+\vspace{\baselineskip}	
+\subsection{Quadratic Fit}
+In our first attempt we used a 2nd degree polynomial to model throughput against grain size. For each matrix size, we fitted the corresponding graphs shown in Figure~\ref{fig8} to a second degree polynomial. 
+
+\begin{figure}[H]
+	\centering
+	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_1_690.png}\label{fig10:a}}
+	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_2_690.png}\label{fig10:b}}{\hfill}
+	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_3_690.png}\label{fig10:c}}
+	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_4_690.png}\label{fig10:d}}{\hfill}
+	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_5_690.png}\label{fig10:e}}
+	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_6_690.png}\label{fig10:f}}{\hfill}
+	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_7_690.png}\label{fig10:g}}
+	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_8_690.png}\label{fig10:h}}
+							
+	\caption{The results of fitting the throughput vs grain size data into a 2d polynomial for $DMATDMATADD$ benchmark for matrix size 690$\times$690 with different number of cores on the test data set (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores}	
+	\label{fig10}
+\end{figure}
+
+
+\vspace{\baselineskip}	
+Figure~\ref{fig10} shows the results of using a quadratic function to fit the data for one matrix size with different number of threads. 
+
+For our experiment, we divided the data into two sections, training and test. $60\%$ of the data was randomly chosen for the training part and the rest was considered as the test set. The training set was used to find the best 2nd degree polynomial for the data, and once the parameters were identified, the generated 2nd degree polynomial was applied to the test set to measure how good our fit was performing. 
+
+For the matrix size $690\times690$ our dataset contained 117 data points, 72 of which was randomly selected to build the model. The mean relative error for each number of cores, calculated using Equation~\ref{eq2}, is represented in Figure~\ref{fig11} for training and test set. In this equation, $t_i$ and $p_i$ denote the true value and the predicted value of the $i$th sample respectively, where $n$ is the number of samples with the particular number of cores. 
+
+\begin{equation}{\label{eq2}}
+error = \frac{1}{n}\sum_{i=1}^{n} {1-p_i/t_i}
+\end{equation}
+
+\vspace{\baselineskip}	
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.75]{images/polyfit/fig_train_test_690.png}
+	\caption{The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores cores}	
+	\label{fig11}
+\end{figure}
+
+\vspace{\baselineskip}	
+\subsection{Generalizing the fitted function to include number of cores}
+In this step, we try to generalize the fitted 2nd degree polynomial obtained from the previous step, represented by $P=ag^2+bg+c$, where $P$ is the throughput and $g$ is the grain size,by looking at how the three parameters $a$, $b$, and $c$ change when number of cores changes. 
+A $3$rd degree polynomial seems to a reasonable fit for each of these parameters, in regards to number of cores. In order to avoid overfitting, we excluded two of the data points($2$ and $5$) from the data points used for fitting the polynomial and tested the fitted function on those two points to see how well the function is working on unseen data points. 
+
+
+\vspace{\baselineskip}	
+\begin{figure}[H]
+	\centering
+	\subfloat[]{\includegraphics[scale=.3]{images/polyfit/fig_690_params_0.png}\label{fig15:a}}
+	\subfloat[]{\includegraphics[scale=.3]{images/polyfit/fig_690_params_1.png}\label{fig15:b}}
+	\subfloat[]{\includegraphics[scale=.3]{images/polyfit/fig_690_params_2.png}\label{fig15:c}}
+	\caption{Fitting the parameters of the quadratic function with a $3$rd degree polynomial from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores.}	
+	\label{fig15}
+\end{figure}
+
+\vspace{\baselineskip}	
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.45]{images/polyfit/fig_690_params_error.png}
+	
+	\caption{The error in fitting the parameters $a$, $b$, and $c$ for matrix size $690\times690$.}	
+	\label{fig16}
+\end{figure}
+
+Using this $3$rd degree polynomial to fit the parameters, we can generalize the relationship between throughput and grain size in the following equation:
+
+\begin{equation}\label{eq3}
+P=a_{11}g^2N^3+a_{10}g^2N^2+...+a_1N+a_0
+\end{equation}
+where $P$ is the throughput, $g$ is the grain size, and $N$ is the number of cores and coefficients $a_{11},...,a_0$ are the real values.
+
+Knowing that a polynomial of degree $2$ based on grain size and of degree $3$ in terms of number of cores, we can try to fit our original data directly to the above mentioned formula (Equation~\ref{eq3}).
+
+\vspace{\baselineskip}	
+\subsection{Finding the range of grain size to achieve high performance}
+The major advantage of using a quadratic function to fit the data, is the simplicity of the formula, which makes it possible for us to find the peak of the graph very easily. n order to add some uncertainty to our prediction, instead of finding the maximum of the quadratic function, we identified the range of grain size that results in a performance within $10\%$ of the maximum performance. For a second degree polynomial in terms of $g$, $P=ag^2+bg+c$, the minimum or maximum of the polynomial is located at $p^{*}=\frac{-b}{2a}$.    
+
+\vspace{\baselineskip}	
+\begin{figure}[H]
+	\centering
+	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_690_4_peak_range_red.png}\label{fig12:a}}
+	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_690_8_peak_range_red.png}\label{fig12:b}}
+	\caption{The range of grain size that leads to a performance within $10\%$ of the maximum performance for (a) 4 cores and (b) 8 cores.}	
+	\label{fig12}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.75]{images/polyfit/fig_690_peak_range_silver.png}
+	\caption{The range of grain size within $10\%$ of the maximum performance of the fitted quadratic function for $DMATDMATADD$ benchmark and matrix size $690\times690$ against different number of cores cores.}	
+	\label{fig13}
+\end{figure}
+
+
+
+Figure~\ref{fig13} shows the calculated range for matrix size $690\times690$ with different number of threads. In order to generalize the solution, we selected the intersection of all the ranges to find a range of grain size that we expect to work well for all the different number of cores in our experiment. This silver region in Figure~\ref{fig13} corresponds to this range. The green line is the throughput achieved by the current implementation of HPX backend. 
+\vspace{\baselineskip}	
+
+\subsection{Estimating the chunk size}
+Once we identified a range of grain sizes that is expected to leads us to highest achievable performances for a specific matrix size, the next step is finding the possible combinations of block size and chunk size to achieve that range of grain sizes.  
+As stated earlier in this chapter, results obtained from Figure~\ref{fig6} suggests that with a fixed grain size, our choice of block size does not affect the performance directly, as long as there exist a chunk size that when combined by the block size could result in the specified grain size. 
+
+In our experiment, we selected our block size to be $4\times256$. With this assumption, in order for the grain size to be within the specified range for each matrix size, chunk size has to be within a specific range size too.
+
+For example, for a $690\times690$ matrix we calculated the range of maximum performance for all number of cores to be $[4.075, 4.717]$ in logarithmic scale which is equivalent to $[11883, 52122]$. Setting the block size to $4\times256$, this range forces the chunk size to be within the range $[13,56]$. The range of chunk sizes to match the range of grain sizes identified, and their corresponding throughput is shown in Figure~\ref{fig14}, for matrix size $690\times690$ and block size $4\times256$.
+
+
+  
+\vspace{\baselineskip}	
+\begin{figure}[H]
+	\centering
+	\subfloat[]{\includegraphics[scale=.35]{images/polyfit/fig_690_chunks_2_4-256.png}\label{fig14:a}}
+	\subfloat[]{\includegraphics[scale=.35]{images/polyfit/fig_690_chunks_4_4-256.png}\label{fig14:b}}
+	\subfloat[]{\includegraphics[scale=.35]{images/polyfit/fig_690_chunks_8_4-256.png}\label{fig14:c}}
+	\hfill
+	\subfloat[]{\includegraphics[scale=.35]{images/polyfit/fig_690_chunks_2_4-512.png}\label{fig14:d}}
+	\subfloat[]{\includegraphics[scale=.35]{images/polyfit/fig_690_chunks_4_4-512.png}\label{fig14:e}}
+	\subfloat[]{\includegraphics[scale=.35]{images/polyfit/fig_690_chunks_8_4-512.png}\label{fig14:f}}
+	\caption{The range of chunk sizes to produce a grain size within $10\%$ of the maximum performance of the fitted quadratic function for $DMATDMATADD$ benchmark for matrix size $690\times690$ with block size of $4\times256$ on (a) $2$ cores, (b) $4$ cores, and (c) $8$ cores, and block size of $4\times512$ on (d) $2$ cores, (e) $4$ cores, and (f) $8$ cores. Silver points denotes the detected range of chunk size.}	
+	\label{fig14}
+\end{figure}
+
+%\vspace{\baselineskip}	
 %\begin{figure}[H]
 %	\centering
-%	\hspace*{-2cm}\includegraphics[scale=.75]{images/fig12.png}
-%	\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for 5 different matrix sizes on $4$ cores}	
-%	\label{fig9}
+%	\includegraphics[scale=.75]{images/polyfit/fig_690_peak_range_silver.png}
+%	\caption{The range of grain size within $10\%$ of the maximum performance of the fitted quadratic function for $DMATDMATADD$ benchmark and matrix size $690\times690$ against different number of cores cores}	
+%	\label{fig13}
 %\end{figure}
+
+

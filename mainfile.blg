@@ -1,6 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2019)
-Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
-The top-level auxiliary file: mainfile.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: mainfile.aux
 The style file: unsrt.bst
 Database file #1: bibliography.bib
 Repeated entry---line 188 of file bibliography.bib
@@ -27,45 +25,4 @@ Warning--there's a number but no volume in kruskal1985allocating
 Warning--can't use both volume and number fields in marin2004cross
 Warning--can't use both volume and number fields in wang2009mapping
 Warning--there's a number but no volume in dagum1998openmp
-You've used 51 entries,
-            1791 wiz_defined-function locations,
-            725 strings with 12863 characters,
-and the built_in function-call counts, 13847 in all, are:
-= -- 1359
-> -- 474
-< -- 28
-+ -- 180
-- -- 129
-* -- 810
-:= -- 1909
-add.period$ -- 168
-call.type$ -- 51
-change.case$ -- 49
-chr.to.int$ -- 0
-cite$ -- 55
-duplicate$ -- 690
-empty$ -- 1428
-format.name$ -- 129
-if$ -- 3333
-int.to.chr$ -- 0
-int.to.str$ -- 51
-missing$ -- 42
-newline$ -- 249
-num.names$ -- 42
-pop$ -- 230
-preamble$ -- 1
-purify$ -- 0
-quote$ -- 0
-skip$ -- 417
-stack$ -- 0
-substring$ -- 971
-swap$ -- 276
-text.length$ -- 28
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 0
-warning$ -- 4
-while$ -- 140
-width$ -- 53
-write$ -- 551
 (There were 5 error messages)

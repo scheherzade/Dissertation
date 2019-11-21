@@ -5,7 +5,33 @@
 \contentsline {figure}{\numberline {4.4}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix sizes from 690$\times $690 with different combinations of block size and chunk size on $4$ cores\relax }}{20}% 
 \contentsline {figure}{\numberline {4.5}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times $690 on $4$ cores\relax }}{21}% 
 \contentsline {figure}{\numberline {4.6}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for 5 different matrix sizes on $4$ cores\relax }}{21}% 
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores for matrix sizes (a) smaller than 912$\times $912 and (b) larger than 912$\times $912\relax }}{22}% 
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores for matrix sizes (a) smaller than 793$\times $793 and (b) larger than 793$\times $793\relax }}{22}% 
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{22}% 
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{22}% 
 \contentsline {figure}{\numberline {4.8}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times $690 on different number of cores\relax }}{23}% 
+\contentsline {figure}{\numberline {4.9}{\ignorespaces The results of fitting the throughput vs grain size data into a 2d polynomial for $DMATDMATADD$ benchmark for matrix size 690$\times $690 with different number of cores on the test data set (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores\relax }}{24}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{24}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{24}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{24}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{24}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{24}% 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{24}% 
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {}}}{24}% 
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {}}}{24}% 
+\contentsline {figure}{\numberline {4.10}{\ignorespaces The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times 690$ against different number of cores cores\relax }}{25}% 
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Fitting the parameters of the quadratic function with a $3$rd degree polynomial from the $DMATDMATADD$ benchmark for matrix size $690\times 690$ against different number of cores.\relax }}{26}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{26}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{26}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{26}% 
+\contentsline {figure}{\numberline {4.12}{\ignorespaces The error in fitting the parameters $a$, $b$, and $c$ for matrix size $690\times 690$.\relax }}{26}% 
+\contentsline {figure}{\numberline {4.13}{\ignorespaces The range of grain size that leads to a performance within $10\%$ of the maximum performance for (a) 4 cores and (b) 8 cores.\relax }}{27}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{27}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{27}% 
+\contentsline {figure}{\numberline {4.14}{\ignorespaces The range of grain size within $10\%$ of the maximum performance of the fitted quadratic function for $DMATDMATADD$ benchmark and matrix size $690\times 690$ against different number of cores cores.\relax }}{28}% 
+\contentsline {figure}{\numberline {4.15}{\ignorespaces The range of chunk sizes to produce a grain size within $10\%$ of the maximum performance of the fitted quadratic function for $DMATDMATADD$ benchmark for matrix size $690\times 690$ with block size of $4\times 256$ on (a) $2$ cores, (b) $4$ cores, and (c) $8$ cores, and block size of $4\times 512$ on (d) $2$ cores, (e) $4$ cores, and (f) $8$ cores. Silver points denotes the detected range of chunk size.\relax }}{29}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{29}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{29}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{29}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{29}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{29}% 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{29}% 

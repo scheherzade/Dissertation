@@ -27,11 +27,16 @@
 \contentsline {subsection}{\numberline {4.1.2}HPX \textit {for\textunderscore loop}}{16}% 
 \contentsline {section}{\numberline {4.2}Experiments}{16}% 
 \contentsline {subsection}{\numberline {4.2.1}Observation}{19}% 
+\contentsline {section}{\numberline {4.3}Method}{23}% 
+\contentsline {subsection}{\numberline {4.3.1}Quadratic Fit}{23}% 
+\contentsline {subsection}{\numberline {4.3.2}Generalizing the fitted function to include number of cores}{26}% 
+\contentsline {subsection}{\numberline {4.3.3}Finding the range of grain size to achieve high performance}{27}% 
+\contentsline {subsection}{\numberline {4.3.4}Estimating the chunk size}{28}% 
 \vskip 12\p@ \relax 
-\contentsline {chapter}{\uppercase {\numberline {5}Results}}{24}% 
-\contentsline {section}{\numberline {5.1}Setup}{24}% 
+\contentsline {chapter}{\uppercase {\numberline {5}Results}}{30}% 
+\contentsline {section}{\numberline {5.1}Setup}{30}% 
 \vskip 12\p@ \relax 
-\contentsline {chapter}{\uppercase {\numberline {6}Future Plans}}{25}% 
+\contentsline {chapter}{\uppercase {\numberline {6}Future Plans}}{31}% 
 \vspace {12pt}
-\contentsline {chapter}{\hspace {-1.6em} REFERENCES}{26}% 
+\contentsline {chapter}{\hspace {-1.6em} REFERENCES}{32}% 
 \vspace {12pt} \hspace {-1.8em} APPENDIX \vspace {-1em}
