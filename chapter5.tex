@@ -1,52 +1,97 @@
 \section{Setup}
-Marvin:
-cache level 1
-coherency line size: 64
-number of sets: 512
-ways of associativity: 8
-type: Instruction
-size: 32K
+Our experiments were run on Marvin nodes of Rostam cluster at Center for Computation and Technology(CCT) at Louisiana State University. Table~\ref{table3} and Table~\ref{4} show some of the specifications of this node.
 
-cache level 2
-coherency line size: 64
-number of sets: 512
-ways of associativity: 8
-type: Unified
-size: 256K
+\vspace{\baselineskip}	
+\begin{table}[H]
+	\centering
+%	\resizebox{\textwidth}{!}
+	\scalebox{0.75}
+	{\begin{tabular}{|c | c |} 
+			\hline
+			CPU &  2 x Intel(R) Xeon(R) CPU E5-2450 0 @ 2.10GHz \\ [0.5ex] 
+			\hline
+			RAM & 48 GB\\ 	
+			\hline
+			Number of Cores & 16\\
+			\hline	
+			Hyperthreading & Off \\
+			\hline			
+	\end{tabular}}	
+	\caption{Specifications of the Marvin node from Rostam cluster at CCT.}
+	\label{table3}
+\end{table} 
 
-cache level 3
-coherency line size: 64
-number of sets: 512
-ways of associativity: 20
-type: Unified
-size: 20480K
+
+\vspace{\baselineskip}	
+\begin{table}[H]
+	\centering
+	\scalebox{0.9}
+	{\begin{tabular}{|c | c | c | c | c|} 
+			\hline
+			Cache Level &  Coherency Line Size & Number of Sets & Ways of Associativity & Size\\ [0.5ex] 
+			\hline
+			1 & 64 & 512 & 8 & 32KB \\	
+			\hline
+			2 & 64 & 512 & 8 & 256KB \\
+			\hline	
+			3 & 64 & 512 & 20 & 20480KB \\
+			\hline			
+	\end{tabular}}	
+	\caption{Cache specifications of the Marvin node from Rostam cluster at CCT.}
+	\label{table4}
+\end{table} 
+\vspace{\baselineskip}	
+
+%Marvin:
+%cache level 1
+%coherency line size: 64
+%number of sets: 512
+%ways of associativity: 8
+%type: Instruction
+%size: 32K
+%
+%cache level 2
+%coherency line size: 64
+%number of sets: 512
+%ways of associativity: 8
+%type: Unified
+%size: 256K
+%
+%cache level 3
+%coherency line size: 64
+%number of sets: 512
+%ways of associativity: 20
+%type: Unified
+%size: 20480K
+%
+%
+%Trillian:
+%cache level 1
+%coherency line size: 64
+%number of sets: 64
+%ways of associativity: 4
+%type: Data
+%size: 16K
+%
+%cache level 1
+%coherency line size: 64
+%number of sets: 512
+%ways of associativity: 2
+%type: Instruction
+%size: 64K
+%
+%cache level 2
+%coherency line size: 64
+%number of sets: 2048
+%ways of associativity: 16
+%type: Unified
+%size: 2048K
+
+%cache level 3
+%coherency line size: 64
+%number of sets: 2048
+%ways of associativity: 48
+%type: Unified
+%size: 6144K
 
 
-Trillian:
-cache level 1
-coherency line size: 64
-number of sets: 64
-ways of associativity: 4
-type: Data
-size: 16K
-
-cache level 1
-coherency line size: 64
-number of sets: 512
-ways of associativity: 2
-type: Instruction
-size: 64K
-
-cache level 2
-coherency line size: 64
-number of sets: 2048
-ways of associativity: 16
-type: Unified
-size: 2048K
-
-cache level 3
-coherency line size: 64
-number of sets: 2048
-ways of associativity: 48
-type: Unified
-size: 6144K

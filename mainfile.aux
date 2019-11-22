@@ -3,7 +3,7 @@
 \@writefile{toc}{\contentsline {chapter}{\hspace  {-1.5em} {ACKNOWLEDGMENTS} \vspace  {12pt}}{ii}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\hspace  {-1.5em} LIST OF TABLES \vspace  {12pt}}{iv}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\hspace  {-1.5em} LIST OF FIGURES \vspace  {12pt}}{v}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\hspace  {-1.5em} ABSTRACT}{vi}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\hspace  {-1.5em} ABSTRACT}{vii}\protected@file@percent }
 \@writefile{toc}{\vspace  {12pt} \hspace  {-1.8em} CHAPTER \vspace  {-1em}}
 \@writefile{toc}{\vskip 12\p@ \relax }
 \@writefile{toc}{\contentsline {chapter}{\uppercase {\numberline {1}Introduction}}{1}\protected@file@percent }
@@ -149,7 +149,7 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times $690 on different number of cores\relax }}{23}\protected@file@percent }
 \newlabel{fig9}{{4.8}{23}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.3}Method}{23}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Quadratic Fit}{23}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Polynomial Fit}{23}\protected@file@percent }
 \newlabel{fig10:a}{{4.9a}{24}}
 \newlabel{sub@fig10:a}{{(a)}{a}}
 \newlabel{fig10:b}{{4.9b}{24}}
@@ -179,7 +179,7 @@
 \newlabel{eq2}{{4.1}{25}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times 690$ against different number of cores cores\relax }}{25}\protected@file@percent }
 \newlabel{fig11}{{4.10}{25}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Generalizing the fitted function to include number of cores}{26}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1.1}Generalizing the fitted function to include number of cores}{26}\protected@file@percent }
 \newlabel{fig15:a}{{4.11a}{26}}
 \newlabel{sub@fig15:a}{{(a)}{a}}
 \newlabel{fig15:b}{{4.11b}{26}}
@@ -194,43 +194,76 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces The error in fitting the parameters $a$, $b$, and $c$ for matrix size $690\times 690$.\relax }}{26}\protected@file@percent }
 \newlabel{fig16}{{4.12}{26}}
 \newlabel{eq3}{{4.2}{27}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Finding the range of grain size to achieve high performance}{27}\protected@file@percent }
-\newlabel{fig12:a}{{4.13a}{27}}
-\newlabel{sub@fig12:a}{{(a)}{a}}
-\newlabel{fig12:b}{{4.13b}{27}}
-\newlabel{sub@fig12:b}{{(b)}{b}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces The range of grain size that leads to a performance within $10\%$ of the maximum performance for (a) 4 cores and (b) 8 cores.\relax }}{27}\protected@file@percent }
-\newlabel{fig12}{{4.13}{27}}
+\newlabel{fig18:a}{{4.13a}{27}}
+\newlabel{sub@fig18:a}{{(a)}{a}}
+\newlabel{fig18:b}{{4.13b}{27}}
+\newlabel{sub@fig18:b}{{(b)}{b}}
+\newlabel{fig18:c}{{4.13c}{27}}
+\newlabel{sub@fig18:c}{{(c)}{c}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces Results of fitting the data from $DMATDMATADD$ benchmark with a polynomial of degree $2$ in terms of grain size and of degree $3$ in terms of number of cores for matrix size $690\times 690$ for (a) 2 core, (b) 4 cores, (c) 8 cores.\relax }}{27}\protected@file@percent }
+\newlabel{fig18}{{4.13}{27}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{27}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{27}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.14}{\ignorespaces The range of grain size within $10\%$ of the maximum performance of the fitted quadratic function for $DMATDMATADD$ benchmark and matrix size $690\times 690$ against different number of cores cores.\relax }}{28}\protected@file@percent }
-\newlabel{fig13}{{4.14}{28}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}Estimating the chunk size}{28}\protected@file@percent }
-\newlabel{fig14:a}{{4.15a}{29}}
-\newlabel{sub@fig14:a}{{(a)}{a}}
-\newlabel{fig14:b}{{4.15b}{29}}
-\newlabel{sub@fig14:b}{{(b)}{b}}
-\newlabel{fig14:c}{{4.15c}{29}}
-\newlabel{sub@fig14:c}{{(c)}{c}}
-\newlabel{fig14:d}{{4.15d}{29}}
-\newlabel{sub@fig14:d}{{(d)}{d}}
-\newlabel{fig14:e}{{4.15e}{29}}
-\newlabel{sub@fig14:e}{{(e)}{e}}
-\newlabel{fig14:f}{{4.15f}{29}}
-\newlabel{sub@fig14:f}{{(f)}{f}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.15}{\ignorespaces The range of chunk sizes to produce a grain size within $10\%$ of the maximum performance of the fitted quadratic function for $DMATDMATADD$ benchmark for matrix size $690\times 690$ with block size of $4\times 256$ on (a) $2$ cores, (b) $4$ cores, and (c) $8$ cores, and block size of $4\times 512$ on (d) $2$ cores, (e) $4$ cores, and (f) $8$ cores. Silver points denotes the detected range of chunk size.\relax }}{29}\protected@file@percent }
-\newlabel{fig14}{{4.15}{29}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{27}\protected@file@percent }
+\newlabel{fig17:a}{{4.14a}{28}}
+\newlabel{sub@fig17:a}{{(a)}{a}}
+\newlabel{fig17:b}{{4.14b}{28}}
+\newlabel{sub@fig17:b}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.14}{\ignorespaces The training and test error obtained fitting the data to a polynomial of degree $2$ in terms of grain size and of degree $3$ in terms of number of cores for matrix size $690\times 690$, for each number of cores. (a) All the data points are include in caluculation of error, (b) the leftmost sample was removed from error calculation.\relax }}{28}\protected@file@percent }
+\newlabel{fig17}{{4.14}{28}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{28}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{28}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1.2}Finding the range of grain size to achieve high performance}{28}\protected@file@percent }
+\newlabel{fig12:a}{{4.15a}{29}}
+\newlabel{sub@fig12:a}{{(a)}{a}}
+\newlabel{fig12:b}{{4.15b}{29}}
+\newlabel{sub@fig12:b}{{(b)}{b}}
+\newlabel{fig12:c}{{4.15c}{29}}
+\newlabel{sub@fig12:c}{{(c)}{c}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.15}{\ignorespaces The range of grain size (shown as the red line) that leads to a performance within $10\%$ of the maximum performance for (a) 2 cores, (b) 4 cores and (b) 8 cores.\relax }}{29}\protected@file@percent }
+\newlabel{fig12}{{4.15}{29}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{29}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{29}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{29}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{29}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {}}}{29}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {}}}{29}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.16}{\ignorespaces The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark and matrix size $690\times 690$ against different number of cores.\relax }}{29}\protected@file@percent }
+\newlabel{fig13}{{4.16}{29}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1.3}Estimating the chunk size}{30}\protected@file@percent }
+\newlabel{fig14:a}{{4.17a}{31}}
+\newlabel{sub@fig14:a}{{(a)}{a}}
+\newlabel{fig14:b}{{4.17b}{31}}
+\newlabel{sub@fig14:b}{{(b)}{b}}
+\newlabel{fig14:c}{{4.17c}{31}}
+\newlabel{sub@fig14:c}{{(c)}{c}}
+\newlabel{fig14:d}{{4.17d}{31}}
+\newlabel{sub@fig14:d}{{(d)}{d}}
+\newlabel{fig14:e}{{4.17e}{31}}
+\newlabel{sub@fig14:e}{{(e)}{e}}
+\newlabel{fig14:f}{{4.17f}{31}}
+\newlabel{sub@fig14:f}{{(f)}{f}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.17}{\ignorespaces The range of chunk sizes to produce a grain size within $10\%$ of the maximum performance of the fitted quadratic function for $DMATDMATADD$ benchmark for matrix size $690\times 690$ with block size of $4\times 256$ on (a) $2$ cores, (b) $4$ cores, and (c) $8$ cores, and block size of $4\times 512$ on (d) $2$ cores, (e) $4$ cores, and (f) $8$ cores. Silver points denotes the detected range of chunk size.\relax }}{31}\protected@file@percent }
+\newlabel{fig14}{{4.17}{31}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{31}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{31}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{31}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{31}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {}}}{31}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {}}}{31}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Bathtub fit}{31}\protected@file@percent }
+\newlabel{Method}{{4.3.2}{32}}
 \@writefile{toc}{\vskip 12\p@ \relax }
-\@writefile{toc}{\contentsline {chapter}{\uppercase {\numberline {5}Results}}{30}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Setup}{30}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\uppercase {\numberline {5}Results}}{32}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Setup}{32}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Specifications of the Marvin node from Rostam cluster at CCT.\relax }}{32}\protected@file@percent }
+\newlabel{table3}{{5.1}{32}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Cache specifications of the Marvin node from Rostam cluster at CCT.\relax }}{32}\protected@file@percent }
+\newlabel{table4}{{5.2}{32}}
 \@writefile{toc}{\vskip 12\p@ \relax }
-\@writefile{toc}{\contentsline {chapter}{\uppercase {\numberline {6}Future Plans}}{31}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\uppercase {\numberline {6}Future Plans}}{33}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}What is the role of matrix size?}{33}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores.\relax }}{33}\protected@file@percent }
+\newlabel{fig19}{{6.1}{33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces The predicted range of grain size for maximum performance for different matrix sizes, using polynomial fit, based on $DMATDMATADD$ benchmark.\relax }}{34}\protected@file@percent }
+\newlabel{fig20}{{6.2}{34}}
 \bibstyle{unsrt}
 \bibdata{bibliography}
 \bibcite{ciorba2018openmp}{1}
@@ -250,7 +283,7 @@
 \bibcite{guennebaud2010eigen}{15}
 \bibcite{grubel2015performance}{16}
 \@writefile{toc}{\vspace  {12pt}}
-\@writefile{toc}{\contentsline {chapter}{\hspace  {-1.6em} REFERENCES}{32}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\hspace  {-1.6em} REFERENCES}{35}\protected@file@percent }
 \bibcite{amdahl1967validity}{17}
 \bibcite{gunther2007guerrilla}{18}
 \bibcite{donfack2012hybrid}{19}
