@@ -13,9 +13,8 @@
 \contentsline {section}{\numberline {2.3}HPX}{3}% 
 \contentsline {section}{\numberline {2.4}Blaze}{4}% 
 \contentsline {section}{\numberline {2.5}Task Granularity}{4}% 
-\contentsline {section}{\numberline {2.6}Modeling performance}{5}% 
-\contentsline {subsection}{\numberline {2.6.1}Universal Scalibility Law}{5}% 
-\contentsline {subsection}{\numberline {2.6.2}Other Models}{7}% 
+\contentsline {subsection}{\numberline {2.5.1}Universal Scalibility Law}{5}% 
+\contentsline {subsection}{\numberline {2.5.2}Other Models}{7}% 
 \vskip 12\p@ \relax 
 \contentsline {chapter}{\uppercase {\numberline {3}Literature Review}}{8}% 
 \contentsline {section}{\numberline {3.1}Literature Review}{8}% 

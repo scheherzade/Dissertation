@@ -47,13 +47,22 @@ On the other hand, when grain size is increases, the number of tasks being creat
 
 While overheads of creating tasks degrades the performance for small grain sizes and starvation causes the execution time to increase for large grain sizes, there is a region in between where changing the grain size does not affect the performance. 
 
-\vspace{\baselineskip}
-\section{Modeling performance}
-Gunther states the factors involved in creating overheads as exchanging data between memory and processors, waiting for completion of a memory access or an I/O, 
-\begin{itemize}
-	\item 
-	\item
-\end{itemize}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{images/task_granularity.png}
+	\caption{The effect of task size on execution time for Stencil application \cite{grubel2015performance}}	
+	\label{fig_task_gran}
+\end{figure}
+
+%\vspace{\baselineskip}
+%\section{Modeling performance}
+%Gunther states the factors involved in creating overheads as, exchanging data between memory and processors, waiting for completion of a memory access or an I/O, 
+%\begin{itemize}
+%	\item 
+%	\item
+%\end{itemize}
+
+
 
 \vspace{\baselineskip}
 \subsection{Universal Scalibility Law}
@@ -91,4 +100,17 @@ Universal scalibility law also suggests that for some values of $\sigma$ and $\k
 
 \vspace{\baselineskip}
 \subsection{Other Models}	
-There are a few other models that have also been suggested to simulate the scalibility. Among which, Geometric model 
+There are a few other models that have also been suggested to simulate the scalibility. Geometric model is a one-parameter model, in which speedup has the following relationship with number of processors:
+\begin{equation}\label{geo}
+X(p) = \frac{1-\phi^{p}}{1-\phi}\\
+\end{equation}
+
+Exponential model
+\begin{equation}\label{expo}
+X(p) = \frac{1-\phi^{p}}{1-\phi}\\
+\end{equation}
+
+Quadratic model
+\begin{equation}\label{quad}
+X(p) = \frac{1-\phi^{p}}{1-\phi}\\
+\end{equation}
