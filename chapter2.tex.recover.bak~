@@ -1,24 +1,15 @@
 \section{Asynchronous Many Task Runtime Systems}
-Some of well known AMTs include: HPX\cite{kaiser2014hpx}, Charm++\cite{kale1993charm++}, Cilk\cite{blumofe1996cilk}, AM++\cite{willcock2010am++}, Legion\cite{bauer2012legion}.
-
 
 \vspace{\baselineskip}
-\subsection{HPX}
+\section{HPX}
 HPX\cite{kaiser2014hpx} is a C++ runtime system for parallel and distributed applications based on ParalleX execution model\cite{kaiser2009parallex}. 
 HPX contains 5 main modules: Performance Monitoring System, Local Control Objects(LCOs), Thread Scheduling System, Parcel Transport Layer, Active Global Address Space (AGAS).
 HPX provides you with lightweight user-level threads with fast context switching, and allows you to hide the latency with using millions of these light-weight threads\cite{kulkarni2019comparative}.  
 
 \vspace{\baselineskip}
-\subsubsection{Execution Model}
+\susubsectio{Execution Model}
 The "SLOW" model identifies four potential sources for performance degradation as: Starvation, Latency, Overheads, and Waiting or contention\cite{kaiser2009parallex}.
-
 Starvation refers to a situation where there is insufficient amount work for the computing resource. this could be due to insufficient total amount of work available, or unbalanced distribution of work among resources\cite{kulkarni2019comparative}. 
-
-Latency is the time distance, usually measured in processor clock, of accessing remote data or services\cite{gao2007parallex}.  
-
-Overhead refers to the effort that needs to be taken to manage parallel resources and actions on the critical path\cite{kulkarni2019comparative}.
-
-Finally, waiting is the contention of the shared physical and logical resources causing one request to be blocked by another access of the same resource\cite{gao2007parallex}. This could happen due to limited network bandwidth, shared communication channels, memory bank conflicts\cite{kulkarni2019comparative},\cite{gao2007parallex}. 
 
 
 \vspace{\baselineskip}
@@ -130,19 +121,18 @@ The simplest loop scheduling method is static scheduling, in which, the iteratio
 In the meanwhile, dynamic scheduling methods postpone the assignment to runtime, which tends to improve load balancing, at the cost of higher scheduling overhead. Some of dynamic scheduling methods include: Pure Self-scheduling, Chunk Self-scheduling, Guided Self-scheduling\cite{polychronopoulos1987guided}, Factoring\cite{hummel1992factoring} and Trapazoid Self-scheduling\cite{tzen1993trapezoid},\cite{liu1994safe}.We briefly go over some of these loop scheduling techniques here.
 
 
-In Pure Self-scheduling every time a processors becomes idle, it fetches one loop iteration. This approach, while achieving a high load balance, imposes a considerable amount of scheduling overhead when we are dealing with a fine-grain workload, and a large number of iterations. Also frequent access to shared variables like loop index could lead to memory contention\cite{liu1994safe}. 
+In Pure Self-scheduling everytime a processors becomes idle, it fetches one loop iteration. This approach, while achieving a high load balance, imposes a considerable amount of scheduling overhead when we are dealing with a fine-grain workload, and a large number of iterations. Also frequent access to shared variables like loop index could lead to memory contention\cite{liu1994safe}. 
 
 In order to decrease the high scheduling overhead of Pure Self-scheduling methods, Chunk Self-scheduling method assigns a certain number of iterations(called chunk size) to each idle processor. This method trades lower scheduling overhead with higher load imbalance. Selection of the chunk size plays a very important role in the performance, as so a large chunk size increases the scheduling overhead decreases and causes load imbalance, while a small chunk size increases memory contention and scheduling overhead\cite{liu1994safe}. 
 
 As an adaptive loop scheduling technique, Guided Self-scheduling\cite{polychronopoulos1987guided} divides the remaining number of iterations at each request evenly among the processors, and assigns it to the processor that made the request, while updating the number of remaining iterations. This causes larger number of iterations to be assigned to the processors at the beginning of the loop execution, which results in lower scheduling overhead. The number of iterations assigned to each processor decreases as it approaches to the end of the execution, generating tasks containing only one or two iterations, causing an increase in the scheduling overhead. In order to tackle this issue, a minimum number of chunks could be set to avoid creation of very small chunks\cite{lilja1994exploiting}. 
 
-Very similar to Guided Self-scheduling, Factoring\cite{hummel1992factoring} also decreases the chunk size as the loop execution proceeds, with this difference that it does it in batches of equal sized chunks. If the first iterations of the loop are more time consuming then the rest of the iterations, Factoring performs better than Guided scheduling\cite{mohammed2018experimental}.  
+Very similar to Guided Self-scheduling, Factoring also decreases the chunk size as the loop execution proceeds, with this difference that   
+-dynamic
+-self-scheduling
+-factoring
 
-
-Along with the mentioned loop scheduling approaches, two other scheduling techniques can be utilized for load balancing. Work stealing\cite{blumofe1999scheduling} lets the processors to steal work from other processors queue, resulting in a more balanced load distribution. In work sharing on the other hand, each time a processor creates new threads, the scheduler would try to migrate some of them to other processors for a more balanced lad distribution\cite{blumofe1999scheduling}.
-
+talk about load balancing and work stealing
 
 
 But each of these methods work well for specific problem. We are looking for a general solution which can automatically decide on the chunk size parameter to achieve the best performance.
-
-\vspace{\baselineskip}	

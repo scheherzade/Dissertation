@@ -1,48 +1,48 @@
-\contentsline {figure}{\numberline {2.1}{\ignorespaces The effect of task size on execution time for Stencil application \cite {grubel2015performance}\relax }}{5}% 
-\contentsline {figure}{\numberline {2.2}{\ignorespaces An example of the achievable speedup based on Amdahl's law and USL compared to the ideal linear speedup where $\sigma =0.04$ and $\kappa =0.005$.\relax }}{7}% 
-\contentsline {figure}{\numberline {4.1}{\ignorespaces An example of the results obtained from running $DVECDVECADD$ benchmark through Blazemark\relax }}{12}% 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix of size 690$\times $690 from two different angles\relax }}{18}% 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix sizes from 200$\times $200 to 1587$\times $1587\relax }}{19}% 
-\contentsline {figure}{\numberline {4.4}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix sizes from 690$\times $690 with different combinations of block size and chunk size on $4$ cores\relax }}{20}% 
-\contentsline {figure}{\numberline {4.5}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times $690 on $4$ cores\relax }}{21}% 
-\contentsline {figure}{\numberline {4.6}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for 5 different matrix sizes on $4$ cores\relax }}{21}% 
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores for matrix sizes (a) smaller than 793$\times $793 and (b) larger than 793$\times $793\relax }}{22}% 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{22}% 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{22}% 
-\contentsline {figure}{\numberline {4.8}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times $690 on different number of cores\relax }}{23}% 
-\contentsline {figure}{\numberline {4.9}{\ignorespaces The results of fitting the throughput vs grain size data into a 2d polynomial for $DMATDMATADD$ benchmark for matrix size 690$\times $690 with different number of cores on the test data set (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores\relax }}{24}% 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{24}% 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{24}% 
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{24}% 
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{24}% 
-\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{24}% 
-\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{24}% 
-\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {}}}{24}% 
-\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {}}}{24}% 
-\contentsline {figure}{\numberline {4.10}{\ignorespaces The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times 690$ against different number of cores cores\relax }}{25}% 
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Fitting the parameters of the quadratic function with a $3$rd degree polynomial from the $DMATDMATADD$ benchmark for matrix size $690\times 690$ against different number of cores.\relax }}{26}% 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{26}% 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{26}% 
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{26}% 
-\contentsline {figure}{\numberline {4.12}{\ignorespaces The error in fitting the parameters $a$, $b$, and $c$ for matrix size $690\times 690$.\relax }}{26}% 
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Results of fitting the data from $DMATDMATADD$ benchmark with a polynomial of degree $2$ in terms of grain size and of degree $3$ in terms of number of cores for matrix size $690\times 690$ for (a) 2 core, (b) 4 cores, (c) 8 cores.\relax }}{27}% 
+\contentsline {figure}{\numberline {2.1}{\ignorespaces The effect of task size on execution time for Stencil application \cite {grubel2015performance}\relax }}{4}% 
+\contentsline {figure}{\numberline {2.2}{\ignorespaces An example of the achievable speedup based on Amdahl's law and USL compared to the ideal linear speedup where $\sigma =0.04$ and $\kappa =0.005$.\relax }}{6}% 
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix of size 690$\times $690 from two different angles\relax }}{19}% 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix sizes from 200$\times $200 to 1587$\times $1587\relax }}{20}% 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix sizes from 690$\times $690 with different combinations of block size and chunk size on $4$ cores\relax }}{21}% 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times $690 on $4$ cores\relax }}{22}% 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for 5 different matrix sizes on $4$ cores\relax }}{22}% 
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores for matrix sizes (a) smaller than 793$\times $793 and (b) larger than 793$\times $793\relax }}{23}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{23}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{23}% 
+\contentsline {figure}{\numberline {4.7}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times $690 on different number of cores\relax }}{24}% 
+\contentsline {figure}{\numberline {4.8}{\ignorespaces The results of fitting the throughput vs grain size data into a 2d polynomial for $DMATDMATADD$ benchmark for matrix size 690$\times $690 with different number of cores on the test data set (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores\relax }}{25}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{25}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{25}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{25}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{25}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{25}% 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{25}% 
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {}}}{25}% 
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {}}}{25}% 
+\contentsline {figure}{\numberline {4.9}{\ignorespaces The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times 690$ against different number of cores cores\relax }}{26}% 
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Fitting the parameters of the quadratic function with a $3$rd degree polynomial from the $DMATDMATADD$ benchmark for matrix size $690\times 690$ against different number of cores.\relax }}{27}% 
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{27}% 
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{27}% 
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{27}% 
-\contentsline {figure}{\numberline {4.14}{\ignorespaces The training and test error obtained fitting the data to a polynomial of degree $2$ in terms of grain size and of degree $3$ in terms of number of cores for matrix size $690\times 690$, for each number of cores. (a) All the data points are include in caluculation of error, (b) the leftmost sample was removed from error calculation.\relax }}{28}% 
+\contentsline {figure}{\numberline {4.11}{\ignorespaces The error in fitting the parameters $a$, $b$, and $c$ for matrix size $690\times 690$.\relax }}{27}% 
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Results of fitting the data from $DMATDMATADD$ benchmark with a polynomial of degree $2$ in terms of grain size and of degree $3$ in terms of number of cores for matrix size $690\times 690$ for (a) 2 core, (b) 4 cores, (c) 8 cores.\relax }}{28}% 
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{28}% 
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{28}% 
-\contentsline {figure}{\numberline {4.15}{\ignorespaces The range of grain size (shown as the red line) that leads to a performance within $10\%$ of the maximum performance for (a) 2 cores, (b) 4 cores and (b) 8 cores.\relax }}{29}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{28}% 
+\contentsline {figure}{\numberline {4.13}{\ignorespaces The training and test error obtained fitting the data to a polynomial of degree $2$ in terms of grain size and of degree $3$ in terms of number of cores for matrix size $690\times 690$, for each number of cores. (a) All the data points are include in caluculation of error, (b) the leftmost sample was removed from error calculation.\relax }}{29}% 
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{29}% 
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{29}% 
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{29}% 
-\contentsline {figure}{\numberline {4.16}{\ignorespaces The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark and matrix size $690\times 690$ against different number of cores.\relax }}{29}% 
-\contentsline {figure}{\numberline {4.17}{\ignorespaces The range of chunk sizes to produce a grain size within $10\%$ of the maximum performance of the fitted quadratic function for $DMATDMATADD$ benchmark for matrix size $690\times 690$ with block size of $4\times 256$ on (a) $2$ cores, (b) $4$ cores, and (c) $8$ cores, and block size of $4\times 512$ on (d) $2$ cores, (e) $4$ cores, and (f) $8$ cores. Silver points denotes the detected range of chunk size.\relax }}{31}% 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{31}% 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{31}% 
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{31}% 
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{31}% 
-\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{31}% 
-\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{31}% 
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores.\relax }}{33}% 
-\contentsline {figure}{\numberline {6.2}{\ignorespaces The predicted range of grain size for maximum performance for different matrix sizes, using polynomial fit, based on $DMATDMATADD$ benchmark.\relax }}{34}% 
+\contentsline {figure}{\numberline {4.14}{\ignorespaces The range of grain size (shown as the red line) that leads to a performance within $10\%$ of the maximum performance for (a) 2 cores, (b) 4 cores and (b) 8 cores.\relax }}{30}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{30}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{30}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{30}% 
+\contentsline {figure}{\numberline {4.15}{\ignorespaces The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark and matrix size $690\times 690$ against different number of cores.\relax }}{30}% 
+\contentsline {figure}{\numberline {4.16}{\ignorespaces The range of chunk sizes to produce a grain size within $10\%$ of the maximum performance of the fitted quadratic function for $DMATDMATADD$ benchmark for matrix size $690\times 690$ with block size of $4\times 256$ on (a) $2$ cores, (b) $4$ cores, and (c) $8$ cores, and block size of $4\times 512$ on (d) $2$ cores, (e) $4$ cores, and (f) $8$ cores. Silver points denotes the detected range of chunk size.\relax }}{32}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{32}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{32}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{32}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{32}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{32}% 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{32}% 
+\contentsline {figure}{\numberline {5.1}{\ignorespaces An example of the results obtained from running $DVECDVECADD$ benchmark through Blazemark\relax }}{33}% 
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores.\relax }}{35}% 
+\contentsline {figure}{\numberline {6.2}{\ignorespaces The predicted range of grain size for maximum performance for different matrix sizes, using polynomial fit, based on $DMATDMATADD$ benchmark.\relax }}{36}% 

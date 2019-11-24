@@ -1,16 +1,6 @@
 Linear algebra libraries like ATLAS, SPIRAL,... try to use hardware-specific optimizations to improve their performance. In this work, we are trying to optimize the performance based on the application parameters such as matrix size, operation, and data layout.   
 
-Scientific applications tend to contain a lot of task parallelism, performing same set of operations on different chunks of the data. Using a parallel for-loop for this purpose can lead to significant speed-ups.
 
-Defining chunk as the group of iterations that would be assigned to a
-processor, loop scheduling methods propose different approaches for creation and assignment of these chunks to the processors.
-
-
-
-
-\vspace{\baselineskip}
-\section{Problem Statement}
-Importance of compile time configuration on task scheduling
 
 
 \vspace{\baselineskip}

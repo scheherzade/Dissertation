@@ -1,15 +1,4 @@
-\subsection{Blazemark}
-Blazemark is a benchmark suite provided by Blaze to compare the performance of Blaze with other linear algebra libraries including Blitz++\cite{Blitz}, Boost uBLAS\cite{Boost}, GMM++\cite{GMM++}, Armadillo\cite{sanderson2016armadillo}, MTL4\cite{MTL}, and Eigen3\cite{Eigen}, alongside plain BLAS libraries like Atlas\cite{ATLAS}, Goto\cite{gotoblas}, and Intel MKL.\cite{MKL}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.5]{images/blazemark_1.png}
-	\includegraphics[scale=0.5]{images/blazemark_2.png}
-	\caption{An example of the results obtained from running $DVECDVECADD$ benchmark through Blazemark}	
-	\label{blazemark1}
-\end{figure}
-
-
+%In this section we discuss how and for what purpose the HPX backend for Blaze was modified. Our work here heavily depends on the data.
 \vspace{\baselineskip}	
 \section{Parallelization in Blaze}
 Depending on the operation and the size of operands, this assignment could be parallelized through four different backends, namely, HPX, OpenMP\cite{dagum1998openmp}, C++ threads, and Boost\cite{Boost}. 
@@ -227,7 +216,7 @@ Table~\ref{table1} show the matrix sizes and the number of cores chosen for our 
 \end{table}
 
 \vspace{\baselineskip}	
-Figure~\ref{fig1} shows the results of running $DMatDMatADD$ benchmark for matrix sizes and number of cores listed in \tablename{name} based on grain size. 
+Figure~\ref{fig1} shows the results of running $DMatDMatADD$ benchmark for matrix sizes and number of cores listed in Tbale~\ref{table1} based on grain size. 
 
 On the other hand, Figure~\ref{fig4} integrates the results obtained from running the same benchmark with different matrix sizes. Each color in this graph represents a specific matrix size. 
 

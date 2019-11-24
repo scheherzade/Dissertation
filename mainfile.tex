@@ -212,9 +212,17 @@ B.S\\
 \begin{abstract}
 \vspace{0.55ex}
 \doublespacing
-Abstract
-Blaze is a template based high performance C++ math library. Blaze provides four different backends for parallelization, one of which is HPX - a C++ library for concurrency and parallelism.
-Here we are suggesting to use a set of compile-time and run-time parameters to improve the performance of a Blaze when used with HPX backend. 
+
+Linear algebra libraries play a very important role in achieving a high performance in HPC applications. In this work we propose to tune the linear algebra library to a set of compile-time and runtime characteristics such as, the machine architecture, the expression being computed, the number of cores to run the application on, and also the size of arrays. 
+
+For this purpose we decided to use Blaze C++ library, a high performance math library, and HPX, a C++ standard library for concurrency and parallelism, as our runtime system.
+We propose that instead of dividing the work equally among the cores and assigning one chunk to each core, we should be able to achieve a higher performance by selecting the right amount of work to be assigned to each core, based on a set of runtime and compile-time characteristics.  
+
+Having collected a significant amount of data, we realized that the grain size, the amount of work assigned to each task, is the key factor for the performance for a fixed number of cores. Knowing that, we tried two different approaches to model the relationship between performance and grain size, in order to find a range of grain size that could lead us to the maximum performance. 
+
+The primary results suggest that, using the data collected for matrix-matrix addition, we are able to improve the performance for matrix-matrix addition, by finding the right range of grain size.
+
+In the next step, this problem should be generalized to different matrix sizes, architectures, and expressions. 
 
 \end{abstract}
 

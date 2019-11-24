@@ -1,5 +1,115 @@
 \begin{thebibliography}{10}
 
+\bibitem{grubel2015performance}
+Patricia Grubel, Hartmut Kaiser, Jeanine Cook, and Adrian Serio.
+\newblock The performance implication of task size for applications on the hpx
+  runtime system.
+\newblock In {\em 2015 IEEE International Conference on Cluster Computing},
+  pages 682--689. IEEE, 2015.
+
+\bibitem{kaiser2014hpx}
+Hartmut Kaiser, Thomas Heller, Bryce Adelstein-Lelbach, Adrian Serio, and
+  Dietmar Fey.
+\newblock Hpx: A task based programming model in a global address space.
+\newblock In {\em Proceedings of the 8th International Conference on
+  Partitioned Global Address Space Programming Models}, page~6. ACM, 2014.
+
+\bibitem{kale1993charm++}
+Laxmikant~V Kale and Sanjeev Krishnan.
+\newblock Charm++: a portable concurrent object oriented system based on c++.
+\newblock In {\em OOPSLA}, volume~93, pages 91--108. Citeseer, 1993.
+
+\bibitem{blumofe1996cilk}
+Robert~D Blumofe, Christopher~F Joerg, Bradley~C Kuszmaul, Charles~E Leiserson,
+  Keith~H Randall, and Yuli Zhou.
+\newblock Cilk: An efficient multithreaded runtime system.
+\newblock {\em Journal of parallel and distributed computing}, 37(1):55--69,
+  1996.
+
+\bibitem{willcock2010am++}
+Jeremiah~James Willcock, Torsten Hoefler, Nicholas~Gerard Edmonds, and Andrew
+  Lumsdaine.
+\newblock Am++: A generalized active message framework.
+\newblock In {\em Proceedings of the 19th international conference on Parallel
+  architectures and compilation techniques}, pages 401--410. ACM, 2010.
+
+\bibitem{bauer2012legion}
+Michael Bauer, Sean Treichler, Elliott Slaughter, and Alex Aiken.
+\newblock Legion: Expressing locality and independence with logical regions.
+\newblock In {\em SC'12: Proceedings of the International Conference on High
+  Performance Computing, Networking, Storage and Analysis}, pages 1--11. IEEE,
+  2012.
+
+\bibitem{kaiser2009parallex}
+Hartmut Kaiser, Maciek Brodowicz, and Thomas Sterling.
+\newblock Parallex an advanced parallel execution model for scaling-impaired
+  applications.
+\newblock In {\em 2009 International Conference on Parallel Processing
+  Workshops}, pages 394--401. IEEE, 2009.
+
+\bibitem{kulkarni2019comparative}
+Abhishek Kulkarni and Andrew Lumsdaine.
+\newblock A comparative study of asynchronous many-tasking runtimes: Cilk,
+  charm++, parallex and am++.
+\newblock {\em arXiv preprint arXiv:1904.00518}, 2019.
+
+\bibitem{gao2007parallex}
+Guang~R Gao, Thomas Sterling, Rick Stevens, Mark Hereld, and Weirong Zhu.
+\newblock Parallex: A study of a new parallel computation model.
+\newblock In {\em 2007 IEEE International Parallel and Distributed Processing
+  Symposium}, pages 1--6. IEEE, 2007.
+
+\bibitem{iglberger2012expression}
+Klaus Iglberger, Georg Hager, Jan Treibig, and Ulrich R{\"u}de.
+\newblock Expression templates revisited: a performance analysis of current
+  methodologies.
+\newblock {\em SIAM Journal on Scientific Computing}, 34(2):C42--C69, 2012.
+
+\bibitem{veldhuizen1995expression}
+Todd Veldhuizen.
+\newblock Expression templates.
+\newblock {\em C++ Report}, 7(5):26--31, 1995.
+
+\bibitem{Blitz}
+{Blitz++ Library}.
+\newblock \url{http://www.oonumerics.org/blitz/}.
+
+\bibitem{ublas}
+{Boost uBLAS Library}.
+\newblock
+  \url{http://www.boost.org/doc/libs/1_45_0/libs/numeric/ublas/doc/index.htm.}
+
+\bibitem{MTL}
+{MTL4 Library}.
+\newblock \url{http://www.simunova.com/de/mtl4}.
+
+\bibitem{guennebaud2010eigen}
+Ga{\"e}l Guennebaud, Benoit Jacob, et~al.
+\newblock Eigen.
+\newblock {\em URl: http://eigen. tuxfamily. org}, 2010.
+
+\bibitem{amdahl1967validity}
+Gene~M Amdahl.
+\newblock Validity of the single processor approach to achieving large scale
+  computing capabilities.
+\newblock In {\em Proceedings of the April 18-20, 1967, spring joint computer
+  conference}, pages 483--485. ACM, 1967.
+
+\bibitem{gunther2007guerrilla}
+Neil~J Gunther.
+\newblock {\em What is guerrilla capacity planning?}
+\newblock Springer, 2007.
+
+\bibitem{gunther2002new}
+Neil~J Gunther.
+\newblock A new interpretation of amdahl's law and geometric scalability.
+\newblock {\em arXiv preprint cs/0210017}, 2002.
+
+\bibitem{gunther2000practical}
+Neil~J Gunther.
+\newblock The practical performance analyst. iuniverse. com inc.
+\newblock {\em Lincoln, Nebraska}, 2000.
+
 \bibitem{ciorba2018openmp}
 Florina~M Ciorba, Christian Iwainsky, and Patrick Buder.
 \newblock Openmp loop scheduling revisited: making a case for more schedules.
@@ -42,67 +152,18 @@ David~J Lilja.
 \newblock Exploiting the parallelism available in loops.
 \newblock {\em Computer}, 27(2):13--26, 1994.
 
-\bibitem{kaiser2014hpx}
-Hartmut Kaiser, Thomas Heller, Bryce Adelstein-Lelbach, Adrian Serio, and
-  Dietmar Fey.
-\newblock Hpx: A task based programming model in a global address space.
-\newblock In {\em Proceedings of the 8th International Conference on
-  Partitioned Global Address Space Programming Models}, page~6. ACM, 2014.
+\bibitem{mohammed2018experimental}
+Ali Mohammed, Ahmed Eleliemy, Florina~M Ciorba, Franziska Kasielke, and Ioana
+  Banicescu.
+\newblock Experimental verification and analysis of dynamic loop scheduling in
+  scientific applications.
+\newblock In {\em 2018 17th International Symposium on Parallel and Distributed
+  Computing (ISPDC)}, pages 141--148. IEEE, 2018.
 
-\bibitem{kaiser2009parallex}
-Hartmut Kaiser, Maciek Brodowicz, and Thomas Sterling.
-\newblock Parallex an advanced parallel execution model for scaling-impaired
-  applications.
-\newblock In {\em 2009 International Conference on Parallel Processing
-  Workshops}, pages 394--401. IEEE, 2009.
-
-\bibitem{iglberger2012expression}
-Klaus Iglberger, Georg Hager, Jan Treibig, and Ulrich R{\"u}de.
-\newblock Expression templates revisited: a performance analysis of current
-  methodologies.
-\newblock {\em SIAM Journal on Scientific Computing}, 34(2):C42--C69, 2012.
-
-\bibitem{veldhuizen1995expression}
-Todd Veldhuizen.
-\newblock Expression templates.
-\newblock {\em C++ Report}, 7(5):26--31, 1995.
-
-\bibitem{Blitz}
-{Blitz++ Library}.
-\newblock \url{http://www.oonumerics.org/blitz/}.
-
-\bibitem{ublas}
-{Boost uBLAS Library}.
-\newblock
-  \url{http://www.boost.org/doc/libs/1_45_0/libs/numeric/ublas/doc/index.htm.}
-
-\bibitem{MTL}
-{MTL4 Library}.
-\newblock \url{http://www.simunova.com/de/mtl4}.
-
-\bibitem{guennebaud2010eigen}
-Ga{\"e}l Guennebaud, Benoit Jacob, et~al.
-\newblock Eigen.
-\newblock {\em URl: http://eigen. tuxfamily. org}, 2010.
-
-\bibitem{grubel2015performance}
-Patricia Grubel, Hartmut Kaiser, Jeanine Cook, and Adrian Serio.
-\newblock The performance implication of task size for applications on the hpx
-  runtime system.
-\newblock In {\em 2015 IEEE International Conference on Cluster Computing},
-  pages 682--689. IEEE, 2015.
-
-\bibitem{amdahl1967validity}
-Gene~M Amdahl.
-\newblock Validity of the single processor approach to achieving large scale
-  computing capabilities.
-\newblock In {\em Proceedings of the April 18-20, 1967, spring joint computer
-  conference}, pages 483--485. ACM, 1967.
-
-\bibitem{gunther2007guerrilla}
-Neil~J Gunther.
-\newblock {\em What is guerrilla capacity planning?}
-\newblock Springer, 2007.
+\bibitem{blumofe1999scheduling}
+Robert~D Blumofe and Charles~E Leiserson.
+\newblock Scheduling multithreaded computations by work stealing.
+\newblock {\em Journal of the ACM (JACM)}, 46(5):720--748, 1999.
 
 \bibitem{donfack2012hybrid}
 Simplice Donfack, Laura Grigori, William~D Gropp, and Vivek Kale.
@@ -274,6 +335,11 @@ Jiangtian Li, Xiaosong Ma, Karan Singh, Martin Schulz, Bronis~R de~Supinski,
 \newblock In {\em 2009 IEEE International Symposium on Performance Analysis of
   Systems and Software}, pages 89--100. IEEE, 2009.
 
+\bibitem{dagum1998openmp}
+Leonardo Dagum and Ramesh Menon.
+\newblock Openmp: An industry-standard api for shared-memory programming.
+\newblock {\em Computing in Science \& Engineering}, (1):46--55, 1998.
+
 \bibitem{Boost}
 {Boost C++ Framework}.
 \newblock \url{https://www.boost.org}.
@@ -303,10 +369,5 @@ Conrad Sanderson and Ryan Curtin.
 \bibitem{MKL}
 {Intel Math Kernel Library}.
 \newblock \url{https://software.intel.com/en-us/mkl}.
-
-\bibitem{dagum1998openmp}
-Leonardo Dagum and Ramesh Menon.
-\newblock Openmp: An industry-standard api for shared-memory programming.
-\newblock {\em Computing in Science \& Engineering}, (1):46--55, 1998.
 
 \end{thebibliography}
