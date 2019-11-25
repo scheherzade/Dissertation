@@ -7,6 +7,32 @@ Patricia Grubel, Hartmut Kaiser, Jeanine Cook, and Adrian Serio.
 \newblock In {\em 2015 IEEE International Conference on Cluster Computing},
   pages 682--689. IEEE, 2015.
 
+\bibitem{whaley1998automatically}
+R~Clinton Whaley and Jack~J Dongarra.
+\newblock Automatically tuned linear algebra software.
+\newblock In {\em SC'98: Proceedings of the 1998 ACM/IEEE conference on
+  Supercomputing}, pages 38--38. IEEE, 1998.
+
+\bibitem{gunther2000practical}
+Neil~J Gunther.
+\newblock The practical performance analyst. iuniverse. com inc.
+\newblock {\em Lincoln, Nebraska}, 2000.
+
+\bibitem{gunther2002new}
+Neil~J Gunther.
+\newblock A new interpretation of amdahl's law and geometric scalability.
+\newblock {\em arXiv preprint cs/0210017}, 2002.
+
+\bibitem{gunther2007guerrilla}
+Neil~J Gunther.
+\newblock {\em What is guerrilla capacity planning?}
+\newblock Springer, 2007.
+
+\bibitem{gunther2011new}
+Neil~J Gunther.
+\newblock A new interpretation of amdahl’s law and geometric scaling.
+\newblock {\em arXiv preprint cs/0210017}, 2011.
+
 \bibitem{kaiser2014hpx}
 Hartmut Kaiser, Thomas Heller, Bryce Adelstein-Lelbach, Adrian Serio, and
   Dietmar Fey.
@@ -95,21 +121,6 @@ Gene~M Amdahl.
 \newblock In {\em Proceedings of the April 18-20, 1967, spring joint computer
   conference}, pages 483--485. ACM, 1967.
 
-\bibitem{gunther2007guerrilla}
-Neil~J Gunther.
-\newblock {\em What is guerrilla capacity planning?}
-\newblock Springer, 2007.
-
-\bibitem{gunther2002new}
-Neil~J Gunther.
-\newblock A new interpretation of amdahl's law and geometric scalability.
-\newblock {\em arXiv preprint cs/0210017}, 2002.
-
-\bibitem{gunther2000practical}
-Neil~J Gunther.
-\newblock The practical performance analyst. iuniverse. com inc.
-\newblock {\em Lincoln, Nebraska}, 2000.
-
 \bibitem{ciorba2018openmp}
 Florina~M Ciorba, Christian Iwainsky, and Patrick Buder.
 \newblock Openmp loop scheduling revisited: making a case for more schedules.
@@ -171,25 +182,6 @@ Simplice Donfack, Laura Grigori, William~D Gropp, and Vivek Kale.
   factorization.
 \newblock In {\em 2012 IEEE 26th International Parallel and Distributed
   Processing Symposium}, pages 496--507. IEEE, 2012.
-
-\bibitem{xue2007locality}
-Liping Xue, M~Kandemir, Guilin Chen, Feihui Li, Ozcan Ozturk, Rajaraman
-  Ramanarayanan, and Balaji Vaidyanathan.
-\newblock Locality-aware distributed loop scheduling for chip multiprocessors.
-\newblock In {\em 20th International Conference on VLSI Design held jointly
-  with 6th International Conference on Embedded Systems (VLSID'07)}, pages
-  251--258. IEEE, 2007.
-
-\bibitem{tang1986processor}
-Peiyi Tang and Pen-Chung Yew.
-\newblock Processor self-scheduling for multiple-nested parallel loops.
-\newblock In {\em ICPP}, volume~86, pages 528--535, 1986.
-
-\bibitem{kruskal1985allocating}
-Clyde~P. Kruskal and Alan Weiss.
-\newblock Allocating independent subtasks on parallel processors.
-\newblock {\em IEEE Transactions on Software engineering}, (10):1001--1016,
-  1985.
 
 \bibitem{malakar2018benchmarking}
 Preeti Malakar, Prasanna Balaprakash, Venkatram Vishwanath, Vitali Morozov, and
@@ -256,20 +248,6 @@ Robert~D Falgout and Ulrike~Meier Yang.
 \newblock In {\em International Conference on Computational Science}, pages
   632--641. Springer, 2002.
 
-\bibitem{pusukuri2011thread}
-Kishore~Kumar Pusukuri, Rajiv Gupta, and Laxmi~N Bhuyan.
-\newblock Thread reinforcer: Dynamically determining number of threads via os
-  level monitoring.
-\newblock In {\em 2011 IEEE International Symposium on Workload
-  Characterization (IISWC)}, pages 116--125. IEEE, 2011.
-
-\bibitem{marin2004cross}
-Gabriel Marin and John Mellor-Crummey.
-\newblock Cross-architecture performance predictions for scientific
-  applications using parameterized models.
-\newblock In {\em ACM SIGMETRICS Performance Evaluation Review}, volume~32,
-  pages 2--13. ACM, 2004.
-
 \bibitem{liu2018runtime}
 Jiawen Liu, Dong Li, Gokcen Kestor, and Jeffrey Vetter.
 \newblock Runtime concurrency control and operation scheduling for high
@@ -288,52 +266,6 @@ Zheng Wang and Michael~FP O'Boyle.
 \newblock Mapping parallelism to multi-cores: a machine learning based
   approach.
 \newblock In {\em ACM Sigplan notices}, volume~44, pages 75--84. ACM, 2009.
-
-\bibitem{treibig2012performance}
-Jan Treibig, Georg Hager, and Gerhard Wellein.
-\newblock Performance patterns and hardware metrics on modern multicore
-  processors: Best practices for performance engineering.
-\newblock In {\em European Conference on Parallel Processing}, pages 451--460.
-  Springer, 2012.
-
-\bibitem{cammarota2012just}
-Rosario Cammarota, Alexandru Nicolau, and Alexander~V Veidenbaum.
-\newblock Just in time load balancing.
-\newblock In {\em International Workshop on Languages and Compilers for
-  Parallel Computing}, pages 1--16. Springer, 2012.
-
-\bibitem{zhang2005runtime}
-Yun Zhang, Michael Voss, and ES~Rogers.
-\newblock Runtime empirical selection of loop schedulers on hyperthreaded smps.
-\newblock In {\em 19th IEEE International Parallel and Distributed Processing
-  Symposium}, pages 10--pp. IEEE, 2005.
-
-\bibitem{thoman2012automatic}
-Peter Thoman, Herbert Jordan, Simone Pellegrini, and Thomas Fahringer.
-\newblock Automatic openmp loop scheduling: a combined compiler and runtime
-  approach.
-\newblock In {\em International Workshop on OpenMP}, pages 88--101. Springer,
-  2012.
-
-\bibitem{singh2009real}
-Karan Singh, Major Bhadauria, and Sally~A McKee.
-\newblock Real time power estimation and thread scheduling via performance
-  counters.
-\newblock {\em ACM SIGARCH Computer Architecture News}, 37(2):46--55, 2009.
-
-\bibitem{zomaya2001observations}
-Albert~Y. Zomaya and Yee-Hwei Teh.
-\newblock Observations on using genetic algorithms for dynamic load-balancing.
-\newblock {\em IEEE transactions on parallel and distributed systems},
-  12(9):899--911, 2001.
-
-\bibitem{li2009machine}
-Jiangtian Li, Xiaosong Ma, Karan Singh, Martin Schulz, Bronis~R de~Supinski,
-  and Sally~A McKee.
-\newblock Machine learning based online performance prediction for runtime
-  parallelization and task scheduling.
-\newblock In {\em 2009 IEEE International Symposium on Performance Analysis of
-  Systems and Software}, pages 89--100. IEEE, 2009.
 
 \bibitem{dagum1998openmp}
 Leonardo Dagum and Ramesh Menon.

@@ -1,6 +1,27 @@
-Linear algebra libraries like ATLAS, SPIRAL,... try to use hardware-specific optimizations to improve their performance. In this work, we are trying to optimize the performance based on the application parameters such as matrix size, operation, and data layout.   
+The current microprocessors are able to deliver a peak performance in range of hundreds of Mflops to Gflops. But in order to achieve these performances a lot of effort needs to be made to optimize your program based on the architecture it would be run on\cite{whaley1998automatically}. 
+
+The core element of any high performance computing library is the linear algebra library. linear algebra libraries like ATLAS, SPIRAL,... try to use hardware-specific optimizations to improve their performance. In this work, we are trying to optimize the performance based on the application parameters such as matrix size, operation, and data layout.   
 
 
+\vspace{\baselineskip}
+\section{Thesis Statement}
+The main objective of this thesis is to propose a hybrid runtime and compile-time solution for a linear algebra library to fully take advantage of the available parallelism and resources. We chose Blaze math library since it is a nice high performance template-based C++ library that allows you to access the expression tree for each assignment at compile time, and we chose HPX as as asynchronous may-task runtime system to manage the parallelism. HPX makes it possible to create thousands to millions of lightweight user threads, to avoid expensive context switching. 
+Through analyzing and modeling the relationship between throughput and grain size(the amount of work assigned to as task), we would be able to identify a range of grain size that leads us to maximum performance. Once decided how big one unit of work should be, based on the identified range we would be able to decide on how many units of work should be packed into one task.
+ 
+\vspace{\baselineskip}
+\section{Contributions}
+There has been a wide study, mostly by Gunther\cite{gunther2000practical,gunther2002new,gunther2007guerrilla,gunther2011new}, on different models to represent the relationship between the throughput and the number of cores, for a fixed size problem. 
+Grubel et.al\cite{grubel2015performance} has studied the effect of task granularity on the performance with a fixed number of cores. 
+Our contributions could be summarized into:
+\begin{itemize}
+	\item{We propose a novel physical model to represent how the execution time is expected to change based on grain size.}
+	\item{To our knowledge, there has not been a work to create a 3D model of the throughput, grain size, and number of cores.} 
+\end{itemize}
+ 
 
+\section{Document Organization}
+In Chapter~\ref{Background}, we will explain briefly the background needed for this thesis, including Blaze and HPX library, the effect of task granularity, and the Universal Scaling Law(USL) method for modeling the throughput based on number of cores.  
+Chapter~\ref{Literature} refers to other works that have been done in our area of our focus. We explain our proposed method to optimize the performance, along with the models we used in Chapter~\ref{Method}. Our work heavily relies on the collected data, the environment we collected the data from and also the library versions are mentioned in Chapter~\ref{Results}.
+Finally we discuss our concerns and the further steps that needs to be taken in Chapter~\ref{Future}.
 
 \vspace{\baselineskip}

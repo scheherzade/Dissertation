@@ -36,7 +36,7 @@ The four mentioned backends, parallelize this assignment process through a paral
 Each backend uses their own method for parallelizing this for loop. For HPX backend, current implementation uses a HPX \textit{parallel::for\textunderscore loop} with static chunking policy and chunk size of 1. This way, knowing the number of cores to run the application on, we can divide the original matrix equally among the cores, while the order of assignment of blocks to the cores is known at compile time.  
 Listings\ref{old_hpx_backend} shows the current implementation of the HPX backend in Blaze.
 
-\begin{lstlisting}[float,floatplacement=H,caption= {Previous implementation of Assign function for HPX backend in Blaze.}, label={old_hpx_backend}]
+\begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,floatplacement=H,caption= {Previous implementation of Assign function for HPX backend in Blaze.}, label={old_hpx_backend}]
 template< typename MT1   // Type of the left-hand side dense matrix
 , bool SO1       // Storage order of the left-hand side dense matrix
 , typename MT2   // Type of the right-hand side dense matrix
@@ -109,7 +109,7 @@ op( target, source );
 What we suggest here is that, some prior knowledge for example, architecture of the system we are running the application on, the expression that has to be executed, number of cores of the system, size and type of the arrays we are dealing with, and etc. should be able to help us to achieve a higher performance.
 For this purpose we introduced two parameters block\textunderscore{size} and chunk\textunderscore{size}.
 
-\begin{lstlisting}[float,floatplacement=H,caption= {New implementation of Assign function for HPX backend in Blaze.}, label={new_hpx_backend}]
+\begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,floatplacement=H,caption= {New implementation of Assign function for HPX backend in Blaze.}, label={new_hpx_backend}]
 template< typename MT1   // Type of the left-hand side dense matrix
 , bool SO1       // Storage order of the left-hand side dense matrix
 , typename MT2   // Type of the right-hand side dense matrix
@@ -189,7 +189,7 @@ HPX \textit{for\textunderscore loop} takes an execution policy as first argument
 \section{Experiments}
 In order to capture the relationship between number of cores, \textit{chunk\textunderscore{size}}, \textit{block\textunderscore{size}}, and the performance, we ran a series of experiments with different of these parameters and measured the number of floating point operations per second performed. 
 
-For these experiments ,at the first step we selected the $DMatDMatADD$ benchmark which was implemented in Blazemark. $DMatDMatADD$ benchmark is a level 3 BLAS function to perform matrix-matrix addition in the form of $A=B+C$, where $A$, $B$, $C$ are square matrices of the same size. 
+For these experiments ,at the first step we selected the $DMatDMatADD$ benchmark which was implemented in Blazemark. $DMatDMatADD$ benchmark is a level 3 BLAS function to perform matrix-matrix addition in the form of $A=B+C$, where $A$, $B$, $C$ are square matrices of the same size. For simplification we are only studying raw-major matrices at this point. Our final goal is to extend the work to cover arbitrary data layouts for arrays.
 
 To avoid adding the scheduling overhead for small matrix sizes, Blaze uses a threshold to start parallelization, which is specific to the type of operation. For matrix-matrix addition, if the number of elements in the matrix is greater than 36100 elements(which is equivalent to a square matrix of size 190$\times$190) Blaze uses the configured backend to parallelize the assignment operation. For this reason, we start our experiments with matrix size of 200x200 and gradually increase the size to 1587$\times$1587. 
 Table~\ref{table1} show the matrix sizes and the number of cores chosen for our experiments with $DMATDMATADD$ benchmark.
@@ -223,8 +223,16 @@ On the other hand, Figure~\ref{fig4} integrates the results obtained from runnin
 \vspace{\baselineskip}	
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\linewidth]{images/fig2.png}
-	\includegraphics[width=1\linewidth]{images/fig3.png}
+	\hspace*{-2cm}\includegraphics[scale=.75]{images/fig13.png}
+	\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times$690 on different number of cores.}	
+	\label{fig9}
+\end{figure}
+
+\vspace{\baselineskip}	
+\begin{figure}[H]
+	\centering
+	{\includegraphics[scale=0.7]{images/fig2.png}}
+	{\includegraphics[scale=0.7]{images/fig3.png}}
 	\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix of size 690$\times$690 from two different angles}	
 	\label{fig1}
 \end{figure}
@@ -265,18 +273,18 @@ By changing our focus to the grain size instead of the block size and the chunk 
 
 \begin{figure}[H]
 	\centering\includegraphics[width=1\linewidth]{images/fig6.png}
-	\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times$690 on $4$ cores}	
+	\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times$690 on $4$ cores.}	
 	\label{fig6}
 \end{figure}
 
-\begin{figure}[H]
-	\centering
-	\hspace*{-2cm}\includegraphics[scale=.75]{images/fig8.png}
-	\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for 5 different matrix sizes on $4$ cores}	
-	\label{fig7}
-\end{figure}
+%\begin{figure}[H]
+%	\centering
+%	\hspace*{-2cm}\includegraphics[scale=.75]{images/fig8.png}
+%	\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for 5 different matrix sizes on $4$ cores.}	
+%	\label{fig7}
+%\end{figure}
 
-\begin{figure}[H]
+\begin{figure}
 	\subfloat[]
 	{\centering\includegraphics[scale=.75]{images/fig11.png}	
 	\label{fig8:a}}
@@ -284,16 +292,11 @@ By changing our focus to the grain size instead of the block size and the chunk 
 	\subfloat[]{
 	\centering\includegraphics[scale=.75]{images/fig12.png}
 	\label{fig8:b}}
-	\caption{Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark  on $4$ cores for matrix sizes (a) smaller than 793$\times$793 and (b) larger than 793$\times$793}
+	\caption{Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark  on $4$ cores for matrix sizes (a) smaller than 793$\times$793 and (b) larger than 793$\times$793.}
 	\label{fig8}	
 \end{figure}
 
-\begin{figure}[H]
-	\centering
-	\hspace*{-2cm}\includegraphics[scale=.75]{images/fig13.png}
-	\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times$690 on different number of cores}	
-	\label{fig9}
-\end{figure}
+
 
 \vspace{\baselineskip}	
 \section{Method}
@@ -315,7 +318,7 @@ In our first attempt we used a 2nd degree polynomial to model throughput against
 	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_7_690.png}\label{fig10:g}}
 	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_8_690.png}\label{fig10:h}}
 							
-	\caption{The results of fitting the throughput vs grain size data into a 2d polynomial for $DMATDMATADD$ benchmark for matrix size 690$\times$690 with different number of cores on the test data set (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores}	
+	\caption{The results of fitting the throughput vs grain size data into a 2d polynomial for $DMATDMATADD$ benchmark for matrix size 690$\times$690 with different number of cores on the test data set (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores.}	
 	\label{fig10}
 \end{figure}
 
@@ -328,14 +331,14 @@ For our experiment, we divided the data into two sections, training and test. $6
 For the matrix size $690\times690$ our dataset contained 117 data points, 72 of which was randomly selected to build the model. The mean relative error for each number of cores, calculated using Equation~\ref{eq2}, is represented in Figure~\ref{fig11} for training and test set. In this equation, $t_i$ and $p_i$ denote the true value and the predicted value of the $i$th sample respectively, where $n$ is the number of samples with the particular number of cores. 
 
 \begin{equation}{\label{eq2}}
-Relative Error = \frac{1}{n}\sum_{i=1}^{n} {1-p_i/t_i}
+Relative\,\,Error = \frac{1}{n}\sum_{i=1}^{n} {1-p_i/t_i}
 \end{equation}
 
 \vspace{\baselineskip}	
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=.75]{images/polyfit/fig_train_test_690.png}
-	\caption{The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores cores}	
+	\caption{The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores cores.}	
 	\label{fig11}
 \end{figure}
 
