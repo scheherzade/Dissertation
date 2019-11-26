@@ -35,8 +35,10 @@
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{29}% 
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{29}% 
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{29}% 
-\contentsline {figure}{\numberline {4.14}{\ignorespaces The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark and matrix size $690\times 690$ against different number of cores.\relax }}{30}% 
-\contentsline {figure}{\numberline {4.15}{\ignorespaces The range of chunk sizes to produce a grain size within $10\%$ of the maximum performance of the fitted quadratic function for $DMATDMATADD$ benchmark for matrix size $690\times 690$ with block size of $4\times 256$ on (a) $2$ cores, (b) $4$ cores, and (c) $8$ cores, and block size of $4\times 512$ on (d) $2$ cores, (e) $4$ cores, and (f) $8$ cores. Silver points denotes the detected range of chunk size.\relax }}{31}% 
+\contentsline {figure}{\numberline {4.14}{\ignorespaces The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark for different number of cores for (a) matrix size $690\times 690$ (b)matrix size $523\times 523$ to $912\times 912$.\relax }}{30}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{30}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{30}% 
+\contentsline {figure}{\numberline {4.15}{\ignorespaces The range of chunk sizes to produce a grain size within $10\%$ of the maximum performance of the fitted quadratic function for $DMATDMATADD$ benchmark for matrix size $690\times 690$ with block size of $4\times 256$ on (a) $2$ cores, (b) $4$ cores, and (c) $8$ cores, and block size of $4\times 512$ on (d) $2$ cores, (e) $4$ cores, and (f) $8$ cores. Silver points denotes the detected range of chunk size, and the red star shows the median point.\relax }}{31}% 
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{31}% 
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{31}% 
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{31}% 

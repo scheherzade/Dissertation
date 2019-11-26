@@ -1,4 +1,5 @@
-\section{Asynchronous Many Task Runtime Systems}
+\section{Asynchronous Many-task Runtime Systems}
+Asynchronous many-task model is 
 Some of well known AMTs include: HPX\cite{kaiser2014hpx}, Charm++\cite{kale1993charm++}, Cilk\cite{blumofe1996cilk}, AM++\cite{willcock2010am++}, Legion\cite{bauer2012legion}.
 
 
@@ -28,7 +29,8 @@ Blaze Math Library\cite{iglberger2012expression} is a C++ library for linear alg
 Although being able to achieve promising performances for element-wise operations, these methods are not suitable for high performance computing for the following reasons. Due to their abstraction from both the data type and also the operation itself, they do not allow optimizations specific to the type of the arrays, alongside the operation\cite{iglberger2012expression}. As a solution, Blaze proposes smart ETs with these three main additions: integration with architecture-specific highly optimized compute kernels, creation of intermediate temporaries when needed, and selecting optimal evaluation method automatically for compound expressions\cite{iglberger2012expression}. 
 
 Some of the ET-based linear algebra libraries are: Blitz++\cite{Blitz}, Boost uBLAS\cite{ublas}, MTL\cite{MTL}, and Eigen\cite{guennebaud2010eigen}. Among these libraries, Eigen, MTL, alongside Blaze, impose different conceptual changes to ETs in order to make them suitable for HPC.    
- 
+Blaze also makes it possible for programmers to utilize SIMD(Single Instruction Multiple Data) vectorization simply by adding a compile time flag.
+
 \vspace{\baselineskip}
 \section{Task Granularity}
 Defining the grain size as the amount of work assigned to one HPX thread, Grubel\cite{grubel2015performance} studies the effect of grain size on the execution time for a fixed number of cores. The results show that, for small grain sizes the overhead of creating the tasks, and for large grain sizes the starvation, is the dominant factor affecting the execution time\cite{grubel2015performance}. When grain size is small, to perform same amount of work, higher number of tasks is created, and there is an overhead associated with creation of each task. Although this overhead is very small (order of microseconds), when the amount of work performed by each thread is also small, this overhead becomes significant. A the grain size increases, these overheads are amortized by the time it takes to execute the task. 
