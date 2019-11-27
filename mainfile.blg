@@ -23,47 +23,51 @@ Repeated entry---line 418 of file bibliography.bib
  : @inproceedings{ciorba2018openmp
  :                                ,
 I'm skipping whatever remains of this entry
-Warning--can't use both volume and number fields in wang2009mapping
+Repeated entry---line 639 of file bibliography.bib
+ : @article{dagum1998openmp
+ :                         ,
+I'm skipping whatever remains of this entry
 Warning--there's a number but no volume in dagum1998openmp
-You've used 51 entries,
+Warning--can't use both volume and number fields in wang2009mapping
+You've used 59 entries,
             1791 wiz_defined-function locations,
-            720 strings with 12589 characters,
-and the built_in function-call counts, 12997 in all, are:
-= -- 1262
-> -- 456
-< -- 24
-+ -- 175
-- -- 124
-* -- 736
-:= -- 1828
-add.period$ -- 166
-call.type$ -- 51
-change.case$ -- 49
+            759 strings with 14108 characters,
+and the built_in function-call counts, 15231 in all, are:
+= -- 1460
+> -- 570
+< -- 27
++ -- 217
+- -- 158
+* -- 886
+:= -- 2173
+add.period$ -- 193
+call.type$ -- 59
+change.case$ -- 56
 chr.to.int$ -- 0
-cite$ -- 53
-duplicate$ -- 652
-empty$ -- 1345
-format.name$ -- 124
-if$ -- 3113
+cite$ -- 61
+duplicate$ -- 756
+empty$ -- 1554
+format.name$ -- 158
+if$ -- 3623
 int.to.chr$ -- 0
-int.to.str$ -- 51
-missing$ -- 42
-newline$ -- 249
-num.names$ -- 42
-pop$ -- 224
+int.to.str$ -- 59
+missing$ -- 51
+newline$ -- 289
+num.names$ -- 50
+pop$ -- 255
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 386
+skip$ -- 436
 stack$ -- 0
-substring$ -- 846
-swap$ -- 246
-text.length$ -- 24
+substring$ -- 985
+swap$ -- 280
+text.length$ -- 27
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 2
-while$ -- 129
-width$ -- 53
-write$ -- 544
-(There were 5 error messages)
+while$ -- 151
+width$ -- 61
+write$ -- 633
+(There were 6 error messages)

@@ -1,13 +1,19 @@
 \section{Asynchronous Many-task Runtime Systems}
-Asynchronous many-task model is 
-Some of well known AMTs include: HPX\cite{kaiser2014hpx}, Charm++\cite{kale1993charm++}, Cilk\cite{blumofe1996cilk}, AM++\cite{willcock2010am++}, Legion\cite{bauer2012legion}.
+A parallel programming model includes a programming  model, which refers to the mechanism for a program to express the concurrency, and an execution model, indicating how the program creates and controls concurrency\cite{kulkarni2019comparative, bennett2015asynchronous}.
+Some of the common existing execution models include fork-join, Communicating Sequential Processes(CSP), event-based models and actor model\cite{bennett2015asynchronous}. 
+Some of the current parallel programming frameworks include, accelerator-based programming models like OpenACC\cite{wienke2012openacc}, OpenCL\cite{munshi2009opencl}, and CUDA\cite{nvidia2011nvidia}, shared-memory programming models like Intel TBB\cite{reinders2007intel}, Cilk\cite{blumofe1996cilk}, OpenMP\cite{dagum1998openmp}, and distributed-memory programming models like MPI\cite{mpi1994message}, Charm++\cite{kale1993charm++}, Parallex\cite{kaiser2009parallex}, UPC\cite{kulkarni2019comparative}.
 
+A runtime system is in charge of creating and managing the concurrency, through implementing parts of an execution model\cite{bennett2015asynchronous}.
+An asynchronous many-task(AMT) model on the other hand, is a category of programming model and execution model. 
+An AMT programming model breaks the work into small and transferable tasks along with their associated input. In an AMT execution model, tasks are being executed when their inputs are available rather than in a well defined order\cite{bennett2015asynchronous}. 
+
+Some of well known AMT runtimes include: HPX\cite{kaiser2014hpx}, Charm++\cite{kale1993charm++}, Uintah\cite{germain2000uintah}, Legion\cite{bauer2012legion}.
 
 \vspace{\baselineskip}
 \subsection{HPX}
 HPX\cite{kaiser2014hpx} is a C++ runtime system for parallel and distributed applications based on ParalleX execution model\cite{kaiser2009parallex}. 
-HPX contains 5 main modules: Performance Monitoring System, Local Control Objects(LCOs), Thread Scheduling System, Parcel Transport Layer, Active Global Address Space (AGAS).
-HPX provides you with lightweight user-level threads with fast context switching, and allows you to hide the latency with using millions of these light-weight threads\cite{kulkarni2019comparative}.  
+%HPX contains 5 main modules: Performance Monitoring System, Local Control Objects(LCOs), Thread Scheduling System, Parcel Transport Layer, Active Global Address Space (AGAS)\cite{kaiser2009parallex}.
+HPX provides you with lightweight user-level threads with fast context switching\cite{kulkarni2019comparative}. Whenever one thread is blocked, the scheduler picks a ready thread based on a scheduling policy. This allows you to hide the latency, and avoid starvation while keeping a high utilization of the resources\cite{kulkarni2019comparative}.  
 
 \vspace{\baselineskip}
 \subsubsection{Execution Model}
@@ -32,7 +38,7 @@ Some of the ET-based linear algebra libraries are: Blitz++\cite{Blitz}, Boost uB
 Blaze also makes it possible for programmers to utilize SIMD(Single Instruction Multiple Data) vectorization simply by adding a compile time flag.
 
 \vspace{\baselineskip}
-\section{Task Granularity}
+\section{Task Granularity}\label{task}
 Defining the grain size as the amount of work assigned to one HPX thread, Grubel\cite{grubel2015performance} studies the effect of grain size on the execution time for a fixed number of cores. The results show that, for small grain sizes the overhead of creating the tasks, and for large grain sizes the starvation, is the dominant factor affecting the execution time\cite{grubel2015performance}. When grain size is small, to perform same amount of work, higher number of tasks is created, and there is an overhead associated with creation of each task. Although this overhead is very small (order of microseconds), when the amount of work performed by each thread is also small, this overhead becomes significant. A the grain size increases, these overheads are amortized by the time it takes to execute the task. 
 
 On the other hand, when grain size is increases, the number of tasks being created decreases, up until a point where the number of tasks being created is smaller than the number of cores. At this point another factor would interfere with the performance, which is referred to as starvation. Starvation happens where a large amount of work is assigned to some of the cores while the other cores are idling. At this point we are not using our resources efficiently. 

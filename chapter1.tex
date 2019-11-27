@@ -1,6 +1,11 @@
-The current microprocessors are able to deliver a peak performance in range of hundreds of Mflops to Gflops. But in order to achieve these performances a lot of effort needs to be made to optimize your program based on the architecture it would be run on\cite{whaley1998automatically}. 
+The path toward exascale computing, would include more complex machine architectures, deeper memory hierarchies, heterogeneous nodes, complicated networks\cite{grubel2016using}.  current programming models would not be sufficient. Advanced runtime systems with support for new programming languages and models are needed to manage the huge amount of parallelism that would be available\cite{kaiser2014hpx}.
+Asynchronous many-task(AMT) models and their corresponding run-times are the solution to keep application developers safe from the upcoming architectures, by mitigating exascale difficulties to run-time level\cite{bennett2015asynchronous}.
 
-The core element of many high performance computing applications is the linear algebra library. linear algebra libraries like ATLAS, SPIRAL,... try to use hardware-specific optimizations to improve their performance. In this work, we are trying to optimize the performance based on the application parameters such as matrix size, operation, the expression, data layout, and also the machine architecture.   
+On the other hand, the core element of many high performance computing applications is the linear algebra library. The performance of these application heavily relies on the performance of their linear algebra library. BLAS(Basic Linear Algebra Subprograms) are the fundamental routines for basic vector and matrix operations. But in order to tune BLAS for a specific architecture, a lot of effort needs to be made, and requires a deep understanding of memory hierarchy and registers from the programmer\cite{whaley1998automatically}. 
+Linear algebra libraries like ATLAS\cite{whaley1998automatically}, SPIRAL\cite{puschel2005spiral} try to use hardware-specific optimizations to improve their performance.
+
+
+In this work, we are trying to optimize the performance of a linear algebra library based on the application parameters such as matrix size, operation, the expression, data layout, and also the machine architecture. Some of these parameters could be extracted at compile time, while extraction of the others should be postponed to runtime.
 
 
 \vspace{\baselineskip}

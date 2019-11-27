@@ -215,9 +215,9 @@ December 2019
 \vspace{0.55ex}
 \doublespacing
 
-Linear algebra libraries play a very important role in HPC applications. There has been an extensive amount of work and study done on how to optimize the compute kernels for matrix-matrix multiplication. In this thesis, we are interested in all types of operations, and our focus is on machine learning applications, where we are potentially dealing with very large matrices and creating temporaries could be very expensive. 
+Linear algebra libraries play a very important role in HPC applications. In this work we propose a method to tune the performance of a linear algebra library based on a set of compile-time and runtime characteristics including the machine architecture, the expression being evaluated, the number of cores to run the application on, the type of the operation, and also the size of the matrices, to be able to get as close as possible to the highest performance. 
 
-In this work we propose a method to tune the performance of a linear algebra library based on a set of compile-time and runtime characteristics including the machine architecture, the expression being evaluated, the number of cores to run the application on, the type of the operation, and also the size of the matrices, to be able to get as close as possible to the highest performance. 
+There has been an extensive amount of work and study done on how to optimize the compute kernels for matrix-matrix multiplication. In this thesis, we are interested in all types of operations, and our focus is on machine learning applications, where we are potentially dealing with very large matrices and creating temporaries could be very expensive. 
 
 For this purpose we decided to use Blaze C++ library, a high performance template-based math library that gives us this option to access the expression tree at compile time, along with HPX, a C++ standard library for concurrency and parallelism, as our runtime systemm.
 We propose here that instead of dividing the work equally among the cores and assigning one chunk to each core, we should be able to achieve a higher performance by selecting the right amount of work to be assigned to one core, based on a set of runtime and compile-time parameters.  
@@ -264,13 +264,13 @@ Our data was only limited to one specific operation, matrix-matrix addition for 
 \pagebreak
 \singlespacing
 
-\chapter{Results}\label{Results}
+\chapter{Setup}\label{Results}
 \doublespacing
 \input{chapter5}
 \pagebreak
 \singlespacing
 
-\chapter{Future Plans}\label{Future}
+\chapter{Proposed Study}\label{Future}
 \doublespacing
 \input{chapter6}
 \pagebreak

@@ -7,11 +7,40 @@ Patricia Grubel, Hartmut Kaiser, Jeanine Cook, and Adrian Serio.
 \newblock In {\em 2015 IEEE International Conference on Cluster Computing},
   pages 682--689. IEEE, 2015.
 
+\bibitem{grubel2016using}
+Patricia Grubel, Hartmut Kaiser, Kevin Huck, and Jeanine Cook.
+\newblock Using intrinsic performance counters to assess efficiency in
+  task-based parallel applications.
+\newblock In {\em 2016 IEEE International Parallel and Distributed Processing
+  Symposium Workshops (IPDPSW)}, pages 1692--1701. IEEE, 2016.
+
+\bibitem{kaiser2014hpx}
+Hartmut Kaiser, Thomas Heller, Bryce Adelstein-Lelbach, Adrian Serio, and
+  Dietmar Fey.
+\newblock Hpx: A task based programming model in a global address space.
+\newblock In {\em Proceedings of the 8th International Conference on
+  Partitioned Global Address Space Programming Models}, page~6. ACM, 2014.
+
+\bibitem{bennett2015asynchronous}
+J~Bennett, R~Clay, G~Baker, M~Gamell, D~Hollman, S~Knight, H~Kolla,
+  G~Sjaardema, N~Slattengren, K~Teranishi, et~al.
+\newblock Asynchronous many-task runtime system analysis and assessment for
+  next generation platforms.
+\newblock {\em US Department of Energy, Sandia National Laboratories Report,
+  Rep. no. SAND2015-8312}, 2015.
+
 \bibitem{whaley1998automatically}
 R~Clinton Whaley and Jack~J Dongarra.
 \newblock Automatically tuned linear algebra software.
 \newblock In {\em SC'98: Proceedings of the 1998 ACM/IEEE conference on
   Supercomputing}, pages 38--38. IEEE, 1998.
+
+\bibitem{puschel2005spiral}
+Markus Puschel, Jos{\'e}~MF Moura, Jeremy~R Johnson, David Padua, Manuela~M
+  Veloso, Bryan~W Singer, Jianxin Xiong, Franz Franchetti, Aca Gacic, Yevgen
+  Voronenko, et~al.
+\newblock Spiral: Code generation for dsp transforms.
+\newblock {\em Proceedings of the IEEE}, 93(2):232--275, 2005.
 
 \bibitem{gunther2000practical}
 Neil~J Gunther.
@@ -33,17 +62,34 @@ Neil~J Gunther.
 \newblock A new interpretation of amdahl’s law and geometric scaling.
 \newblock {\em arXiv preprint cs/0210017}, 2011.
 
-\bibitem{kaiser2014hpx}
-Hartmut Kaiser, Thomas Heller, Bryce Adelstein-Lelbach, Adrian Serio, and
-  Dietmar Fey.
-\newblock Hpx: A task based programming model in a global address space.
-\newblock In {\em Proceedings of the 8th International Conference on
-  Partitioned Global Address Space Programming Models}, page~6. ACM, 2014.
+\bibitem{kulkarni2019comparative}
+Abhishek Kulkarni and Andrew Lumsdaine.
+\newblock A comparative study of asynchronous many-tasking runtimes: Cilk,
+  charm++, parallex and am++.
+\newblock {\em arXiv preprint arXiv:1904.00518}, 2019.
 
-\bibitem{kale1993charm++}
-Laxmikant~V Kale and Sanjeev Krishnan.
-\newblock Charm++: a portable concurrent object oriented system based on c++.
-\newblock In {\em OOPSLA}, volume~93, pages 91--108. Citeseer, 1993.
+\bibitem{wienke2012openacc}
+Sandra Wienke, Paul Springer, Christian Terboven, and Dieter an~Mey.
+\newblock Openacc—first experiences with real-world applications.
+\newblock In {\em European Conference on Parallel Processing}, pages 859--870.
+  Springer, 2012.
+
+\bibitem{munshi2009opencl}
+Aaftab Munshi.
+\newblock The opencl specification.
+\newblock In {\em 2009 IEEE Hot Chips 21 Symposium (HCS)}, pages 1--314. IEEE,
+  2009.
+
+\bibitem{nvidia2011nvidia}
+CUDA Nvidia.
+\newblock Nvidia cuda c programming guide.
+\newblock {\em Nvidia Corporation}, 120(18):8, 2011.
+
+\bibitem{reinders2007intel}
+James Reinders.
+\newblock {\em Intel threading building blocks: outfitting C++ for multi-core
+  processor parallelism}.
+\newblock " O'Reilly Media, Inc.", 2007.
 
 \bibitem{blumofe1996cilk}
 Robert~D Blumofe, Christopher~F Joerg, Bradley~C Kuszmaul, Charles~E Leiserson,
@@ -52,19 +98,21 @@ Robert~D Blumofe, Christopher~F Joerg, Bradley~C Kuszmaul, Charles~E Leiserson,
 \newblock {\em Journal of parallel and distributed computing}, 37(1):55--69,
   1996.
 
-\bibitem{willcock2010am++}
-Jeremiah~James Willcock, Torsten Hoefler, Nicholas~Gerard Edmonds, and Andrew
-  Lumsdaine.
-\newblock Am++: A generalized active message framework.
-\newblock In {\em Proceedings of the 19th international conference on Parallel
-  architectures and compilation techniques}, pages 401--410. ACM, 2010.
+\bibitem{dagum1998openmp}
+Leonardo Dagum and Ramesh Menon.
+\newblock Openmp: An industry-standard api for shared-memory programming.
+\newblock {\em Computing in Science \& Engineering}, (1):46--55, 1998.
 
-\bibitem{bauer2012legion}
-Michael Bauer, Sean Treichler, Elliott Slaughter, and Alex Aiken.
-\newblock Legion: Expressing locality and independence with logical regions.
-\newblock In {\em SC'12: Proceedings of the International Conference on High
-  Performance Computing, Networking, Storage and Analysis}, pages 1--11. IEEE,
-  2012.
+\bibitem{mpi1994message}
+MPI Mpi.
+\newblock A message passing interface standard.
+\newblock {\em International Journal of Supercomputer Applications},
+  8(3/4):165--414, 1994.
+
+\bibitem{kale1993charm++}
+Laxmikant~V Kale and Sanjeev Krishnan.
+\newblock Charm++: a portable concurrent object oriented system based on c++.
+\newblock In {\em OOPSLA}, volume~93, pages 91--108. Citeseer, 1993.
 
 \bibitem{kaiser2009parallex}
 Hartmut Kaiser, Maciek Brodowicz, and Thomas Sterling.
@@ -73,11 +121,19 @@ Hartmut Kaiser, Maciek Brodowicz, and Thomas Sterling.
 \newblock In {\em 2009 International Conference on Parallel Processing
   Workshops}, pages 394--401. IEEE, 2009.
 
-\bibitem{kulkarni2019comparative}
-Abhishek Kulkarni and Andrew Lumsdaine.
-\newblock A comparative study of asynchronous many-tasking runtimes: Cilk,
-  charm++, parallex and am++.
-\newblock {\em arXiv preprint arXiv:1904.00518}, 2019.
+\bibitem{germain2000uintah}
+J~Davison de~St Germain, John McCorquodale, Steven~G Parker, and Christopher~R
+  Johnson.
+\newblock Uintah: A massively parallel problem solving environment.
+\newblock In {\em Proceedings the Ninth International Symposium on
+  High-Performance Distributed Computing}, pages 33--41. IEEE, 2000.
+
+\bibitem{bauer2012legion}
+Michael Bauer, Sean Treichler, Elliott Slaughter, and Alex Aiken.
+\newblock Legion: Expressing locality and independence with logical regions.
+\newblock In {\em SC'12: Proceedings of the International Conference on High
+  Performance Computing, Networking, Storage and Analysis}, pages 1--11. IEEE,
+  2012.
 
 \bibitem{gao2007parallex}
 Guang~R Gao, Thomas Sterling, Rick Stevens, Mark Hereld, and Weirong Zhu.
@@ -266,11 +322,6 @@ Zheng Wang and Michael~FP O'Boyle.
 \newblock Mapping parallelism to multi-cores: a machine learning based
   approach.
 \newblock In {\em ACM Sigplan notices}, volume~44, pages 75--84. ACM, 2009.
-
-\bibitem{dagum1998openmp}
-Leonardo Dagum and Ramesh Menon.
-\newblock Openmp: An industry-standard api for shared-memory programming.
-\newblock {\em Computing in Science \& Engineering}, (1):46--55, 1998.
 
 \bibitem{Boost}
 {Boost C++ Framework}.
