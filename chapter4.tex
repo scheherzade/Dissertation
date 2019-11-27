@@ -200,6 +200,9 @@ Table~\ref{table1} show the matrix sizes and the number of cores chosen for our 
 		\resizebox{\textwidth}{!}
 		{\begin{tabular}{|c | c |} 
 			\hline
+			Category & Configuration \\
+			\hline
+			\hline
 			Matrix sizes & 200, 230, 264, 300, 396, 455, 523, 600, 690, 793, 912, 1048, 1200, 1380, 1587 \\ [0.5ex] 
 			\hline
 			Number of cores & 1, 2, 3, 4, 5, 6, 7, 8 \\ 	
@@ -216,7 +219,7 @@ Table~\ref{table1} show the matrix sizes and the number of cores chosen for our 
 \end{table}
 
 \vspace{\baselineskip}	
-Figure~\ref{fig1} shows the results of running $DMatDMatADD$ benchmark for matrix sizes and number of cores listed in Tbale~\ref{table1} based on grain size. 
+Figure~\ref{fig1} shows the results of running $DMatDMatADD$ benchmark for matrix sizes and number of cores listed in Table~\ref{table1} based on grain size. 
 
 On the other hand, Figure~\ref{fig4} integrates the results obtained from running the same benchmark with different matrix sizes. Each color in this graph represents a specific matrix size. 
 
@@ -567,6 +570,7 @@ Figure~\ref{fig25} shows the prediction error on the test set for $DMATDMATADD$ 
 	\label{fig25}
 \end{figure}
 
-
+The problem with the current model is that with this formula we know that the minimum occurs at $n_t=N$, but that's not usually the case. This inspires us to check for a missing factor. 
+This model still needs to be studied. The estimate that we have is for execution time, which is in our experiments 
 
 \vspace{\baselineskip}	 

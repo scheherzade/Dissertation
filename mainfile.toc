@@ -39,9 +39,10 @@
 \contentsline {subsection}{\numberline {5.0.2}Configurations}{38}% 
 \vskip 12\p@ \relax 
 \contentsline {chapter}{\uppercase {\numberline {6}Proposed Study}}{40}% 
-\contentsline {section}{\numberline {6.1}Generalization for matrix size}{40}% 
-\contentsline {section}{\numberline {6.2}Generalization for complex expressions}{41}% 
-\contentsline {section}{\numberline {6.3}Generalization for different architectures}{42}% 
+\contentsline {section}{\numberline {6.1}Studying the bathtub model}{40}% 
+\contentsline {section}{\numberline {6.2}Generalization for matrix size}{40}% 
+\contentsline {section}{\numberline {6.3}Generalization for complex expressions}{42}% 
+\contentsline {section}{\numberline {6.4}Generalization for different architectures}{42}% 
 \vspace {12pt}
 \contentsline {chapter}{\hspace {-1.6em} REFERENCES}{43}% 
 \vspace {12pt} \hspace {-1.8em} APPENDIX \vspace {-1em}

@@ -2,7 +2,12 @@
 In Chapter~\ref{Method} two different functions were proposed to model the relationship between grain size, number of cores, and performance (execution time or throughput). Using these function, for a specific matrix size, we were able to identify a reasonable value for grain size in order to be able to amortize the overhead of task creation with execution time on one hand, and utilize our resources properly on another hand. This value(range of values) helped us to select a reasonable value(range of values) for chunk size, for a fixed block size.
 In this section we will state the next steps that needs to be taken.
 \vspace{\baselineskip}	
+\section{Studying the bathtub model}
+The bathtub model needs to be studied more to check for the missing factor. We suspect this factor to be relevant to load imbalance, where some cores end up to be idle while the others are still doing the work. 
 
+Also, we need to study the formula in terms of throughput instead of execution time, since small changes in execution time could make a large difference in throughput, so it would be easier to spot it.
+
+\vspace{\baselineskip}		
 \section{Generalization for matrix size}
 As stated earlier, the suggested functions were fitted for each matrix size individually for simplification, but this assumption is not practical, since even though the characteristics of the function is the same for all matrix sizes, the fitted parameters vary from one matrix size to another. 
 
@@ -28,7 +33,9 @@ Moreover, Figure~\ref{fig20} shows how the predicted grain size range changes fo
 	\label{fig20}
 \end{figure} 
 \vspace{\baselineskip}	
+Also, larger matrix sizes should be added to the experiments to validate the current results. 
 
+\vspace{\baselineskip}	
 \section{Generalization for complex expressions}
 The whole study here was based on a simple matrix-matrix addition, and was validated on the same operation. We have been looking at the grain size as the key factor here, while the complexity of the operation has been included in the grain size. In the next step we need to add more benchmarks and study if the behavior is consistent for the other benchmarks. 
 In addition to the operation, the number of matrices involved in the operation is also important, since it affects the threshold from which the matrices would not fit into the cache, which itself results in a performance degradation.
