@@ -28,7 +28,7 @@
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{29}% 
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{29}% 
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{29}% 
-\contentsline {figure}{\numberline {4.12}{\ignorespaces The training and test error obtained fitting the data to a polynomial of degree $2$ in terms of grain size and of degree $3$ in terms of number of cores for matrix size $690\times 690$, for each number of cores. (a) All the data points are include in caluculation of error, (b) the leftmost sample was removed from error calculation.\relax }}{29}% 
+\contentsline {figure}{\numberline {4.12}{\ignorespaces The training and test error obtained fitting the data to a polynomial of degree $2$ in terms of grain size and of degree $3$ in terms of number of cores for matrix size $690\times 690$, for each number of cores. (a) All the data points are include in calculation of error, (b) the leftmost sample was removed from error calculation.\relax }}{29}% 
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{29}% 
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{29}% 
 \contentsline {figure}{\numberline {4.13}{\ignorespaces The range of grain size (shown as the red line) that leads to a performance within $10\%$ of the maximum performance for (a) 2 cores, (b) 4 cores and (b) 8 cores.\relax }}{30}% 
@@ -48,7 +48,7 @@
 \contentsline {figure}{\numberline {4.16}{\ignorespaces (a)The execution time vs. grain size graph, and (b) execution time vs. number fo tasks graph for $DMATDMATADD$ benchmark for matrix size $690\times 690$ ran on $4$ cores.\relax }}{33}% 
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{33}% 
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{33}% 
-\contentsline {figure}{\numberline {4.17}{\ignorespaces (a)The execution time vs. grain size graph, and (b) execution time vs. number fo tasks graph for $DMATDMATADD$ benchmark for matrix size $690\times 690$ ran on $4$ cores.\relax }}{35}% 
+\contentsline {figure}{\numberline {4.17}{\ignorespaces The prediction of execution time based on grain size using the bathtub model, for (a)4 cores and (b)8 cores for $DMATDMATADD$ benchmark for matrix size $690\times 690$.\relax }}{35}% 
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{35}% 
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{35}% 
 \contentsline {figure}{\numberline {4.18}{\ignorespaces The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times 690$ with different number of cores.\relax }}{36}% 

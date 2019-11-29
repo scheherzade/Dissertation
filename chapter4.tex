@@ -334,7 +334,7 @@ For our experiment, we divided the data into two sections, training and test. $6
 For the matrix size $690\times690$ our dataset contained 117 data points, 72 of which was randomly selected to build the model. The mean relative error for each number of cores, calculated using Equation~\ref{eq2}, is represented in Figure~\ref{fig11} for training and test set. In this equation, $t_i$ and $p_i$ denote the true value and the predicted value of the $i$th sample respectively, where $n$ is the number of samples with the particular number of cores. 
 
 \begin{equation}{\label{eq2}}
-Relative\,\,Error = \frac{1}{n}\sum_{i=1}^{n} {1-p_i/t_i}
+Relative\:\:Error = \frac{1}{n}\sum_{i=1}^{n} {1-p_i/t_i}
 \end{equation}
 
 \vspace{\baselineskip}	
@@ -394,7 +394,7 @@ Knowing that a polynomial of degree $2$ in terms of grain size and of degree $3$
 	\centering
 	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_690_total_error.png}\label{fig17:a}}
 	\subfloat[]{\includegraphics[scale=.45]{images/polyfit/fig_690_total_error_corrected.png}\label{fig17:b}}
-	\caption{The training and test error obtained fitting the data to a polynomial of degree $2$ in terms of grain size and of degree $3$ in terms of number of cores for matrix size $690\times690$, for each number of cores. (a) All the data points are include in caluculation of error, (b) the leftmost sample was removed from error calculation.}	
+	\caption{The training and test error obtained fitting the data to a polynomial of degree $2$ in terms of grain size and of degree $3$ in terms of number of cores for matrix size $690\times690$, for each number of cores. (a) All the data points are include in calculation of error, (b) the leftmost sample was removed from error calculation.}	
 	\label{fig17}
 \end{figure}
 
@@ -523,7 +523,7 @@ Here again we limited our problem to one specific matrix size at a time, and div
 	\centering
 	\subfloat[]{\includegraphics[scale=.45]{images/bathtub/pred/pred_690_4.png}\label{fig22:a}}
 	\subfloat[]{\includegraphics[scale=.45]{images/bathtub/pred/pred_690_8.png}\label{fig22:b}}	
-	\caption{(a)The execution time vs. grain size graph, and (b) execution time vs. number fo tasks graph for $DMATDMATADD$ benchmark for matrix size $690\times690$ ran on $4$ cores.}	
+	\caption{The prediction of execution time based on grain size using the bathtub model, for (a)4 cores and (b)8 cores for $DMATDMATADD$ benchmark for matrix size $690\times690$.}	
 	\label{fig22}
 \end{figure}
 \vspace{\baselineskip}	
