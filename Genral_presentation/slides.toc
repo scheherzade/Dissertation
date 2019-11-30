@@ -1,7 +1,6 @@
 \beamer@sectionintoc {1}{Objective}{3}{0}{1}
 \beamer@sectionintoc {2}{Introduction}{5}{0}{2}
 \beamer@sectionintoc {3}{Background}{7}{0}{3}
-\beamer@sectionintoc {4}{Method}{19}{0}{4}
-\beamer@sectionintoc {5}{Setup}{44}{0}{5}
-\beamer@sectionintoc {6}{Related Work}{47}{0}{6}
-\beamer@sectionintoc {7}{Proposed Study}{49}{0}{7}
+\beamer@sectionintoc {4}{Method}{18}{0}{4}
+\beamer@sectionintoc {5}{Related Work}{46}{0}{5}
+\beamer@sectionintoc {6}{Proposed Study}{48}{0}{6}

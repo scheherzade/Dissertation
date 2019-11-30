@@ -1,5 +1,6 @@
-\beamer@slide {fig_Amdahl}{16}
-\beamer@slide {table1}{20}
+\beamer@slide {fig_loop}{13}
+\beamer@slide {fig_Amdahl}{15}
+\beamer@slide {table1}{19}
 \beamer@slide {fig6}{22}
 \beamer@slide {fig10:a}{26}
 \beamer@slide {fig10:b}{26}
@@ -27,7 +28,6 @@
 \beamer@slide {fig12:c}{32}
 \beamer@slide {fig12}{32}
 \beamer@slide {fig13:a}{33}
-\beamer@slide {fig13:b}{33}
 \beamer@slide {fig13}{33}
 \beamer@slide {fig14:a}{34}
 \beamer@slide {fig14:b}{34}
@@ -37,7 +37,6 @@
 \beamer@slide {fig14:f}{34}
 \beamer@slide {fig14}{34}
 \beamer@slide {fig20:a}{36}
-\beamer@slide {fig20:b}{36}
 \beamer@slide {fig21}{36}
 \beamer@slide {fig22:a}{39}
 \beamer@slide {fig22:b}{39}
@@ -48,6 +47,6 @@
 \beamer@slide {fig24:c}{41}
 \beamer@slide {fig24}{41}
 \beamer@slide {fig25}{42}
-\beamer@slide {table3}{46}
-\beamer@slide {table5}{46}
-\beamer@slide {fig20}{50}
+\beamer@slide {table3}{45}
+\beamer@slide {table5}{45}
+\beamer@slide {fig20}{49}

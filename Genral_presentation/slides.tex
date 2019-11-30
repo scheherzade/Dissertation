@@ -57,20 +57,31 @@
 	\2HPX, Charm++, Uintah, Legion
 	\1Linear algebra libraries
 	\2Scalapack, ATLAS, SPIRAL	
+	\1Our motivation:
+	\2Phylanx
 	\end{outline}
 \end{frame}
 
 \section{Background}
 \begin{frame}{HPX}
 	\begin{outline}
-		
+		\1HPX is a general purpose C++ runtime system for parallel and distributed applications of any scale.
+		\1HPX is the first
+		open source software runtime system implementing the concepts of
+		the ParalleX execution model, on conventional systems
+		including Linux clusters, Windows, Macintosh, Android, XeonPhi,
+		and the Bluegene/Q.
+		\1Fine-grained Parallelism instead of Heavyweight Threads.
 	\end{outline}
 \end{frame}
 
 \begin{frame}{HPX: Execution Model}
 	\begin{outline}
-		\1Parallex
-		\2SLOW
+		\1SLOW
+		\2Starvation
+		\2Latency
+		\2Overheads
+		\2Waiting for contention resolution
 	\end{outline}
 \end{frame}
 
@@ -124,18 +135,24 @@
 %\end{frame}
 \begin{frame}{Loop Scheduling}
 	\begin{outline}
+			\begin{figure}[]
+			\centering
+			\includegraphics[scale=0.5]{images/loop_cropped.png}
+			\caption{An example of loop chunking\footnote{Ciorba, Florina M., Christian Iwainsky, and Patrick Buder. "OpenMP loop scheduling revisited: making a case for more schedules." International Workshop on OpenMP. Springer, Cham, 2018.}}	
+			\label{fig_loop}
+		\end{figure}
 		Chunk size: Number of loop iterations executed by one thread 
 		\1Static
 		\1Dynamic
-		\1Other methods including
+		\1Other methods including Guided, Factoring
 	\end{outline}
 \end{frame}
 
-\begin{frame}{HPX Tasks}
-	\begin{outline}
-		
-	\end{outline}
-\end{frame}
+%\begin{frame}{HPX Tasks}
+%	\begin{outline}
+%		
+%	\end{outline}
+%\end{frame}
 
 \begin{frame}{Task Granularity}
 	\begin{outline}
@@ -160,8 +177,8 @@
 			$$S(p) = \frac{p}{1+\sigma(p-1)}$$
 		\1Universal Scalibility Law
 		$$X(p) = \frac{\gamma{p}}{1+\sigma(p-1)+\kappa{p}(p-1)}$$
-%		\2 Models the effects
-%		of linear speedup, contention delay, and coherency delay due to crosstalk
+		\2 Models the effects
+		of linear speedup, contention delay, and coherency delay due to crosstalk
 		\begin{figure}[H]
 			\centering
 			\includegraphics[scale=0.4]{images/amdahls.png}
@@ -237,7 +254,7 @@
 
 \begin{frame}{Data}
 	\begin{outline}
-		\1For simplicity we look at one matrix size at a time
+		\1For simplicity we look at each matrix size individually, one number of core at a time, 
 		
 		
 		\begin{figure}
@@ -247,15 +264,16 @@
 	\end{outline}
 \end{frame}
 
-%block size on x axis
-%\begin{frame}{Method}
-%	\begin{outline}
-%		\begin{figure}
-%			\includegraphics[width=0.9\linewidth]{images/fig5.png}	
-%			\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix sizes from 690$\times$690 with different combinations of block size and chunk size on $4$ cores}	
-%		\end{figure}
-%	\end{outline}
-%\end{frame}
+
+\begin{frame}{Observation}
+	\begin{outline}
+		\begin{figure}
+			\includegraphics[scale=0.2]{images/fig5_cropped.png}			
+		\end{figure}
+		\1For each selected block size, there is a range of chunk sizes that gives us the best performance. 
+		\1Except for some uncommon cases, no matter which block size we choose, we are able to achieve the maximum performance if we select the right chunk size.  
+	\end{outline}
+\end{frame}
 
 \begin{frame}{Throughput vs. Grain Size}
 	\begin{outline}
@@ -270,22 +288,15 @@
 	\end{outline}
 \end{frame}
 
-\begin{frame}{Observation}
+\begin{frame}{Throughput vs. Grain Siz}
 	\begin{outline}
-		\begin{figure}
-			\hfill\centering\includegraphics[scale=0.2]{images/fig6_cropped.png}
-		\end{figure}
-		\1For each selected block size, there is a range of chunk sizes that gives us the best performance. 
-		\1Except for some uncommon cases, no matter which block size we choose, we are able to achieve the maximum performance if we select the right chunk size.  
-		
-		\vspace{\baselineskip}
 		Can we model the relationship between the throughput and the grain size?
 	\end{outline}
 \end{frame}
 
 \begin{frame}{Modeling}
 	\begin{outline}
-		1- Quadratic Model
+		1- Polynomial Model
 		
 		
 				\vspace{\baselineskip}
@@ -293,7 +304,7 @@
 	\end{outline}
 \end{frame}
 
-\begin{frame}{Method: Quadratic Model}
+\begin{frame}{Method: Polynomial Model}
 	\begin{outline}
 		In order to simplify the process and eliminate the effect of different possible factors, we started with limiting the problem to a fixed matrix size.	
 		\1Used a second order polynomial to model the relationship between the throughput and the grain size when number of cores is fixed.
@@ -344,14 +355,14 @@
 	\begin{outline}	
 		\1For $P=ag^2+bg+c$, see how $a$, $b$, and $c$ change with the number of cores
 		\1Model the relationship with a 3rd degree polynomial
-		$$a,b,c=a_0N^3+a_1N^2+a_2N+a_3$$
-		%,\:b=b_0N^3+b_1N^2+b_2N+b_3,\: c=c_0N^3+c_1N^2+c_2N+c_3$$
+		$$a=a_0N^3+a_1N^2+a_2N+a_3
+		,\:b=b_0N^3+b_1N^2+b_2N+b_3,$$ $$c=c_0N^3+c_1N^2+c_2N+c_3$$
 		\begin{figure}[H]
 			\centering
 			{\includegraphics[scale=.2]{images/polyfit/fig_690_params_0.png}\label{fig15:a}}
 			{\includegraphics[scale=.2]{images/polyfit/fig_690_params_1.png}\label{fig15:b}}
 			{\includegraphics[scale=.2]{images/polyfit/fig_690_params_2.png}\label{fig15:c}}
-			\caption{Fitting the parameters of the quadratic function with a $3$rd degree polynomial from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores.}	
+			\caption{Fitting the parameters of the polynomial function with a $3$rd degree polynomial from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores.}	
 			\label{fig15}
 		\end{figure}
 	\end{outline}
@@ -402,8 +413,8 @@
 		\begin{figure}[H]
 			\centering
 			{\includegraphics[scale=.3]{images/polyfit/fig_690_peak_range_all.png}\label{fig13:a}}
-			{\includegraphics[scale=.3]{images/polyfit/fig_523-912_peak_range_all.png}\label{fig13:b}}
-			\caption{The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark for different number of cores for (a) matrix size $690\times690$ (b)matrix size $523\times523$ to $912\times912$.}	
+%			{\includegraphics[scale=.3]{images/polyfit/fig_523-912_peak_range_all.png}\label{fig13:b}}
+			\caption{The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark for different number of cores for (a) matrix size $690\times690$}	
 			\label{fig13}
 \end{figure}
 \end{outline}
@@ -438,8 +449,8 @@
 \begin{figure}[H]
 	\centering
 	{\includegraphics[scale=.3]{images/bathtub/all_690_4.png}\label{fig20:a}}
-	{\includegraphics[scale=.3]{images/bathtub/tasks_all_690_4.png}\label{fig20:b}}
-	\caption{(a)The execution time vs. grain size graph, and (b) execution time vs. number fo tasks graph for $DMATDMATADD$ benchmark for matrix size $690\times690$ ran on $4$ cores.}	
+%	{\includegraphics[scale=.3]{images/bathtub/tasks_all_690_4.png}\label{fig20:b}}
+	\caption{The execution time vs. grain size graph for $DMATDMATADD$ benchmark for matrix size $690\times690$ ran on $4$ cores.}	
 	\label{fig21}
 \end{figure}
 	\end{outline}
@@ -451,8 +462,9 @@
 		\1Overheads of creating tasks
 		\1Starvation
 		\begin{figure}
-			\includegraphics[width=0.9\linewidth]{images/true_1_annotated.png}	
-			\caption{Results of running the \textit{DMATDMATADD} benchmark on 8 cores matrix size 690(time unit is microseconds)}	
+			
+			\includegraphics[width=0.9\linewidth]{images/bathtub/all_690_4_star_over.png}	
+			\caption{Results of running the \textit{DMATDMATADD} benchmark on $8$ cores matrix size $690\times690$(time unit is microseconds)}	
 		\end{figure}
 	\end{outline}
 \end{frame}
@@ -465,13 +477,14 @@
 		\frac{\alpha{n_t}+t_s}{N}+\gamma\:\:\:\:\:\:\:\:     \text{otherwise}
 	\end{aligned}
 	\right.$$
-	$n_t$: number of tasks
-	
-	$N$: number of cores
-	$t_s$: sequential execution time
-	$\gamma$: parallelization constant
-	Softplus function:
-	$$f(x)=Ln(1+e^x)$$
+
+	$$n_t \text{: number of tasks}	$$
+	$$N\text{: number of cores}$$
+	$$t_s\text{: sequential execution time}$$
+	$$\gamma\text{: parallelization constant}$$
+%	Softplus function:
+%	$$f(x)=Ln(1+e^x)$$
+
 \end{outline}
 \end{frame}
 
@@ -530,8 +543,8 @@ $$f(x)=\frac{m_0}{x}+\frac{m_1(x-1)}{x}+m_2(x-1)+m_3(x)(x-1)$$
 
 \begin{frame}{Modeling Execution Time based on Grain Size}
 	\begin{outline}	
-The problem with the current model is that with this formula we know that the minimum occurs at $n_t=N$, but that's not usually the case. This inspires us to check for a missing factor. 
-This model still needs to be studied. The estimate that we have is for execution time, which is in our experiments 
+The problem with the current model is that with this formula we know that the minimum occurs at $n_t=N$.
+
 \end{outline}
 \end{frame}
 
@@ -546,8 +559,8 @@ This model still needs to be studied. The estimate that we have is for execution
 
 
 
-\section{Setup}
-\begin{frame}{Blazemark}
+%\section{Setup}
+\begin{frame}{Setup: Blazemark}
 	\begin{outline}
 		Blazemark is a benchmark suite provided by Blaze to compare the performance of Blaze with other linear algebra libraries. 
 		\begin{figure}
@@ -559,7 +572,7 @@ This model still needs to be studied. The estimate that we have is for execution
 \end{frame}
 
 
-\begin{frame}{Configuration}
+\begin{frame}{Setup: Configuration}
 	\begin{outline}
 	\vspace{\baselineskip}	
 	\begin{table}[H]
@@ -606,11 +619,12 @@ This model still needs to be studied. The estimate that we have is for execution
 \end{frame}
 
 \section{Related Work}
-	\begin{frame}{HPX}
+	\begin{frame}{Related Work}
 		\begin{outline}
-			\1Zahra
-			\1Gabriel
-			\1Peter thoman
+			\1Estimating the optimal number of cores to run the program on
+			\1Zahra Used logostic regsression to find the best chunk size
+			\1Gabriel Used machine learning to find the best chunk size, while block size was fixed statically
+			\1Peter thoman proposed a compile-time and runtime solution 
 		\end{outline}
 \end{frame}
 
@@ -627,6 +641,7 @@ This model still needs to be studied. The estimate that we have is for execution
 	\end{figure} 
 	\1Studying the bathtub model
 	\1Generalization for matrix size 
+	\1Adding runs for larger matrix sizes
 	\1Generalization for complex expressions
 	\1Generalization for different architectures
 \end{outline}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.6)  29 NOV 2019 14:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.6)  30 NOV 2019 16:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -947,12 +947,12 @@ Dictionary: translator-numbers-dictionary, Language: English
 ry-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 ) (./slides.nav)
-<logos/stellar_4x1.pdf, id=41, 289.08pt x 72.27051pt>
+<logos/stellar_4x1.pdf, id=37, 289.08pt x 72.27051pt>
 File: logos/stellar_4x1.pdf Graphic file (type pdf)
 <use logos/stellar_4x1.pdf>
 Package pdftex.def Info: logos/stellar_4x1.pdf  used on input line 32.
 (pdftex.def)             Requested size: 76.82246pt x 19.20561pt.
-<logos/LSU.png, id=42, 1991.44pt x 301.125pt>
+<logos/LSU.png, id=38, 1991.44pt x 301.125pt>
 File: logos/LSU.png Graphic file (type png)
 <use logos/LSU.png>
 Package pdftex.def Info: logos/LSU.png  used on input line 32.
@@ -1013,145 +1013,151 @@ LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 ] [9
 
 ]
-<images/blaze.png, id=131, 301.125pt x 150.5625pt>
+<images/blaze.png, id=125, 301.125pt x 150.5625pt>
 File: images/blaze.png Graphic file (type png)
 <use images/blaze.png>
-Package pdftex.def Info: images/blaze.png  used on input line 92.
+Package pdftex.def Info: images/blaze.png  used on input line 103.
 (pdftex.def)             Requested size: 67.60414pt x 33.80157pt.
  [10
 
  <./images/blaze.png>] [11
 
 ]
-<images/old_backend.png, id=142, 1255.69125pt x 400.49625pt>
+<images/old_backend.png, id=136, 1255.69125pt x 400.49625pt>
 File: images/old_backend.png Graphic file (type png)
 <use images/old_backend.png>
-Package pdftex.def Info: images/old_backend.png  used on input line 117.
+Package pdftex.def Info: images/old_backend.png  used on input line 128.
 (pdftex.def)             Requested size: 206.84903pt x 65.96902pt.
  [12
 
- <./images/old_backend.png>] [13
+ <./images/old_backend.png>]
+<images/loop_cropped.png, id=144, 58.0569pt x 128.1588pt>
+File: images/loop_cropped.png Graphic file (type png)
+<use images/loop_cropped.png>
+Package pdftex.def Info: images/loop_cropped.png  used on input line 149.
+(pdftex.def)             Requested size: 29.02837pt x 64.07924pt.
+ [13
 
-] [14
-
-]
-<images/task_granularity.png, id=161, 733.74126pt x 394.47375pt>
+ <./images/loop_cropped.png>]
+<images/task_granularity.png, id=152, 733.74126pt x 394.47375pt>
 File: images/task_granularity.png Graphic file (type png)
 <use images/task_granularity.png>
-Package pdftex.def Info: images/task_granularity.png  used on input line 154.
+Package pdftex.def Info: images/task_granularity.png  used on input line 171.
 (pdftex.def)             Requested size: 192.44897pt x 103.46362pt.
 
-Overfull \vbox (2.0599pt too high) detected at line 154
+Overfull \vbox (2.0599pt too high) detected at line 171
+ []
+
+[14
+
+ <./images/task_granularity.png>]
+<images/amdahls.png, id=159, 500.87125pt x 248.93pt>
+File: images/amdahls.png Graphic file (type png)
+<use images/amdahls.png>
+Package pdftex.def Info: images/amdahls.png  used on input line 191.
+(pdftex.def)             Requested size: 200.34494pt x 99.57022pt.
+
+Overfull \vbox (49.75946pt too high) detected at line 191
  []
 
 [15
 
- <./images/task_granularity.png>]
-<images/amdahls.png, id=168, 500.87125pt x 248.93pt>
-File: images/amdahls.png Graphic file (type png)
-<use images/amdahls.png>
-Package pdftex.def Info: images/amdahls.png  used on input line 174.
-(pdftex.def)             Requested size: 200.34494pt x 99.57022pt.
-
-Overfull \vbox (16.41917pt too high) detected at line 174
- []
-
-[16
-
- <./images/amdahls.png>] [17
+ <./images/amdahls.png>] [16
 
 ]
-<images/chunks.png, id=187, 309.40594pt x 166.74797pt>
+<images/chunks.png, id=177, 309.40594pt x 166.74797pt>
 File: images/chunks.png Graphic file (type png)
 <use images/chunks.png>
-Package pdftex.def Info: images/chunks.png  used on input line 199.
+Package pdftex.def Info: images/chunks.png  used on input line 216.
 (pdftex.def)             Requested size: 206.84903pt x 111.48137pt.
 
-Overfull \vbox (12.6112pt too high) detected at line 199
+Overfull \vbox (12.6112pt too high) detected at line 216
  []
 
-[18
+[17
 
- <./images/chunks.png>] [19
+ <./images/chunks.png>] [18
 
 ]
-Overfull \hbox (20.00021pt too wide) in paragraph at lines 235--235
+Overfull \hbox (20.00021pt too wide) in paragraph at lines 252--252
  [] 
  []
 
-[20
+[19
 
 ]
-<images/fig5.png, id=206, 980.91469pt x 411.41203pt>
+<images/fig5.png, id=197, 980.91469pt x 411.41203pt>
 File: images/fig5.png Graphic file (type png)
 <use images/fig5.png>
-Package pdftex.def Info: images/fig5.png  used on input line 248.
+Package pdftex.def Info: images/fig5.png  used on input line 265.
 (pdftex.def)             Requested size: 258.5591pt x 108.43985pt.
- [21
+ [20
 
  <./images/fig5.png>]
-<images/fig6.png, id=213, 970.75172pt x 411.41203pt>
+<images/fig5_cropped.png, id=204, 612.03656pt x 396.35577pt>
+File: images/fig5_cropped.png Graphic file (type png)
+<use images/fig5_cropped.png>
+Package pdftex.def Info: images/fig5_cropped.png  used on input line 276.
+(pdftex.def)             Requested size: 122.40514pt x 79.26974pt.
+ [21
+
+ <./images/fig5_cropped.png>]
+<images/fig6.png, id=211, 970.75172pt x 411.41203pt>
 File: images/fig6.png Graphic file (type png)
 <use images/fig6.png>
-Package pdftex.def Info: images/fig6.png  used on input line 271.
+Package pdftex.def Info: images/fig6.png  used on input line 289.
 (pdftex.def)             Requested size: 307.28987pt x 130.2358pt.
  [22
 
- <./images/fig6.png>]
-<images/fig6_cropped.png, id=221, 614.295pt x 396.35577pt>
-File: images/fig6_cropped.png Graphic file (type png)
-<use images/fig6_cropped.png>
-Package pdftex.def Info: images/fig6_cropped.png  used on input line 284.
-(pdftex.def)             Requested size: 122.85681pt x 79.26974pt.
- [23
+ <./images/fig6.png>] [23
 
- <./images/fig6_cropped.png>] [24
+] [24
 
 ] [25
 
 ]
-<images/polyfit/fig_1_690.png, id=239, 482.7636pt x 264.21912pt>
+<images/polyfit/fig_1_690.png, id=235, 482.7636pt x 264.21912pt>
 File: images/polyfit/fig_1_690.png Graphic file (type png)
 <use images/polyfit/fig_1_690.png>
-Package pdftex.def Info: images/polyfit/fig_1_690.png  used on input line 322.
+Package pdftex.def Info: images/polyfit/fig_1_690.png  used on input line 333.
 (pdftex.def)             Requested size: 96.551pt x 52.84288pt.
-<images/polyfit/fig_2_690.png, id=240, 482.7636pt x 264.21912pt>
+<images/polyfit/fig_2_690.png, id=236, 482.7636pt x 264.21912pt>
 File: images/polyfit/fig_2_690.png Graphic file (type png)
 <use images/polyfit/fig_2_690.png>
-Package pdftex.def Info: images/polyfit/fig_2_690.png  used on input line 322.
+Package pdftex.def Info: images/polyfit/fig_2_690.png  used on input line 333.
 (pdftex.def)             Requested size: 96.551pt x 52.84288pt.
-<images/polyfit/fig_3_690.png, id=241, 491.14693pt x 267.10992pt>
+<images/polyfit/fig_3_690.png, id=237, 491.14693pt x 267.10992pt>
 File: images/polyfit/fig_3_690.png Graphic file (type png)
 <use images/polyfit/fig_3_690.png>
-Package pdftex.def Info: images/polyfit/fig_3_690.png  used on input line 322.
+Package pdftex.def Info: images/polyfit/fig_3_690.png  used on input line 333.
 (pdftex.def)             Requested size: 98.22765pt x 53.42104pt.
-<images/polyfit/fig_4_690.png, id=242, 491.14693pt x 264.21912pt>
+<images/polyfit/fig_4_690.png, id=238, 491.14693pt x 264.21912pt>
 File: images/polyfit/fig_4_690.png Graphic file (type png)
 <use images/polyfit/fig_4_690.png>
-Package pdftex.def Info: images/polyfit/fig_4_690.png  used on input line 322.
+Package pdftex.def Info: images/polyfit/fig_4_690.png  used on input line 333.
 (pdftex.def)             Requested size: 98.22765pt x 52.84288pt.
-<images/polyfit/fig_5_690.png, id=243, 482.7636pt x 264.21912pt>
+<images/polyfit/fig_5_690.png, id=239, 482.7636pt x 264.21912pt>
 File: images/polyfit/fig_5_690.png Graphic file (type png)
 <use images/polyfit/fig_5_690.png>
-Package pdftex.def Info: images/polyfit/fig_5_690.png  used on input line 322.
+Package pdftex.def Info: images/polyfit/fig_5_690.png  used on input line 333.
 (pdftex.def)             Requested size: 96.551pt x 52.84288pt.
-<images/polyfit/fig_6_690.png, id=244, 491.14693pt x 264.21912pt>
+<images/polyfit/fig_6_690.png, id=240, 491.14693pt x 264.21912pt>
 File: images/polyfit/fig_6_690.png Graphic file (type png)
 <use images/polyfit/fig_6_690.png>
-Package pdftex.def Info: images/polyfit/fig_6_690.png  used on input line 322.
+Package pdftex.def Info: images/polyfit/fig_6_690.png  used on input line 333.
 (pdftex.def)             Requested size: 98.22765pt x 52.84288pt.
-<images/polyfit/fig_7_690.png, id=245, 482.7636pt x 264.21912pt>
+<images/polyfit/fig_7_690.png, id=241, 482.7636pt x 264.21912pt>
 File: images/polyfit/fig_7_690.png Graphic file (type png)
 <use images/polyfit/fig_7_690.png>
-Package pdftex.def Info: images/polyfit/fig_7_690.png  used on input line 322.
+Package pdftex.def Info: images/polyfit/fig_7_690.png  used on input line 333.
 (pdftex.def)             Requested size: 96.551pt x 52.84288pt.
-<images/polyfit/fig_8_690.png, id=246, 491.14693pt x 264.21912pt>
+<images/polyfit/fig_8_690.png, id=242, 491.14693pt x 264.21912pt>
 File: images/polyfit/fig_8_690.png Graphic file (type png)
 <use images/polyfit/fig_8_690.png>
-Package pdftex.def Info: images/polyfit/fig_8_690.png  used on input line 322.
+Package pdftex.def Info: images/polyfit/fig_8_690.png  used on input line 333.
 (pdftex.def)             Requested size: 98.22765pt x 52.84288pt.
 
-Overfull \vbox (20.79243pt too high) detected at line 322
+Overfull \vbox (20.79243pt too high) detected at line 333
  []
 
 [26
@@ -1160,14 +1166,14 @@ Overfull \vbox (20.79243pt too high) detected at line 322
 lyfit/fig_3_690.png> <./images/polyfit/fig_4_690.png> <./images/polyfit/fig_5_6
 90.png> <./images/polyfit/fig_6_690.png> <./images/polyfit/fig_7_690.png> <./im
 ages/polyfit/fig_8_690.png>]
-<images/polyfit/fig_train_test_690.png, id=269, 475.82568pt x 264.21912pt>
+<images/polyfit/fig_train_test_690.png, id=265, 475.82568pt x 264.21912pt>
 File: images/polyfit/fig_train_test_690.png Graphic file (type png)
 <use images/polyfit/fig_train_test_690.png>
 Package pdftex.def Info: images/polyfit/fig_train_test_690.png  used on input l
-ine 335.
+ine 346.
 (pdftex.def)             Requested size: 237.91225pt x 132.10922pt.
 
-Overfull \vbox (29.2696pt too high) detected at line 335
+Overfull \vbox (29.2696pt too high) detected at line 346
  []
 
 [27
@@ -1175,252 +1181,240 @@ Overfull \vbox (29.2696pt too high) detected at line 335
  <./images/polyfit/fig_train_test_690.png>] [28
 
 ]
-<images/polyfit/fig_690_params_0.png, id=283, 478.1865pt x 262.8219pt>
+<images/polyfit/fig_690_params_0.png, id=279, 478.1865pt x 262.8219pt>
 File: images/polyfit/fig_690_params_0.png Graphic file (type png)
 <use images/polyfit/fig_690_params_0.png>
 Package pdftex.def Info: images/polyfit/fig_690_params_0.png  used on input lin
-e 358.
+e 369.
 (pdftex.def)             Requested size: 95.63559pt x 52.56345pt.
-<images/polyfit/fig_690_params_1.png, id=284, 476.2593pt x 262.8219pt>
+<images/polyfit/fig_690_params_1.png, id=280, 476.2593pt x 262.8219pt>
 File: images/polyfit/fig_690_params_1.png Graphic file (type png)
 <use images/polyfit/fig_690_params_1.png>
 Package pdftex.def Info: images/polyfit/fig_690_params_1.png  used on input lin
-e 358.
+e 369.
 (pdftex.def)             Requested size: 95.25017pt x 52.56345pt.
-<images/polyfit/fig_690_params_2.png, id=285, 484.6908pt x 262.8219pt>
+<images/polyfit/fig_690_params_2.png, id=281, 484.6908pt x 262.8219pt>
 File: images/polyfit/fig_690_params_2.png Graphic file (type png)
 <use images/polyfit/fig_690_params_2.png>
 Package pdftex.def Info: images/polyfit/fig_690_params_2.png  used on input lin
-e 358.
+e 369.
 (pdftex.def)             Requested size: 96.93643pt x 52.56345pt.
 
-Overfull \vbox (10.80675pt too high) detected at line 358
+Overfull \vbox (27.16222pt too high) detected at line 369
  []
 
 [29
 
  <./images/polyfit/fig_690_params_0.png> <./images/polyfit/fig_690_params_1.png
 > <./images/polyfit/fig_690_params_2.png>]
-<images/polyfit/fig_690_total_2.png, id=298, 464.55156pt x 252.36684pt>
+<images/polyfit/fig_690_total_2.png, id=294, 464.55156pt x 252.36684pt>
 File: images/polyfit/fig_690_total_2.png Graphic file (type png)
 <use images/polyfit/fig_690_total_2.png>
 Package pdftex.def Info: images/polyfit/fig_690_total_2.png  used on input line
- 373.
+ 384.
 (pdftex.def)             Requested size: 139.36653pt x 75.71063pt.
-<images/polyfit/fig_690_total_4.png, id=299, 470.91132pt x 249.47604pt>
+<images/polyfit/fig_690_total_4.png, id=295, 470.91132pt x 249.47604pt>
 File: images/polyfit/fig_690_total_4.png Graphic file (type png)
 <use images/polyfit/fig_690_total_4.png>
 Package pdftex.def Info: images/polyfit/fig_690_total_4.png  used on input line
- 373.
+ 384.
 (pdftex.def)             Requested size: 141.27448pt x 74.84338pt.
-<images/polyfit/fig_690_total_8.png, id=300, 470.91132pt x 249.47604pt>
+<images/polyfit/fig_690_total_8.png, id=296, 470.91132pt x 249.47604pt>
 File: images/polyfit/fig_690_total_8.png Graphic file (type png)
 <use images/polyfit/fig_690_total_8.png>
 Package pdftex.def Info: images/polyfit/fig_690_total_8.png  used on input line
- 373.
+ 384.
 (pdftex.def)             Requested size: 141.27448pt x 74.84338pt.
 
-Overfull \vbox (18.98415pt too high) detected at line 373
+Overfull \vbox (18.98415pt too high) detected at line 384
  []
 
 [30
 
  <./images/polyfit/fig_690_total_2.png> <./images/polyfit/fig_690_total_4.png> 
 <./images/polyfit/fig_690_total_8.png>]
-<images/polyfit/fig_690_total_error.png, id=313, 475.82568pt x 263.35188pt>
+<images/polyfit/fig_690_total_error.png, id=309, 475.82568pt x 263.35188pt>
 File: images/polyfit/fig_690_total_error.png Graphic file (type png)
 <use images/polyfit/fig_690_total_error.png>
 Package pdftex.def Info: images/polyfit/fig_690_total_error.png  used on input 
-line 385.
+line 396.
 (pdftex.def)             Requested size: 166.54147pt x 92.17453pt.
-<images/polyfit/fig_690_total_error_corrected.png, id=314, 475.82568pt x 263.35
+<images/polyfit/fig_690_total_error_corrected.png, id=310, 475.82568pt x 263.35
 188pt>
 File: images/polyfit/fig_690_total_error_corrected.png Graphic file (type png)
 <use images/polyfit/fig_690_total_error_corrected.png>
 Package pdftex.def Info: images/polyfit/fig_690_total_error_corrected.png  used
- on input line 385.
+ on input line 396.
 (pdftex.def)             Requested size: 166.54147pt x 92.17453pt.
 
-Overfull \vbox (19.23483pt too high) detected at line 385
+Overfull \vbox (19.23483pt too high) detected at line 396
  []
 
 [31
 
  <./images/polyfit/fig_690_total_error.png> <./images/polyfit/fig_690_total_err
 or_corrected.png>]
-<images/polyfit/fig_690_total_2_range.png, id=326, 464.55156pt x 252.36684pt>
+<images/polyfit/fig_690_total_2_range.png, id=322, 464.55156pt x 252.36684pt>
 File: images/polyfit/fig_690_total_2_range.png Graphic file (type png)
 <use images/polyfit/fig_690_total_2_range.png>
 Package pdftex.def Info: images/polyfit/fig_690_total_2_range.png  used on inpu
-t line 398.
+t line 409.
 (pdftex.def)             Requested size: 139.36653pt x 75.71063pt.
-<images/polyfit/fig_690_total_4_range.png, id=327, 470.91132pt x 249.47604pt>
+<images/polyfit/fig_690_total_4_range.png, id=323, 470.91132pt x 249.47604pt>
 File: images/polyfit/fig_690_total_4_range.png Graphic file (type png)
 <use images/polyfit/fig_690_total_4_range.png>
 Package pdftex.def Info: images/polyfit/fig_690_total_4_range.png  used on inpu
-t line 398.
+t line 409.
 (pdftex.def)             Requested size: 141.27448pt x 74.84338pt.
-<images/polyfit/fig_690_total_8_range.png, id=328, 470.91132pt x 249.47604pt>
+<images/polyfit/fig_690_total_8_range.png, id=324, 470.91132pt x 249.47604pt>
 File: images/polyfit/fig_690_total_8_range.png Graphic file (type png)
 <use images/polyfit/fig_690_total_8_range.png>
 Package pdftex.def Info: images/polyfit/fig_690_total_8_range.png  used on inpu
-t line 398.
+t line 409.
 (pdftex.def)             Requested size: 141.27448pt x 74.84338pt.
 
-Overfull \vbox (14.68964pt too high) detected at line 398
+Overfull \vbox (14.68964pt too high) detected at line 409
  []
 
 [32
 
  <./images/polyfit/fig_690_total_2_range.png> <./images/polyfit/fig_690_total_4
 _range.png> <./images/polyfit/fig_690_total_8_range.png>]
-<images/polyfit/fig_690_peak_range_all.png, id=341, 377.53848pt x 263.35188pt>
+<images/polyfit/fig_690_peak_range_all.png, id=337, 377.53848pt x 263.35188pt>
 File: images/polyfit/fig_690_peak_range_all.png Graphic file (type png)
 <use images/polyfit/fig_690_peak_range_all.png>
 Package pdftex.def Info: images/polyfit/fig_690_peak_range_all.png  used on inp
-ut line 410.
+ut line 421.
 (pdftex.def)             Requested size: 113.2624pt x 79.00616pt.
-<images/polyfit/fig_523-912_peak_range_all.png, id=342, 511.6716pt x 265.9536pt
->
-File: images/polyfit/fig_523-912_peak_range_all.png Graphic file (type png)
-<use images/polyfit/fig_523-912_peak_range_all.png>
-Package pdftex.def Info: images/polyfit/fig_523-912_peak_range_all.png  used on
- input line 410.
-(pdftex.def)             Requested size: 153.50266pt x 79.78668pt.
  [33
 
- <./images/polyfit/fig_690_peak_range_all.png> <./images/polyfit/fig_523-912_pe
-ak_range_all.png>]
-<images/polyfit/fig_690_chunks_2_4-256.png, id=354, 396.5214pt x 263.0628pt>
+ <./images/polyfit/fig_690_peak_range_all.png>]
+<images/polyfit/fig_690_chunks_2_4-256.png, id=346, 396.5214pt x 263.0628pt>
 File: images/polyfit/fig_690_chunks_2_4-256.png Graphic file (type png)
 <use images/polyfit/fig_690_chunks_2_4-256.png>
 Package pdftex.def Info: images/polyfit/fig_690_chunks_2_4-256.png  used on inp
-ut line 427.
+ut line 438.
 (pdftex.def)             Requested size: 99.1301pt x 65.76553pt.
-<images/polyfit/fig_690_chunks_4_4-256.png, id=355, 396.5214pt x 263.0628pt>
+<images/polyfit/fig_690_chunks_4_4-256.png, id=347, 396.5214pt x 263.0628pt>
 File: images/polyfit/fig_690_chunks_4_4-256.png Graphic file (type png)
 <use images/polyfit/fig_690_chunks_4_4-256.png>
 Package pdftex.def Info: images/polyfit/fig_690_chunks_4_4-256.png  used on inp
-ut line 427.
+ut line 438.
 (pdftex.def)             Requested size: 99.1301pt x 65.76553pt.
-<images/polyfit/fig_690_chunks_8_4-256.png, id=356, 396.5214pt x 264.5082pt>
+<images/polyfit/fig_690_chunks_8_4-256.png, id=348, 396.5214pt x 264.5082pt>
 File: images/polyfit/fig_690_chunks_8_4-256.png Graphic file (type png)
 <use images/polyfit/fig_690_chunks_8_4-256.png>
 Package pdftex.def Info: images/polyfit/fig_690_chunks_8_4-256.png  used on inp
-ut line 427.
+ut line 438.
 (pdftex.def)             Requested size: 99.1301pt x 66.12688pt.
-<images/polyfit/fig_690_chunks_2_4-512.png, id=357, 396.5214pt x 263.0628pt>
+<images/polyfit/fig_690_chunks_2_4-512.png, id=349, 396.5214pt x 263.0628pt>
 File: images/polyfit/fig_690_chunks_2_4-512.png Graphic file (type png)
 <use images/polyfit/fig_690_chunks_2_4-512.png>
 Package pdftex.def Info: images/polyfit/fig_690_chunks_2_4-512.png  used on inp
-ut line 427.
+ut line 438.
 (pdftex.def)             Requested size: 99.1301pt x 65.76553pt.
-<images/polyfit/fig_690_chunks_4_4-512.png, id=358, 396.5214pt x 263.0628pt>
+<images/polyfit/fig_690_chunks_4_4-512.png, id=350, 396.5214pt x 263.0628pt>
 File: images/polyfit/fig_690_chunks_4_4-512.png Graphic file (type png)
 <use images/polyfit/fig_690_chunks_4_4-512.png>
 Package pdftex.def Info: images/polyfit/fig_690_chunks_4_4-512.png  used on inp
-ut line 427.
+ut line 438.
 (pdftex.def)             Requested size: 99.1301pt x 65.76553pt.
-<images/polyfit/fig_690_chunks_8_4-512.png, id=359, 396.5214pt x 263.0628pt>
+<images/polyfit/fig_690_chunks_8_4-512.png, id=351, 396.5214pt x 263.0628pt>
 File: images/polyfit/fig_690_chunks_8_4-512.png Graphic file (type png)
 <use images/polyfit/fig_690_chunks_8_4-512.png>
 Package pdftex.def Info: images/polyfit/fig_690_chunks_8_4-512.png  used on inp
-ut line 427.
+ut line 438.
 (pdftex.def)             Requested size: 99.1301pt x 65.76553pt.
  [34
 
  <./images/polyfit/fig_690_chunks_2_4-256.png> <./images/polyfit/fig_690_chunks
 _4_4-256.png> <./images/polyfit/fig_690_chunks_8_4-256.png> <./images/polyfit/f
 ig_690_chunks_2_4-512.png> <./images/polyfit/fig_690_chunks_4_4-512.png> <./ima
-ges/polyfit/fig_690_chunks_8_4-512.png>] [35
+ges/polyfit/fig_690_chunks_8_4-512.png>]
+[35
 
 ]
-<images/bathtub/all_690_4.png, id=383, 396.5214pt x 263.0628pt>
+<images/bathtub/all_690_4.png, id=376, 396.5214pt x 263.0628pt>
 File: images/bathtub/all_690_4.png Graphic file (type png)
 <use images/bathtub/all_690_4.png>
-Package pdftex.def Info: images/bathtub/all_690_4.png  used on input line 446.
-(pdftex.def)             Requested size: 118.95732pt x 78.91943pt.
-<images/bathtub/tasks_all_690_4.png, id=384, 396.5214pt x 263.0628pt>
-File: images/bathtub/tasks_all_690_4.png Graphic file (type png)
-<use images/bathtub/tasks_all_690_4.png>
-Package pdftex.def Info: images/bathtub/tasks_all_690_4.png  used on input line
- 446.
+Package pdftex.def Info: images/bathtub/all_690_4.png  used on input line 457.
 (pdftex.def)             Requested size: 118.95732pt x 78.91943pt.
  [36
 
- <./images/bathtub/all_690_4.png> <./images/bathtub/tasks_all_690_4.png>]
-<images/true_1_annotated.png, id=395, 949.5475pt x 495.8525pt>
-File: images/true_1_annotated.png Graphic file (type png)
-<use images/true_1_annotated.png>
-Package pdftex.def Info: images/true_1_annotated.png  used on input line 458.
-(pdftex.def)             Requested size: 258.5591pt x 135.01688pt.
+ <./images/bathtub/all_690_4.png>]
+<images/bathtub/all_690_4_star_over.png, id=385, 258.4857pt x 134.6631pt>
+File: images/bathtub/all_690_4_star_over.png Graphic file (type png)
+<use images/bathtub/all_690_4_star_over.png>
+Package pdftex.def Info: images/bathtub/all_690_4_star_over.png  used on input 
+line 470.
+(pdftex.def)             Requested size: 258.5591pt x 134.70796pt.
  [37
 
- <./images/true_1_annotated.png>] [38
+ <./images/bathtub/all_690_4_star_over.png>] [38
 
 ]
-<images/bathtub/pred/pred_690_4.png, id=409, 476.2593pt x 263.0628pt>
+<images/bathtub/pred/pred_690_4.png, id=399, 476.2593pt x 263.0628pt>
 File: images/bathtub/pred/pred_690_4.png Graphic file (type png)
 <use images/bathtub/pred/pred_690_4.png>
 Package pdftex.def Info: images/bathtub/pred/pred_690_4.png  used on input line
- 490.
+ 503.
 (pdftex.def)             Requested size: 190.50034pt x 105.22325pt.
-<images/bathtub/pred/pred_690_8.png, id=410, 476.2593pt x 263.0628pt>
+<images/bathtub/pred/pred_690_8.png, id=400, 476.2593pt x 263.0628pt>
 File: images/bathtub/pred/pred_690_8.png Graphic file (type png)
 <use images/bathtub/pred/pred_690_8.png>
 Package pdftex.def Info: images/bathtub/pred/pred_690_8.png  used on input line
- 490.
+ 503.
 (pdftex.def)             Requested size: 190.50034pt x 105.22325pt.
 
-Overfull \vbox (78.16537pt too high) detected at line 490
+Overfull \vbox (78.16537pt too high) detected at line 503
  []
 
 [39
 
  <./images/bathtub/pred/pred_690_4.png> <./images/bathtub/pred/pred_690_8.png>]
-<images/bathtub/error_690.png, id=421, 469.2732pt x 262.8219pt>
+<images/bathtub/error_690.png, id=411, 469.2732pt x 262.8219pt>
 File: images/bathtub/error_690.png Graphic file (type png)
 <use images/bathtub/error_690.png>
-Package pdftex.def Info: images/bathtub/error_690.png  used on input line 501.
+Package pdftex.def Info: images/bathtub/error_690.png  used on input line 514.
 (pdftex.def)             Requested size: 211.17097pt x 118.26875pt.
  [40
 
  <./images/bathtub/error_690.png>]
-<images/bathtub/coef_1_690.png, id=429, 465.6597pt x 262.8219pt>
+<images/bathtub/coef_1_690.png, id=419, 465.6597pt x 262.8219pt>
 File: images/bathtub/coef_1_690.png Graphic file (type png)
 <use images/bathtub/coef_1_690.png>
-Package pdftex.def Info: images/bathtub/coef_1_690.png  used on input line 518.
+Package pdftex.def Info: images/bathtub/coef_1_690.png  used on input line 531.
 
 (pdftex.def)             Requested size: 139.69897pt x 78.84717pt.
-<images/bathtub/coef_2_690.png, id=430, 462.2871pt x 262.8219pt>
+<images/bathtub/coef_2_690.png, id=420, 462.2871pt x 262.8219pt>
 File: images/bathtub/coef_2_690.png Graphic file (type png)
 <use images/bathtub/coef_2_690.png>
-Package pdftex.def Info: images/bathtub/coef_2_690.png  used on input line 518.
+Package pdftex.def Info: images/bathtub/coef_2_690.png  used on input line 531.
 
 (pdftex.def)             Requested size: 138.6872pt x 78.84717pt.
-<images/bathtub/coef_3_690.png, id=431, 464.6961pt x 262.8219pt>
+<images/bathtub/coef_3_690.png, id=421, 464.6961pt x 262.8219pt>
 File: images/bathtub/coef_3_690.png Graphic file (type png)
 <use images/bathtub/coef_3_690.png>
-Package pdftex.def Info: images/bathtub/coef_3_690.png  used on input line 518.
+Package pdftex.def Info: images/bathtub/coef_3_690.png  used on input line 531.
 
 (pdftex.def)             Requested size: 139.4099pt x 78.84717pt.
 
-Overfull \vbox (63.27272pt too high) detected at line 518
+Overfull \vbox (63.27272pt too high) detected at line 531
  []
 
 [41
 
  <./images/bathtub/coef_1_690.png> <./images/bathtub/coef_2_690.png> <./images/
 bathtub/coef_3_690.png>]
-<images/bathtub/prediction_error_overall690.png, id=444, 1348.5582pt x 335.3328
+<images/bathtub/prediction_error_overall690.png, id=434, 1348.5582pt x 335.3328
 pt>
 File: images/bathtub/prediction_error_overall690.png Graphic file (type png)
 <use images/bathtub/prediction_error_overall690.png>
 Package pdftex.def Info: images/bathtub/prediction_error_overall690.png  used o
-n input line 529.
+n input line 542.
 (pdftex.def)             Requested size: 337.13872pt x 83.833pt.
 
-Overfull \hbox (29.84885pt too wide) in paragraph at lines 529--529
+Overfull \hbox (29.84885pt too wide) in paragraph at lines 542--542
  [] 
  []
 
@@ -1428,48 +1422,48 @@ Overfull \hbox (29.84885pt too wide) in paragraph at lines 529--529
 
  <./images/bathtub/prediction_error_overall690.png>] [43
 
-] [44
-
 ]
-<images/blazemark_1.png, id=463, 325.215pt x 449.68pt>
+<images/blazemark_1.png, id=448, 325.215pt x 449.68pt>
 File: images/blazemark_1.png Graphic file (type png)
 <use images/blazemark_1.png>
-Package pdftex.def Info: images/blazemark_1.png  used on input line 559.
+Package pdftex.def Info: images/blazemark_1.png  used on input line 572.
 (pdftex.def)             Requested size: 129.06117pt x 178.45532pt.
-<images/blazemark_2.png, id=464, 302.12875pt x 327.2225pt>
+<images/blazemark_2.png, id=449, 302.12875pt x 327.2225pt>
 File: images/blazemark_2.png Graphic file (type png)
 <use images/blazemark_2.png>
-Package pdftex.def Info: images/blazemark_2.png  used on input line 559.
+Package pdftex.def Info: images/blazemark_2.png  used on input line 572.
 (pdftex.def)             Requested size: 125.98996pt x 136.45387pt.
 
-Overfull \vbox (35.38545pt too high) detected at line 559
+Overfull \vbox (35.38545pt too high) detected at line 572
  []
 
-[45
+[44
 
- <./images/blazemark_1.png> <./images/blazemark_2.png>] [46
+ <./images/blazemark_1.png> <./images/blazemark_2.png>] [45
+
+] [46
 
 ] [47
 
-] [48
+]
+[48
 
 ]
-[49
-
-]
+<images/polyfit/fig_523-912_peak_range_all.png, id=479, 511.6716pt x 265.9536pt
+>
 File: images/polyfit/fig_523-912_peak_range_all.png Graphic file (type png)
 <use images/polyfit/fig_523-912_peak_range_all.png>
 Package pdftex.def Info: images/polyfit/fig_523-912_peak_range_all.png  used on
- input line 633.
+ input line 648.
 (pdftex.def)             Requested size: 127.91759pt x 66.48824pt.
-<images/fig11.png, id=495, 527.3301pt x 263.3037pt>
+<images/fig11.png, id=480, 527.3301pt x 263.3037pt>
 File: images/fig11.png Graphic file (type png)
 <use images/fig11.png>
-Package pdftex.def Info: images/fig11.png  used on input line 633.
+Package pdftex.def Info: images/fig11.png  used on input line 648.
 (pdftex.def)             Requested size: 131.8322pt x 65.82576pt.
- [50
+ [49
 
- <./images/fig11.png>] [51
+ <./images/polyfit/fig_523-912_peak_range_all.png> <./images/fig11.png>] [50
 
 ]
 \tf@nav=\write6
@@ -1481,26 +1475,26 @@ Package pdftex.def Info: images/fig11.png  used on input line 633.
 \tf@snm=\write8
 \openout8 = `slides.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 640.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 640.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 655.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 655.
  (./slides.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 640.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 640.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 655.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 655.
 Package rerunfilecheck Info: File `slides.out' has not changed.
-(rerunfilecheck)             Checksum: 8C1FACBF63BC483D6CBBD2EC65D01123;313.
+(rerunfilecheck)             Checksum: 29D3093612A458C9697ED17358826A0C;273.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 20995 strings out of 492676
- 419314 string characters out of 6134162
- 477156 words of memory out of 5000000
- 24208 multiletter control sequences out of 15000+600000
+ 20984 strings out of 492676
+ 419214 string characters out of 6134162
+ 477131 words of memory out of 5000000
+ 24201 multiletter control sequences out of 15000+600000
  15430 words of font info for 56 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
- 71i,13n,88p,1809b,836s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,13n,88p,1809b,835s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texli
@@ -1514,10 +1508,10 @@ sfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmssi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 sy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on slides.pdf (51 pages, 3740336 bytes).
+Output written on slides.pdf (50 pages, 3783515 bytes).
 PDF statistics:
- 594 PDF objects out of 1000 (max. 8388607)
- 405 compressed objects within 5 object streams
- 163 named destinations out of 1000 (max. 500000)
- 354 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 579 PDF objects out of 1000 (max. 8388607)
+ 393 compressed objects within 4 object streams
+ 159 named destinations out of 1000 (max. 500000)
+ 346 words of extra memory for PDF output out of 10000 (max. 10000000)
 
