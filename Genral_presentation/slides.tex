@@ -1,11 +1,15 @@
 \documentclass[10pt]{beamer}
-
+\usepackage{caption}
 \usetheme{metropolis}
 \usepackage{appendixnumberbeamer}
+\usepackage{amsmath}
 %
 \setbeamercolor{frametitle}{bg=violet}
+\setbeamerfont{caption}{size=\scriptsize}
 %\setbeamercolor{progress bar in section page}{bg=violet}
 \usepackage{outlines}
+\usepackage{subfig}
+\captionsetup[subfigure]{font=tiny,labelfont=tiny}
 
 \title{Optimizing the Performance of Multi-threaded Linear Algebra Libraries, a Task Granularity based Approach }
 \subtitle{PhD Proposal}
@@ -41,12 +45,6 @@
 		\begin{outline}
 			\1A compile-time and runtime solution to optimize the performance of a linear algebra library based on a specific application
 			\1These parameters could be: Machine architecture, number of cores to run the program on, the expression to be evaluated: the type of operations, the number of matrices involved, the matrix sizes. 
-			%		\1What was our motivation?
-%			\2Phylanx
-%		\1What are we looking for here?
-%			\2Optimizing the performance of multi-threaded linear algebra libraries
-%		\1Why is it important?
-%			\2 HPC applications heavily rely on the linear algebra libraries to achieve a high performance	
 		\end{outline}		
 \end{frame}
 
@@ -63,7 +61,7 @@
 \end{frame}
 
 \section{Background}
-\begin{frame}{HPX}
+\begin{frame}{Background: HPX}
 	\begin{outline}
 		\1HPX is a general purpose C++ runtime system for parallel and distributed applications of any scale.
 		\1HPX is the first
@@ -71,28 +69,28 @@
 		the ParalleX execution model, on conventional systems
 		including Linux clusters, Windows, Macintosh, Android, XeonPhi,
 		and the Bluegene/Q.
-		\1Fine-grained Parallelism instead of Heavyweight Threads.
+		\1Fine-grained parallelism instead of heavyweight threads.
 	\end{outline}
 \end{frame}
 
-\begin{frame}{HPX: Execution Model}
+\begin{frame}{Background: HPX, Execution Model}
 	\begin{outline}
-		\1SLOW
-		\2Starvation
-		\2Latency
-		\2Overheads
-		\2Waiting for contention resolution
+		Four major factors for performance degradation: SLOW
+		\1Starvation
+		\1Latency
+		\1Overheads
+		\1Waiting for contention resolution
 	\end{outline}
 \end{frame}
 
 
-\begin{frame}{Blaze C++ Library}
+\begin{frame}{Background: Blaze C++ Library}
 \begin{outline}
 \begin{figure}[H]
 
 	\includegraphics[width=0.22\linewidth]{images/blaze.png}
 \end{figure}	
- Linear Algebra Library based on Smart Expression Templates
+Blaze is a high performance C++ linear algebra library based on Smart Expression Templates.
  \1Expression Templates:
 	\2Creates a parse tree of the expression at compile time and postpone the actual evaluation to when the expression is assigned to a target
 \1 Smart: 
@@ -103,7 +101,7 @@
 \end{frame}
 
 
-\begin{frame}{Blaze: Parallelization}
+\begin{frame}{Background: Blaze, Parallelization}
 	\begin{outline}
 		Depending on the operation and the size of operands, the assignment could be parallelized through four different backends
 		\1 HPX 
@@ -113,7 +111,7 @@
 	\end{outline}
 \end{frame}
 
-\begin{frame}{Blaze: Backend Implementation}
+\begin{frame}{Background: Blaze, Backend Implementation}
 	\begin{outline}
 		In the current implementation, the work is equally divided between the cores at compile time. 
 		\1Parallel for loop
@@ -143,8 +141,7 @@
 		\end{figure}
 		Chunk size: Number of loop iterations executed by one thread 
 		\1Static
-		\1Dynamic
-		\1Other methods including Guided, Factoring
+		\1Dynamic methods including Guided, Factoring
 	\end{outline}
 \end{frame}
 
@@ -154,7 +151,7 @@
 %	\end{outline}
 %\end{frame}
 
-\begin{frame}{Task Granularity}
+\begin{frame}{Background: Task Granularity}
 	\begin{outline}
 		Grain size: The amount of work performed by one HPX thread
 		\1What causes performance degradation?
@@ -171,7 +168,7 @@
 \end{frame}
 
 
-\begin{frame}{Modeling Performance}
+\begin{frame}{Background: Modeling Performance based on number of cores}
 	\begin{outline}
 		\1Amdahl's Law
 			$$S(p) = \frac{p}{1+\sigma(p-1)}$$
@@ -181,8 +178,8 @@
 		of linear speedup, contention delay, and coherency delay due to crosstalk
 		\begin{figure}[H]
 			\centering
-			\includegraphics[scale=0.4]{images/amdahls.png}
-			\caption{An example of the achievable speedup based on Amdahl's law and USL compared to the ideal linear speedup where $\sigma=0.04$ and $\kappa=0.005$.}	
+			\includegraphics[scale=0.38]{images/amdahls.png}
+			\caption{An example of speedup based on Amdahl's law and USL compared to the ideal linear speedup where $\sigma=0.04$ and $\kappa=0.005$.}	
 			\label{fig_Amdahl}
 		\end{figure}
 		
@@ -190,7 +187,7 @@
 	\end{outline}
 \end{frame}
 
-\begin{frame}{Modeling Performance: Other Models}
+\begin{frame}{Background: Modeling Performance based on number of cores: Other Models}
 	\begin{outline}
 		\1Quadratic model
 		$$ S(p) = p-\gamma{p(p-1)}$$
@@ -201,7 +198,17 @@
 	\end{outline}
 \end{frame}
 
-\begin{frame}{Objective}
+
+
+%\begin{frame}{Definitions}
+%	\begin{outline}
+%	\1Block size
+%	\1Chunk size
+%	\1Grain size
+%	\end{outline}
+%\end{frame}
+\section{Method}
+\begin{frame}{Method: Objective}
 	\begin{outline}
 		Dynamically divide the work among the cores based on number of cores, matrix size, complexity of the operation, machine architecture.
 		For this purpose two parameters have been introduced:
@@ -215,20 +222,12 @@
 	\end{outline}
 \end{frame}
 
-%\begin{frame}{Definitions}
-%	\begin{outline}
-%	\1Block size
-%	\1Chunk size
-%	\1Grain size
-%	\end{outline}
-%\end{frame}
-\section{Method}
-\begin{frame}{Data Collection}
+\begin{frame}{Method: Data Collection}
 	\begin{outline}
 		\1Starting from DMATDMATADD benchmark: $C=A+B$
 	\begin{table}[H]
 		\centering
-		\resizebox{\textwidth}{!}
+		\resizebox{0.8\textwidth}{!}
 		{\begin{tabular}{|c | c |} 
 				\hline
 				Category & Configuration \\
@@ -252,20 +251,20 @@
 \end{frame}
 
 
-\begin{frame}{Data}
+\begin{frame}{Method: Data Analysis}
 	\begin{outline}
 		\1For simplicity we look at each matrix size individually, one number of core at a time, 
 		
 		
 		\begin{figure}
 			\includegraphics[width=0.9\linewidth]{images/fig5.png}	
-			\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix sizes from 690$\times$690 with different combinations of block size and chunk size on $4$ cores}	
+			\caption{The results obtained from running $DMATDMATADD$ benchmark for matrix sizes 690$\times$690 with different combinations of block size and chunk size on $4$ cores}	
 		\end{figure}
 	\end{outline}
 \end{frame}
 
 
-\begin{frame}{Observation}
+\begin{frame}{Method: Observation}
 	\begin{outline}
 		\begin{figure}
 			\includegraphics[scale=0.2]{images/fig5_cropped.png}			
@@ -275,10 +274,10 @@
 	\end{outline}
 \end{frame}
 
-\begin{frame}{Throughput vs. Grain Size}
+\begin{frame}{Method: Throughput vs. Grain Size}
 	\begin{outline}
-		Grain size: The amount of work performed by one HPX thread
-		
+		Grain size: The number of floating point operations performed by one thread\\
+		For $DMATDMATADD$, with $block\textunderscore{size}=r\times{c}$ and  $chunk\textunderscore{size}=ch$ \\ $r\times{c}\times{ch}$
 		\begin{figure}[H]
 			\centering\includegraphics[width=1\linewidth]{images/fig6.png}
 			\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times$690 on $4$ cores.}	
@@ -288,21 +287,33 @@
 	\end{outline}
 \end{frame}
 
-\begin{frame}{Throughput vs. Grain Siz}
-	\begin{outline}
-		Can we model the relationship between the throughput and the grain size?
+\begin{frame}{Method: Throughput vs. Grain Size}
+	\begin{outline}		
+		The range of grain size for maximum performance
+		\begin{figure}[H]
+			\centering\includegraphics[scale=0.9]{images/fig6_range.png}
+			\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times$690 on $4$ cores.}	
+			\label{fig7}
+		\end{figure}
+		
 	\end{outline}
 \end{frame}
 
-\begin{frame}{Modeling}
+\begin{frame}{Throughput vs. Grain Size}
 	\begin{outline}
-		1- Polynomial Model
-		
-		
-				\vspace{\baselineskip}
-		2- Bathtub Model
+		Can we model the relationship between the throughput and the grain size?
+		\pause
+		\1Polynomial Model
+		\1Bathtub Model
 	\end{outline}
 \end{frame}
+
+%\begin{frame}{Modeling}
+%	\begin{outline}
+%		\1Polynomial Model
+%		\1Bathtub Model
+%	\end{outline}
+%\end{frame}
 
 \begin{frame}{Method: Polynomial Model}
 	\begin{outline}
@@ -317,16 +328,16 @@
 	\begin{outline}	
 		\begin{figure}[H]
 			\centering
-			{\includegraphics[scale=.2]{images/polyfit/fig_1_690.png}\label{fig10:a}}
-			{\includegraphics[scale=.2]{images/polyfit/fig_2_690.png}\label{fig10:b}}{\hfill}
-			{\includegraphics[scale=.2]{images/polyfit/fig_3_690.png}\label{fig10:c}}
-			{\includegraphics[scale=.2]{images/polyfit/fig_4_690.png}\label{fig10:d}}{\hfill}
-			{\includegraphics[scale=.2]{images/polyfit/fig_5_690.png}\label{fig10:e}}
-			{\includegraphics[scale=.2]{images/polyfit/fig_6_690.png}\label{fig10:f}}{\hfill}
-			{\includegraphics[scale=.2]{images/polyfit/fig_7_690.png}\label{fig10:g}}
-			{\includegraphics[scale=.2]{images/polyfit/fig_8_690.png}\label{fig10:h}}
+			\subfloat[1 core]{\includegraphics[scale=.18]{images/polyfit/fig_1_690.png}\label{fig10:a}}
+			\subfloat[2 cores]{\includegraphics[scale=.18]{images/polyfit/fig_2_690.png}\label{fig10:b}}
+			\subfloat[3 cores]{\includegraphics[scale=.18]{images/polyfit/fig_3_690.png}\label{fig10:c}}{\hfill}
+			\subfloat[4 cores]{\includegraphics[scale=.18]{images/polyfit/fig_4_690.png}\label{fig10:d}}
+			\subfloat[5 cores]{\includegraphics[scale=.18]{images/polyfit/fig_5_690.png}\label{fig10:e}}
+			\subfloat[6 cores]{\includegraphics[scale=.18]{images/polyfit/fig_6_690.png}\label{fig10:f}}{\hfill}
+			\subfloat[7 cores]{\includegraphics[scale=.18]{images/polyfit/fig_7_690.png}\label{fig10:g}}
+			\subfloat[8 cores]{\includegraphics[scale=.18]{images/polyfit/fig_8_690.png}\label{fig10:h}}
 			
-			\caption{The results of fitting the throughput vs grain size data into a 2d polynomial for $DMATDMATADD$ benchmark for matrix size 690$\times$690 with different number of cores on the test data set (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores.}	
+			\caption{The results of fitting the throughput vs grain size data into a 2d polynomial for $DMATDMATADD$ benchmark for matrix size 690$\times$690 with different number of cores on the test data.}
 			\label{fig10}
 		\end{figure}
 	\end{outline}
@@ -335,7 +346,7 @@
 
 \begin{frame}{Method: Modeling Performance based on Grain Size}
 	\begin{outline}	
-		$$Relative_error = \frac{1}{n}\sum_{i=1}^{n} {1-p_i/t_i}$$
+		$$Relative\textunderscore{error} = \frac{1}{n}\sum_{i=1}^{n} {1-p_i/t_i}\:\:\:\: n \text{ is the number of samples}$$
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=.5]{images/polyfit/fig_train_test_690.png}
@@ -347,7 +358,8 @@
 
 \begin{frame}{Method: Modeling Performance based on Grain Size}
 	\begin{outline}	
-		Can we somehow integrate number of cores into the model?
+		\1We have developed a model for each number of cores:1,2,..,8 $P=ag^2+bg+c$\\ 
+		\1Can we somehow integrate number of cores into the model?
 	\end{outline}
 \end{frame}
 
@@ -355,13 +367,13 @@
 	\begin{outline}	
 		\1For $P=ag^2+bg+c$, see how $a$, $b$, and $c$ change with the number of cores
 		\1Model the relationship with a 3rd degree polynomial
-		$$a=a_0N^3+a_1N^2+a_2N+a_3
+		$$a_i=a_0N^3+a_1N^2+a_2N+a_3
 		,\:b=b_0N^3+b_1N^2+b_2N+b_3,$$ $$c=c_0N^3+c_1N^2+c_2N+c_3$$
 		\begin{figure}[H]
 			\centering
-			{\includegraphics[scale=.2]{images/polyfit/fig_690_params_0.png}\label{fig15:a}}
-			{\includegraphics[scale=.2]{images/polyfit/fig_690_params_1.png}\label{fig15:b}}
-			{\includegraphics[scale=.2]{images/polyfit/fig_690_params_2.png}\label{fig15:c}}
+			{\includegraphics[scale=.18]{images/polyfit/fig_690_params_0.png}\label{fig15:a}}
+			{\includegraphics[scale=.18]{images/polyfit/fig_690_params_1.png}\label{fig15:b}}
+			{\includegraphics[scale=.18]{images/polyfit/fig_690_params_2.png}\label{fig15:c}}
 			\caption{Fitting the parameters of the polynomial function with a $3$rd degree polynomial from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores.}	
 			\label{fig15}
 		\end{figure}
@@ -374,9 +386,9 @@
 		The final model: $$P=a_{11}g^2N^3+a_{10}g^2N^2+...+a_1N+a_0$$
 	\begin{figure}[H]
 		\centering
-		{\includegraphics[scale=.3]{images/polyfit/fig_690_total_2.png}\label{fig18:a}}
-		{\includegraphics[scale=.3]{images/polyfit/fig_690_total_4.png}\label{fig18:b}}
-		{\includegraphics[scale=.3]{images/polyfit/fig_690_total_8.png}\label{fig18:c}}
+		\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_total_2.png}\label{fig18:a}}
+		\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_total_4.png}\label{fig18:b}}\hfill
+		\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_total_8.png}\label{fig18:c}}
 		\caption{matrix size $690\times690$ for (a) 2 core, (b) 4 cores, (c) 8 cores.}	
 		\label{fig18}
 	\end{figure}
@@ -387,8 +399,8 @@
 	\begin{outline}
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.35]{images/polyfit/fig_690_total_error.png}\label{fig17:a}}
-	{\includegraphics[scale=.35]{images/polyfit/fig_690_total_error_corrected.png}\label{fig17:b}}
+	\subfloat[]{\includegraphics[scale=.35]{images/polyfit/fig_690_total_error.png}\label{fig17:a}}
+	\subfloat[]{\includegraphics[scale=.35]{images/polyfit/fig_690_total_error_corrected.png}\label{fig17:b}}
 	\caption{(a) All the data points are include in calculation of error, (b) the leftmost sample was removed from error calculation.}	
 	\label{fig17}
 \end{figure}
@@ -399,65 +411,79 @@
 	\begin{outline}
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.3]{images/polyfit/fig_690_total_2_range.png}\label{fig12:a}}
+	\subfloat[]{\includegraphics[scale=.3]{images/polyfit/fig_690_total_2_range.png}\label{fig12:a}}
 	{\includegraphics[scale=.3]{images/polyfit/fig_690_total_4_range.png}\label{fig12:b}}
-	{\includegraphics[scale=.3]{images/polyfit/fig_690_total_8_range.png}\label{fig12:c}}
+	\subfloat[]{\includegraphics[scale=.3]{images/polyfit/fig_690_total_8_range.png}\label{fig12:c}}
 	\caption{The range of grain size (shown as the red line) that leads to a performance within $10\%$ of the maximum performance for (a) 2 cores, (b) 4 cores and (b) 8 cores.}	
 	\label{fig12}
 \end{figure}
 	\end{outline}
 \end{frame}
 
+%\begin{frame}{Method: Finding the Grain Size Range for Maximum Performance}
+%	\begin{outline}
+%		\begin{figure}[H]
+%			\centering
+%			{\includegraphics[scale=.3]{images/polyfit/fig_690_peak_range_all.png}\label{fig13:a}}
+%%			{\includegraphics[scale=.3]{images/polyfit/fig_523-912_peak_range_all.png}\label{fig13:b}}
+%			\caption{The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark for different number of cores for (a) matrix size $690\times690$}	
+%			\label{fig13}
+%\end{figure}
+%\end{outline}
+%\end{frame}
+
 \begin{frame}{Method: Finding the Grain Size Range for Maximum Performance}
 	\begin{outline}
-		\begin{figure}[H]
-			\centering
-			{\includegraphics[scale=.3]{images/polyfit/fig_690_peak_range_all.png}\label{fig13:a}}
-%			{\includegraphics[scale=.3]{images/polyfit/fig_523-912_peak_range_all.png}\label{fig13:b}}
-			\caption{The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark for different number of cores for (a) matrix size $690\times690$}	
-			\label{fig13}
-\end{figure}
-\end{outline}
+	How do we use the calculated range?
+	\1Select a block size
+	\1Find the range of chunk size that results in the calculated range of grain size
+	\end{outline}
 \end{frame}
-
 
 \begin{frame}{Method: Finding the Grain Size Range for Maximum Performance}
 	\begin{outline}
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_2_4-256.png}\label{fig14:a}}
-	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_4_4-256.png}\label{fig14:b}}
-	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_8_4-256.png}\label{fig14:c}}
-	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_2_4-512.png}\label{fig14:d}}
-	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_4_4-512.png}\label{fig14:e}}
-	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_8_4-512.png}\label{fig14:f}}
+	\subfloat[]	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_2_4-256.png}\label{fig14:a}}
+	\subfloat[]	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_4_4-256.png}\label{fig14:b}}
+	\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_8_4-256.png}\label{fig14:c}}\hfill
+	\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_2_4-512.png}\label{fig14:d}}
+	\subfloat[]	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_4_4-512.png}\label{fig14:e}}
+	\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_8_4-512.png}\label{fig14:f}}
 	\caption{matrix size $690\times690$ with block size of $4\times256$ on (a) $2$ cores, (b) $4$ cores, and (c) $8$ cores, and block size of $4\times512$ on (d) $2$ cores, (e) $4$ cores, and (f) $8$ cores. }	
 	\label{fig14}
 \end{figure}
 \end{outline}
 \end{frame}
 
+%\begin{frame}{Method: Polynomial Model, Wrap up}
+%	\begin{outline}
+%		\1Easy to use.
+%		\1It is not physical.
+%	\end{outline}
+%\end{frame}
+
 \begin{frame}{Method: Bathtub Model}
 	\begin{outline}
-		Creating a analytic model for execution time based on grain size
+		Can we create an analytic model for execution time based on grain size?
 	\end{outline}
 \end{frame}
 
 
+%\begin{frame}{Method: Bathtub Model}
+%	\begin{outline}
+%\begin{figure}[H]
+%	\centering
+%	{\includegraphics[scale=.3]{images/bathtub/all_690_4.png}\label{fig20:a}}
+%%	{\includegraphics[scale=.3]{images/bathtub/tasks_all_690_4.png}\label{fig20:b}}
+%	\caption{The execution time vs. grain size graph for $DMATDMATADD$ benchmark for matrix size $690\times690$ ran on $4$ cores.}	
+%	\label{fig21}
+%\end{figure}
+%	\end{outline}
+%\end{frame}	
+
+
 \begin{frame}{Method: Bathtub Model}
-	\begin{outline}
-\begin{figure}[H]
-	\centering
-	{\includegraphics[scale=.3]{images/bathtub/all_690_4.png}\label{fig20:a}}
-%	{\includegraphics[scale=.3]{images/bathtub/tasks_all_690_4.png}\label{fig20:b}}
-	\caption{The execution time vs. grain size graph for $DMATDMATADD$ benchmark for matrix size $690\times690$ ran on $4$ cores.}	
-	\label{fig21}
-\end{figure}
-	\end{outline}
-\end{frame}	
-
-
-\begin{frame}{Modeling Execution Time based on Grain Size}
 	\begin{outline}		
 		\1Overheads of creating tasks
 		\1Starvation
@@ -469,7 +495,32 @@
 	\end{outline}
 \end{frame}
 
-\begin{frame}{Modeling Execution Time based on Grain Size}
+\begin{frame}{Method: Modeling Execution Time based on Grain Size}
+	\begin{outline}	
+
+		$$N\text{: Number of cores}$$	
+		$$n_t \text{: Number of created tasks}	$$
+		$$n_t=\frac{maximum\textunderscore{grain\textunderscore{size}}}{grain\textunderscore{size}}$$
+		$$t_s\text{: sequential execution time}$$
+		$$M\text{: Number of cores actually doing the work}$$
+
+		$$M=\left\{
+		\begin{aligned}
+		n_t  \:\:\:\:\:\:\:\:      \text{ if } n_t<N\\
+		N\:\:\:\:\:\:\:\:     \text{otherwise}
+		\end{aligned}
+		\right.$$
+		
+		\pause
+		$Execution\textunderscore{time}=\frac{t_s}{M}$
+		\pause
+		$+\alpha\frac{n_t}{M}$
+		\pause
+		$+\gamma$
+	\end{outline}
+\end{frame}
+
+\begin{frame}{Method: Modeling Execution Time based on Grain Size}
 \begin{outline}		
 	$$t=\left\{
 	\begin{aligned}
@@ -478,31 +529,31 @@
 	\end{aligned}
 	\right.$$
 
-	$$n_t \text{: number of tasks}	$$
-	$$N\text{: number of cores}$$
-	$$t_s\text{: sequential execution time}$$
-	$$\gamma\text{: parallelization constant}$$
-%	Softplus function:
-%	$$f(x)=Ln(1+e^x)$$
+%	$$n_t \text{: number of tasks}	$$
+%	$$N\text{: number of cores}$$
+%	$$t_s\text{: sequential execution time}$$
+%	$$\gamma\text{: parallelization constant}$$
+%%	Softplus function:
+%%	$$f(x)=Ln(1+e^x)$$
 
 \end{outline}
 \end{frame}
 
-\begin{frame}{Modeling Execution Time based on Grain Size}
+\begin{frame}{Method: Modeling Execution Time based on Grain Size}
 \begin{outline}	
 	\1Fixed matrix size, and number of cores	
-	\1Training set and test set (\%60, \%40)
+	\1Training set and test set (\%60, \%40)	
+
 	\begin{figure}[H]
-		\centering
-		{\includegraphics[scale=.4]{images/bathtub/pred/pred_690_4.png}\label{fig22:a}}
-		{\includegraphics[scale=.4]{images/bathtub/pred/pred_690_8.png}\label{fig22:b}}	
+		\subfloat[]{\includegraphics[scale=.3]{images/bathtub/pred/pred_690_4.png}\label{fig22:a}} 
+		\subfloat[]{\includegraphics[scale=.3]{images/bathtub/pred/pred_690_8.png}\label{fig22:b}}	
 		\caption{The prediction of execution time based on grain size using the bathtub model, for (a)4 cores and (b)8 cores for $DMATDMATADD$ benchmark for matrix size $690\times690$.}	
 		\label{fig22}
 	\end{figure}
 \end{outline}
 \end{frame}
 
-\begin{frame}{Modeling Execution Time based on Grain Size}
+\begin{frame}{Method: Modeling Execution Time based on Grain Size}
 	\begin{outline}	
 \begin{figure}[H]
 	\centering
@@ -513,38 +564,37 @@
 \end{outline}
 \end{frame}
 
-\begin{frame}{Modeling Execution Time based on Grain Size}
+\begin{frame}{Method: Modeling Execution Time based on Grain Size}
 	\begin{outline}	
-	How do $\alpha$, $t_s$, and $\gamma$ change with number of cores?	
+	\1How do $\alpha$, $t_s$, and $\gamma$ change with number of cores?
+		$$f(x)=\frac{m_0}{x}+\frac{m_1(x-1)}{x}+m_2(x-1)+m_3(x)(x-1)$$
 	\begin{figure}[H]
 		\centering
-		{\includegraphics[scale=.3]{images/bathtub/coef_1_690.png}\label{fig24:a}}
-		{\includegraphics[scale=.3]{images/bathtub/coef_2_690.png}\label{fig24:b}}	
-		{\includegraphics[scale=.3]{images/bathtub/coef_3_690.png}\label{fig24:c}}
+		\subfloat[]{\includegraphics[scale=.2]{images/bathtub/coef_1_690.png}\label{fig24:a}}
+		\subfloat[]{\includegraphics[scale=.2]{images/bathtub/coef_2_690.png}\label{fig24:b}}\hfill	
+		\subfloat[]{\includegraphics[scale=.2]{images/bathtub/coef_3_690.png}\label{fig24:c}}
 		\caption{Fitting the three parameters (a)$\alpha$, (b)$t_s$, and (c)$\gamma$ for $DMATDMATADD$ benchmark for matrix size $690\times690$.}	
 		\label{fig24}
 	\end{figure}
-	
-	
-$$f(x)=\frac{m_0}{x}+\frac{m_1(x-1)}{x}+m_2(x-1)+m_3(x)(x-1)$$
 \end{outline}
 \end{frame}
 
 
-\begin{frame}{Modeling Execution Time based on Grain Size}
+\begin{frame}{Method: Modeling Execution Time based on Grain Size}
 	\begin{outline}	
 \begin{figure}[H]
-	\centering	{\hfill\includegraphics[scale=.25]{images/bathtub/prediction_error_overall690.png}}	
+		{\hfill\includegraphics[scale=.2]{images/bathtub/prediction_error_overall690.png}}	
 	\caption{The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times690$ with different number of cores.}	
 	\label{fig25}
 \end{figure}
 \end{outline}
 \end{frame}
 
-\begin{frame}{Modeling Execution Time based on Grain Size}
+\begin{frame}{Method: Modeling Execution Time based on Grain Size}
 	\begin{outline}	
 The problem with the current model is that with this formula we know that the minimum occurs at $n_t=N$.
-
+\pause
+What is the missing factor?
 \end{outline}
 \end{frame}
 
@@ -621,10 +671,10 @@ The problem with the current model is that with this formula we know that the mi
 \section{Related Work}
 	\begin{frame}{Related Work}
 		\begin{outline}
-			\1Estimating the optimal number of cores to run the program on
-			\1Zahra Used logostic regsression to find the best chunk size
-			\1Gabriel Used machine learning to find the best chunk size, while block size was fixed statically
-			\1Peter thoman proposed a compile-time and runtime solution 
+			\1Liu et. al Estimating the optimal number of cores to run the program on based on cache specific traces (\cite{liu2018runtime})
+			\1Zahra used logistic regression to find the best chunk size based on some static and dynamic features of the loop
+			\1Gabriel Used machine learning to find the best chunk size to get the maximum performance, while block size was fixed statically
+			\1Peter Thoman proposed a compile-time and runtime solution, using an effort estimation function decide a policy to run the parallel for-loop 
 		\end{outline}
 \end{frame}
 
@@ -635,8 +685,8 @@ The problem with the current model is that with this formula we know that the mi
 \begin{outline}	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=.25]{images/polyfit/fig_523-912_peak_range_all.png}
-		\includegraphics[scale=.25]{images/fig11.png}	
+%		\includegraphics[scale=.25]{images/polyfit/fig_523-912_peak_range_all.png}
+		\includegraphics[scale=.4]{images/fig11.png}	
 		\label{fig20}
 	\end{figure} 
 	\1Studying the bathtub model

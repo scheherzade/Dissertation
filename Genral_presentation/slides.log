@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.6)  30 NOV 2019 16:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.11.6)  1 DEC 2019 15:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -641,6 +641,26 @@ Package: amsthm 2017/10/31 v2.20.4
 \beamer@dimb=\dimen189
 )
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerouterthemedefault.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2018/05/01 v3.3-147 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2018/05/27 v1.8a caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 64.
+\captionmargin=\dimen190
+\captionmargin@=\dimen191
+\captionwidth=\dimen192
+\caption@tempdima=\dimen193
+\caption@indent=\dimen194
+\caption@parindent=\dimen195
+\caption@hangindent=\dimen196
+)
+\c@ContinuedFloat=\count155
+Package caption Info: beamer document class.
+Package caption Info: hyperref package is loaded.
+Package caption Info: Hyperref support is turned off
+(caption)             because hyperref has stopped early.
+)
 (/usr/share/texlive/texmf-dist/tex/latex/beamertheme-metropolis/beamerthememetr
 opolis.sty
 Package: beamerthememetropolis 2017/01/23 v1.2 Metropolis Beamer theme
@@ -657,15 +677,15 @@ emetropolis.sty
 Package: beamerinnerthememetropolis 2017/01/23 Metropolis inner theme
  (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count155
-\calc@Bcount=\count156
-\calc@Adimen=\dimen190
-\calc@Bdimen=\dimen191
+\calc@Acount=\count156
+\calc@Bcount=\count157
+\calc@Adimen=\dimen197
+\calc@Bdimen=\dimen198
 \calc@Askip=\skip57
 \calc@Bskip=\skip58
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count157
+\calc@Ccount=\count158
 \calc@Cskip=\skip59
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
@@ -681,8 +701,8 @@ File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
 .sty
 Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
-\pgf@nodesepstart=\dimen192
-\pgf@nodesepend=\dimen193
+\pgf@nodesepstart=\dimen199
+\pgf@nodesepend=\dimen256
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
 .sty
@@ -694,8 +714,8 @@ Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
 Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
-\pgffor@iter=\dimen194
-\pgffor@skip=\dimen195
+\pgffor@iter=\dimen257
+\pgffor@skip=\dimen258
 \pgffor@stack=\toks45
 \pgffor@toks=\toks46
 ))
@@ -705,31 +725,31 @@ Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
 .code.tex
 File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
-\pgf@plot@mark@count=\count158
-\pgfplotmarksize=\dimen196
+\pgf@plot@mark@count=\count159
+\pgfplotmarksize=\dimen259
 )
-\tikz@lastx=\dimen197
-\tikz@lasty=\dimen198
-\tikz@lastxsaved=\dimen199
-\tikz@lastysaved=\dimen256
-\tikzleveldistance=\dimen257
-\tikzsiblingdistance=\dimen258
+\tikz@lastx=\dimen260
+\tikz@lasty=\dimen261
+\tikz@lastxsaved=\dimen262
+\tikz@lastysaved=\dimen263
+\tikzleveldistance=\dimen264
+\tikzsiblingdistance=\dimen265
 \tikz@figbox=\box55
 \tikz@figbox@bg=\box56
 \tikz@tempbox=\box57
 \tikz@tempbox@bg=\box58
-\tikztreelevel=\count159
-\tikznumberofchildren=\count160
-\tikznumberofcurrentchild=\count161
-\tikz@fig@count=\count162
+\tikztreelevel=\count160
+\tikznumberofchildren=\count161
+\tikznumberofcurrentchild=\count162
+\tikz@fig@count=\count163
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
-\pgfmatrixcurrentrow=\count163
-\pgfmatrixcurrentcolumn=\count164
-\pgf@matrix@numberofcolumns=\count165
+\pgfmatrixcurrentrow=\count164
+\pgfmatrixcurrentcolumn=\count165
+\pgf@matrix@numberofcolumns=\count166
 )
-\tikz@expandcount=\count166
+\tikz@expandcount=\count167
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarytopaths.code.tex
@@ -768,23 +788,38 @@ Package: outlines 2012/1/23 1.1 Ch. Pecheur
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
-)) (./slides.aux)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+\c@KVtest=\count168
+\sf@farskip=\skip69
+\sf@captopadj=\dimen266
+\sf@capskip=\skip70
+\sf@nearskip=\skip71
+\c@subfigure=\count169
+\c@subfigure@save=\count170
+\c@depth=\count171
+\c@subtable=\count172
+\c@subtable@save=\count173
+\sf@top=\skip72
+\sf@bottom=\skip73
+) (./slides.aux)
 \openout1 = `slides.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -822,16 +857,16 @@ LaTeX Font Info:    ... okay on input line 28.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count167
-\scratchdimen=\dimen259
+\scratchcounter=\count174
+\scratchdimen=\dimen267
 \scratchbox=\box59
-\nofMPsegments=\count168
-\nofMParguments=\count169
+\nofMPsegments=\count175
+\nofMParguments=\count176
 \everyMPshowfont=\toks47
-\MPscratchCnt=\count170
-\MPscratchDim=\dimen260
-\MPnumerator=\count171
-\makeMPintoPDFobject=\count172
+\MPscratchCnt=\count177
+\MPscratchDim=\dimen268
+\MPnumerator=\count178
+\makeMPintoPDFobject=\count179
 \everyMPtoPDFconversion=\toks48
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -852,7 +887,7 @@ e
 ))
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box60
-Package hyperref Info: Link coloring OFF on input line 28.
+Package hyperref Info: Link coloring OFF on input line 32.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -860,68 +895,68 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count173
+\c@section@level=\count180
 )
-LaTeX Info: Redefining \ref on input line 28.
-LaTeX Info: Redefining \pageref on input line 28.
-LaTeX Info: Redefining \nameref on input line 28.
+LaTeX Info: Redefining \ref on input line 32.
+LaTeX Info: Redefining \pageref on input line 32.
+LaTeX Info: Redefining \nameref on input line 32.
 
 (./slides.out) (./slides.out)
 \@outlinefile=\write5
 \openout5 = `slides.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 28.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 32.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 28.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 32.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 28.
+(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 28.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 28.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 28.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 32.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 28.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 28.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 28.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 32.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 28.
+(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 28.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 28.
+(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 32.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 28.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 28.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 32.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 28.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 32.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 28.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmr/bx/n on input line 28.
+(Font)                  OT1/cmss/bx/n --> OT1/cmr/bx/n on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/bx/n on input line 28.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/bx/n on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 28.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 28.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/bx/n on input line 28.
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 28.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/bx/n on input line 32.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 32.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
-(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 2
-8.
+(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 3
+2.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
 (Font)                  OT1/cmss/bx/it --> OT1/mathkerncmss/m/sl on input line 
-28.
+32.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
 (Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on inp
-ut line 28.
+ut line 32.
 
 (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary
 -English.dict
@@ -946,23 +981,27 @@ Dictionary: translator-numbers-dictionary, Language: English
 (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-theorem-dictiona
 ry-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
-) (./slides.nav)
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: End \AtBeginDocument code.
+ (./slides.nav)
 <logos/stellar_4x1.pdf, id=37, 289.08pt x 72.27051pt>
 File: logos/stellar_4x1.pdf Graphic file (type pdf)
 <use logos/stellar_4x1.pdf>
-Package pdftex.def Info: logos/stellar_4x1.pdf  used on input line 32.
+Package pdftex.def Info: logos/stellar_4x1.pdf  used on input line 36.
 (pdftex.def)             Requested size: 76.82246pt x 19.20561pt.
 <logos/LSU.png, id=38, 1991.44pt x 301.125pt>
 File: logos/LSU.png Graphic file (type png)
 <use logos/LSU.png>
-Package pdftex.def Info: logos/LSU.png  used on input line 32.
+Package pdftex.def Info: logos/LSU.png  used on input line 36.
 (pdftex.def)             Requested size: 153.64493pt x 23.23126pt.
 
-Overfull \vbox (20.00003pt too high) detected at line 32
+Overfull \vbox (20.00003pt too high) detected at line 36
  []
 
 
-Overfull \vbox (13.79993pt too high) detected at line 32
+Overfull \vbox (13.79993pt too high) detected at line 36
  []
 
 [1
@@ -971,18 +1010,18 @@ Overfull \vbox (13.79993pt too high) detected at line 32
 llar_4x1.pdf> <./logos/LSU.png>] (./slides.toc) [2
 
 ]
-LaTeX Font Info:    Try loading font information for U+msa on input line 39.
+LaTeX Font Info:    Try loading font information for U+msa on input line 43.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 39.
+LaTeX Font Info:    Try loading font information for U+msb on input line 43.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input 
-line 39.
+line 43.
 
 (/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
@@ -991,14 +1030,14 @@ thkerncmss.
 [3
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmss on input line 51.
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 49.
 
-LaTeX Font Info:    No file OMScmss.fd. on input line 51.
+LaTeX Font Info:    No file OMScmss.fd. on input line 49.
 
 
 LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbullet' on input line 51.
+(Font)              for symbol `textbullet' on input line 49.
 
 [4
 
@@ -1016,7 +1055,7 @@ LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 <images/blaze.png, id=125, 301.125pt x 150.5625pt>
 File: images/blaze.png Graphic file (type png)
 <use images/blaze.png>
-Package pdftex.def Info: images/blaze.png  used on input line 103.
+Package pdftex.def Info: images/blaze.png  used on input line 101.
 (pdftex.def)             Requested size: 67.60414pt x 33.80157pt.
  [10
 
@@ -1026,7 +1065,7 @@ Package pdftex.def Info: images/blaze.png  used on input line 103.
 <images/old_backend.png, id=136, 1255.69125pt x 400.49625pt>
 File: images/old_backend.png Graphic file (type png)
 <use images/old_backend.png>
-Package pdftex.def Info: images/old_backend.png  used on input line 128.
+Package pdftex.def Info: images/old_backend.png  used on input line 126.
 (pdftex.def)             Requested size: 206.84903pt x 65.96902pt.
  [12
 
@@ -1034,7 +1073,7 @@ Package pdftex.def Info: images/old_backend.png  used on input line 128.
 <images/loop_cropped.png, id=144, 58.0569pt x 128.1588pt>
 File: images/loop_cropped.png Graphic file (type png)
 <use images/loop_cropped.png>
-Package pdftex.def Info: images/loop_cropped.png  used on input line 149.
+Package pdftex.def Info: images/loop_cropped.png  used on input line 146.
 (pdftex.def)             Requested size: 29.02837pt x 64.07924pt.
  [13
 
@@ -1042,476 +1081,410 @@ Package pdftex.def Info: images/loop_cropped.png  used on input line 149.
 <images/task_granularity.png, id=152, 733.74126pt x 394.47375pt>
 File: images/task_granularity.png Graphic file (type png)
 <use images/task_granularity.png>
-Package pdftex.def Info: images/task_granularity.png  used on input line 171.
+Package pdftex.def Info: images/task_granularity.png  used on input line 168.
 (pdftex.def)             Requested size: 192.44897pt x 103.46362pt.
-
-Overfull \vbox (2.0599pt too high) detected at line 171
- []
-
-[14
+ [14
 
  <./images/task_granularity.png>]
 <images/amdahls.png, id=159, 500.87125pt x 248.93pt>
 File: images/amdahls.png Graphic file (type png)
 <use images/amdahls.png>
-Package pdftex.def Info: images/amdahls.png  used on input line 191.
-(pdftex.def)             Requested size: 200.34494pt x 99.57022pt.
+Package pdftex.def Info: images/amdahls.png  used on input line 188.
+(pdftex.def)             Requested size: 190.33304pt x 94.59438pt.
 
-Overfull \vbox (49.75946pt too high) detected at line 191
+Overfull \vbox (25.2337pt too high) detected at line 188
  []
 
 [15
 
  <./images/amdahls.png>] [16
 
+] [17
+
 ]
-<images/chunks.png, id=177, 309.40594pt x 166.74797pt>
+<images/chunks.png, id=183, 309.40594pt x 166.74797pt>
 File: images/chunks.png Graphic file (type png)
 <use images/chunks.png>
-Package pdftex.def Info: images/chunks.png  used on input line 216.
+Package pdftex.def Info: images/chunks.png  used on input line 223.
 (pdftex.def)             Requested size: 206.84903pt x 111.48137pt.
 
-Overfull \vbox (12.6112pt too high) detected at line 216
+Overfull \vbox (6.26122pt too high) detected at line 223
  []
 
-[17
+[18
 
- <./images/chunks.png>] [18
-
-]
-Overfull \hbox (20.00021pt too wide) in paragraph at lines 252--252
- [] 
- []
-
-[19
+ <./images/chunks.png>] [19
 
 ]
-<images/fig5.png, id=197, 980.91469pt x 411.41203pt>
+<images/fig5.png, id=196, 980.91469pt x 411.41203pt>
 File: images/fig5.png Graphic file (type png)
 <use images/fig5.png>
-Package pdftex.def Info: images/fig5.png  used on input line 265.
+Package pdftex.def Info: images/fig5.png  used on input line 264.
 (pdftex.def)             Requested size: 258.5591pt x 108.43985pt.
  [20
 
  <./images/fig5.png>]
-<images/fig5_cropped.png, id=204, 612.03656pt x 396.35577pt>
+<images/fig5_cropped.png, id=203, 612.03656pt x 396.35577pt>
 File: images/fig5_cropped.png Graphic file (type png)
 <use images/fig5_cropped.png>
-Package pdftex.def Info: images/fig5_cropped.png  used on input line 276.
+Package pdftex.def Info: images/fig5_cropped.png  used on input line 275.
 (pdftex.def)             Requested size: 122.40514pt x 79.26974pt.
  [21
 
  <./images/fig5_cropped.png>]
-<images/fig6.png, id=211, 970.75172pt x 411.41203pt>
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 288.
+
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 288.
+
+<images/fig6.png, id=210, 970.75172pt x 411.41203pt>
 File: images/fig6.png Graphic file (type png)
 <use images/fig6.png>
-Package pdftex.def Info: images/fig6.png  used on input line 289.
+Package pdftex.def Info: images/fig6.png  used on input line 288.
 (pdftex.def)             Requested size: 307.28987pt x 130.2358pt.
- [22
 
- <./images/fig6.png>] [23
+Overfull \vbox (16.50462pt too high) detected at line 288
+ []
 
-] [24
+[22
+
+ <./images/fig6.png>]
+<images/fig6_range.png, id=218, 202.5969pt x 130.086pt>
+File: images/fig6_range.png Graphic file (type png)
+<use images/fig6_range.png>
+Package pdftex.def Info: images/fig6_range.png  used on input line 300.
+(pdftex.def)             Requested size: 182.33551pt x 117.0763pt.
+ [23
+
+ <./images/fig6_range.png>] [24
 
 ] [25
 
+] [26
+
 ]
-<images/polyfit/fig_1_690.png, id=235, 482.7636pt x 264.21912pt>
+<images/polyfit/fig_1_690.png, id=242, 482.7636pt x 264.21912pt>
 File: images/polyfit/fig_1_690.png Graphic file (type png)
 <use images/polyfit/fig_1_690.png>
-Package pdftex.def Info: images/polyfit/fig_1_690.png  used on input line 333.
-(pdftex.def)             Requested size: 96.551pt x 52.84288pt.
-<images/polyfit/fig_2_690.png, id=236, 482.7636pt x 264.21912pt>
+Package pdftex.def Info: images/polyfit/fig_1_690.png  used on input line 344.
+(pdftex.def)             Requested size: 86.89369pt x 47.55737pt.
+<images/polyfit/fig_2_690.png, id=243, 482.7636pt x 264.21912pt>
 File: images/polyfit/fig_2_690.png Graphic file (type png)
 <use images/polyfit/fig_2_690.png>
-Package pdftex.def Info: images/polyfit/fig_2_690.png  used on input line 333.
-(pdftex.def)             Requested size: 96.551pt x 52.84288pt.
-<images/polyfit/fig_3_690.png, id=237, 491.14693pt x 267.10992pt>
+Package pdftex.def Info: images/polyfit/fig_2_690.png  used on input line 344.
+(pdftex.def)             Requested size: 86.89369pt x 47.55737pt.
+<images/polyfit/fig_3_690.png, id=244, 491.14693pt x 267.10992pt>
 File: images/polyfit/fig_3_690.png Graphic file (type png)
 <use images/polyfit/fig_3_690.png>
-Package pdftex.def Info: images/polyfit/fig_3_690.png  used on input line 333.
-(pdftex.def)             Requested size: 98.22765pt x 53.42104pt.
-<images/polyfit/fig_4_690.png, id=238, 491.14693pt x 264.21912pt>
+Package pdftex.def Info: images/polyfit/fig_3_690.png  used on input line 344.
+(pdftex.def)             Requested size: 88.40263pt x 48.0777pt.
+<images/polyfit/fig_4_690.png, id=245, 491.14693pt x 264.21912pt>
 File: images/polyfit/fig_4_690.png Graphic file (type png)
 <use images/polyfit/fig_4_690.png>
-Package pdftex.def Info: images/polyfit/fig_4_690.png  used on input line 333.
-(pdftex.def)             Requested size: 98.22765pt x 52.84288pt.
-<images/polyfit/fig_5_690.png, id=239, 482.7636pt x 264.21912pt>
+Package pdftex.def Info: images/polyfit/fig_4_690.png  used on input line 344.
+(pdftex.def)             Requested size: 88.40263pt x 47.55737pt.
+<images/polyfit/fig_5_690.png, id=246, 482.7636pt x 264.21912pt>
 File: images/polyfit/fig_5_690.png Graphic file (type png)
 <use images/polyfit/fig_5_690.png>
-Package pdftex.def Info: images/polyfit/fig_5_690.png  used on input line 333.
-(pdftex.def)             Requested size: 96.551pt x 52.84288pt.
-<images/polyfit/fig_6_690.png, id=240, 491.14693pt x 264.21912pt>
+Package pdftex.def Info: images/polyfit/fig_5_690.png  used on input line 344.
+(pdftex.def)             Requested size: 86.89369pt x 47.55737pt.
+<images/polyfit/fig_6_690.png, id=247, 491.14693pt x 264.21912pt>
 File: images/polyfit/fig_6_690.png Graphic file (type png)
 <use images/polyfit/fig_6_690.png>
-Package pdftex.def Info: images/polyfit/fig_6_690.png  used on input line 333.
-(pdftex.def)             Requested size: 98.22765pt x 52.84288pt.
-<images/polyfit/fig_7_690.png, id=241, 482.7636pt x 264.21912pt>
+Package pdftex.def Info: images/polyfit/fig_6_690.png  used on input line 344.
+(pdftex.def)             Requested size: 88.40263pt x 47.55737pt.
+<images/polyfit/fig_7_690.png, id=248, 482.7636pt x 264.21912pt>
 File: images/polyfit/fig_7_690.png Graphic file (type png)
 <use images/polyfit/fig_7_690.png>
-Package pdftex.def Info: images/polyfit/fig_7_690.png  used on input line 333.
-(pdftex.def)             Requested size: 96.551pt x 52.84288pt.
-<images/polyfit/fig_8_690.png, id=242, 491.14693pt x 264.21912pt>
+Package pdftex.def Info: images/polyfit/fig_7_690.png  used on input line 344.
+(pdftex.def)             Requested size: 86.89369pt x 47.55737pt.
+<images/polyfit/fig_8_690.png, id=249, 491.14693pt x 264.21912pt>
 File: images/polyfit/fig_8_690.png Graphic file (type png)
 <use images/polyfit/fig_8_690.png>
-Package pdftex.def Info: images/polyfit/fig_8_690.png  used on input line 333.
-(pdftex.def)             Requested size: 98.22765pt x 52.84288pt.
+Package pdftex.def Info: images/polyfit/fig_8_690.png  used on input line 344.
+(pdftex.def)             Requested size: 88.40263pt x 47.55737pt.
 
-Overfull \vbox (20.79243pt too high) detected at line 333
+Overfull \vbox (42.32803pt too high) detected at line 344
  []
 
-[26
+[27
 
  <./images/polyfit/fig_1_690.png> <./images/polyfit/fig_2_690.png> <./images/po
 lyfit/fig_3_690.png> <./images/polyfit/fig_4_690.png> <./images/polyfit/fig_5_6
 90.png> <./images/polyfit/fig_6_690.png> <./images/polyfit/fig_7_690.png> <./im
 ages/polyfit/fig_8_690.png>]
-<images/polyfit/fig_train_test_690.png, id=265, 475.82568pt x 264.21912pt>
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 357.
+
+<images/polyfit/fig_train_test_690.png, id=272, 475.82568pt x 264.21912pt>
 File: images/polyfit/fig_train_test_690.png Graphic file (type png)
 <use images/polyfit/fig_train_test_690.png>
 Package pdftex.def Info: images/polyfit/fig_train_test_690.png  used on input l
-ine 346.
+ine 357.
 (pdftex.def)             Requested size: 237.91225pt x 132.10922pt.
 
-Overfull \vbox (29.2696pt too high) detected at line 346
+Overfull \vbox (9.7197pt too high) detected at line 357
  []
 
-[27
+[28
 
- <./images/polyfit/fig_train_test_690.png>] [28
+ <./images/polyfit/fig_train_test_690.png>] [29
 
 ]
-<images/polyfit/fig_690_params_0.png, id=279, 478.1865pt x 262.8219pt>
+<images/polyfit/fig_690_params_0.png, id=286, 478.1865pt x 262.8219pt>
 File: images/polyfit/fig_690_params_0.png Graphic file (type png)
 <use images/polyfit/fig_690_params_0.png>
 Package pdftex.def Info: images/polyfit/fig_690_params_0.png  used on input lin
-e 369.
-(pdftex.def)             Requested size: 95.63559pt x 52.56345pt.
-<images/polyfit/fig_690_params_1.png, id=280, 476.2593pt x 262.8219pt>
+e 381.
+(pdftex.def)             Requested size: 86.06985pt x 47.3059pt.
+<images/polyfit/fig_690_params_1.png, id=287, 476.2593pt x 262.8219pt>
 File: images/polyfit/fig_690_params_1.png Graphic file (type png)
 <use images/polyfit/fig_690_params_1.png>
 Package pdftex.def Info: images/polyfit/fig_690_params_1.png  used on input lin
-e 369.
-(pdftex.def)             Requested size: 95.25017pt x 52.56345pt.
-<images/polyfit/fig_690_params_2.png, id=281, 484.6908pt x 262.8219pt>
+e 381.
+(pdftex.def)             Requested size: 85.72296pt x 47.3059pt.
+<images/polyfit/fig_690_params_2.png, id=288, 484.6908pt x 262.8219pt>
 File: images/polyfit/fig_690_params_2.png Graphic file (type png)
 <use images/polyfit/fig_690_params_2.png>
 Package pdftex.def Info: images/polyfit/fig_690_params_2.png  used on input lin
-e 369.
-(pdftex.def)             Requested size: 96.93643pt x 52.56345pt.
-
-Overfull \vbox (27.16222pt too high) detected at line 369
- []
-
-[29
+e 381.
+(pdftex.def)             Requested size: 87.24057pt x 47.3059pt.
+ [30
 
  <./images/polyfit/fig_690_params_0.png> <./images/polyfit/fig_690_params_1.png
 > <./images/polyfit/fig_690_params_2.png>]
-<images/polyfit/fig_690_total_2.png, id=294, 464.55156pt x 252.36684pt>
+<images/polyfit/fig_690_total_2.png, id=301, 464.55156pt x 252.36684pt>
 File: images/polyfit/fig_690_total_2.png Graphic file (type png)
 <use images/polyfit/fig_690_total_2.png>
 Package pdftex.def Info: images/polyfit/fig_690_total_2.png  used on input line
- 384.
-(pdftex.def)             Requested size: 139.36653pt x 75.71063pt.
-<images/polyfit/fig_690_total_4.png, id=295, 470.91132pt x 249.47604pt>
+ 396.
+(pdftex.def)             Requested size: 116.1376pt x 63.09155pt.
+<images/polyfit/fig_690_total_4.png, id=302, 470.91132pt x 249.47604pt>
 File: images/polyfit/fig_690_total_4.png Graphic file (type png)
 <use images/polyfit/fig_690_total_4.png>
 Package pdftex.def Info: images/polyfit/fig_690_total_4.png  used on input line
- 384.
-(pdftex.def)             Requested size: 141.27448pt x 74.84338pt.
-<images/polyfit/fig_690_total_8.png, id=296, 470.91132pt x 249.47604pt>
+ 396.
+(pdftex.def)             Requested size: 117.72754pt x 62.36885pt.
+<images/polyfit/fig_690_total_8.png, id=303, 470.91132pt x 249.47604pt>
 File: images/polyfit/fig_690_total_8.png Graphic file (type png)
 <use images/polyfit/fig_690_total_8.png>
 Package pdftex.def Info: images/polyfit/fig_690_total_8.png  used on input line
- 384.
-(pdftex.def)             Requested size: 141.27448pt x 74.84338pt.
+ 396.
+(pdftex.def)             Requested size: 117.72754pt x 62.36885pt.
 
-Overfull \vbox (18.98415pt too high) detected at line 384
- []
-
-[30
-
- <./images/polyfit/fig_690_total_2.png> <./images/polyfit/fig_690_total_4.png> 
-<./images/polyfit/fig_690_total_8.png>]
-<images/polyfit/fig_690_total_error.png, id=309, 475.82568pt x 263.35188pt>
-File: images/polyfit/fig_690_total_error.png Graphic file (type png)
-<use images/polyfit/fig_690_total_error.png>
-Package pdftex.def Info: images/polyfit/fig_690_total_error.png  used on input 
-line 396.
-(pdftex.def)             Requested size: 166.54147pt x 92.17453pt.
-<images/polyfit/fig_690_total_error_corrected.png, id=310, 475.82568pt x 263.35
-188pt>
-File: images/polyfit/fig_690_total_error_corrected.png Graphic file (type png)
-<use images/polyfit/fig_690_total_error_corrected.png>
-Package pdftex.def Info: images/polyfit/fig_690_total_error_corrected.png  used
- on input line 396.
-(pdftex.def)             Requested size: 166.54147pt x 92.17453pt.
-
-Overfull \vbox (19.23483pt too high) detected at line 396
+Overfull \vbox (28.84044pt too high) detected at line 396
  []
 
 [31
 
- <./images/polyfit/fig_690_total_error.png> <./images/polyfit/fig_690_total_err
-or_corrected.png>]
-<images/polyfit/fig_690_total_2_range.png, id=322, 464.55156pt x 252.36684pt>
-File: images/polyfit/fig_690_total_2_range.png Graphic file (type png)
-<use images/polyfit/fig_690_total_2_range.png>
-Package pdftex.def Info: images/polyfit/fig_690_total_2_range.png  used on inpu
-t line 409.
-(pdftex.def)             Requested size: 139.36653pt x 75.71063pt.
-<images/polyfit/fig_690_total_4_range.png, id=323, 470.91132pt x 249.47604pt>
-File: images/polyfit/fig_690_total_4_range.png Graphic file (type png)
-<use images/polyfit/fig_690_total_4_range.png>
-Package pdftex.def Info: images/polyfit/fig_690_total_4_range.png  used on inpu
-t line 409.
-(pdftex.def)             Requested size: 141.27448pt x 74.84338pt.
-<images/polyfit/fig_690_total_8_range.png, id=324, 470.91132pt x 249.47604pt>
-File: images/polyfit/fig_690_total_8_range.png Graphic file (type png)
-<use images/polyfit/fig_690_total_8_range.png>
-Package pdftex.def Info: images/polyfit/fig_690_total_8_range.png  used on inpu
-t line 409.
-(pdftex.def)             Requested size: 141.27448pt x 74.84338pt.
+ <./images/polyfit/fig_690_total_2.png> <./images/polyfit/fig_690_total_4.png> 
+<./images/polyfit/fig_690_total_8.png>]
+<images/polyfit/fig_690_total_error.png, id=317, 475.82568pt x 263.35188pt>
+File: images/polyfit/fig_690_total_error.png Graphic file (type png)
+<use images/polyfit/fig_690_total_error.png>
+Package pdftex.def Info: images/polyfit/fig_690_total_error.png  used on input 
+line 408.
+(pdftex.def)             Requested size: 166.54147pt x 92.17453pt.
+<images/polyfit/fig_690_total_error_corrected.png, id=318, 475.82568pt x 263.35
+188pt>
+File: images/polyfit/fig_690_total_error_corrected.png Graphic file (type png)
+<use images/polyfit/fig_690_total_error_corrected.png>
+Package pdftex.def Info: images/polyfit/fig_690_total_error_corrected.png  used
+ on input line 408.
+(pdftex.def)             Requested size: 166.54147pt x 92.17453pt.
 
-Overfull \vbox (14.68964pt too high) detected at line 409
+Overfull \hbox (25.79308pt too wide) in paragraph at lines 408--408
+ [][] 
  []
 
 [32
 
- <./images/polyfit/fig_690_total_2_range.png> <./images/polyfit/fig_690_total_4
-_range.png> <./images/polyfit/fig_690_total_8_range.png>]
-<images/polyfit/fig_690_peak_range_all.png, id=337, 377.53848pt x 263.35188pt>
-File: images/polyfit/fig_690_peak_range_all.png Graphic file (type png)
-<use images/polyfit/fig_690_peak_range_all.png>
-Package pdftex.def Info: images/polyfit/fig_690_peak_range_all.png  used on inp
-ut line 421.
-(pdftex.def)             Requested size: 113.2624pt x 79.00616pt.
- [33
+ <./images/polyfit/fig_690_total_error.png> <./images/polyfit/fig_690_total_err
+or_corrected.png>]
+<images/polyfit/fig_690_total_2_range.png, id=329, 464.55156pt x 252.36684pt>
+File: images/polyfit/fig_690_total_2_range.png Graphic file (type png)
+<use images/polyfit/fig_690_total_2_range.png>
+Package pdftex.def Info: images/polyfit/fig_690_total_2_range.png  used on inpu
+t line 421.
+(pdftex.def)             Requested size: 139.36653pt x 75.71063pt.
+<images/polyfit/fig_690_total_4_range.png, id=330, 470.91132pt x 249.47604pt>
+File: images/polyfit/fig_690_total_4_range.png Graphic file (type png)
+<use images/polyfit/fig_690_total_4_range.png>
+Package pdftex.def Info: images/polyfit/fig_690_total_4_range.png  used on inpu
+t line 421.
+(pdftex.def)             Requested size: 141.27448pt x 74.84338pt.
+<images/polyfit/fig_690_total_8_range.png, id=331, 470.91132pt x 249.47604pt>
+File: images/polyfit/fig_690_total_8_range.png Graphic file (type png)
+<use images/polyfit/fig_690_total_8_range.png>
+Package pdftex.def Info: images/polyfit/fig_690_total_8_range.png  used on inpu
+t line 421.
+(pdftex.def)             Requested size: 141.27448pt x 74.84338pt.
 
- <./images/polyfit/fig_690_peak_range_all.png>]
-<images/polyfit/fig_690_chunks_2_4-256.png, id=346, 396.5214pt x 263.0628pt>
+Overfull \vbox (24.68962pt too high) detected at line 421
+ []
+
+[33
+
+ <./images/polyfit/fig_690_total_2_range.png> <./images/polyfit/fig_690_total_4
+_range.png> <./images/polyfit/fig_690_total_8_range.png>] [34
+
+]
+<images/polyfit/fig_690_chunks_2_4-256.png, id=350, 396.5214pt x 263.0628pt>
 File: images/polyfit/fig_690_chunks_2_4-256.png Graphic file (type png)
 <use images/polyfit/fig_690_chunks_2_4-256.png>
 Package pdftex.def Info: images/polyfit/fig_690_chunks_2_4-256.png  used on inp
-ut line 438.
+ut line 457.
 (pdftex.def)             Requested size: 99.1301pt x 65.76553pt.
-<images/polyfit/fig_690_chunks_4_4-256.png, id=347, 396.5214pt x 263.0628pt>
+<images/polyfit/fig_690_chunks_4_4-256.png, id=351, 396.5214pt x 263.0628pt>
 File: images/polyfit/fig_690_chunks_4_4-256.png Graphic file (type png)
 <use images/polyfit/fig_690_chunks_4_4-256.png>
 Package pdftex.def Info: images/polyfit/fig_690_chunks_4_4-256.png  used on inp
-ut line 438.
+ut line 457.
 (pdftex.def)             Requested size: 99.1301pt x 65.76553pt.
-<images/polyfit/fig_690_chunks_8_4-256.png, id=348, 396.5214pt x 264.5082pt>
+<images/polyfit/fig_690_chunks_8_4-256.png, id=352, 396.5214pt x 264.5082pt>
 File: images/polyfit/fig_690_chunks_8_4-256.png Graphic file (type png)
 <use images/polyfit/fig_690_chunks_8_4-256.png>
 Package pdftex.def Info: images/polyfit/fig_690_chunks_8_4-256.png  used on inp
-ut line 438.
+ut line 457.
 (pdftex.def)             Requested size: 99.1301pt x 66.12688pt.
-<images/polyfit/fig_690_chunks_2_4-512.png, id=349, 396.5214pt x 263.0628pt>
+<images/polyfit/fig_690_chunks_2_4-512.png, id=353, 396.5214pt x 263.0628pt>
 File: images/polyfit/fig_690_chunks_2_4-512.png Graphic file (type png)
 <use images/polyfit/fig_690_chunks_2_4-512.png>
 Package pdftex.def Info: images/polyfit/fig_690_chunks_2_4-512.png  used on inp
-ut line 438.
+ut line 457.
 (pdftex.def)             Requested size: 99.1301pt x 65.76553pt.
-<images/polyfit/fig_690_chunks_4_4-512.png, id=350, 396.5214pt x 263.0628pt>
+<images/polyfit/fig_690_chunks_4_4-512.png, id=354, 396.5214pt x 263.0628pt>
 File: images/polyfit/fig_690_chunks_4_4-512.png Graphic file (type png)
 <use images/polyfit/fig_690_chunks_4_4-512.png>
 Package pdftex.def Info: images/polyfit/fig_690_chunks_4_4-512.png  used on inp
-ut line 438.
+ut line 457.
 (pdftex.def)             Requested size: 99.1301pt x 65.76553pt.
-<images/polyfit/fig_690_chunks_8_4-512.png, id=351, 396.5214pt x 263.0628pt>
+<images/polyfit/fig_690_chunks_8_4-512.png, id=355, 396.5214pt x 263.0628pt>
 File: images/polyfit/fig_690_chunks_8_4-512.png Graphic file (type png)
 <use images/polyfit/fig_690_chunks_8_4-512.png>
 Package pdftex.def Info: images/polyfit/fig_690_chunks_8_4-512.png  used on inp
-ut line 438.
+ut line 457.
 (pdftex.def)             Requested size: 99.1301pt x 65.76553pt.
- [34
+
+Overfull \vbox (16.02802pt too high) detected at line 457
+ []
+
+[35
 
  <./images/polyfit/fig_690_chunks_2_4-256.png> <./images/polyfit/fig_690_chunks
 _4_4-256.png> <./images/polyfit/fig_690_chunks_8_4-256.png> <./images/polyfit/f
 ig_690_chunks_2_4-512.png> <./images/polyfit/fig_690_chunks_4_4-512.png> <./ima
-ges/polyfit/fig_690_chunks_8_4-512.png>]
-[35
+ges/polyfit/fig_690_chunks_8_4-512.png>] [36
 
 ]
-<images/bathtub/all_690_4.png, id=376, 396.5214pt x 263.0628pt>
-File: images/bathtub/all_690_4.png Graphic file (type png)
-<use images/bathtub/all_690_4.png>
-Package pdftex.def Info: images/bathtub/all_690_4.png  used on input line 457.
-(pdftex.def)             Requested size: 118.95732pt x 78.91943pt.
- [36
-
- <./images/bathtub/all_690_4.png>]
-<images/bathtub/all_690_4_star_over.png, id=385, 258.4857pt x 134.6631pt>
+<images/bathtub/all_690_4_star_over.png, id=379, 258.4857pt x 134.6631pt>
 File: images/bathtub/all_690_4_star_over.png Graphic file (type png)
 <use images/bathtub/all_690_4_star_over.png>
 Package pdftex.def Info: images/bathtub/all_690_4_star_over.png  used on input 
-line 470.
+line 496.
 (pdftex.def)             Requested size: 258.5591pt x 134.70796pt.
  [37
 
- <./images/bathtub/all_690_4_star_over.png>] [38
+ <./images/bathtub/all_690_4_star_over.png>]
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
+
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
+
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
+
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
+
+[38
 
 ]
-<images/bathtub/pred/pred_690_4.png, id=399, 476.2593pt x 263.0628pt>
-File: images/bathtub/pred/pred_690_4.png Graphic file (type png)
-<use images/bathtub/pred/pred_690_4.png>
-Package pdftex.def Info: images/bathtub/pred/pred_690_4.png  used on input line
- 503.
-(pdftex.def)             Requested size: 190.50034pt x 105.22325pt.
-<images/bathtub/pred/pred_690_8.png, id=400, 476.2593pt x 263.0628pt>
-File: images/bathtub/pred/pred_690_8.png Graphic file (type png)
-<use images/bathtub/pred/pred_690_8.png>
-Package pdftex.def Info: images/bathtub/pred/pred_690_8.png  used on input line
- 503.
-(pdftex.def)             Requested size: 190.50034pt x 105.22325pt.
 
-Overfull \vbox (78.16537pt too high) detected at line 503
- []
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
+
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
+
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
+
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
 
 [39
 
- <./images/bathtub/pred/pred_690_4.png> <./images/bathtub/pred/pred_690_8.png>]
-<images/bathtub/error_690.png, id=411, 469.2732pt x 262.8219pt>
-File: images/bathtub/error_690.png Graphic file (type png)
-<use images/bathtub/error_690.png>
-Package pdftex.def Info: images/bathtub/error_690.png  used on input line 514.
-(pdftex.def)             Requested size: 211.17097pt x 118.26875pt.
- [40
+]
 
- <./images/bathtub/error_690.png>]
-<images/bathtub/coef_1_690.png, id=419, 465.6597pt x 262.8219pt>
-File: images/bathtub/coef_1_690.png Graphic file (type png)
-<use images/bathtub/coef_1_690.png>
-Package pdftex.def Info: images/bathtub/coef_1_690.png  used on input line 531.
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
 
-(pdftex.def)             Requested size: 139.69897pt x 78.84717pt.
-<images/bathtub/coef_2_690.png, id=420, 462.2871pt x 262.8219pt>
-File: images/bathtub/coef_2_690.png Graphic file (type png)
-<use images/bathtub/coef_2_690.png>
-Package pdftex.def Info: images/bathtub/coef_2_690.png  used on input line 531.
 
-(pdftex.def)             Requested size: 138.6872pt x 78.84717pt.
-<images/bathtub/coef_3_690.png, id=421, 464.6961pt x 262.8219pt>
-File: images/bathtub/coef_3_690.png Graphic file (type png)
-<use images/bathtub/coef_3_690.png>
-Package pdftex.def Info: images/bathtub/coef_3_690.png  used on input line 531.
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
 
-(pdftex.def)             Requested size: 139.4099pt x 78.84717pt.
 
-Overfull \vbox (63.27272pt too high) detected at line 531
- []
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
+
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
+
+[40
+
+]
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
+
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
+
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
+
+
+LaTeX Warning: Command \textunderscore invalid in math mode on input line 521.
 
 [41
 
- <./images/bathtub/coef_1_690.png> <./images/bathtub/coef_2_690.png> <./images/
-bathtub/coef_3_690.png>]
-<images/bathtub/prediction_error_overall690.png, id=434, 1348.5582pt x 335.3328
-pt>
-File: images/bathtub/prediction_error_overall690.png Graphic file (type png)
-<use images/bathtub/prediction_error_overall690.png>
-Package pdftex.def Info: images/bathtub/prediction_error_overall690.png  used o
-n input line 542.
-(pdftex.def)             Requested size: 337.13872pt x 83.833pt.
-
-Overfull \hbox (29.84885pt too wide) in paragraph at lines 542--542
- [] 
- []
-
-[42
-
- <./images/bathtub/prediction_error_overall690.png>] [43
+] [42
 
 ]
-<images/blazemark_1.png, id=448, 325.215pt x 449.68pt>
-File: images/blazemark_1.png Graphic file (type png)
-<use images/blazemark_1.png>
-Package pdftex.def Info: images/blazemark_1.png  used on input line 572.
-(pdftex.def)             Requested size: 129.06117pt x 178.45532pt.
-<images/blazemark_2.png, id=449, 302.12875pt x 327.2225pt>
-File: images/blazemark_2.png Graphic file (type png)
-<use images/blazemark_2.png>
-Package pdftex.def Info: images/blazemark_2.png  used on input line 572.
-(pdftex.def)             Requested size: 125.98996pt x 136.45387pt.
+<images/bathtub/pred/pred_690_4.png, id=413, 476.2593pt x 263.0628pt>
+File: images/bathtub/pred/pred_690_4.png Graphic file (type png)
+<use images/bathtub/pred/pred_690_4.png>
+Package pdftex.def Info: images/bathtub/pred/pred_690_4.png  used on input line
+ 554.
+(pdftex.def)             Requested size: 142.87888pt x 78.91943pt.
+<images/bathtub/pred/pred_690_8.png, id=414, 476.2593pt x 263.0628pt>
+File: images/bathtub/pred/pred_690_8.png Graphic file (type png)
+<use images/bathtub/pred/pred_690_8.png>
+Package pdftex.def Info: images/bathtub/pred/pred_690_8.png  used on input line
+ 554.
+(pdftex.def)             Requested size: 142.87888pt x 78.91943pt.
+ [43
 
-Overfull \vbox (35.38545pt too high) detected at line 572
- []
+ <./images/bathtub/pred/pred_690_4.png> <./images/bathtub/pred/pred_690_8.png>]
+<images/bathtub/error_690.png, id=426, 469.2732pt x 262.8219pt>
+File: images/bathtub/error_690.png Graphic file (type png)
+<use images/bathtub/error_690.png>
+Package pdftex.def Info: images/bathtub/error_690.png  used on input line 565.
+(pdftex.def)             Requested size: 211.17097pt x 118.26875pt.
+ [44
 
-[44
+ <./images/bathtub/error_690.png>]
+<images/bathtub/coef_1_690.png, id=434, 465.6597pt x 262.8219pt>
+File: images/bathtub/coef_1_690.png Graphic file (type png)
+<use images/bathtub/coef_1_690.png>
+Package pdftex.def Info: images/bathtub/coef_1_690.png  used on input line 580.
 
- <./images/blazemark_1.png> <./images/blazemark_2.png>] [45
+(pdftex.def)             Requested size: 93.13028pt x 52.56345pt.
+<images/bathtub/coef_2_690.png, id=435, 462.2871pt x 262.8219pt>
+File: images/bathtub/coef_2_690.png Graphic file (type png)
+<use images/bathtub/coef_2_690.png>
+Package pdftex.def Info: images/bathtub/coef_2_690.png  used on input line 580.
 
-] [46
-
-] [47
-
-]
-[48
-
-]
-<images/polyfit/fig_523-912_peak_range_all.png, id=479, 511.6716pt x 265.9536pt
->
-File: images/polyfit/fig_523-912_peak_range_all.png Graphic file (type png)
-<use images/polyfit/fig_523-912_peak_range_all.png>
-Package pdftex.def Info: images/polyfit/fig_523-912_peak_range_all.png  used on
- input line 648.
-(pdftex.def)             Requested size: 127.91759pt x 66.48824pt.
-<images/fig11.png, id=480, 527.3301pt x 263.3037pt>
-File: images/fig11.png Graphic file (type png)
-<use images/fig11.png>
-Package pdftex.def Info: images/fig11.png  used on input line 648.
-(pdftex.def)             Requested size: 131.8322pt x 65.82576pt.
- [49
-
- <./images/polyfit/fig_523-912_peak_range_all.png> <./images/fig11.png>] [50
-
-]
-\tf@nav=\write6
-\openout6 = `slides.nav'.
-
-\tf@toc=\write7
-\openout7 = `slides.toc'.
-
-\tf@snm=\write8
-\openout8 = `slides.snm'.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 655.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 655.
- (./slides.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 655.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 655.
-Package rerunfilecheck Info: File `slides.out' has not changed.
-(rerunfilecheck)             Checksum: 29D3093612A458C9697ED17358826A0C;273.
-
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
- ) 
-Here is how much of TeX's memory you used:
- 20984 strings out of 492676
- 419214 string characters out of 6134162
- 477131 words of memory out of 5000000
- 24201 multiletter control sequences out of 15000+600000
- 15430 words of font info for 56 fonts, out of 8000000 for 9000
- 1137 hyphenation exceptions out of 8191
- 71i,13n,88p,1809b,835s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmssi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on slides.pdf (50 pages, 3783515 bytes).
-PDF statistics:
- 579 PDF objects out of 1000 (max. 8388607)
- 393 compressed objects within 4 object streams
- 159 named destinations out of 1000 (max. 500000)
- 346 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+(pdftex.def)             Requested size: 92.45576pt x 52.56345pt.
+<images/bathtub/coef_3_690.png, id=436, 464.6961pt x 262.8219pt>
+File: images/bathtub/coef_3_690.png Graphic file (type png)
+<use images/bathtub/coef_3_690.png>
+Package pd
