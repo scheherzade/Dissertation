@@ -3,7 +3,7 @@
 \contentsline {figure}{\numberline {4.1}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times $690 on different number of cores.\relax }}{20}% 
 \contentsline {figure}{\numberline {4.2}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix of size 690$\times $690 from two different angles\relax }}{21}% 
 \contentsline {figure}{\numberline {4.3}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix sizes from 200$\times $200 to 1587$\times $1587\relax }}{22}% 
-\contentsline {figure}{\numberline {4.4}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix sizes from 690$\times $690 with different combinations of block size and chunk size on $4$ cores\relax }}{23}% 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times $690 with different combinations of block size and chunk size on $4$ cores\relax }}{23}% 
 \contentsline {figure}{\numberline {4.5}{\ignorespaces The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times $690 on $4$ cores.\relax }}{24}% 
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores for matrix sizes (a) smaller than 793$\times $793 and (b) larger than 793$\times $793.\relax }}{25}% 
 \addvspace {12\p@ }

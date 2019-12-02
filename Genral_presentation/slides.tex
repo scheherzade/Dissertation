@@ -43,20 +43,36 @@
 \section{Objective}
 \begin{frame}{Objective}
 		\begin{outline}
-			\1A compile-time and runtime solution to optimize the performance of a linear algebra library based on a specific application
-			\1These parameters could be: Machine architecture, number of cores to run the program on, the expression to be evaluated: the type of operations, the number of matrices involved, the matrix sizes. 
+			A compile-time and runtime solution to optimize the performance of a linear algebra library based on 
+			\1Machine architecture
+			\1Number of cores to run the program on
+			\1Expression to be evaluated 
+			\2Type of operations
+			\2Number of matrices involved
+			\2Matrix sizes
 		\end{outline}		
 \end{frame}
 
 \section{Introduction}
 \begin{frame}{Introduction}
 	\begin{outline}
-	\1AMT(Asynchronous Many-task) model and runtime systems 			
-	\2HPX, Charm++, Uintah, Legion
-	\1Linear algebra libraries
-	\2Scalapack, ATLAS, SPIRAL	
-	\1Our motivation:
-	\2Phylanx
+	\1Current programming models would not be able to keep up with the advances toward exascale computing
+	\2More complex machine architectures, deeper memory hierarchies, heterogeneous nodes, complicated networks
+	\1AMT(Asynchronous Many-task) model and runtime systems 		
+	\2Examples: HPX, Charm++, Legion, OCR
+	
+	\end{outline}
+\end{frame}
+
+\begin{frame}{Introduction}
+	\begin{outline}
+	
+\1Performance of HPC applications heavily rely on the linear algebra library they are using.
+		\1Linear algebra libraries
+		\2BLAS(Basic Linear Algebra Subprograms) are the fundamental routines for basic vector and matrix operations.
+		\2Scalapack, ATLAS, SPIRAL	
+		\1Our motivation:
+		\2Phylanx, a platform to run your python code in parallel and distributed with machine learning as the target application
 	\end{outline}
 \end{frame}
 
@@ -94,7 +110,6 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
  \1Expression Templates:
 	\2Creates a parse tree of the expression at compile time and postpone the actual evaluation to when the expression is assigned to a target
 \1 Smart: 
-	\2Creation of intermediate temporaries when needed
 	\2Integration with highly optimized compute kernels
 	\2Selecting optimal evaluation method automatically for compound expressions
 \end{outline}
@@ -135,13 +150,13 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 	\begin{outline}
 			\begin{figure}[]
 			\centering
-			\includegraphics[scale=0.5]{images/loop_cropped.png}
+			\includegraphics[scale=0.2]{images/loop.png}
 			\caption{An example of loop chunking\footnote{Ciorba, Florina M., Christian Iwainsky, and Patrick Buder. "OpenMP loop scheduling revisited: making a case for more schedules." International Workshop on OpenMP. Springer, Cham, 2018.}}	
 			\label{fig_loop}
 		\end{figure}
 		Chunk size: Number of loop iterations executed by one thread 
-		\1Static
-		\1Dynamic methods including Guided, Factoring
+		\1Static and dynamic loop scheduling
+
 	\end{outline}
 \end{frame}
 
@@ -566,13 +581,13 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 \begin{frame}{Method: Modeling Execution Time based on Grain Size}
 	\begin{outline}	
-	\1How do $\alpha$, $t_s$, and $\gamma$ change with number of cores?
-		$$f(x)=\frac{m_0}{x}+\frac{m_1(x-1)}{x}+m_2(x-1)+m_3(x)(x-1)$$
-	\begin{figure}[H]
+	\1How do $\alpha$, and $\gamma$ change with number of cores?
+		$$f(N)=\frac{m_0+m_1(N-1)+m_2(N-1)N+m_3(N^2)(N-1)}{N}$$
+	\begin{figure}[]
 		\centering
-		\subfloat[]{\includegraphics[scale=.2]{images/bathtub/coef_1_690.png}\label{fig24:a}}
-		\subfloat[]{\includegraphics[scale=.2]{images/bathtub/coef_2_690.png}\label{fig24:b}}\hfill	
-		\subfloat[]{\includegraphics[scale=.2]{images/bathtub/coef_3_690.png}\label{fig24:c}}
+		\subfloat[]{\includegraphics[scale=.13]{images/bathtub/coef_1_690.png}\label{fig24:a}}
+		\subfloat[]{\includegraphics[scale=.13]{images/bathtub/coef_2_690.png}\label{fig24:b}}\hfill	
+		\subfloat[]{\includegraphics[scale=.13]{images/bathtub/coef_3_690.png}\label{fig24:c}}
 		\caption{Fitting the three parameters (a)$\alpha$, (b)$t_s$, and (c)$\gamma$ for $DMATDMATADD$ benchmark for matrix size $690\times690$.}	
 		\label{fig24}
 	\end{figure}
@@ -582,7 +597,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 \begin{frame}{Method: Modeling Execution Time based on Grain Size}
 	\begin{outline}	
-\begin{figure}[H]
+\begin{figure}[]
 		{\hfill\includegraphics[scale=.2]{images/bathtub/prediction_error_overall690.png}}	
 	\caption{The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times690$ with different number of cores.}	
 	\label{fig25}
@@ -592,8 +607,9 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 \begin{frame}{Method: Modeling Execution Time based on Grain Size}
 	\begin{outline}	
-The problem with the current model is that with this formula we know that the minimum occurs at $n_t=N$.
-\pause
+\1The problem with the current model is that with this formula we know that the minimum occurs at $n_t=N$.
+\1parameters $t_s, \alpha, \gamma$ do not behave the way we expect, they change with change of number of cores.
+\\
 What is the missing factor?
 \end{outline}
 \end{frame}
@@ -671,27 +687,41 @@ What is the missing factor?
 \section{Related Work}
 	\begin{frame}{Related Work}
 		\begin{outline}
-			\1Liu et. al Estimating the optimal number of cores to run the program on based on cache specific traces (\cite{liu2018runtime})
-			\1Zahra used logistic regression to find the best chunk size based on some static and dynamic features of the loop
-			\1Gabriel Used machine learning to find the best chunk size to get the maximum performance, while block size was fixed statically
-			\1Peter Thoman proposed a compile-time and runtime solution, using an effort estimation function decide a policy to run the parallel for-loop 
+			\1Liu et al. estimating the optimal number of cores to run the program on based on cache specific traces. 
+			\1Khatami et al. used logistic regression to find the best chunk size based on some static and dynamic features of the loop.
+			\1Laberge et al. Used machine learning to find the best chunk size to get the maximum performance, while block size was fixed statistically.
+			\1Thoman et al. proposed a compile-time and runtime solution, using an effort estimation function set the chunk size. 
 		\end{outline}
 \end{frame}
 
+
+\begin{frame}{Our Contributions}
+	\begin{outline}
+		\1We propose a novel analytic model to represent how the execution time is expected to change based on grain size.
+		\1To our knowledge, there has not been a work to create a 3D model of the throughput, grain size, and number of cores. 
+		\1We are proposing a method to apply the developed model to a linear algebra library, in a way specific to our application, and the machine architecture.
+	\end{outline}
+\end{frame}
 
 
 \section{Proposed Study}
 \begin{frame}{Proposed Study}
 \begin{outline}	
-	\begin{figure}[H]
-		\centering
-%		\includegraphics[scale=.25]{images/polyfit/fig_523-912_peak_range_all.png}
-		\includegraphics[scale=.4]{images/fig11.png}	
+	\begin{figure}[]
+
+
+		\subfloat[]
+		{\includegraphics[scale=.3]{images/fig11.png}	
+			\label{fig8:a}}		
+		\subfloat[]{
+			\includegraphics[scale=.3]{images/fig12.png}
+			\label{fig8:b}}
+		\caption{Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark  on $4$ cores for matrix sizes (a) smaller than 793$\times$793 (b) larger than 793$\times$793.}
 		\label{fig20}
 	\end{figure} 
+
+	\1Generalization for matrix size, adding runs for larger matrix sizes
 	\1Studying the bathtub model
-	\1Generalization for matrix size 
-	\1Adding runs for larger matrix sizes
 	\1Generalization for complex expressions
 	\1Generalization for different architectures
 \end{outline}
@@ -700,6 +730,24 @@ What is the missing factor?
 
 \begin{frame}[standout]
   Thank you!
+\end{frame}
+
+\begin{frame}{Appendix}
+	\begin{outline}	
+		\begin{figure}[H]
+			\includegraphics[scale=.2]{images/BLAS.png}	
+			\caption{{https://web.stanford.edu/class/ee392o/nlas-foils.pdf}}
+			\label{fig26}		
+		\end{figure} 
+	\end{outline}
+\end{frame}
+
+\begin{frame}{Appendix}
+	\begin{outline}	
+		\begin{figure}[H]
+			\includegraphics[scale=.5]{images/polyfit/fig_523-912_peak_range_all.png} \label{fig27}	\caption{The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark for different number of cores for matrix size $523\times523$ to $912\times912$.}		
+		\end{figure} 
+	\end{outline}
 \end{frame}
 
 \end{document}
