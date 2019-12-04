@@ -147,14 +147,28 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 %		\1 Universal Scalability Law
 %	\end{outline}
 %\end{frame}
+%\begin{frame}{Background: Loop Scheduling}
+%	\begin{outline}
+%				\1Chunk size: Number of loop iterations executed by one thread 
+%%				\1Static and dynamic loop scheduling
+%			\begin{figure}[]
+%			\centering
+%			\includegraphics[scale=0.09]{images/schedules.png}
+%				\caption{An example of different loop scheduling methods\footnote{http://pages.tacc.utexas.edu/~eijkhout/pcse/html/omp-loop.html}}
+%%			\caption{An example of loop chunking\footnote{Ciorba, Florina M., Christian Iwainsky, and Patrick Buder. "OpenMP loop scheduling revisited: making a case for more schedules." International Workshop on OpenMP. Springer, Cham, 2018.}}	
+%			\label{fig_loop}
+%		\end{figure}
+%	\end{outline}
+%\end{frame}
+
 \begin{frame}{Background: Loop Scheduling}
 	\begin{outline}
 				\1Chunk size: Number of loop iterations executed by one thread 
 %				\1Static and dynamic loop scheduling
 			\begin{figure}[]
 			\centering
-			\includegraphics[scale=0.09]{images/schedules.png}
-				\caption{An example of different loop scheduling methods\footnote{http://pages.tacc.utexas.edu/~eijkhout/pcse/html/omp-loop.html}}
+			\includegraphics[scale=0.98]{images/loop_1.png}
+				\caption{An example of effect of different loop scheduling methods\footnote{Ciorba, F. M., Iwainsky, C., \& Buder, P. (2018, September). OpenMP loop scheduling revisited: making a case for more schedules. In International Workshop on OpenMP (pp. 21-36). Springer, Cham.}}
 %			\caption{An example of loop chunking\footnote{Ciorba, Florina M., Christian Iwainsky, and Patrick Buder. "OpenMP loop scheduling revisited: making a case for more schedules." International Workshop on OpenMP. Springer, Cham, 2018.}}	
 			\label{fig_loop}
 		\end{figure}
@@ -663,7 +677,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 		\begin{figure}[H]
 			\centering
 			\subfloat[]{\includegraphics[scale=.32]{images/bathtub/error_690r2.png}\label{fig38:a}}
-			\subfloat[]{\includegraphics[scale=.32]{images/bathtub/error_690mae.png}\label{fig38:b}}
+			\subfloat[]{\includegraphics[scale=.32]{images/bathtub/error_final_690mae}\label{fig38:b}}
 			\caption{The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times690$ with different number of cores,(a) R\textunderscore{squared} error (b) Mean Absolute Error(MAE).}	
 			\label{fig38}
 		\end{figure}
