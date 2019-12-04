@@ -342,7 +342,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 \begin{frame}{Throughput vs. Grain Size and Number of Cores}
 	\begin{outline}
-		\includegraphics[scale=0.2]{images/fig1.png}	\\
+%		\includegraphics[scale=0.4]{images/fig1.png}	\\
 		Can we model the relationship between the \textbf{throughput} and the \textbf{grain size} and the \textbf{number of cores}?
 		\pause	
 		\1First we try to model the relationship between throughput and grain size.
@@ -417,8 +417,8 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 \begin{frame}{Method: Modeling Performance based on Grain Size}
 	\begin{outline}	
-		$$Mean\textunderscore{absolute\textunderscore{error}} = \frac{1}{n}\sum_{i=1}^{n} abs({t_i-p_i})$$
-		$$n \text{ is the number of samples}$$
+		$$Mean\textunderscore{Absolute\textunderscore{Error}} = \frac{1}{n}\sum_{i=1}^{n} abs({t_i-p_i})$$
+%		$$n \text{ is the number of samples}$$
 		\begin{figure}[H]
 			\centering
 			\includegraphics[scale=.5]{images/polyfit/error_690_mae.png}
@@ -431,7 +431,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 \begin{frame}{Method: Modeling Performance based on Grain Size}
 	\begin{outline}	
 		$$R\textunderscore{squared} = 1-\frac{{\frac{1}{n}\sum_{i=1}^{n}{(t_i-p_i)}^2}}{Var(t)}$$
-		$$n \text{ is the number of samples}$$
+%		$$n \text{ is the number of samples}$$
 		\begin{figure}[H]
 			\centering
 			\includegraphics[scale=.5]{images/polyfit/error_690_r2.png}
