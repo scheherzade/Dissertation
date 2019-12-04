@@ -57,7 +57,7 @@
 \section{Introduction}
 \begin{frame}{Introduction}
 	\begin{outline}
-	\1Current programming models would not be able to keep up with the advances toward exascale computing because
+	\1Current programming models would not be able to keep up with the advances toward exascale computing 
 	\2More complex machine architectures, deeper memory hierarchies, heterogeneous nodes, complicated networks
 	\1AMT(Asynchronous Many-Task) model and runtime systems 		
 	\2Examples: HPX, Charm++, Legion
@@ -71,9 +71,9 @@
 \1Performance of HPC applications heavily rely on the linear algebra library they are using.
 		\1Linear algebra libraries
 		\2BLAS(Basic Linear Algebra Subprograms) are the fundamental routines for basic vector and matrix operations.
-		\2ScaLAPACK, ATLAS, SPIRAL	
+		\2Examples: ScaLAPACK, ATLAS, SPIRAL	
 		\1Our motivation:
-		\2Phylanx, a platform to run your python code in parallel and distributed with machine learning as the target application
+		\2Phylanx, a platform to run your python code in parallel and distributed with machine learning as the target application.
 	\end{outline}
 \end{frame}
 
@@ -144,10 +144,10 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 %\begin{frame}{Background}
 %	\begin{outline}
 %		\1 Effect of Task Granularity on execution time
-%		\1 Universal Scalibility Law
+%		\1 Universal Scalability Law
 %	\end{outline}
 %\end{frame}
-\begin{frame}{Loop Scheduling}
+\begin{frame}{Background: Loop Scheduling}
 	\begin{outline}
 				\1Chunk size: Number of loop iterations executed by one thread 
 %				\1Static and dynamic loop scheduling
@@ -169,7 +169,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 \begin{frame}{Background: Task Granularity}
 	\begin{outline}
-		Grain size: The amount of work performed by one HPX thread
+		Grain size: The amount of work performed by one task
 		\1What causes performance degradation?
 		\2Overheads
 		\2Starvation
@@ -270,7 +270,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 \begin{frame}{Method: Data Analysis}
 	\begin{outline}
-		\1For simplicity we look at each matrix size individually, one number of core at a time, 
+		\1For simplicity we look at each matrix size individually, one number of core at a time 
 		
 		
 		\begin{figure}
@@ -288,13 +288,27 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 		\end{figure}
 		\1For each selected block size, there is a range of chunk sizes that gives us the best performance. 
 		\1Except for some uncommon cases, no matter which block size we choose, we are able to achieve the maximum performance if we select the right chunk size.  
+		\pause
+		\1Instead of looking at block size and chunk size individually, look at grain size.
 	\end{outline}
 \end{frame}
 
 \begin{frame}{Method: Throughput vs. Grain Size}
 	\begin{outline}
 		Grain size: The number of floating point operations performed by one thread\\
-		For $DMATDMATADD$, with $block\textunderscore{size}=r\times{c}$ and  $chunk\textunderscore{size}=ch$ \\ $r\times{c}\times{ch}$
+		\1Grain size represents the complexity of the expression
+		\1For $DMATDMATADD$, with $block\textunderscore{size}=r\times{c}$ and  $chunk\textunderscore{size}=ch$ \\ Grain\textunderscore{size}=$r\times{c}\times{ch}$
+		\begin{figure}[H]
+			\centering\includegraphics[width=1\linewidth]{images/grain_size.png}
+			
+			\label{fig28}
+		\end{figure}
+	
+	\end{outline}
+\end{frame}
+
+\begin{frame}{Method: Throughput vs. Grain Size}
+	\begin{outline}
 		\begin{figure}[H]
 			\centering\includegraphics[width=1\linewidth]{images/fig6.png}
 			\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times$690 on $4$ cores.}	
@@ -316,12 +330,25 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 	\end{outline}
 \end{frame}
 
-\begin{frame}{Throughput vs. Grain Size}
+\begin{frame}{Throughput vs. Grain Size and Number of Cores}
 	\begin{outline}
-		Can we model the relationship between the throughput and the grain size?
-		\pause
-		\1Polynomial Model
-		\1Bathtub Model
+		\begin{figure}[H]
+			\includegraphics[scale=0.42]{images/fig2.png}					\includegraphics[scale=0.42]{images/fig3.png}
+			\caption{The results obtained from running $DMATDMATADD$ benchmark through Blazemark for matrix size 690$\times$690 based on grain size and number of cores.}	
+			\label{fig29}
+		\end{figure}
+	\end{outline}
+\end{frame}
+
+\begin{frame}{Throughput vs. Grain Size and Number of Cores}
+	\begin{outline}
+		\includegraphics[scale=0.2]{images/fig1.png}	\\
+		Can we model the relationship between the \textbf{throughput} and the \textbf{grain size} and the \textbf{number of cores}?
+		\pause	
+		\1First we try to model the relationship between throughput and grain size.
+		\pause	
+		\2Polynomial Model
+		\2Bathtub Model
 	\end{outline}
 \end{frame}
 
@@ -334,10 +361,19 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 \begin{frame}{Method: Polynomial Model}
 	\begin{outline}
+		
 		In order to simplify the process and eliminate the effect of different possible factors, we started with limiting the problem to a fixed matrix size.	
 		\1Used a second order polynomial to model the relationship between the throughput and the grain size when number of cores is fixed.
-		 $$P=ag^2+bg+c$$    
-		 \1Divide the data into training(60\%) and test(40\%)
+		\begin{columns}		
+			\column{0.38\linewidth}
+		 \centering$P=ag^2+bg+c$ 
+		 \column{0.38\linewidth}  
+		 \begin{figure}[]
+		 \includegraphics[scale=0.15]{images/fig6_cropped.png}
+		 \end{figure}
+		 
+		\end{columns}
+	\1Divide the data into training(60\%) and test(40\%)
 	\end{outline}
 \end{frame}
 
@@ -345,14 +381,14 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 	\begin{outline}	
 		\begin{figure}[H]
 			\centering
-			\subfloat[1 core]{\includegraphics[scale=.18]{images/polyfit/fig_1_690.png}\label{fig10:a}}
-			\subfloat[2 cores]{\includegraphics[scale=.18]{images/polyfit/fig_2_690.png}\label{fig10:b}}\hfill
+			\subfloat[1 core]{\includegraphics[scale=.3]{images/polyfit/fig_1_690.png}\label{fig10:a}}
+			\subfloat[2 cores]{\includegraphics[scale=.3]{images/polyfit/fig_2_690.png}\label{fig10:b}}\hfill
 %			\subfloat[3 cores]{\includegraphics[scale=.18]{images/polyfit/fig_3_690.png}\label{fig10:c}}{\hfill}
-			\subfloat[4 cores]{\includegraphics[scale=.18]{images/polyfit/fig_4_690.png}\label{fig10:d}}
+			\subfloat[4 cores]{\includegraphics[scale=.3]{images/polyfit/fig_4_690.png}\label{fig10:d}}
 %			\subfloat[5 cores]{\includegraphics[scale=.18]{images/polyfit/fig_5_690.png}\label{fig10:e}}
 %			\subfloat[6 cores]{\includegraphics[scale=.18]{images/polyfit/fig_6_690.png}\label{fig10:f}}{\hfill}
 %			\subfloat[7 cores]{\includegraphics[scale=.18]{images/polyfit/fig_7_690.png}\label{fig10:g}}
-			\subfloat[8 cores]{\includegraphics[scale=.18]{images/polyfit/fig_8_690.png}\label{fig10:h}}
+			\subfloat[8 cores]{\includegraphics[scale=.3]{images/polyfit/fig_8_690.png}\label{fig10:h}}
 			
 			\caption{The results of fitting the throughput vs grain size data into a 2d polynomial for $DMATDMATADD$ benchmark for matrix size 690$\times$690 with different number of cores on the test data.}
 			\label{fig10}
@@ -360,43 +396,92 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 	\end{outline}
 \end{frame}
 
+%\begin{frame}{Method: Modeling Performance based on Grain Size}
+%	\begin{outline}	
+%		\begin{figure}[H]
+%			\centering
+%			\subfloat[1 core]{\includegraphics[scale=.15]{images/polyfit/fig_1_690.png}\label{fig40:a}}
+%			\subfloat[2 cores]{\includegraphics[scale=.15]{images/polyfit/fig_2_690.png}\label{fig40:b}}
+%			\subfloat[3 cores]{\includegraphics[scale=.15]{images/polyfit/fig_3_690.png}\label{fig40:c}}
+%			\subfloat[4 cores]{\includegraphics[scale=.15]{images/polyfit/fig_4_690.png}\label{fig40:d}}{\hfill}
+%			\subfloat[5 cores]{\includegraphics[scale=.15]{images/polyfit/fig_5_690.png}\label{fig40:e}}
+%			\subfloat[6 cores]{\includegraphics[scale=.15]{images/polyfit/fig_6_690.png}\label{fig40:f}}
+%			\subfloat[7 cores]{\includegraphics[scale=.15]{images/polyfit/fig_7_690.png}\label{fig40:g}}
+%			\subfloat[8 cores]{\includegraphics[scale=.15]{images/polyfit/fig_8_690.png}\label{fig40:h}}
+%			
+%			\caption{The results of fitting the throughput vs grain size data into a 2d polynomial for $DMATDMATADD$ benchmark for matrix size 1587$\times$1587 with different number of cores on the test data.}
+%			\label{fig10}
+%		\end{figure}
+%	\end{outline}
+%\end{frame}
 
 \begin{frame}{Method: Modeling Performance based on Grain Size}
 	\begin{outline}	
-		$$Relative\textunderscore{error} = \frac{1}{n}\sum_{i=1}^{n} {1-p_i/t_i}\:\:\:\: n \text{ is the number of samples}$$
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=.5]{images/polyfit/fig_train_test_690.png}
-	\caption{The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores cores.}	
-	\label{fig11}
-\end{figure}
+		$$Mean\textunderscore{absolute\textunderscore{error}} = \frac{1}{n}\sum_{i=1}^{n} abs({t_i-p_i})$$
+		$$n \text{ is the number of samples}$$
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=.5]{images/polyfit/error_690_mae.png}
+			\caption{The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores cores.}	
+			\label{fig32}
+		\end{figure}
 	\end{outline}
 \end{frame}
 
 \begin{frame}{Method: Modeling Performance based on Grain Size}
 	\begin{outline}	
-		\1We have developed a model for each number of cores:1,2,..,8 $P=ag^2+bg+c$\\ 
+		$$R\textunderscore{squared} = 1-\frac{{\frac{1}{n}\sum_{i=1}^{n}{(t_i-p_i)}^2}}{Var(t)}$$
+		$$n \text{ is the number of samples}$$
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=.5]{images/polyfit/error_690_r2.png}
+			\caption{The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores cores.}	
+			\label{fig33}
+		\end{figure}
+	\end{outline}
+\end{frame}
+
+\begin{frame}{Method: Modeling Performance based on Grain Size}
+	\begin{outline}	
+		\begin{figure}
+		\includegraphics[scale=.15]{images/polyfit/model_1_8.png}
+		\end{figure}
+
+		\1We have developed a model for each number of cores:1, 2,.., 8 $P=ag^2+bg+c$\\ 
+		\pause
 		\1Can we somehow integrate number of cores into the model?
 	\end{outline}
 \end{frame}
 
 \begin{frame}{Method: Modeling Performance based on Grain Size}
 	\begin{outline}	
-		\1For $P=ag^2+bg+c$, see how $a$, $b$, and $c$ change with the number of cores
-		\1Model the relationship with a 3rd degree polynomial
-		$$a_i=a_0N^3+a_1N^2+a_2N+a_3
-		,\:b=b_0N^3+b_1N^2+b_2N+b_3,$$ $$c=c_0N^3+c_1N^2+c_2N+c_3$$
+		\1For $P=ag^2+bg+c$, how do $a$, $b$, and $c$ change with the number of cores?		\\
 		\begin{figure}[H]
 			\centering
-			{\includegraphics[scale=.18]{images/polyfit/fig_690_params_0.png}\label{fig15:a}}
-			{\includegraphics[scale=.18]{images/polyfit/fig_690_params_1.png}\label{fig15:b}}
-			{\includegraphics[scale=.18]{images/polyfit/fig_690_params_2.png}\label{fig15:c}}
-			\caption{Fitting the parameters of the polynomial function with a $3$rd degree polynomial from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores.}	
-			\label{fig15}
+			{\includegraphics[scale=.33]{images/polyfit/fig_1587_params_0before_fit.png}\label{fig31:a}}
+			{\includegraphics[scale=.33]{images/polyfit/fig_1587_params_1before_fit.png}\label{fig31:b}}
+			{\includegraphics[scale=.33]{images/polyfit/fig_1587_params_2before_fit.png}\label{fig31:c}}
+			\caption{The parameters of the polynomial fit from the $DMATDMATADD$ benchmark for matrix size $1587\times1587$ against different number of cores.}	
+			\label{fig31}
 		\end{figure}
 	\end{outline}
 \end{frame}
 
+\begin{frame}{Method: Modeling Performance based on Grain Size}
+	\begin{outline}			
+		\1Model the relationship with a 3rd degree polynomial
+		$$a=a_0N^3+a_1N^2+a_2N+a_3
+		,\:\:\:\:\:b=b_0N^3+b_1N^2+b_2N+b_3,$$ $$c=c_0N^3+c_1N^2+c_2N+c_3$$
+		\begin{figure}[H]
+			\centering
+			{\includegraphics[scale=.25]{images/polyfit/fig_690_params_0.png}\label{fig15:a}}
+			{\includegraphics[scale=.25]{images/polyfit/fig_690_params_1.png}\label{fig15:b}}
+			{\includegraphics[scale=.25]{images/polyfit/fig_690_params_2.png}\label{fig15:c}}
+			\caption{Fitting the parameters of the polynomial function with a $3$rd degree polynomial from the $DMATDMATADD$ benchmark for matrix size $1587\times1587$ against different number of cores.}	
+			\label{fig15}
+		\end{figure}
+	\end{outline}
+\end{frame}
 
 \begin{frame}{Method: Modeling Performance based on Grain Size}
 	\begin{outline}
@@ -414,15 +499,17 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 \begin{frame}{Method: Modeling Performance based on Grain Size}
 	\begin{outline}
-\begin{figure}[H]
-	\centering
-	\subfloat[]{\includegraphics[scale=.35]{images/polyfit/fig_690_total_error.png}\label{fig17:a}}
-	\subfloat[]{\includegraphics[scale=.35]{images/polyfit/fig_690_total_error_corrected.png}\label{fig17:b}}
-	\caption{(a) All the data points are include in calculation of error, (b) the leftmost sample was removed from error calculation.}	
-	\label{fig17}
-\end{figure}
+		\begin{figure}[H]
+			\centering
+			\subfloat[]{\includegraphics[scale=.32]{images/polyfit/fig_690_total_error_r2.png}\label{fig17:a}}
+			\subfloat[]{\includegraphics[scale=.32]{images/polyfit/fig_690_total_error_mae.png}\label{fig17:b}}
+			\caption{All the data points are included in calculation of error,(a) R\textunderscore{squared} error (b) Mean Absolute Error(MAE) .}	
+			\label{fig17}
+		\end{figure}
 	\end{outline}
 \end{frame}
+
+
 
 \begin{frame}{Method: Finding the Grain Size Range for Maximum Performance}
 	\begin{outline}
@@ -452,8 +539,9 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 \begin{frame}{Method: Finding the Grain Size Range for Maximum Performance}
 	\begin{outline}
 	How do we use the calculated range?
-	\1Select a block size
-	\1Find the range of chunk size that results in the calculated range of grain size
+	\includegraphics[scale=.3]{images/polyfit/fig_690_total_8_range.png}
+	\1Select a reasonable block size, e.g. $4\times256$
+	\1Find the range of chunk size that results in the calculated range of grain size, Grain\textunderscore{size}=$r\times{c}\times{ch}$
 	\end{outline}
 \end{frame}
 
@@ -473,12 +561,12 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 \end{outline}
 \end{frame}
 
-%\begin{frame}{Method: Polynomial Model, Wrap up}
-%	\begin{outline}
-%		\1Easy to use.
-%		\1It is not physical.
-%	\end{outline}
-%\end{frame}
+\begin{frame}{Method: Polynomial Model, Wrap up}
+	\begin{outline}
+		\1Simple model, can easily find the maximum.
+		\1It is not physical.
+	\end{outline}
+\end{frame}
 
 \begin{frame}{Method: Bathtub Model}
 	\begin{outline}
@@ -517,7 +605,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 		$$N\text{: Number of cores}$$	
 		$$n_t \text{: Number of created tasks}	$$
-		$$n_t=\frac{Total amount of work}{grain\textunderscore{size}}$$
+		$$n_t=\frac{Total\:amount\:of\:work}{grain\textunderscore{size}}$$
 		$$t_s\text{: sequential execution time}$$
 		$$M\text{: Number of cores actually doing the work}$$
 
@@ -570,20 +658,32 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 \end{outline}
 \end{frame}
 
-\begin{frame}{Method: Modeling Execution Time based on Grain Size}
-	\begin{outline}	
-\begin{figure}[H]
-	\centering
-	{\includegraphics[scale=.45]{images/bathtub/error_690.png}}	
-	\caption{The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times690$ with different number of cores.}	
-	\label{fig23}
-\end{figure}
-\end{outline}
+\begin{frame}{Method: Modeling Performance based on Grain Size}
+	\begin{outline}
+		\begin{figure}[H]
+			\centering
+			\subfloat[]{\includegraphics[scale=.32]{images/bathtub/error_690r2.png}\label{fig38:a}}
+			\subfloat[]{\includegraphics[scale=.32]{images/bathtub/error_690mae.png}\label{fig38:b}}
+			\caption{The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times690$ with different number of cores,(a) R\textunderscore{squared} error (b) Mean Absolute Error(MAE).}	
+			\label{fig38}
+		\end{figure}
+	\end{outline}
 \end{frame}
+
+%\begin{frame}{Method: Modeling Execution Time based on Grain Size}
+%	\begin{outline}	
+%\begin{figure}[H]
+%	\centering
+%	{\includegraphics[scale=.45]{images/bathtub/error_690.png}}	
+%	\caption{The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times690$ with different number of cores.}	
+%	\label{fig23}
+%\end{figure}
+%\end{outline}
+%\end{frame}
 
 \begin{frame}{Method: Modeling Execution Time based on Grain Size}
 	\begin{outline}	
-	\1How do $\alpha$, and $\gamma$ change with number of cores?
+	\1How do $t_s$, $\alpha$, and $\gamma$ change with number of cores?
 		$$f(N)=\frac{m_0+m_1(N-1)+m_2(N-1)N+m_3(N^2)(N-1)}{N}$$
 	\begin{figure}[]
 		\centering
@@ -600,8 +700,8 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 \begin{frame}{Method: Modeling Execution Time based on Grain Size}
 	\begin{outline}	
 \begin{figure}[]
-		{\hfill\includegraphics[scale=.2]{images/bathtub/prediction_error_overall690.png}}	
-	\caption{The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times690$ with different number of cores.}	
+		{\includegraphics[scale=.7]{images/bathtub/error_final_690mae.png}}	
+	\caption{The error in fitting execution time with the bathtub formula integrated with the USL modelfor $DMATDMATADD$ benchmark for matrix size $690\times690$ with different number of cores.}	
 	\label{fig25}
 \end{figure}
 \end{outline}
@@ -610,9 +710,10 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 \begin{frame}{Method: Modeling Execution Time based on Grain Size}
 	\begin{outline}	
 \1The problem with the current model is that with this formula we know that the minimum occurs at $n_t=N$.
-\1parameters $t_s, \alpha, \gamma$ do not behave the way we expect, they change with change of number of cores.
+\1Parameters $t_s, \alpha, \gamma$ do not behave the way we expect, they change with change of number of cores.
 \\
 What is the missing factor?
+
 \end{outline}
 \end{frame}
 
@@ -689,11 +790,28 @@ What is the missing factor?
 \section{Related Work}
 	\begin{frame}{Related Work}
 		\begin{outline}
-			\1Liu et al. estimating the optimal number of cores to run the program on based on cache specific traces. 
-			\1Khatami et al. used logistic regression to find the best chunk size based on some static and dynamic features of the loop.
-			\1Laberge et al. Used machine learning to find the best chunk size to get the maximum performance, while block size was fixed statistically.
+			\1Liu et al. estimated the optimal number of cores to run the program on based on cache specific traces. 
+			\1Khatami et al. used logistic regression to find the best chunk size based on some static and dynamic features of the loop.		
 			\1Thoman et al. proposed a compile-time and runtime solution, using an effort estimation function set the chunk size. 
 		\end{outline}
+\end{frame}
+
+
+\begin{frame}{Related Work}
+	\begin{outline}	
+		\begin{columns}		
+			\column{0.52\linewidth}
+			\begin{itemize}
+\item{Laberge et al. used machine learning to find the best chunk size to get the maximum performance, while block size was fixed statistically.}
+\item{Features included: matrix size, number of cores, number of floating point operations, number of iterations.} 
+\end{itemize}
+		\column{0.38\linewidth}
+		 \begin{figure}[]
+		\includegraphics[scale=.22]{images/gab.png}\caption{Laberge, G., Shirzad, S., Diehl, P., Kaiser, H., Prudhomme, S.,  Lemoine, A. (2019). Scheduling optimization of parallel linear algebra algorithms using Supervised Learning. arXiv preprint arXiv:1909.03947.}\label{fig30}
+		\end{figure}
+			\end{columns}	
+			
+	\end{outline}
 \end{frame}
 
 
@@ -723,8 +841,8 @@ What is the missing factor?
 		\label{fig20}
 	\end{figure} 
 
+	\1Studying the bathtub model to find the missing factor, also location of the minimum 
 	\1Generalization for matrix size, adding runs for larger matrix sizes
-	\1Studying the bathtub model
 	\1Generalization for complex expressions
 	\1Generalization for different architectures
 \end{outline}
@@ -754,3 +872,39 @@ What is the missing factor?
 \end{frame}
 
 \end{document}
+
+\begin{frame}{Method: Modeling Performance based on Grain Size}
+	\begin{outline}	
+		$$Mean\textunderscore{relative\textunderscore{absolute\textunderscore{error}}} = \frac{1}{n}\sum_{i=1}^{n} abs({1-p_i/t_i})$$
+		$$n \text{ is the number of samples}$$
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=.5]{images/polyfit/fig_train_test_690.png}
+			\caption{The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores cores.}	
+			\label{fig11}
+		\end{figure}
+	\end{outline}
+\end{frame}
+
+\begin{frame}{Method: Modeling Performance based on Grain Size}
+	\begin{outline}
+		\begin{figure}[H]
+			\centering
+			\subfloat[]{\includegraphics[scale=.35]{images/polyfit/fig_690_total_error.png}\label{fig37:a}}
+			\subfloat[]{\includegraphics[scale=.35]{images/polyfit/fig_690_total_error_corrected.png}\label{fig37:b}}
+			\caption{(a) All the data points are include in calculation of error, (b) the leftmost sample was removed from error calculation.}	
+			\label{fig37}
+		\end{figure}
+	\end{outline}
+\end{frame}
+
+\begin{frame}{Method: Bathtub Model Evaluation}
+	\begin{outline}	
+		\begin{figure}[H]
+			\centering
+			{\includegraphics[scale=.45]{images/bathtub/error_690.png}}	
+			\caption{The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times690$ with different number of cores.}	
+			\label{fig34}
+		\end{figure}
+	\end{outline}
+\end{frame}
