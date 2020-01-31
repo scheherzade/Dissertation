@@ -61,10 +61,12 @@ While overheads of creating tasks degrades the performance for small grain sizes
 %	\item
 %\end{itemize}
 
+\section{Analytical modeling of parallel programs}
 
+The execution time of a parallel program is highly dependent of the parallel algorithm to be evaluated, alongside the architecture it is implemented on\cite{grama2003introduction}.
 
 \vspace{\baselineskip}
-\section{Universal Scalibility Law}
+\subsection{Universal Scalibility Law}
 Amdahl's law\cite{amdahl1967validity}, states that the amount of achievable speed up by adding more processors when running a parallel application, is restricted by the amount of code that could actually be parallelized. 
 Equation \ref{Amdahl}, shows the relationship between speedup and number of processors, where $\sigma$ is the serial fraction of the execution time, based on Amdahl's law\cite{gunther2007guerrilla}. 
 

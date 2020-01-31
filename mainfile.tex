@@ -219,7 +219,7 @@ Linear algebra libraries play a very important role in HPC applications. In this
 
 There has been an extensive amount of work and study done on how to optimize the compute kernels for matrix-matrix multiplication. In this thesis, we are interested in all types of operations, and our focus is on machine learning applications, where we are potentially dealing with very large matrices and creating temporaries could be very expensive. 
 
-For this purpose we decided to use Blaze C++ library, a high performance template-based math library that gives us this option to access the expression tree at compile time, along with HPX, a C++ standard library for concurrency and parallelism, as our runtime systemm.
+For this purpose we decided to use Blaze C++ library, a high performance template-based math library that gives us this option to access the expression tree at compile time, along with HPX, a C++ standard library for concurrency and parallelism, as our runtime system.
 We propose here that instead of dividing the work equally among the cores and assigning one chunk to each core, we should be able to achieve a higher performance by selecting the right amount of work to be assigned to one core, based on a set of runtime and compile-time parameters.  
 
 Studying the significant amount of data we collected with different configurations, we concluded that, grain size, which is the amount of work assigned to each task, is the key factor for the performance when number of cores is fixed. With this assumption, we tried two different approaches to model the relationship between performance and grain size, in order to find a range of grain size that could lead us to the maximum performance. 
@@ -229,7 +229,7 @@ First model uses a polynomial function to fit the data both for throughput vs. g
 The primary results suggest that, using the data collected for matrix-matrix addition, we are able to improve the performance for matrix-matrix addition, by finding the right range of grain size.
 
 Having the mentioned models, we changed the current implementation of the HPX backend for Blaze by adding two parameters to represent the unit of work and the number of these units included in each task, for fine grained control of the parallelism, which is possible through HPX runtime system.
-Also, a complexity estimation function has been added to Blaze as an estimate of the number of floating point operations occuring in each unit of work. 
+Also, a complexity estimation function has been added to Blaze as an estimate of the number of floating point operations occurring in each unit of work. 
 
 Our data was only limited to one specific operation, matrix-matrix addition for two raw-major matrices, one matrix size at a time. In the next step, this problem should be generalized to different matrix sizes, architectures, and arbitrary complex expressions. 
 
@@ -264,6 +264,12 @@ Our data was only limited to one specific operation, matrix-matrix addition for 
 \pagebreak
 \singlespacing
 
+\chapter{Understanding the effect of grain size on concurrency in an asynchronous many-task runtime system}\label{Bathtub}
+\doublespacing
+\input{chapter8}
+\pagebreak
+\singlespacing
+
 \chapter{Setup}\label{Results}
 \doublespacing
 \input{chapter5}
@@ -273,6 +279,12 @@ Our data was only limited to one specific operation, matrix-matrix addition for 
 \chapter{Proposed Study}\label{Future}
 \doublespacing
 \input{chapter6}
+\pagebreak
+\singlespacing
+
+\chapter{Appendix}
+\doublespacing
+\input{chapter7}
 \pagebreak
 \singlespacing
 

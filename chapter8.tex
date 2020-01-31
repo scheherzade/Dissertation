@@ -1,0 +1,99 @@
+\section{Analytical Modeling}
+In this chapter we attempt to understand the effect of grain size on the achievable speedup in an asynchronous many-task runtime system. As discussed in chapter~\ref{Background}, our knowledge here comes from Amdahl's law and Universal Scalibility Law, which is an extension to the Amdahl's law. What these models suggest is that as we increase the number of cores in a multicore system, we do not observe a linear speedup, and they hold two major factors accountible for that, latency.
+
+Problem statement: We are interested in developing an analytical model for predicting the execution time in an asynchronous many task runtime system. Even if we were able to determine all the factors affecting the execution time, it is still very hard to find an analytical model describing the relationship between these factors and the execution time.   
+In an attempt to find these relationships, we started with simplifying the problem to eliminate the factors involved as much as possible, and then we looked at the problem step by step, looking at one parameter at one time. 
+
+For this purpose, we created a series of test cases based on a simple \textit{for\textunderscore{loop}} with different number of iterations, iteration lengths, and chunk sizes, as shown in Listing~\ref{hpx_for_loop}. At each iteration consists of a while loop that makes sure the iteration lasts a certain amount ot time. This way, knowing how long it would take to execute one iteration(denoted as \textit{iter\textunderscore{length}}), how many of iterations are executed by one HPX thread(denoted as \textit{chunk\textunderscore{size}}), and finally how many iterations there are(denoted as \textit{num\textunderscore{iterations}})), we can see how the execution time changes when the problem is executed on different number of cores. Here, we define \textit{problem\textunderscore{size}} as the time it takes to execute all the iterations, which is:
+
+\begin{equation}\label{problem_size}
+problem\:\:size = iter\:\:length\times{num\:\:iterations}
+\end{equation}
+
+Throughout these experiments we try to fix or eliminate the factors we believe will affect the execution time as much as possible, study the results, and then introduce one factor to the model and study the behavior of the model. 
+\vspace{\baselineskip}
+
+\begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,caption= {A simple hpx for\textunderscore{loop} used to study the effect of grain size on the achieved parallelism.}, label={hpx_for_loop}]
+
+///////////////////////////////////////////////////////////////////////////////
+void measure_function_futures_for_loop(std::uint64_t count, bool csv, std::uint64_t chunk_size, std::uint64_t iter_length)
+{
+// start the clock
+high_resolution_timer walltime;
+hpx::parallel::for_loop(hpx::parallel::execution::par.with(
+hpx::parallel::execution::dynamic_chunk_size( chunk_size )),
+0, count, [&](std::uint64_t) { worker_timed(iter_length*1000); });
+// stop the clock
+const double duration = walltime.elapsed();
+print_stats("for_loop", "par", "parallel_executor", count, duration, csv);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+int hpx_main(variables_map& vm)
+{
+{
+const int repetitions = vm["repetitions"].as<int>();
+num_threads = hpx::get_num_worker_threads();
+const std::uint64_t chunk_size = vm["chunk_size"].as<std::uint64_t>();
+const std::uint64_t iter_length = vm["iter_length"].as<std::uint64_t>();
+const std::uint64_t count = vm["num_iterations"].as<std::uint64_t>();
+bool csv = vm.count("csv") != 0;
+if (HPX_UNLIKELY(0 == count))
+throw std::logic_error("error: count of 0 futures specified\n");
+for (int i = 0; i < repetitions; i++)
+{
+measure_function_futures_for_loop(count, csv, chunk_size, iter_length);
+}
+}
+return hpx::finalize();
+}
+///////////////////////////////////////////////////////////////////////////////
+inline void worker_timed(std::uint64_t delay_ns)
+{
+if (delay_ns == 0)
+return;
+std::uint64_t start = hpx::util::high_resolution_clock::now();
+while (true)
+{
+// Check if we've reached the specified delay.
+if ((hpx::util::high_resolution_clock::now() - start) >= delay_ns)
+break;chunk
+}
+}
+///////////////////////////////////////////////////////////////////////////////
+int main(int argc, char* argv[])
+{
+// Configure application-specific options.
+options_description cmdline("usage: " HPX_APPLICATION_STRING " [options]");
+cmdline.add_options()("num_iterations",
+value<std::uint64_t>()->default_value(500000),
+"number of iterations to invoke")
+("repetitions", value<int>()->default_value(1),
+"number of repetitions of the full benchmark")
+("iter_length",value<std::uint64_t>()->default_value(1), "length of each iteration")
+("chunk_size",value<std::uint64_t>()->default_value(1), "chunk size");
+// Initialize and run HPX.
+return init(cmdline, argc, argv);
+}
+\end{lstlisting}
+
+For this simple experiment, where we do not have to deal with the cash effects, we believe the important factors are: number of HPX threads being created, number of cores the program is run on, the maximum amount of work one core has to do. The maximum number of tasks assigned to one core, and the number of cores that are actually performing the work, are two other important factors that can be deducted from the aforementioned factors. 
+
+\vspace{\baselineskip}
+\subsection{Step 1}
+At this step we look at the cases where only one task has been created, the program is run on only one core, and chunk size is set to one. This problem could be assumed to be equivalent to running the same amount of work sequentially with an additional cost of creating just one task. 
+
+\vspace{\baselineskip}
+\subsubsection{Expected Model}
+With this assumption we expect the execution time to be summation of the time it takes to perform the total amount of work(\textit{problem\textunderscore{size}}) and the overhead of creating one HPX task($\alpha$). Formula~\ref{chunk1} shows the expected formula.
+
+\begin{equation}\label{chunk1}
+execution\:\:time = \alpha + problem\:\:size
+\end{equation}  
+
+\vspace{\baselineskip}
+\subsubsection{Original Data}
+In order to check our proposed model for this simplified problem, we collected data from running the program, setting the \textit{chunk\textunderscore{size}} to 1, \textit{num\textunderscore{iterations}} to 1, and changing the \textit{iter\textunderscore{length}} from 1 to 10,000,000. 
+
+
+\vspace{\baselineskip}
