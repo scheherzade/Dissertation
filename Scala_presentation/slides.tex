@@ -14,7 +14,7 @@
 
 \title{Optimizing the Performance of Multi-threaded Linear Algebra Libraries, a Task Granularity based Approach }
 \subtitle{Scientific Computing Around Louisiana (SCALA)}
-\author{Shahrzad Shirzad}
+\author{Shahrzad Shirzad, Dr. Hartmut Kaiser}
 \date{Feburary 8, 2020}
 \institute{Louisiana State University}
 %\titlegraphic{\includegraphics[height=10mm]{logos/stellar_4x1.pdf}}
@@ -36,12 +36,12 @@
 
 \maketitle
 
-\begin{frame}{Outline}
-  \setbeamertemplate{section in toc}[sections]
-  \tableofcontents[hideallsubsections]
-\end{frame}
+%\begin{frame}{Outline}
+%  \setbeamertemplate{section in toc}[sections]
+%  \tableofcontents[hideallsubsections]
+%\end{frame}
 
-\section{Objective}
+%\section{Objective}
 \begin{frame}{Objective}
 		\begin{outline}
 			A compile-time and runtime solution to optimize the performance of a linear algebra library based on 
@@ -198,25 +198,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 \end{frame}
 
 
-\begin{frame}{Background: Modeling Performance based on number of cores}
-	\begin{outline}
-		\1Amdahl's Law
-			$$S(p) = \frac{p}{1+\sigma(p-1)}$$
-		\1Universal Scalability Law(USL)
-%		$$X(p) = \frac{\gamma{p}}{1+\sigma(p-1)+\kappa{p}(p-1)}$$
-		$$S(p) = \frac{p}{1+\sigma(p-1)+\kappa{p}(p-1)}$$
-		\2 Models the effects
-		of linear speedup, contention delay, and coherency delay due to crosstalk
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.38]{images/USL.png}
-			\caption{An example of speedup based on Amdahl's law and USL compared to the ideal linear speedup where $\sigma=0.2$ and $\kappa=0.05$.}	
-			\label{fig_Amdahl}
-		\end{figure}
-		
 
-	\end{outline}
-\end{frame}
 
 %\begin{frame}{Background: Modeling Performance based on number of cores: Other Models}
 %	\begin{outline}
@@ -435,18 +417,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 %	\end{outline}
 %\end{frame}
 
-\begin{frame}{Method: Modeling Performance based on Grain Size}
-	\begin{outline}	
-		$$Mean\textunderscore{Absolute\textunderscore{Error}} = \frac{1}{n}\sum_{i=1}^{n} abs({t_i-p_i})$$
-%		$$n \text{ is the number of samples}$$
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=.5]{images/polyfit/error_690_mae.png}
-			\caption{The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores cores.}	
-			\label{fig32}
-		\end{figure}
-	\end{outline}
-\end{frame}
+
 
 \begin{frame}{Method: Modeling Performance based on Grain Size}
 	\begin{outline}	
@@ -505,7 +476,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 \begin{frame}{Method: Modeling Performance based on Grain Size}
 	\begin{outline}
-		The final model: $$P=a_{11}g^2N^3+a_{10}g^2N^2+...+a_1N+a_0$$
+		The final model: $$P=\sum_{i=0}^{2} \sum_{j=0}^{3}a_{ij}g^iN^j$$
 	\begin{figure}[H]
 		\centering
 		\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_total_2.png}\label{fig18:a}}
@@ -521,13 +492,25 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 	\begin{outline}
 		\begin{figure}[H]
 			\centering
-			\subfloat[]{\includegraphics[scale=.32]{images/polyfit/fig_690_total_error_r2.png}\label{fig17:a}}
-			\subfloat[]{\includegraphics[scale=.32]{images/polyfit/fig_690_total_error_mae.png}\label{fig17:b}}
-			\caption{All the data points are included in calculation of error,(a) R\textunderscore{squared} error (b) Mean Absolute Error(MAE) .}	
+			{\includegraphics[scale=.32]{images/polyfit/fig_690_total_error_r2.png}\label{fig17:a}}
+	
+			\caption{All the data points are included in calculation of error, R\textunderscore{squared} error.}	
 			\label{fig17}
 		\end{figure}
 	\end{outline}
 \end{frame}
+
+%\begin{frame}{Method: Modeling Performance based on Grain Size}
+%	\begin{outline}
+%		\begin{figure}[H]
+%			\centering
+%			\subfloat[]{\includegraphics[scale=.32]{images/polyfit/fig_690_total_error_r2.png}\label{fig17:a}}
+%			\subfloat[]{\includegraphics[scale=.32]{images/polyfit/fig_690_total_error_mae.png}\label{fig17:b}}
+%			\caption{All the data points are included in calculation of error,(a) R\textunderscore{squared} error (b) Mean Absolute Error(MAE) .}	
+%			\label{fig17}
+%		\end{figure}
+%	\end{outline}
+%\end{frame}
 
 
 
@@ -560,26 +543,40 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 	\begin{outline}
 	How do we use the calculated range?
 	\includegraphics[scale=.3]{images/polyfit/fig_690_total_8_range.png}
-	\1Select a reasonable block size, e.g. $4\times256$
+	\1Select a reasonable block size, e.g. $4\times512$
 	\1Find the range of chunk size that results in the calculated range of grain size, Grain\textunderscore{size}=$r\times{c}\times{ch}$
 	\end{outline}
 \end{frame}
 
 \begin{frame}{Method: Finding the Grain Size Range for Maximum Performance}
 	\begin{outline}
-\begin{figure}[H]
-	\centering
-	\subfloat[]	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_2_4-256.png}\label{fig14:a}}
-	\subfloat[]	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_4_4-256.png}\label{fig14:b}}
-	\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_8_4-256.png}\label{fig14:c}}\hfill
-	\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_2_4-512.png}\label{fig14:d}}
-	\subfloat[]	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_4_4-512.png}\label{fig14:e}}
-	\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_8_4-512.png}\label{fig14:f}}
-	\caption{matrix size $690\times690$ with block size of $4\times256$ on (a) $2$ cores, (b) $4$ cores, and (c) $8$ cores, and block size of $4\times512$ on (d) $2$ cores, (e) $4$ cores, and (f) $8$ cores. }	
-	\label{fig14}
-\end{figure}
-\end{outline}
+		\begin{figure}[H]
+			\centering
+			
+			\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_2_4-512.png}\label{fig14:d}}
+			\subfloat[]	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_4_4-512.png}\label{fig14:e}}
+			\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_8_4-512.png}\label{fig14:f}}
+			\caption{matrix size $690\times690$ with block size of  $4\times512$ on (a) $2$ cores, (b) $4$ cores, and (c) $8$ cores. }	
+			\label{fig14}
+		\end{figure}
+	\end{outline}
 \end{frame}
+
+%\begin{frame}{Method: Finding the Grain Size Range for Maximum Performance}
+%	\begin{outline}
+%\begin{figure}[H]
+%	\centering
+%	\subfloat[]	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_2_4-256.png}\label{fig14:a}}
+%	\subfloat[]	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_4_4-256.png}\label{fig14:b}}
+%	\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_8_4-256.png}\label{fig14:c}}\hfill
+%	\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_2_4-512.png}\label{fig14:d}}
+%	\subfloat[]	{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_4_4-512.png}\label{fig14:e}}
+%	\subfloat[]{\includegraphics[scale=.25]{images/polyfit/fig_690_chunks_8_4-512.png}\label{fig14:f}}
+%	\caption{matrix size $690\times690$ with block size of $4\times256$ on (a) $2$ cores, (b) $4$ cores, and (c) $8$ cores, and block size of $4\times512$ on (d) $2$ cores, (e) $4$ cores, and (f) $8$ cores. }	
+%	\label{fig14}
+%\end{figure}
+%\end{outline}
+%\end{frame}
 
 \begin{frame}{Method: Polynomial Model, Wrap up}
 	\begin{outline}
@@ -809,32 +806,6 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 	\end{outline}
 \end{frame}
 
-\section{Related Work}
-	\begin{frame}{Related Work}
-		\begin{outline}
-			\1Liu et al. estimated the optimal number of cores to run the program on based on cache specific traces. 
-			\1Khatami et al. used logistic regression to find the best chunk size based on some static and dynamic features of the loop.		
-			\1Thoman et al. proposed a compile-time and runtime solution, using an effort estimation function set the chunk size. 
-		\end{outline}
-\end{frame}
-
-
-%\begin{frame}{Related Work}
-%	\begin{outline}	
-%		\begin{columns}		
-%			\column{0.52\linewidth}
-%			\begin{itemize}
-%\item{Laberge et al. used machine learning to find the best chunk size to get the maximum performance, while block size was fixed statistically.}
-%\item{Features included: matrix size, number of cores, number of floating point operations, number of iterations.} 
-%\end{itemize}
-%		\column{0.38\linewidth}
-%		 \begin{figure}[]
-%		\includegraphics[scale=.22]{images/gab.png}\caption{Laberge, G., Shirzad, S., Diehl, P., Kaiser, H., Prudhomme, S.,  Lemoine, A. (2019). Scheduling optimization of parallel linear algebra algorithms using Supervised Learning. arXiv preprint arXiv:1909.03947.}\label{fig30}
-%		\end{figure}
-%			\end{columns}	
-%			
-%	\end{outline}
-%\end{frame}
 
 
 \begin{frame}{Our Contributions}
@@ -897,7 +868,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 	\end{outline}
 \end{frame}
 
-\end{document}
+
 
 \begin{frame}{Method: Modeling Performance based on Grain Size}
 	\begin{outline}	
@@ -934,3 +905,62 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 		\end{figure}
 	\end{outline}
 \end{frame}
+
+
+	\begin{frame}{Related Work}
+		\begin{outline}
+			\1Liu et al. estimated the optimal number of cores to run the program on based on cache specific traces. 
+			\1Khatami et al. used logistic regression to find the best chunk size based on some static and dynamic features of the loop.		
+			\1Thoman et al. proposed a compile-time and runtime solution, using an effort estimation function set the chunk size. 
+		\end{outline}
+\end{frame}
+
+
+\begin{frame}{Related Work}
+	\begin{outline}	
+		\begin{columns}		
+			\column{0.52\linewidth}
+			\begin{itemize}
+\item{Laberge et al. used machine learning to find the best chunk size to get the maximum performance, while block size was fixed statistically.}
+\item{Features included: matrix size, number of cores, number of floating point operations, number of iterations.} 
+\end{itemize}
+		\column{0.38\linewidth}
+		 \begin{figure}[]
+		\includegraphics[scale=.22]{images/gab.png}\caption{Laberge, G., Shirzad, S., Diehl, P., Kaiser, H., Prudhomme, S.,  Lemoine, A. (2019). Scheduling optimization of parallel linear algebra algorithms using Supervised Learning. arXiv preprint arXiv:1909.03947.}\label{fig30}
+		\end{figure}
+			\end{columns}	
+			
+	\end{outline}
+\end{frame}
+\begin{frame}{Method: Modeling Performance based on Grain Size}
+	\begin{outline}	
+		$$Mean\textunderscore{Absolute\textunderscore{Error}} = \frac{1}{n}\sum_{i=1}^{n} abs({t_i-p_i})$$
+		%		$$n \text{ is the number of samples}$$
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=.5]{images/polyfit/error_690_mae.png}
+			\caption{The training and test error for fitting data obtained from the $DMATDMATADD$ benchmark for matrix size $690\times690$ against different number of cores cores.}	
+			\label{fig32}
+		\end{figure}
+	\end{outline}
+\end{frame}
+\begin{frame}{Background: Modeling Performance based on number of cores}
+	\begin{outline}
+		\1Amdahl's Law
+		$$S(p) = \frac{p}{1+\sigma(p-1)}$$
+		\1Universal Scalability Law(USL)
+		%		$$X(p) = \frac{\gamma{p}}{1+\sigma(p-1)+\kappa{p}(p-1)}$$
+		$$S(p) = \frac{p}{1+\sigma(p-1)+\kappa{p}(p-1)}$$
+		\2 Models the effects
+		of linear speedup, contention delay, and coherency delay due to crosstalk
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.38]{images/USL.png}
+			\caption{An example of speedup based on Amdahl's law and USL compared to the ideal linear speedup where $\sigma=0.2$ and $\kappa=0.05$.}	
+			\label{fig_Amdahl}
+		\end{figure}
+		
+		
+	\end{outline}
+\end{frame}
+\end{document}
