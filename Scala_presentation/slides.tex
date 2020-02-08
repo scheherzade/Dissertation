@@ -81,6 +81,7 @@
 \begin{frame}{Background: HPX}
 	\begin{outline}
 		\1HPX is a general purpose C++ runtime system for parallel and distributed applications of any scale.
+		\1Fine-grained parallelism instead of heavyweight threads.
 		\1Four major factors for performance degradation: SLOW
 		\2Starvation
 		\2Latency
@@ -128,8 +129,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 		\1HPX, OpenMP, C++ threads, Boost
 		
 
-
-		In the current implementation, the work is equally divided between the cores at compile time. 
+		\0In the current implementation, the work is equally divided between the cores at compile time. 
 		\1Parallel for loop
 %		\1 HPX for-loop with static chunking and chunk size=1
 		\begin{figure}
@@ -218,16 +218,16 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 	\end{outline}
 \end{frame}
 
-\begin{frame}{Background: Modeling Performance based on number of cores: Other Models}
-	\begin{outline}
-		\1Quadratic model
-		$$ S(p) = p-\gamma{p(p-1)}$$
-		\1Exponential model
-		$$S(p) = p(1-\alpha)^{(p-1)}$$
-		\1Geometric model
-		$$S(p) = \frac{1-\phi^{p}}{1-\phi}$$
-	\end{outline}
-\end{frame}
+%\begin{frame}{Background: Modeling Performance based on number of cores: Other Models}
+%	\begin{outline}
+%		\1Quadratic model
+%		$$ S(p) = p-\gamma{p(p-1)}$$
+%		\1Exponential model
+%		$$S(p) = p(1-\alpha)^{(p-1)}$$
+%		\1Geometric model
+%		$$S(p) = \frac{1-\phi^{p}}{1-\phi}$$
+%	\end{outline}
+%\end{frame}
 
 
 
@@ -360,17 +360,17 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 \end{outline}
 \end{frame}
 
-\begin{frame}{Throughput vs. Grain Size and Number of Cores}
-	\begin{outline}
-%		\includegraphics[scale=0.4]{images/fig1.png}	\\
-		Can we model the relationship between the \textbf{throughput} and the \textbf{grain size} and the \textbf{number of cores}?
-		\pause	
-		\1First we try to model the relationship between throughput and grain size.
-		\pause	
-		\2Polynomial Model
-
-	\end{outline}
-\end{frame}
+%\begin{frame}{Throughput vs. Grain Size and Number of Cores}
+%	\begin{outline}
+%%		\includegraphics[scale=0.4]{images/fig1.png}	\\
+%		Can we model the relationship between the \textbf{throughput} and the \textbf{grain size} and the \textbf{number of cores}?
+%		\pause	
+%		\1First we try to model the relationship between throughput and grain size.
+%		\pause	
+%		\2Polynomial Model
+%
+%	\end{outline}
+%\end{frame}
 
 %\begin{frame}{Modeling}
 %	\begin{outline}
@@ -583,7 +583,9 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 \begin{frame}{Method: Polynomial Model, Wrap up}
 	\begin{outline}
+		\0Strength:
 		\1Simple model, can easily find the maximum.
+		\0Weakness:
 		\1It is not physical.
 	\end{outline}
 \end{frame}
@@ -837,7 +839,7 @@ Blaze is a high performance C++ linear algebra library based on Smart Expression
 
 \begin{frame}{Our Contributions}
 	\begin{outline}
-		\1We propose a novel analytic model to represent how the execution time is expected to change based on grain size.
+%		\1We propose a novel analytic model to represent how the execution time is expected to change based on grain size.
 		\1To our knowledge, there has not been a work to create a 3D model of the throughput, grain size, and number of cores. 
 		\1We are proposing a method to apply the developed model to a linear algebra library, in a way specific to our application, and the machine architecture.
 		%Thanks to Blaze we are able to access to expression tree at compile time, through which we can estimate the complexity of the expression 
