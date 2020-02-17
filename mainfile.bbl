@@ -170,6 +170,11 @@ Ga{\"e}l Guennebaud, Benoit Jacob, et~al.
 \newblock Eigen.
 \newblock {\em URl: http://eigen. tuxfamily. org}, 2010.
 
+\bibitem{grama2003introduction}
+Ananth Grama, Vipin Kumar, Anshul Gupta, and George Karypis.
+\newblock {\em Introduction to parallel computing}.
+\newblock Pearson Education, 2003.
+
 \bibitem{amdahl1967validity}
 Gene~M Amdahl.
 \newblock Validity of the single processor approach to achieving large scale
