@@ -22,62 +22,41 @@ problem\_size = iter\_length\times{num\_iterations}
 The total execution time could be assumed to be the maximum amount of time it takes for one of the cores to finish it's work. With this assumption, the execution time for this simple problem, could be estimated as summation of maximum overhead of creating tasks on one core and the time it takes to run $w\_c$ amount of work on $N$ cores, shown in Formula~\ref{formula1}.
 
 \begin{equation}\label{formula1}
-execution\_time = \alpha\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\:\:{(1+\gamma\times{(N-1)})\times{w\_c}}
+execution\_time = \alpha\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\:\:{(1+\gamma\times{(M-1)})\times{w\_c}}
 \end{equation}
 %\vspace{\baselineskip}
 
-The first part of the equation is associated with the overhead of creating $num\_{tasks}$ tasks on $N$ cores, and the second part is deducted from the Universal Scalibilty Law\cite{gunther2007guerrilla}, that suggests there an overhead associated with the number of cores should be added to the expected execution time.
+Where, 
+\begin{equation}\label{formula2}
+w\_c =\left\{
+\begin{aligned}
+problem\_{size} \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:        \text{ if } N=1\\
+g\times(\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil-1)+(num\_{iteration}\%chunk\_{size}\times(iter\_{length})\})  \:\:\:\:\:\:\:\:       \text{otherwise}\\
+g\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil  \:\:\:\:\:\:\:\:       \text{otherwise}
+\end{aligned}
+\right.
+\end{equation}
+
+The first part of Formula~\ref{formula1} is associated with the overhead of creating $num\_{tasks}$ tasks on $N$ cores, and the second part is deducted from the Universal Scalibilty Law\cite{gunther2007guerrilla}, that suggests an overhead associated with the number of cores should be added to the expected execution time. Here, we adjusted the total number of cores ($N$) to the number of cores that are actually executing the work ($M$). 
+
+Assuming we are running our application on $N$ cores, with a grain size equal to $g$, $num\_{tasks}$ tasks are being created, and $M$ cores are actually doing the work. If $num\_{tasks}<N$, $M$ would be equal to $num\_{tasks}$, otherwise $M=N$.
 
 Figure shows an example of the results obtained from running the benchmark, for $problem\_size=10000$, on different number of cores.
 
 \vspace{\baselineskip}	
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/10000_8_all.png}\label{fig29}}
-	\caption{The results of running the benchmark in Listing with $problem\_size=10000$, on different number of cores.}		
+	{\includegraphics[scale=.45]{images/hpx_for_loop/10000_8_all.png}}
+	\caption{The results of running the benchmark in Listing with $problem\_size=10000$, on different number of cores.}\label{fig39}		
 \end{figure}
 
-A stated in Chapter~\ref{Background}, at the left hand side of the graph in Figure~\ref{fig29},  the number of tasks created is smaller than the number of cores which results in making at least one of the cores idle, while the other cores are assigned a rather big chunk of work. The performance degradation we observe in that points is associated with starvation, meaning that we are not utilizing our computation resources to the full extent. In these points, the number of cores actually doing the work is equal to the number of the tasks, since each core gets to execute at most one task.    
+As stated in Chapter~\ref{Background}, at the right hand side of the graph in Figure~\ref{fig39}, the number of tasks created is smaller than the number of cores which results in making at least one of the cores idle, while the other cores are assigned a rather big chunk of work. The performance degradation we observe in that points is associated with starvation, meaning that we are not utilizing our computation resources to the full extent. In these points, the number of cores actually doing the work is equal to the number of the tasks, since each core gets to execute at most one task. At this region of the graph, the maximum assigned work to a core ($w\_c$) is the dominant factor.   
 
-To generalize the problem, assuming we are running our application on $N$ cores, with a grain size equal to $g$, $num\_{tasks}$ tasks are being created, and $M$ cores are actually doing the work. If $num\_{tasks}<N$, $M$ would be equal to $num\_{tasks}$, otherwise $M=N$.
-
-%\begin{equation}
-%M=\left\{
-%\begin{aligned}
-%num\_{tasks}\text{ if } num\_{tasks}<N\\
-%N    \text{otherwise}
-%\end{aligned}
-%\right.
-%\end{equation}
+On the other hand, on the left hand side of the graph, since the grain size is very small we end up with creating a large number of tasks. Since there is an overhead associated with each created task, we observe a performance degradation in that region. As the grain size increases, the number of created tasks, and the overhead associated to that decreases consequently. At this region of the graph, the overhead of creating the tasks($\alpha\times{num\_{tasks}}$) is the dominant factor.   
 
 
-From overhead point of view though, if we represent the overhead of creating one task on a particular machine as $\alpha$, the overhead of creating $num\_{tasks}$ tasks would be $\alpha\times{num\_{tasks}}$, but this overhead is divided between the $M$ cores actually doing the work. 
 
-%To summarize, knowing the grain size, we are expecting the execution time in a many-task runtime system to be mainly affected by these factors, the overhead of creating one task($\alpha$), the number of cores that are actually doing the work($M$), the sequential execution time($t_s$), and finally the portion of the program that could actually be parallelized($\gamma$). 
-%
-%If we try to integrate these information into a formula, we would expect the relation between execution time($t$) and number of tasks($n_t$) as follows:
-%\begin{equation}\label{new1}
-%t=\frac{\alpha{n_t}+t_s}{M}+\gamma
-%\end{equation}
-%
-%which could be decomposed into these two equations:
-%
-%
-%Now we use this function to find the best three parameters $\alpha$, $t_s$, and $\gamma$ so that the collected data would fit this model. For this purpose we used the \textit{curve\textunderscore{fit}} package from \textit{SciPy} library in \textit{python}.
-%
-%In order to make Equation~\ref{new1} differentiable, we used the softplus function(Equation~\ref{softplus1}) to represent $M$ based on $n_t$.
-%\begin{equation}\label{softplus1}
-%f(x)=Ln(1+e^x)
-%\end{equation}
-%
-%Which results in Equation~\ref{soft_plus1}:
-%\begin{equation}\label{soft_plus1}
-%t=\frac{\alpha{n_t}+t_s}{(N-1)-Ln(1+(e^{N-1}-1)e^{-n_t})}+\gamma
-%\end{equation}
-%Throughout these experiments we try to fix or eliminate the factors we believe will affect the execution time as much as possible, study the results, and then introduce one factor to the model and study the behavior of the model. 
-%\vspace{\baselineskip}
-
-\begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,floatplacement=H,caption= {A simple hpx for\textunderscore{loop} used to study the effect of grain size on the achieved parallelism.}, label={hpx_for_loop}]
+\begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,floatplacement=H,caption= {A simple hpx for\textunderscore{loop} used to study the effect of grain size on the achieved parallelism.}, label={hpx_for_loop}][H]
 
 ///////////////////////////////////////////////////////////////////////////////
 void measure_function_futures_for_loop(std::uint64_t count, bool csv, std::uint64_t chunk_size, std::uint64_t iter_length)
@@ -141,9 +120,34 @@ return init(cmdline, argc, argv);
 }
 \end{lstlisting}
 
-For this simple experiment, where we do not have to deal with the cash effects, we believe the important factors are: number of HPX threads being created, number of cores the program is ran on, the maximum amount of work one core has to perform. The maximum number of tasks assigned to one core, and the number of cores that are actually performing the work, are two other important factors that can be deducted from the aforementioned factors. 
+From overhead point of view though, if we represent the overhead of creating one task on a particular machine as $\alpha$, the overhead of creating $num\_{tasks}$ tasks would be $\alpha\times{num\_{tasks}}$, but this overhead is divided between the $M$ cores actually doing the work. 
 
-%\vspace{\baselineskip}
+To summarize, for this simple experiment, where we do not have to deal with the cash effects, we believe the important factors are: number of HPX threads being created, number of cores the program is ran on, the maximum amount of work one core has to perform. The maximum number of tasks assigned to one core, and the number of cores that are actually performing the work, are two other important factors that can be deducted from the aforementioned factors. 
+
+\vspace{\baselineskip}
+\subsection{Analyzing the Data}
+Assuming the proposed formula is a good fit for this problem, we can estimate the range of grain sizes for which we achieve the lowest execution time, for a specific problem size, run on specific number of cores.
+
+As stated earlier, in Formula~\ref{formula1}, for small grain sizes the first term is the dominant factor while the second term roughly stays constant. Same way, for large grain sizes the second factor is the dominant factor. 
+
+In order to find the lowerbound of the range for which the execution time stays constant, we assume the second factor is constant in that region. Taking the derivative of the function based on the grain size then leads to:
+
+ 
+\begin{equation}\label{formula3}
+\frac{\partial execution\_{time}}{\partial g} = \frac{\alpha}{M}\times{\frac{\partial num\_{tasks}}{\partial g}} \\
+=\frac{\alpha}{M}\times\frac{\partial problem\_{size}}{\partial g} \\
+=\frac{\alpha\times{problem\_{size}}}{M}\times{\frac{-1}{g^2}}
+\end{equation}
+
+
+
+\vspace{\baselineskip}
+\subsection{Analyzing the Data}
+Throughout these experiments we try to fix or eliminate the factors we believe will affect the execution time as much as possible, study the results, and then introduce one factor to the model and study the behavior of the model. 
+
+
+
+\vspace{\baselineskip}
 %\subsection{Step 1: Sequential Run}
 %In the first step in order to eliminate all the factors related to parallel execution we run the code sequentially for some problem sizes. The obtained result, as shown in Figure~\ref{fig26} demonstrates an overhead that increases as the number of iterations increases.
 %
@@ -153,21 +157,47 @@ For this simple experiment, where we do not have to deal with the cash effects, 
 %	\caption{The results obtained from running the hpx for loop sequentially}	
 %	\label{fig26}
 %\end{figure}
+
+\subsection{Step 1: Single-task, single-core runs}
+At the first step, we look at the cases where only one task has been created, the program is run on only one core. This problem could be assumed to be equivalent to running the same amount of work sequentially with an additional cost of creating just one task. 
+
+\vspace{\baselineskip}
+\subsubsection{Expected Model}
+With this assumption we expect the execution time to be summation of the time it takes to perform the total amount of work(\textit{problem\textunderscore{size}}) and the overhead of creating one HPX task($\alpha$). Formula~\ref{chunk1} shows the expected formula.
+
+\begin{equation}\label{chunk1}
+execution\:\:time = \alpha + problem\:\:size
+\end{equation}  
+
+\vspace{\baselineskip}
+\subsubsection{Original Data}
+In order to check our proposed model for this simplified problem, we collected data from running the program, setting the \textit{chunk\textunderscore{size}} to 1, \textit{num\textunderscore{iterations}} to 1, and changing the \textit{iter\textunderscore{length}} from 1 to 10,000,000. 
+
+
+
+
+%To summarize, knowing the grain size, we are expecting the execution time in a many-task runtime system to be mainly affected by these factors, the overhead of creating one task($\alpha$), the number of cores that are actually doing the work($M$), the sequential execution time($t_s$), and finally the portion of the program that could actually be parallelized($\gamma$). 
 %
-%\subsection{Step 2: Single-task, single-core runs}
-%At this step we look at the cases where only one task has been created, the program is run on only one core, and chunk size is set to one. This problem could be assumed to be equivalent to running the same amount of work sequentially with an additional cost of creating just one task. 
+%If we try to integrate these information into a formula, we would expect the relation between execution time($t$) and number of tasks($n_t$) as follows:
+%\begin{equation}\label{new1}
+%t=\frac{\alpha{n_t}+t_s}{M}+\gamma
+%\end{equation}
 %
-%\vspace{\baselineskip}
-%\subsubsection{Expected Model}
-%With this assumption we expect the execution time to be summation of the time it takes to perform the total amount of work(\textit{problem\textunderscore{size}}) and the overhead of creating one HPX task($\alpha$). Formula~\ref{chunk1} shows the expected formula.
+%which could be decomposed into these two equations:
 %
-%\begin{equation}\label{chunk1}
-%execution\:\:time = \alpha + problem\:\:size
-%\end{equation}  
 %
-%\vspace{\baselineskip}
-%\subsubsection{Original Data}
-%In order to check our proposed model for this simplified problem, we collected data from running the program, setting the \textit{chunk\textunderscore{size}} to 1, \textit{num\textunderscore{iterations}} to 1, and changing the \textit{iter\textunderscore{length}} from 1 to 10,000,000. 
+%Now we use this function to find the best three parameters $\alpha$, $t_s$, and $\gamma$ so that the collected data would fit this model. For this purpose we used the \textit{curve\textunderscore{fit}} package from \textit{SciPy} library in \textit{python}.
+%
+%In order to make Equation~\ref{new1} differentiable, we used the softplus function(Equation~\ref{softplus1}) to represent $M$ based on $n_t$.
+%\begin{equation}\label{softplus1}
+%f(x)=Ln(1+e^x)
+%\end{equation}
+%
+%Which results in Equation~\ref{soft_plus1}:
+%\begin{equation}\label{soft_plus1}
+%t=\frac{\alpha{n_t}+t_s}{(N-1)-Ln(1+(e^{N-1}-1)e^{-n_t})}+\gamma
+%\end{equation}
+
 
 
 
