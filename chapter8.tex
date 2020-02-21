@@ -205,7 +205,7 @@ Formula~\ref{formula13} shows that as number of created tasks increases, as long
 \vspace{\baselineskip}
 For example, considering a case where $problem\_{size}=100,000$, and $N=8$, for the grain sizes in range of $[4167,\:6249]$ would result in creating between $\left \lceil{\frac{100,000}{6,249}}\right \rceil=17$ and  $\left \lceil{\frac{100,000}{4,167}}\right \rceil=24$ tasks. This amount of tasks created itself would result in $\left \lceil{\frac{17}{8}}\right \rceil=3$ and  $\left \lceil{\frac{24}{8}}\right \rceil=3$ tasks.
 On the other hand, $w\_c=g\times{\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil}=3\times{g}$, would have a value in range of $[3\times4167,\:3\times6249]=[12501,\: 18747]$, where the average amount of work per core is $\frac{problem\_{size}}{M}=12500$. This means that for grain sizes closer to the end of the range, we are observing that a much bigger amount of work is assigned to the core with maximum amount of work, which would result in a higher execution time. 
-
+Figure~\ref{figure38} shows the imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores. Each of the regions between two dashed lines correspond to a specific value for $k=\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil$. 
 
 
 \vspace{\baselineskip}	
