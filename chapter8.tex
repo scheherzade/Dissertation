@@ -22,7 +22,10 @@ problem\_size = iter\_length\times{num\_iterations}
 The total execution time could be assumed to be the maximum amount of time it takes for one of the cores to finish it's work. With this assumption, the execution time for this simple problem, could be estimated as summation of maximum overhead of creating tasks on one core and the time it takes to run $w\_c$ amount of work on $N$ cores, shown in Formula~\ref{formula1}.
 
 \begin{equation}\label{formula1}
-execution\_time = \alpha\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\:\:{(1+\gamma\times{(M-1)})\times{w\_c}}
+\begin{aligned}
+execution\_time = \alpha\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\:\:{(1+\gamma\times{(M-1)})\times{w\_c}}\\
+=\alpha\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\:\:{w\_c+\gamma\times{w\_c}\times{(M-1)}}
+\end{aligned}
 \end{equation}
 %\vspace{\baselineskip}
 
@@ -31,7 +34,7 @@ Where,
 w\_c =\left\{
 \begin{aligned}
 problem\_{size} \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:        \text{ if } N=1\\
-g\times(\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil-1)+(num\_{iteration}\%chunk\_{size}\times(iter\_{length})\})  \:\:\:\:\:\:\:\:       \text{otherwise}\\
+g\times(\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil-1)+(num\_{iterations}\%chunk\_{size})\times(iter\_{length}) \\ \:\:\:\:\:\:\:\:       \text{if }num\_{iterations}\%N=1\text{and }num\_{iterations}\%chunk\_{size}\neq0\\
 g\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil  \:\:\:\:\:\:\:\:       \text{otherwise}
 \end{aligned}
 \right.
@@ -40,6 +43,15 @@ g\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil  \:\:\:\:\:\:\:\:      
 The first part of Formula~\ref{formula1} is associated with the overhead of creating $num\_{tasks}$ tasks on $N$ cores, and the second part is deducted from the Universal Scalibilty Law\cite{gunther2007guerrilla}, that suggests an overhead associated with the number of cores should be added to the expected execution time. Here, we adjusted the total number of cores ($N$) to the number of cores that are actually executing the work ($M$). 
 
 Assuming we are running our application on $N$ cores, with a grain size equal to $g$, $num\_{tasks}$ tasks are being created, and $M$ cores are actually doing the work. If $num\_{tasks}<N$, $M$ would be equal to $num\_{tasks}$, otherwise $M=N$.
+
+\begin{equation}\label{formula19}
+M=\left\{
+\begin{aligned}
+num\_{tasks} \text{\:\:\:\:if \:} num\_{tasks}<N\\
+N \text{\:\:\:\:otherwise}
+\end{aligned}
+\right.
+\end{equation}
 
 Figure shows an example of the results obtained from running the benchmark, for $problem\_size=10000$, on different number of cores.
 
@@ -56,7 +68,156 @@ On the other hand, on the left hand side of the graph, since the grain size is v
 
 
 
-\begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,floatplacement=H,caption= {A simple hpx for\textunderscore{loop} used to study the effect of grain size on the achieved parallelism.}, label={hpx_for_loop}][H]
+
+
+From overhead point of view though, if we represent the overhead of creating one task on a particular machine as $\alpha$, the overhead of creating $num\_{tasks}$ tasks would be $\alpha\times{num\_{tasks}}$, but this overhead is divided between the $M$ cores actually doing the work. 
+
+To summarize, for this simple experiment, where we do not have to deal with the cash effects, we believe the important factors are: number of HPX threads being created, number of cores the program is ran on, the maximum amount of work one core has to perform. The maximum number of tasks assigned to one core, and the number of cores that are actually performing the work, are two other important factors that can be deducted from the aforementioned factors. 
+
+\vspace{\baselineskip}
+\subsection{Analyzing the Data}
+Assuming the proposed formula is a good fit for this problem, we can estimate the range of grain sizes for which we achieve the lowest execution time, for a specific problem size, run on specific number of cores.
+
+As stated earlier, in Formula~\ref{formula1}, for small grain sizes the first term is the dominant factor while the second term roughly stays constant. Same way, for large grain sizes the second factor is the dominant factor. 
+
+In order to find the lower-bound of the range for which the execution time stays constant, we assume the second factor is constant in that region. Taking the derivative of the function based on the grain size then leads to:
+
+ 
+\begin{equation}\label{formula3}
+\begin{aligned}
+\frac{\partial execution\_{time}}{\partial g} = \frac{\alpha}{M}\times{\frac{\partial num\_{tasks}}{\partial g}} \\
+=\frac{\alpha}{M}\times\frac{\partial problem\_{size}}{\partial g} \\
+=\frac{\alpha\times{problem\_{size}}}{M}\times{\frac{-1}{g^2}}
+\\
+=\frac{\alpha\times{problem\_{size}}}{N}\times{\frac{-1}{g^2}}
+\end{aligned}
+\end{equation}
+
+From Formula~\ref{formula3}, it can be observed that for the left hand side of the graph the rate of changes is negative and decreases as the grain size increases. Here we are looking for the value of the grain size for which the rate of change becomes very small (we introduce a threshold $\lambda_s$ for this purpose). 
+
+
+\begin{equation}\label{formula4}
+\begin{aligned}
+\frac{\alpha\times{problem\_{size}}}{N}\times{\frac{1}{g^2}}\leq{\lambda_s} \\
+{g^2}\geq{\frac{\alpha\times{problem\_{size}}}{N\times{\lambda_s}}}\\
+{g}\geq{\sqrt{\frac{\alpha\times{problem\_{size}}}{N\times{\lambda_s}}}}
+\end{aligned}
+\end{equation}
+
+Formula~\ref{formula4} can also be represented as shown in Formula~\ref{formula5}. This representation shows that when the ratio of the time it takes to execute one task to the total overhead of creating $num\_{tasks}$ tasks on $N$ core, is greater than a threshold, we will end up in the flat region of the graph, close to the left hand side.
+
+
+\begin{equation}\label{formula5}
+\begin{aligned}
+\frac{\alpha}{N}\times{\frac{problem\_{size}}{g}}\times{\frac{1}{g}}\leq{\lambda_s} \\
+\frac{\alpha}{N}\times{num\_{tasks}}\times{\frac{1}{g}}\leq{\lambda_s}\\
+\frac{\alpha\times{num\_{tasks}}}{N}\leq{g\times\lambda_s}\\	
+\frac{g}{\frac{\alpha\times{num\_{tasks}}}{N}}\geq{\frac{1}{\lambda_s}}
+\end{aligned}
+\end{equation}
+
+
+Now looking at the right hand side of the graph, the overhead of creating the tasks becomes negligible on that side, since only few tasks are being created and the overhead of creating these many tasks is not significant compared to the execution time. On this side, the maximum amount of work executed by one core ($w\_c$) is the dominant factor.
+
+Formula~\ref{formula2} shows how $w\_c$ is calculated for different cases, but in general we can estimate $w\_c$ with $g\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil$. 
+
+\begin{equation}\label{formula6}
+\begin{aligned}
+w\_c\approx{g\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil}\\
+\approx{g\times\left \lceil{\frac{\frac{problem\_{size}}{g}}{M}}\right \rceil}\\
+\approx{\frac{problem\_{size}}{M}}
+\end{aligned}
+\end{equation}
+
+What happens here is that as the grain size changes, there are points for which $\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil$ is the same but since the grain size is different, a different $w\_c$ would be resulted. 
+For all the values of $g$ that create the same $\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil$, as $g$ increases the difference between $w\_c$ and $\frac{problem\_{size}}{N}$ increases. We define $imbalance\_{factor}$ to quantify this difference as shown in Formula~\ref{formula6}.
+
+\begin{equation}\label{formula7}
+\begin{aligned}
+imbalance\_{factor}=\frac{w\_c}{\frac{problem\_{size}}{M}}
+\end{aligned}
+\end{equation}
+
+If we denote $\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil$ as $k$, then:
+
+
+\begin{equation}\label{formula8}
+\begin{aligned}
+k-1<{\frac{num\_{tasks}}{M}}\leq{k}\\
+(k-1)\times{M}<num\_{tasks}\leq{k}\times{M}\\
+%num\_{tasks}=\left \lceil{\frac{problem\_{size}}{g}}\right \rceil\\
+(k-1)\times{M}<\left \lceil{\frac{problem\_{size}}{g}}\right \rceil\leq{k}\times{M}\\
+(k-1)\times{M}<\frac{problem\_{size}}{g}\leq{{k}\times{M}}\\
+\end{aligned}
+\end{equation}
+
+If $k=1$, then $\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil=1$, and since $M\leq{num\_{tasks}}$, this requires ${num\_{tasks}}=M$, which puts us in the right hand side of the graph. 
+
+\begin{equation}\label{formula9}
+\begin{aligned}
+0<\frac{problem\_{size}}{g}\leq{M}\\
+\frac{problem\_{size}}{M}\leq{g}\leq{problem\_{size}}
+\end{aligned}
+\end{equation}
+
+Otherwise, when $k>1$, then $M=N$, 
+
+\begin{equation}\label{formula10}
+\begin{aligned}
+\frac{problem\_{size}}{k\times{N}}\leq{g}<\frac{problem\_{size}}{(k-1)\times{N}}
+\end{aligned}
+\end{equation}
+
+Since $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil=k$, and $w\_c\approx{g\times\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil}={k\times{g}}$, we can conclude for $k>1$:
+
+\begin{equation}\label{formula11}
+\begin{aligned}
+k\times{\frac{problem\_{size}}{k\times{N}}}\leq{w\_c}<{k\times{\frac{problem\_{size}}{(k-1)\times{N}}}}\\
+\frac{problem\_{size}}{{N}}\leq{w\_c}<{\frac{k}{k-1}\times{\frac{problem\_{size}}{N}}}\\
+0\leq{w\_c-\frac{problem\_{size}}{N}}<\frac{1}{k-1}\times{\frac{problem\_{size}}{N}}
+\end{aligned}
+\end{equation}
+
+And for $k=1$, where $M\leq{N}$,
+\begin{equation}\label{formula12}
+w\_c=g
+\end{equation}
+
+\begin{equation}\label{formula14}
+\begin{aligned}
+0\leq{w\_c-\frac{problem\_{size}}{M}}={g-\frac{problem\_{size}}{M}}\leq(M-1)\times{\frac{problem\_{size}}{M}}
+\end{aligned}
+\end{equation}
+
+
+Defining $imbalance\_{ratio}=\frac{w\_c-\frac{problem\_{size}}{M}}{\frac{problem\_{size}}{M}}$, then,
+
+\begin{equation}\label{formula13}
+\begin{aligned}
+0\leq{w\_c-\frac{problem\_{size}}{M}}<\frac{1}{k-1}\times{\frac{problem\_{size}}{M}}\\
+0\leq{imbalance\_{ratio}}<\frac{1}{k-1}  \text{\:\:\:\:\:\:\:\:\:\:\:\:\:for\:\:\:}k>{1}\\
+\end{aligned}
+\end{equation}
+
+%k\in\mathbb{Z}
+Formula~\ref{formula13} shows that as number of created tasks increases, as long as number of tasks per core is the same, the imbalance factor decreases. 
+
+\vspace{\baselineskip}
+For example, considering a case where $problem\_{size}=100,000$, and $N=8$, for the grain sizes in range of $[4167,\:6249]$ would result in creating between $\left \lceil{\frac{100,000}{6,249}}\right \rceil=17$ and  $\left \lceil{\frac{100,000}{4,167}}\right \rceil=24$ tasks. This amount of tasks created itself would result in $\left \lceil{\frac{17}{8}}\right \rceil=3$ and  $\left \lceil{\frac{24}{8}}\right \rceil=3$ tasks.
+On the other hand, $w\_c=g\times{\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil}=3\times{g}$, would have a value in range of $[3\times4167,\:3\times6249]=[12501,\: 18747]$, where the average amount of work per core is $\frac{problem\_{size}}{M}=12500$. This means that for grain sizes closer to the end of the range, we are observing that a much bigger amount of work is assigned to the core with maximum amount of work, which would result in a higher execution time. 
+
+
+
+\vspace{\baselineskip}	
+\begin{figure}[H]
+	\centering
+	{\includegraphics[scale=.25]{images/hpx_for_loop/w_c.png}}
+	\caption{The imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores. $k=\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil$}\label{fig38}		
+\end{figure}
+
+
+
+\begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,floatplacement=H,caption= {A simple hpx for\textunderscore{loop} used to study the effect of grain size on the achieved parallelism.}, label={hpx_for_loop}]
 
 ///////////////////////////////////////////////////////////////////////////////
 void measure_function_futures_for_loop(std::uint64_t count, bool csv, std::uint64_t chunk_size, std::uint64_t iter_length)
@@ -120,27 +281,6 @@ return init(cmdline, argc, argv);
 }
 \end{lstlisting}
 
-From overhead point of view though, if we represent the overhead of creating one task on a particular machine as $\alpha$, the overhead of creating $num\_{tasks}$ tasks would be $\alpha\times{num\_{tasks}}$, but this overhead is divided between the $M$ cores actually doing the work. 
-
-To summarize, for this simple experiment, where we do not have to deal with the cash effects, we believe the important factors are: number of HPX threads being created, number of cores the program is ran on, the maximum amount of work one core has to perform. The maximum number of tasks assigned to one core, and the number of cores that are actually performing the work, are two other important factors that can be deducted from the aforementioned factors. 
-
-\vspace{\baselineskip}
-\subsection{Analyzing the Data}
-Assuming the proposed formula is a good fit for this problem, we can estimate the range of grain sizes for which we achieve the lowest execution time, for a specific problem size, run on specific number of cores.
-
-As stated earlier, in Formula~\ref{formula1}, for small grain sizes the first term is the dominant factor while the second term roughly stays constant. Same way, for large grain sizes the second factor is the dominant factor. 
-
-In order to find the lowerbound of the range for which the execution time stays constant, we assume the second factor is constant in that region. Taking the derivative of the function based on the grain size then leads to:
-
- 
-\begin{equation}\label{formula3}
-\frac{\partial execution\_{time}}{\partial g} = \frac{\alpha}{M}\times{\frac{\partial num\_{tasks}}{\partial g}} \\
-=\frac{\alpha}{M}\times\frac{\partial problem\_{size}}{\partial g} \\
-=\frac{\alpha\times{problem\_{size}}}{M}\times{\frac{-1}{g^2}}
-\end{equation}
-
-
-
 \vspace{\baselineskip}
 \subsection{Analyzing the Data}
 Throughout these experiments we try to fix or eliminate the factors we believe will affect the execution time as much as possible, study the results, and then introduce one factor to the model and study the behavior of the model. 
@@ -162,6 +302,16 @@ Throughout these experiments we try to fix or eliminate the factors we believe w
 At the first step, we look at the cases where only one task has been created, the program is run on only one core. This problem could be assumed to be equivalent to running the same amount of work sequentially with an additional cost of creating just one task. 
 
 \vspace{\baselineskip}
+\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}
+
+
+
+
+
+
+
+
+
 \subsubsection{Expected Model}
 With this assumption we expect the execution time to be summation of the time it takes to perform the total amount of work(\textit{problem\textunderscore{size}}) and the overhead of creating one HPX task($\alpha$). Formula~\ref{chunk1} shows the expected formula.
 
