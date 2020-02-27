@@ -34,9 +34,9 @@ Where,
 w\_c =\left\{
 \begin{aligned}
 problem\_{size} \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:        \text{ if } N=1\\
-problem\_{size}-g\times{(M-1)}\times(\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil-1) \text{\:\:or} \\
-g\times(\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil-1)+(num\_{iterations}\%chunk\_{size})\times(iter\_{length}) \\ \:\:\:\:\:\:\:\:       \text{if }num\_{tasks}\%N=1\text{and }num\_{iterations}\%chunk\_{size}\neq0\\
-g\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil  \:\:\:\:\:\:\:\:       \text{otherwise}
+problem\_{size}-g\times{(N-1)}\times(\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil-1) \text{\:\:or} \\
+g\times(\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil-1)+(num\_{iterations}\%chunk\_{size})\times(iter\_{length}) \\ \:\:\:\:\:\:\:\:       \text{if }num\_{tasks}\%N=1\text{\:\:and\:\: }num\_{iterations}\%chunk\_{size}\neq0\\
+g\times\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil  \:\:\:\:\:\:\:\:       \text{otherwise}
 \end{aligned}
 \right.
 \end{equation}
@@ -122,39 +122,39 @@ Formula~\ref{formula4} can also be represented as shown in Formula~\ref{formula5
 \subsubsection{Right side of the graph}
 Now looking at the right hand side of the graph, the overhead of creating the tasks becomes negligible on that side, since only few tasks are being created and the overhead of creating these many tasks is not significant compared to the execution time. On this side, the maximum amount of work executed by one core ($w\_c$) is the dominant factor.
 
-Formula~\ref{formula2} shows how $w\_c$ is calculated for different cases, but in general we can estimate $w\_c$ with $g\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil$. 
+Formula~\ref{formula2} shows how $w\_c$ is calculated for different cases, but in general we can estimate $w\_c$ with $g\times\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil$. 
 
 \begin{equation}\label{formula6}
 \begin{aligned}
-w\_c\approx{g\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil}\\
-\approx{g\times\left \lceil{\frac{\frac{problem\_{size}}{g}}{M}}\right \rceil}\\
-\approx{\frac{problem\_{size}}{M}}
+w\_c\approx{g\times\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil}\\
+\approx{g\times\left \lceil{\frac{\frac{problem\_{size}}{g}}{N}}\right \rceil}\\
+\approx{\frac{problem\_{size}}{N}}
 \end{aligned}
 \end{equation}
 
-What happens here is that as the grain size changes, there are points for which $\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil$ is the same but since the grain size is different, a different $w\_c$ would be resulted. 
-For all the values of $g$ that create the same $\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil$, as $g$ increases the difference between $w\_c$ and $\frac{problem\_{size}}{N}$ increases. We define $imbalance\_{factor}$ to quantify this difference as shown in Formula~\ref{formula6}.
+What happens here is that as the grain size changes, there are points for which $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil$ is the same but since the grain size is different, a different $w\_c$ would be resulted. 
+For all the values of $g$ that create the same $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil$, as $g$ increases the difference between $w\_c$ and $\frac{problem\_{size}}{N}$ increases. We define $imbalance\_{factor}$ to quantify this difference as shown in Formula~\ref{formula6}.
 
 \begin{equation}\label{formula7}
 \begin{aligned}
-imbalance\_{factor}=\frac{w\_c}{\frac{problem\_{size}}{M}}
+imbalance\_{factor}=\frac{w\_c}{\frac{problem\_{size}}{N}}
 \end{aligned}
 \end{equation}
 
-If we denote $\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil$ as $k$, then:
+If we denote $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil$ as $k$, then:
 
 
 \begin{equation}\label{formula8}
 \begin{aligned}
-k-1<{\frac{num\_{tasks}}{M}}\leq{k}\\
-(k-1)\times{M}<num\_{tasks}\leq{k}\times{M}\\
+k-1<{\frac{num\_{tasks}}{N}}\leq{k}\\
+(k-1)\times{N}<num\_{tasks}\leq{k}\times{N}\\
 %num\_{tasks}=\left \lceil{\frac{problem\_{size}}{g}}\right \rceil\\
-(k-1)\times{M}<\left \lceil{\frac{problem\_{size}}{g}}\right \rceil\leq{k}\times{M}\\
-(k-1)\times{M}<\frac{problem\_{size}}{g}\leq{{k}\times{M}}\\
+(k-1)\times{N}<\left \lceil{\frac{problem\_{size}}{g}}\right \rceil\leq{k}\times{N}\\
+(k-1)\times{N}<\frac{problem\_{size}}{g}\leq{{k}\times{N}}\\
 \end{aligned}
 \end{equation}
 
-If $k=1$, then $\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil=1$, and since $M\leq{num\_{tasks}}$, this requires ${num\_{tasks}}=M$, which puts us in the right hand side of the graph. 
+If $k=1$, then $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil=1$, and since $M\leq{num\_{tasks}}$, this requires ${num\_{tasks}}\leq{N}$, which puts us in the right hand side of the graph. 
 
 \begin{equation}\label{formula9}
 \begin{aligned}
@@ -226,7 +226,8 @@ Defining $imbalance\_{ratio}=\frac{w\_c-\frac{problem\_{size}}{M}}{\frac{problem
 \begin{equation}\label{formula13}
 \begin{aligned}
 0\leq{imbalance\_{ratio}}\leq\frac{1}{M-1}  \text{\:\:\:\:\:\:\:\:\:\:\:\:\:for\:\:\:}k={1}\\
-0\leq{imbalance\_{ratio}}<\frac{1}{k-1}  \text{\:\:\:\:\:\:\:\:\:\:\:\:\:for\:\:\:}k>{1}\\
+0\leq{imbalance\_{ratio}}<\frac{1}{k-1}  \text{\:\:\:\:\:\:\:\:\:\:\:\:\:for\:\:\:}k>{1} \text{\:\:and\:\:}num\_{tasks}\%{N}\neq{1}\\
+0\leq{imbalance\_{ratio}}<\frac{N-1}{N(k-1)+1}\text{\:\:\:\:\:\:\:\:\:\:\:\:\:otherwise}
 \end{aligned}
 \end{equation}
 
