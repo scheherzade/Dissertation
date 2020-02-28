@@ -133,15 +133,13 @@ w\_c\approx{g\times\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil}\\
 \end{equation}
 
 What happens here is that as the grain size changes, there are points for which $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil$ is the same but since the grain size is different, a different $w\_c$ would be resulted. 
-For all the values of $g$ that create the same $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil$, as $g$ increases the difference between $w\_c$ and $\frac{problem\_{size}}{N}$ increases. We define $imbalance\_{factor}$ to quantify this difference as shown in Formula~\ref{formula6}.
+For all the values of $g$ that create the same $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil$, as $g$ increases the difference between $w\_c$ and $\frac{problem\_{size}}{N}$ increases. 
 
-\begin{equation}\label{formula7}
-\begin{aligned}
-imbalance\_{factor}=\frac{w\_c}{\frac{problem\_{size}}{N}}
-\end{aligned}
-\end{equation}
+For example, considering a case where $problem\_{size}=100,000$, and $N=8$, for the grain sizes in range of $[4167,\:6249]$ would result in creating between $\left \lceil{\frac{100,000}{6,249}}\right \rceil=17$ and  $\left \lceil{\frac{100,000}{4,167}}\right \rceil=24$ tasks. This amount of tasks created itself would result in $\left \lceil{\frac{17}{8}}\right \rceil=3$ and  $\left \lceil{\frac{24}{8}}\right \rceil=3$ tasks.
+On the other hand, $w\_c=g\times{\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil}=3\times{g}$, would have a value in range of $[3\times4167,\:3\times6249]=[12501,\: 18747]$, where the average amount of work per core is $\frac{problem\_{size}}{M}=12500$. This means that for grain sizes closer to the end of the range, we are observing that a much bigger amount of work is assigned to the core with maximum amount of work, which would result in a higher execution time. 
 
-If we denote $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil$ as $k$, then:
+
+In the general case, if we denote $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil$ as $k$, then:
 
 
 \begin{equation}\label{formula8}
@@ -154,24 +152,24 @@ k-1<{\frac{num\_{tasks}}{N}}\leq{k}\\
 \end{aligned}
 \end{equation}
 
-If $k=1$, then $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil=1$, and since $M\leq{num\_{tasks}}$, this requires ${num\_{tasks}}\leq{N}$, which puts us in the right hand side of the graph. 
+If $k=1$, then, 
 
 \begin{equation}\label{formula9}
 \begin{aligned}
-0<\frac{problem\_{size}}{g}\leq{M}\\
-\frac{problem\_{size}}{M}\leq{g}\leq{problem\_{size}}
+0<\frac{problem\_{size}}{g}\leq{N}\\
+\frac{problem\_{size}}{N}\leq{g}\leq{problem\_{size}}.
 \end{aligned}
 \end{equation}
 
-Otherwise, when $k>1$, then $M=N$, 
+Otherwise, when $k>1$,
 
 \begin{equation}\label{formula10}
 \begin{aligned}
-\frac{problem\_{size}}{k\times{N}}\leq{g}<\frac{problem\_{size}}{(k-1)\times{N}}
+\frac{problem\_{size}}{k\times{N}}\leq{g}<\frac{problem\_{size}}{(k-1)\times{N}}.
 \end{aligned}
 \end{equation}
 
-Since $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil=k$, and $w\_c={g\times\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil}={k\times{g}}$ if $num\_{tasks}\%{M}\neq{1}$, we can conclude for $k>1$:
+Since $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil=k$, and $w\_c={g\times\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil}={k\times{g}}$ if $num\_{tasks}\%{N}\neq{1}$, we can conclude for $k>1$:
 
 \begin{equation}\label{formula11}
 \begin{aligned}
@@ -209,25 +207,26 @@ Therefore,
 \end{aligned}
 \end{equation}
 
-And for $k=1$, where $M\leq{N}$,
+And for $k=1$, where $num\_{tasks}\leq{N}$,
 \begin{align*}\label{formula12}
-w\_c=g
+w\_c=g\\
+\frac{problem\_{size}}{N}\leq{g}\leq{problem\_{size}}\Rightarrow
 \end{align*}
 
 \begin{equation}\label{formula14}
 \begin{aligned}
-0\leq{w\_c-\frac{problem\_{size}}{M}}={g-\frac{problem\_{size}}{M}}\leq(M-1)\times{\frac{problem\_{size}}{M}}
+0\leq{w\_c-\frac{problem\_{size}}{N}}={g-\frac{problem\_{size}}{N}}\leq(N-1)\times{\frac{problem\_{size}}{N}}\\
 \end{aligned}
 \end{equation}
 
 
-Defining $imbalance\_{ratio}=\frac{w\_c-\frac{problem\_{size}}{M}}{\frac{problem\_{size}}{M}}$, then,
+Defining $imbalance\_{ratio}=\frac{w\_c-\frac{problem\_{size}}{N}}{\frac{problem\_{size}}{N}}$, then,
 
 \begin{equation}\label{formula13}
 \begin{aligned}
-0\leq{imbalance\_{ratio}}\leq\frac{1}{M-1}  \text{\:\:\:\:\:\:\:\:\:\:\:\:\:for\:\:\:}k={1}\\
+0\leq{imbalance\_{ratio}}\leq{N-1}  \text{\:\:\:\:\:\:\:\:\:\:\:\:\:for\:\:\:}k={1}\\
 0\leq{imbalance\_{ratio}}<\frac{1}{k-1}  \text{\:\:\:\:\:\:\:\:\:\:\:\:\:for\:\:\:}k>{1} \text{\:\:and\:\:}num\_{tasks}\%{N}\neq{1}\\
-0\leq{imbalance\_{ratio}}<\frac{N-1}{N(k-1)+1}\text{\:\:\:\:\:\:\:\:\:\:\:\:\:otherwise}
+0\leq{imbalance\_{ratio}}<\frac{N-1}{N(k-1)+1}=\frac{1}{k-1+\frac{k}{N-1}}\text{\:\:\:\:\:\:\:\:\:\:\:\:\:otherwise}
 \end{aligned}
 \end{equation}
 
@@ -235,39 +234,62 @@ Defining $imbalance\_{ratio}=\frac{w\_c-\frac{problem\_{size}}{M}}{\frac{problem
 Formula~\ref{formula13} shows that as number of created tasks increases, as long as number of tasks per core is the same, the imbalance factor decreases. 
 
 \vspace{\baselineskip}
-For example, considering a case where $problem\_{size}=100,000$, and $N=8$, for the grain sizes in range of $[4167,\:6249]$ would result in creating between $\left \lceil{\frac{100,000}{6,249}}\right \rceil=17$ and  $\left \lceil{\frac{100,000}{4,167}}\right \rceil=24$ tasks. This amount of tasks created itself would result in $\left \lceil{\frac{17}{8}}\right \rceil=3$ and  $\left \lceil{\frac{24}{8}}\right \rceil=3$ tasks.
-On the other hand, $w\_c=g\times{\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil}=3\times{g}$, would have a value in range of $[3\times4167,\:3\times6249]=[12501,\: 18747]$, where the average amount of work per core is $\frac{problem\_{size}}{M}=12500$. This means that for grain sizes closer to the end of the range, we are observing that a much bigger amount of work is assigned to the core with maximum amount of work, which would result in a higher execution time. 
 
-Figure~\ref{fig38} shows the imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores. Each of the regions between two dashed green lines correspond to a specific value for $k=\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil$. As for the purple lines, in all those regions $k=1$, and based on Formula~\ref{formula13} for those regions $M$ is the determinant factor.
-At each of the regions, $\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil=k$,  $imbalance\_{ratio}$ starts from $0$ and approaches $\frac{1}{k-1}$ ($\frac{1}{M-1}$ for regions where $k=1$) at the end of the region. As we move to larger grain sizes, $\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil$ decreases, therefore the upper-bound for $imbalance\_{ratio}$ increases.   
+Figure~\ref{fig38} shows the imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores. Each of the regions between two dashed green lines correspond to a specific value for $k=\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil$. 
+At each of the regions with $k>1$, $\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil=k$,  $imbalance\_{ratio}$ starts from $0$ and approaches $\frac{1}{k-1}$ ($\frac{1}{k-1+\frac{k}{N-1}}$ for regions where $num\_{tasks}\%{N}\neq{1}$) at the end of the region. When $k=1$, $imbalance\_{ratio}$ increases linearly starting from 0 and reaching the maximum of $N-1$ when $g=pronblem\_{size}$. As we move to larger grain sizes, $\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil$ decreases, therefore the upper-bound for $imbalance\_{ratio}$ increases.   
 
 
 \vspace{\baselineskip}	
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.25]{images/hpx_for_loop/w_c.png}}
-	\caption{The imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores, where $k=\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil$.}\label{fig38}		
+	{\includegraphics[scale=.25]{images/hpx_for_loop/w_c_all.png}}
+	\caption{The imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores, where $k=\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil$.}\label{fig38}		
 \end{figure}
 
+
+%\vspace{\baselineskip}	
+%\begin{figure}[H]
+%	\centering
+%	{\includegraphics[scale=.45]{images/hpx_for_loop/max_w_c.png}}
+%	\caption{The maximum imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores, where $k=\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil$.}\label{fig36}		
+%\end{figure}
+
+Figure~\ref{fig39} represents the imbalance ratio, along with the ratio of the sequential execution time over execution time(speed-up) against grain size for $problem\_size=10000$, ran on 8 cores.   
+As it can be observed, as the $imbalance\_{ratio}$ increases, the speed-up decreases. 
 
 \vspace{\baselineskip}	
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/max_w_c.png}}
-	\caption{The maximum imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores, where $k=\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil$.}\label{fig36}		
+	{\includegraphics[scale=.3]{images/hpx_for_loop/w_c_speedup.png}}
+	\caption{The imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores, where $k=\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil$.}\label{fig37}		
 \end{figure}
 
-To summarize, as the grain size increases the maximum imbalance in the loads assigned to to cores also increases, and some point on, this imbalance has a significant affect in the execution time. We define a threshold, $\lambda_s$, where for $imbalance\_{ratio}$s smaller than this threshold the imbalance effect is not significant. As we get close to this threshold, we are likely to reach the right hand side of the flat region of the bathtub curve of the execution time against grain size. 
+
+To summarize, as the grain size increases the maximum imbalance in the loads assigned to the cores also increases, and some point on, this imbalance has a significant affect in the execution time. We define a threshold, $\lambda_s$ ($0<\lambda_s<1$), where for $imbalance\_{ratio}$s smaller than this threshold the imbalance effect is not significant. As we get close to this threshold, we are likely to reach the right hand side of the flat region of the bathtub curve of the execution time against grain size. 
 
 
-Figure~\ref{fig39} represents the imbalance ratio, along with the ratio of execution time over the sequential execution time($\frac{1}{speed\_{up}}$) against grain size for $problem\_size=10000$, run on 8 cores.   
+We are interested in finding the maximum grain size that would generate a reasonable imbalance ($imbalance\_{ratio}\leq{\lambda_s}$), to make sure we should stay in the flat region of the bathtub curve of execution time against grain size, from load imbalance point of view.  
 
-\vspace{\baselineskip}	
-\begin{figure}[H]
-	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/w_c_speedup.png}}
-	\caption{The imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores, where $k=\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil$.}\label{fig37}		
-\end{figure}
+Formula~\ref{formula14} states that for grain sizes greater than $problem\_{size}$, $imblance\_{ratio}$ increases linearly with grain size from $0$ to $N-1$. While for grain sizes smaller than $problem\_{size}$, the maximum $imbalance\_{ratio}$ depends on $k=\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil$. So, in order to assure $imbalance\_{ratio}$ is smaller than or equal to a threshold ($\lambda_s$), first we search the grain sizes smaller than $\frac{problem\_{size}}{N}$. Since $0<\lambda_s<1$, and $k\geq2$ in this region, there exists a $k$ such that $\frac{1}{k-1}\leq\lambda_s$.    
+If there exists a $k_{min}$ (creating an imbalance ratio between $0$ and $\frac{1}{k_{min}-1}$), where $\frac{1}{k_{min}-1}\leq{\lambda_s}$, $\forall k<k_{min}$ maximum value of $imbalance\_{ratio}$ would be greater than $\lambda_s$. So in order to find the grain size that would create maximum $imbalance\_{ratio}$ of $\lambda_s$:
+
+
+
+\begin{equation}\label{formula21}
+\begin{aligned}
+imbalance\_{ratio}\leq{{\lambda_s}}\Rightarrow\\
+\frac{1}{k-1}\leq\lambda_s\\
+k\geq{1+\frac{1}{\lambda_s}}\\
+k_{min}=\left\lceil{1+\frac{1}{\lambda_s}}\right\rceil+1\\
+{g}<\frac{problem\_{size}}{(k_{min}-1)\times{N}}\\
+g_{max}=\frac{problem\_{size}}{(k_{min}-1)\times{N}}-1=\frac{problem\_{size}}{(1+\left\lceil{\frac{1}{\lambda_s}}\right\rceil)\times{N}}
+\end{aligned}
+\end{equation}
+
+If $g<g\_{max}$, we can assure that $imbalance\_{ratio}$ never exceeds $\lambda_s$. Since we already found a match at grain sizes smaller than $\frac{problem\_{size}}{N}$, checking the rest of grain sizes would not be necessary.
+
+
+
 
 
 \begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,floatplacement=H,caption= {A simple hpx for\textunderscore{loop} used to study the effect of grain size on the achieved parallelism.}, label={hpx_for_loop}]
@@ -335,8 +357,24 @@ return init(cmdline, argc, argv);
 \end{lstlisting}
 
 \vspace{\baselineskip}
-\subsection{Analyzing the Data}
-Throughout these experiments we try to fix or eliminate the factors we believe will affect the execution time as much as possible, study the results, and then introduce one factor to the model and study the behavior of the model. 
+\subsection{Identifying the range of grain size for maximum speedup}
+In the previous section, we proposed a method to identify the lower-bound and the upper-bound of the grain sizes for which we observe the minimum execution time. 
+Integrating Formula~\ref{formula4} and Formula~\ref{formula21} suggests the following range for maximum speedup:
+
+
+\begin{equation}\label{formula23}
+\begin{aligned}
+{\sqrt{\frac{\alpha\times{problem\_{size}}}{N\times{\lambda_b}}}}\leq{g}\leq\frac{problem\_{size}}{(1+\left\lceil{\frac{1}{\lambda_s}}\right\rceil)\times{N}}
+\end{aligned}
+\end{equation}
+ 
+
+In this section we represent the identified range for a number of problem sizes, with different number of cores.
+
+
+%\vspace{\baselineskip}
+%\subsection{Analyzing the Data}
+%Throughout these experiments we try to fix or eliminate the factors we believe will affect the execution time as much as possible, study the results, and then introduce one factor to the model and study the behavior of the model. 
 
 
 
