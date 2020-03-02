@@ -19,12 +19,27 @@ Each iteration consists of a while loop that makes sure the iteration lasts a ce
 problem\_size = iter\_length\times{num\_iterations}
 \end{equation}
 
-The total execution time could be assumed to be the maximum amount of time it takes for one of the cores to finish it's work. With this assumption, the execution time for this simple problem, could be estimated as summation of maximum overhead of creating tasks on one core and the time it takes to run $w\_c$ amount of work on $N$ cores, shown in Formula~\ref{formula1}.
+The total execution time could be assumed to be the maximum amount of time it takes for one of the cores to finish it's work. With this assumption, the execution time for this simple problem, could be estimated as summation of maximum overhead of creating tasks on one core, the overhead of managing the tasks created on one core, and the time it takes to run $w\_c$ amount of work when $M$ cores are available, shown in Formula~\ref{formula1}. 
+
+While the overhead of creating a task should be constant on a specific machine architecture, we are suggesting here that the overall overhead of managing $num\_{tasks}$ tasks, is a factor of $N\times{N-1}$, due to the effect of load balancing resulted from work stealing. We observe this effect when the number of tasks created is greater than the number of cores. 
+
+On the other hand, when number of tasks created is smaller than the number of cores, the positive load balancing effect we observed earlier with more number of tasks than cores, now becomes a negative effect due to continuous efforts of the idle cores to steal work from cores that are actually doing the work, interrupting the cache coherency constantly. We represent this effect with $\delta\times{(num\_{tasks}-1)}$.
+
+
+We represent the overhead of creating a task on a machine with $\alpha$, and the overhead of managing a task on a machine with $\beta\times{N}\times{N-1}$, when $num\_{tasks}>N$, and $num\_{tasks}-1$ otherwise. 
+
+Looking at the execution time as the maximum amount of execution time among all the cores, we can formulate the execution time as:  
 
 \begin{equation}\label{formula1}
 \begin{aligned}
-execution\_time = \alpha\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\:\:{(1+\gamma\times{(M-1)})\times{w\_c}}\\
-=\alpha\times\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\:\:{w\_c+\gamma\times{w\_c}\times{(M-1)}}
+&execution\_time = \\
+\left\{
+\begin{aligned}
+&
+\alpha\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil +\beta\times{(N-1)}{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{if\:\:}num\_{tasks}>N\\
+&\alpha\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\delta\times\frac{num\_{tasks}-1}{N}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{otherwise}
+\end{aligned}
+\right.
 \end{aligned}
 \end{equation}
 %\vspace{\baselineskip}
@@ -33,15 +48,16 @@ Where,
 \begin{equation}\label{formula2}
 w\_c =\left\{
 \begin{aligned}
-problem\_{size} \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:        \text{ if } N=1\\
-problem\_{size}-g\times{(N-1)}\times(\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil-1) \text{\:\:or} \\
-g\times(\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil-1)+(num\_{iterations}\%chunk\_{size})\times(iter\_{length}) \\ \:\:\:\:\:\:\:\:       \text{if }num\_{tasks}\%N=1\text{\:\:and\:\: }num\_{iterations}\%chunk\_{size}\neq0\\
-g\times\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil  \:\:\:\:\:\:\:\:       \text{otherwise}
+&problem\_{size} \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:        \text{ if } N=1\\
+&problem\_{size}-g\times{(N-1)}\times(\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil-1)
+ \text{if }num\_{tasks}\%N=1\text{\:\:and\:\: }num\_{iterations}\%chunk\_{size}\neq0\\ 
+%\text{\:\:or} \\ g\times(\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil-1)+(num\_{iterations}\%chunk\_{size})\times(iter\_{length}) \\ \:\:\:\:\:\:\:\:       
+&g\times\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil  \:\:\:\:\:\:\:\:       \text{otherwise}
 \end{aligned}
 \right.
 \end{equation}
 
-The first part of Formula~\ref{formula1} is associated with the overhead of creating $num\_{tasks}$ tasks on $N$ cores, and the second part is deducted from the Universal Scalibilty Law\cite{gunther2007guerrilla}, that suggests an overhead associated with the number of cores should be added to the expected execution time. Here, we adjusted the total number of cores ($N$) to the number of cores that are actually executing the work ($M$). 
+The first and second part of Formula~\ref{formula1} is associated with the overhead of creating and managing $num\_{tasks}$ tasks on $N$ cores, while considering the effect of work stealing ,and the last part is deducted from the Universal Scalibilty Law\cite{gunther2007guerrilla}, that suggests an overhead associated with the number of cores should be added to the expected execution time. Here, we adjusted the total number of cores ($N$) to the number of cores that are actually executing the work ($M$). 
 
 Assuming we are running our application on $N$ cores, with a grain size equal to $g$, $num\_{tasks}$ tasks are being created, and $M$ cores are actually doing the work. If $num\_{tasks}<N$, $M$ would be equal to $num\_{tasks}$, otherwise $M=N$.
 
@@ -79,42 +95,42 @@ To summarize, for this simple experiment, where we do not have to deal with the 
 \subsection{Analyzing the Data}
 Assuming the proposed formula is a good fit for this problem, we can estimate the range of grain sizes for which we achieve the lowest execution time, for a specific problem size, run on specific number of cores.
 
+\vspace{\baselineskip}
 \subsubsection{Left side of the graph}
 As stated earlier, in Formula~\ref{formula1}, for small grain sizes the first term is the dominant factor while the second term roughly stays constant. Same way, for large grain sizes the second factor is the dominant factor. 
 
-In order to find the lower-bound of the range for which the execution time stays constant, we assume the second factor is constant in that region. Taking the derivative of the function based on the grain size then leads to:
+In order to find the lower-bound of the range for which the execution time stays constant, we assume the second factor is constant in that region. Also we can change $N$ to $M$, knowing that our concern is on the left hand side of the graph, where $num\_{tasks}$ is definitely greater than the number of cores. 
+Taking the derivative of the function based on the grain size then leads to:
 
  
 \begin{equation}\label{formula3}
 \begin{aligned}
-\frac{\partial execution\_{time}}{\partial g} = \frac{\alpha}{M}\times{\frac{\partial num\_{tasks}}{\partial g}} \\
-=\frac{\alpha}{M}\times\frac{\partial problem\_{size}}{\partial g} \\
-=\frac{\alpha\times{problem\_{size}}}{M}\times{\frac{-1}{g^2}}
-\\
-=\frac{\alpha\times{problem\_{size}}}{N}\times{\frac{-1}{g^2}}
+\frac{\partial execution\_{time}}{\partial g} = \frac{\alpha}{N}\times{\frac{\partial num\_{tasks}}{\partial g}}+\beta\times(N-1)\times{\frac{\partial num\_{tasks}}{\partial g}} \\
+=(\frac{\alpha}{N}+\beta\times(N-1))\times\frac{\partial(\frac{problem\_{size}}{g})}{\partial g} \\
+=(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}\times{\frac{-1}{g^2}}
 \end{aligned}
 \end{equation}
 
-From Formula~\ref{formula3}, it can be observed that for the left hand side of the graph the rate of changes is negative and decreases as the grain size increases. Here we are looking for the value of the grain size for which the rate of change becomes very small (we introduce a threshold $\lambda_b$ for this purpose). 
+From Formula~\ref{formula3}, it can be observed that for the left hand side of the graph the rate of changes is negative and decreases as the grain size increases. Here we are looking for the value of the grain size for which the rate of change becomes very small (we introduce a threshold $\lambda_b$, where $\lambda_b\ll1$, for this purpose). 
 
 
 \begin{equation}\label{formula4}
 \begin{aligned}
-\frac{\alpha\times{problem\_{size}}}{N}\times{\frac{1}{g^2}}\leq{\lambda_b} \\
-{g^2}\geq{\frac{\alpha\times{problem\_{size}}}{N\times{\lambda_b}}}\\
-{g}\geq{\sqrt{\frac{\alpha\times{problem\_{size}}}{N\times{\lambda_b}}}}
+(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}\times{\frac{1}{g^2}}\leq{\lambda_b} \\
+{g^2}\geq{\frac{(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}}{\lambda_b}}\\
+{g}\geq{\sqrt{\frac{(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}}{\lambda_b}}}
 \end{aligned}
 \end{equation}
 
-Formula~\ref{formula4} can also be represented as shown in Formula~\ref{formula5}. This representation shows that when the ratio of the time it takes to execute one task to the total overhead of creating $num\_{tasks}$ tasks on $N$ core, is greater than a threshold, we will end up in the flat region of the graph, close to the left hand side.
+Formula~\ref{formula4} can also be represented as shown in Formula~\ref{formula5}. This representation shows that when the ratio of the time it takes to execute one task to the total overhead of creating and managing $num\_{tasks}$ tasks on $N$ core, is greater than a threshold, we will end up in the flat region of the graph, close to the left hand side.
 
 
 \begin{equation}\label{formula5}
 \begin{aligned}
-\frac{\alpha}{N}\times{\frac{problem\_{size}}{g}}\times{\frac{1}{g}}\leq{\lambda_b} \\
-\frac{\alpha}{N}\times{num\_{tasks}}\times{\frac{1}{g}}\leq{\lambda_b}\\
-\frac{\alpha\times{num\_{tasks}}}{N}\leq{g\times\lambda_b}\\	
-\frac{g}{\frac{\alpha\times{num\_{tasks}}}{N}}\geq{\frac{1}{\lambda_b}}
+(\frac{\alpha}{N}+\beta\times(N-1))\times{\frac{problem\_{size}}{g}}\times{\frac{1}{g}}\leq{\lambda_b}\\
+(\frac{\alpha}{N}+\beta\times(N-1))\times{num\_{tasks}}\times{\frac{1}{g}}\leq{\lambda_b}\\
+(\frac{\alpha}{N}+\beta\times(N-1))\times{num\_{tasks}}\leq{g\times\lambda_b}\\	
+\frac{g}{(\frac{\alpha}{N}+\beta\times(N-1))\times{num\_{tasks}}}\geq{\frac{1}{\lambda_b}}
 \end{aligned}
 \end{equation}
 
@@ -364,7 +380,7 @@ Integrating Formula~\ref{formula4} and Formula~\ref{formula21} suggests the foll
 
 \begin{equation}\label{formula23}
 \begin{aligned}
-{\sqrt{\frac{\alpha\times{problem\_{size}}}{N\times{\lambda_b}}}}\leq{g}\leq\frac{problem\_{size}}{(1+\left\lceil{\frac{1}{\lambda_s}}\right\rceil)\times{N}}
+{\sqrt{\frac{(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}}{{\lambda_b}}}}\leq{g}\leq\frac{problem\_{size}}{(1+\left\lceil{\frac{1}{\lambda_s}}\right\rceil)\times{N}}
 \end{aligned}
 \end{equation}
  
