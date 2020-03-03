@@ -21,12 +21,12 @@ problem\_size = iter\_length\times{num\_iterations}
 
 The total execution time could be assumed to be the maximum amount of time it takes for one of the cores to finish it's work. With this assumption, the execution time for this simple problem, could be estimated as summation of maximum overhead of creating tasks on one core, the overhead of managing the tasks created on one core, and the time it takes to run $w\_c$ amount of work when $M$ cores are available, shown in Formula~\ref{formula1}. 
 
-While the overhead of creating a task should be constant on a specific machine architecture, we are suggesting here that the overall overhead of managing $num\_{tasks}$ tasks, is a factor of $N\times{N-1}$, due to the effect of load balancing resulted from work stealing. We observe this effect when the number of tasks created is greater than the number of cores. 
+While the overhead of creating a task should be constant on a specific machine architecture, we are suggesting here that the overall overhead of managing $num\_{tasks}$ tasks, is a factor($\delta$) of $N\times{N-1}$, due to the effect of work stealing. We observe this factor when the number of tasks created is greater than the number of cores, affecting the execution time as $\delta\times{N\times{N-1}}\times{num\_{tasks}}\times{\frac{1}{N}}$. 
 
-On the other hand, when number of tasks created is smaller than the number of cores, the positive load balancing effect we observed earlier with more number of tasks than cores, now becomes a negative effect due to continuous efforts of the idle cores to steal work from cores that are actually doing the work, interrupting the cache coherency constantly. We represent this effect with $\delta\times{(num\_{tasks}-1)}$.
+On the other hand, when number of tasks created is smaller than the number of cores, we observe continuous efforts from the idle cores to steal work from cores that are actually doing the work, interrupting the cache coherency constantly. We represent this effect with $\delta\times{(N-M)\times{M}}\times{num\_{tasks}}\times{\frac{1}{M}})$.
 
 
-We represent the overhead of creating a task on a machine with $\alpha$, and the overhead of managing a task on a machine with $\beta\times{N}\times{N-1}$, when $num\_{tasks}>N$, and $num\_{tasks}-1$ otherwise. 
+We represent the overhead of creating a task on a machine with $\alpha$, and the overhead of managing a task on a machine with $\delta\times{(N-1)}\times{num\_{tasks}}$, when $num\_{tasks}>N$, and $\delta\times{(N-num\_{tasks})}\times{num\_{tasks}}$ otherwise. 
 
 Looking at the execution time as the maximum amount of execution time among all the cores, we can formulate the execution time as:  
 
@@ -36,12 +36,25 @@ Looking at the execution time as the maximum amount of execution time among all 
 \left\{
 \begin{aligned}
 &
-\alpha\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil +\beta\times{(N-1)}{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{if\:\:}num\_{tasks}>N\\
-&\alpha\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\delta\times\frac{num\_{tasks}-1}{N}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{otherwise}
+\alpha\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil +\delta\times{(N-1)}\times{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{if\:\:}num\_{tasks}>N\\
+&\alpha\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\delta\times{(N-num\_{tasks})}\times{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{otherwise}
 \end{aligned}
 \right.
 \end{aligned}
 \end{equation}
+
+%\begin{equation}\label{formula1}
+%\begin{aligned}
+%&execution\_time = \\
+%\left\{
+%\begin{aligned}
+%&
+%\alpha\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil +\beta\times{(N-1)}{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{if\:\:}num\_{tasks}>N\\
+%&\alpha\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\delta\times\frac{num\_{tasks}-1}{N}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{otherwise}
+%\end{aligned}
+%\right.
+%\end{aligned}
+%\end{equation}
 %\vspace{\baselineskip}
 
 Where, 
@@ -152,7 +165,7 @@ What happens here is that as the grain size changes, there are points for which 
 For all the values of $g$ that create the same $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil$, as $g$ increases the difference between $w\_c$ and $\frac{problem\_{size}}{N}$ increases. 
 
 For example, considering a case where $problem\_{size}=100,000$, and $N=8$, for the grain sizes in range of $[4167,\:6249]$ would result in creating between $\left \lceil{\frac{100,000}{6,249}}\right \rceil=17$ and  $\left \lceil{\frac{100,000}{4,167}}\right \rceil=24$ tasks. This amount of tasks created itself would result in $\left \lceil{\frac{17}{8}}\right \rceil=3$ and  $\left \lceil{\frac{24}{8}}\right \rceil=3$ tasks.
-On the other hand, $w\_c=g\times{\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil}=3\times{g}$, would have a value in range of $[3\times4167,\:3\times6249]=[12501,\: 18747]$, where the average amount of work per core is $\frac{problem\_{size}}{M}=12500$. This means that for grain sizes closer to the end of the range, we are observing that a much bigger amount of work is assigned to the core with maximum amount of work, which would result in a higher execution time. 
+On the other hand, $w\_c=g\times{\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil}=3\times{g}$, would have a value in range of $[3\times4167,\:3\times6249]=[12501,\: 18747]$, where the average amount of work per core is $\frac{problem\_{size}}{N}=12500$. This means that for grain sizes closer to the end of the range, we are observing that a much bigger amount of work is assigned to the core with maximum amount of work, which would result in a higher execution time. 
 
 
 In the general case, if we denote $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil$ as $k$, then:
