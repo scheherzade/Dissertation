@@ -21,22 +21,22 @@ problem\_size = iter\_length\times{num\_iterations}
 
 The total execution time could be assumed to be the maximum amount of time it takes for one of the cores to finish it's work. With this assumption, the execution time for this simple problem, could be estimated as summation of maximum overhead of creating tasks on one core, the overhead of managing the tasks created on one core, and the time it takes to run $w\_c$ amount of work when $M$ cores are available, shown in Formula~\ref{formula1}. 
 
-While the overhead of creating a task should be constant on a specific machine architecture, we are suggesting here that the overall overhead of managing $num\_{tasks}$ tasks, is a factor($\delta$) of $N\times{N-1}$, due to the effect of work stealing. We observe this factor when the number of tasks created is greater than the number of cores, affecting the execution time as $\delta\times{N\times{N-1}}\times{num\_{tasks}}\times{\frac{1}{N}}$. 
+While the overhead of creating a task should be constant on a specific machine architecture, we are suggesting here that the overall overhead of managing $num\_{tasks}$ tasks, is a factor($\delta$) of $N$. This effect is originated from HPX's strategy to avoid allocating new stacks by keeping the previous stack alive until new thread is created, at this point the stack is assigned to the new thread. 
 
-On the other hand, when number of tasks created is smaller than the number of cores, we observe continuous efforts from the idle cores to steal work from cores that are actually doing the work, interrupting the cache coherency constantly. We represent this effect with $\delta\times{(N-M)\times{M}}\times{num\_{tasks}}\times{\frac{1}{M}})$.
+%On the other hand, when number of tasks created is smaller than the number of cores, we observe continuous efforts from the idle cores to steal work from cores that are actually doing the work, interrupting the cache coherency constantly. We represent this effect with $\delta\times{(N-M)\times{M}}\times{num\_{tasks}}\times{\frac{1}{M}})$.
 
 
-We represent the overhead of creating a task on a machine with $\alpha$, and the overhead of managing a task on a machine with $\delta\times{(N-1)}\times{num\_{tasks}}$, when $num\_{tasks}>N$, and $\delta\times{(N-num\_{tasks})}\times{num\_{tasks}}$ otherwise. 
+We represent the overhead of creating a task on a machine with $\alpha$, and the overhead of managing a task on a machine with $\delta\times\frac{{N}\times{num\_{tasks}}}{N}=\delta\times{num\_{tasks}}$. 
 
 Looking at the execution time as the maximum amount of execution time among all the cores, we can formulate the execution time as:  
 
 \begin{equation}\label{formula1}
 \begin{aligned}
 &execution\_time = \\
-\left\{
+&\left\{
 \begin{aligned}
 &
-\alpha\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil +\delta\times{(N-1)}\times{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{if\:\:}num\_{tasks}>N\\
+\alpha\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil +\delta\times{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{if\:\:}num\_{tasks}>N\\
 &\alpha\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\delta\times{(N-num\_{tasks})}\times{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{otherwise}
 \end{aligned}
 \right.
@@ -118,9 +118,9 @@ Taking the derivative of the function based on the grain size then leads to:
  
 \begin{equation}\label{formula3}
 \begin{aligned}
-\frac{\partial execution\_{time}}{\partial g} = \frac{\alpha}{N}\times{\frac{\partial num\_{tasks}}{\partial g}}+\beta\times(N-1)\times{\frac{\partial num\_{tasks}}{\partial g}} \\
-=(\frac{\alpha}{N}+\beta\times(N-1))\times\frac{\partial(\frac{problem\_{size}}{g})}{\partial g} \\
-=(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}\times{\frac{-1}{g^2}}
+\frac{\partial execution\_{time}}{\partial g} &= \frac{\alpha}{N}\times{\frac{\partial num\_{tasks}}{\partial g}}+\beta\times(N-1)\times{\frac{\partial num\_{tasks}}{\partial g}} \\
+&=(\frac{\alpha}{N}+\beta\times(N-1))\times\frac{\partial(\frac{problem\_{size}}{g})}{\partial g} \\
+&=(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}\times{\frac{-1}{g^2}}
 \end{aligned}
 \end{equation}
 
@@ -129,9 +129,9 @@ From Formula~\ref{formula3}, it can be observed that for the left hand side of t
 
 \begin{equation}\label{formula4}
 \begin{aligned}
-(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}\times{\frac{1}{g^2}}\leq{\lambda_b} \\
-{g^2}\geq{\frac{(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}}{\lambda_b}}\\
-{g}\geq{\sqrt{\frac{(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}}{\lambda_b}}}
+&(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}\times{\frac{1}{g^2}}\leq{\lambda_b} \\
+{g^2}&\geq{\frac{(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}}{\lambda_b}}\\
+{g}&\geq{\sqrt{\frac{(\frac{\alpha}{N}+\beta\times(N-1))\times{problem\_{size}}}{\lambda_b}}}
 \end{aligned}
 \end{equation}
 
@@ -140,10 +140,10 @@ Formula~\ref{formula4} can also be represented as shown in Formula~\ref{formula5
 
 \begin{equation}\label{formula5}
 \begin{aligned}
-(\frac{\alpha}{N}+\beta\times(N-1))\times{\frac{problem\_{size}}{g}}\times{\frac{1}{g}}\leq{\lambda_b}\\
-(\frac{\alpha}{N}+\beta\times(N-1))\times{num\_{tasks}}\times{\frac{1}{g}}\leq{\lambda_b}\\
-(\frac{\alpha}{N}+\beta\times(N-1))\times{num\_{tasks}}\leq{g\times\lambda_b}\\	
-\frac{g}{(\frac{\alpha}{N}+\beta\times(N-1))\times{num\_{tasks}}}\geq{\frac{1}{\lambda_b}}
+(\frac{\alpha}{N}+\beta\times(N-1))\times{\frac{problem\_{size}}{g}}\times{\frac{1}{g}}&\leq{\lambda_b}\\
+(\frac{\alpha}{N}+\beta\times(N-1))\times{num\_{tasks}}\times{\frac{1}{g}}&\leq{\lambda_b}\\
+(\frac{\alpha}{N}+\beta\times(N-1))\times{num\_{tasks}}&\leq{g\times\lambda_b}\\	
+\frac{g}{(\frac{\alpha}{N}+\beta\times(N-1))\times{num\_{tasks}}}&\geq{\frac{1}{\lambda_b}}
 \end{aligned}
 \end{equation}
 
@@ -155,9 +155,9 @@ Formula~\ref{formula2} shows how $w\_c$ is calculated for different cases, but i
 
 \begin{equation}\label{formula6}
 \begin{aligned}
-w\_c\approx{g\times\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil}\\
-\approx{g\times\left \lceil{\frac{\frac{problem\_{size}}{g}}{N}}\right \rceil}\\
-\approx{\frac{problem\_{size}}{N}}
+w\_c&\approx{g\times\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil}\\
+&\approx{g\times\left \lceil{\frac{\frac{problem\_{size}}{g}}{N}}\right \rceil}\\
+&\approx{\frac{problem\_{size}}{N}} \:\:\text{\:\:\:\:if\:\:} num\_{tasks}\geq{N}
 \end{aligned}
 \end{equation}
 
@@ -173,11 +173,11 @@ In the general case, if we denote $\left \lceil{\frac{num\_{tasks}}{N}}\right \r
 
 \begin{equation}\label{formula8}
 \begin{aligned}
-k-1<{\frac{num\_{tasks}}{N}}\leq{k}\\
-(k-1)\times{N}<num\_{tasks}\leq{k}\times{N}\\
+k-1&<{\frac{num\_{tasks}}{N}}\leq{k}\\
+(k-1)\times{N}&<num\_{tasks}\leq{k}\times{N}\\
 %num\_{tasks}=\left \lceil{\frac{problem\_{size}}{g}}\right \rceil\\
-(k-1)\times{N}<\left \lceil{\frac{problem\_{size}}{g}}\right \rceil\leq{k}\times{N}\\
-(k-1)\times{N}<\frac{problem\_{size}}{g}\leq{{k}\times{N}}\\
+(k-1)\times{N}&<\left \lceil{\frac{problem\_{size}}{g}}\right \rceil\leq{k}\times{N}\\
+(k-1)\times{N}&<\frac{problem\_{size}}{g}\leq{{k}\times{N}}\\
 \end{aligned}
 \end{equation}
 
@@ -202,9 +202,9 @@ Since $\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil=k$, and $w\_c={g\times\
 
 \begin{equation}\label{formula11}
 \begin{aligned}
-k\times{\frac{problem\_{size}}{k\times{N}}}\leq{w\_c}<{k\times{\frac{problem\_{size}}{(k-1)\times{N}}}}\\
-\frac{problem\_{size}}{{N}}\leq{w\_c}<{\frac{k}{k-1}\times{\frac{problem\_{size}}{N}}}\\
-0\leq{w\_c-\frac{problem\_{size}}{N}}<\frac{1}{k-1}\times{\frac{problem\_{size}}{N}}
+k\times{\frac{problem\_{size}}{k\times{N}}}&\leq{w\_c}<{k\times{\frac{problem\_{size}}{(k-1)\times{N}}}}\\
+\frac{problem\_{size}}{{N}}&\leq{w\_c}<{\frac{k}{k-1}\times{\frac{problem\_{size}}{N}}}\\
+0&\leq{w\_c-\frac{problem\_{size}}{N}}<\frac{1}{k-1}\times{\frac{problem\_{size}}{N}}
 \end{aligned}
 \end{equation}
 
@@ -213,10 +213,10 @@ For the cases where $k>1$ and $num\_{tasks}\%{N}={1}$, there could be a  change 
 
 \begin{equation}\label{formula15}
 \begin{aligned}
-\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil=k \text{\:\:\:}\&\text{\:\:\:} num\_{tasks}\%{N}={1}\Rightarrow\\
-num\_{tasks}=(k-1)\times{N}+1\Rightarrow\\
-(k-1)\times{N}<{\frac{problem\_{size}}{g}}\leq(k-1)\times{N}+1\Rightarrow\\
-\frac{problem\_{size}}{(k-1)\times{N}+1}\leq{g}<\frac{problem\_{size}}{(k-1)\times{N}}
+\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil&=k \text{\:\:\:}\&\text{\:\:\:} num\_{tasks}\%{N}={1}\Rightarrow\\
+num\_{tasks}&=(k-1)\times{N}+1\Rightarrow\\
+(k-1)\times{N}&<{\frac{problem\_{size}}{g}}\leq(k-1)\times{N}+1\Rightarrow\\
+\frac{problem\_{size}}{(k-1)\times{N}+1}&\leq{g}<\frac{problem\_{size}}{(k-1)\times{N}}
 \end{aligned}
 \end{equation}
 
@@ -230,16 +230,16 @@ w\_c={problem\_{size}}-(k-1)\times(N-1)\times{g}.
 Therefore,
 \begin{equation}\label{formula18}
 \begin{aligned}
-(k-1)(N-1)\frac{problem\_{size}}{(k-1){N}+1}\leq{(k-1)(N-1){g}}<(k-1)(N-1)\frac{problem\_{size}}{(k-1){N}}\Rightarrow\\
-{\frac{problem\_{size}}{N}}<{problem\_{size}-{(k-1)(N-1){g}}}\leq{k\frac{problem\_{size}}{(k-1){N}+1}}\\
-{\frac{problem\_{size}}{N}}<{w\_{c}}\leq{k\times\frac{problem\_{size}}{(k-1){N}+1}}
+(k-1)(N-1)\frac{problem\_{size}}{(k-1){N}+1}&\leq{(k-1)(N-1){g}}<(k-1)(N-1)\frac{problem\_{size}}{(k-1){N}}\Rightarrow\\
+{\frac{problem\_{size}}{N}}&<{problem\_{size}-{(k-1)(N-1){g}}}\leq{k\frac{problem\_{size}}{(k-1){N}+1}}\\
+{\frac{problem\_{size}}{N}}&<{w\_{c}}\leq{k\times\frac{problem\_{size}}{(k-1){N}+1}}
 \end{aligned}
 \end{equation}
 
 And for $k=1$, where $num\_{tasks}\leq{N}$,
 \begin{align*}\label{formula12}
-w\_c=g\\
-\frac{problem\_{size}}{N}\leq{g}\leq{problem\_{size}}\Rightarrow
+w\_c&=g\\
+\frac{problem\_{size}}{N}&\leq{g}\leq{problem\_{size}}\Rightarrow
 \end{align*}
 
 \begin{equation}\label{formula14}
@@ -253,9 +253,9 @@ Defining $imbalance\_{ratio}=\frac{w\_c-\frac{problem\_{size}}{N}}{\frac{problem
 
 \begin{equation}\label{formula13}
 \begin{aligned}
-0\leq{imbalance\_{ratio}}\leq{N-1}  \text{\:\:\:\:\:\:\:\:\:\:\:\:\:for\:\:\:}k={1}\\
-0\leq{imbalance\_{ratio}}<\frac{1}{k-1}  \text{\:\:\:\:\:\:\:\:\:\:\:\:\:for\:\:\:}k>{1} \text{\:\:and\:\:}num\_{tasks}\%{N}\neq{1}\\
-0\leq{imbalance\_{ratio}}<\frac{N-1}{N(k-1)+1}=\frac{1}{k-1+\frac{k}{N-1}}\text{\:\:\:\:\:\:\:\:\:\:\:\:\:otherwise}
+0&\leq{imbalance\_{ratio}}\leq{N-1}  \text{\:\:\:\:\:\:\:\:\:\:\:\:\:for\:\:\:}k={1}\\
+0&\leq{imbalance\_{ratio}}<\frac{1}{k-1}  \text{\:\:\:\:\:\:\:\:\:\:\:\:\:for\:\:\:}k>{1} \text{\:\:and\:\:}num\_{tasks}\%{N}\neq{1}\\
+0&\leq{imbalance\_{ratio}}<\frac{N-1}{N(k-1)+1}=\frac{1}{k-1+\frac{k}{N-1}}\text{\:\:\:\:\:\:\:\:\:\:\:\:\:otherwise}
 \end{aligned}
 \end{equation}
 
@@ -418,12 +418,33 @@ In this section we represent the identified range for a number of problem sizes,
 %	\caption{The results obtained from running the hpx for loop sequentially}	
 %	\label{fig26}
 %\end{figure}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+
 
 \subsection{Step 1: Single-task, single-core runs}
 At the first step, we look at the cases where only one task has been created, the program is run on only one core. This problem could be assumed to be equivalent to running the same amount of work sequentially with an additional cost of creating just one task. 
 
 \vspace{\baselineskip}
-\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
+\vspace{\baselineskip}
 
 
 
