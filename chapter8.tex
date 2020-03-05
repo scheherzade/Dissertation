@@ -1,15 +1,15 @@
 \section{Analytical Modeling}
 In the previous section we studied the possibility of using a polynomial to capture the relationship between grain size, number of cores, and throughput for a fixed matrix size, with the purpose of finding a range of grain size that leads us to maximum performance. 
-Although the polynomial function was helpful in directing us toward our objective, it does not have a physical implication. 
+Although the polynomial function was helpful in directing us toward our objective of finding the region with maximum performance, it lacked a physical implication, and was not quite able to capture the overall behavior of the system. 
 
-This motivated us to change our view, and instead of looking just at the data and trying to find a function to fit the data, study the behavior of the data, and then find a function that would be likely to fit the data. That function would be a good fit mostly because that's how we expect the throughput to change with grain size, and not just how the data looks like.   
+This motivated us to change our view, and instead of looking just at the data and trying to find a function to fit the data, study the behavior of the data, and then find a function that would be likely to fit and explain the data. That function would be a good fit mostly because that's how we expect the throughput to change with grain size, and not solely how the data behaves.   
 
-In this chapter we attempt to understand the effect of grain size on the achievable speedup in an asynchronous many-task runtime system. As discussed in chapter~\ref{Background}, our knowledge here comes from Amdahl's law and Universal Scalibility Law, which is an extension to the Amdahl's law. What these models suggest is that as we increase the number of cores in a multicore system, we do not observe a linear speedup, and they hold two major factors accountable for that, latency.
+In this chapter we attempt to understand the effect of grain size on the achievable speedup in an asynchronous many-task runtime system, in order to develop an analytical model for predicting the execution time in an asynchronous many task runtime system. 
 
-Here we are interested in developing an analytical model for predicting the execution time in an asynchronous many task runtime system. Even if we were able to determine all the factors affecting the execution time, it is still very hard to find an analytical model describing the relationship between these factors and the execution time.   
+We have to note here that even if we were able to identify all the factors affecting the execution time, it is still very hard to find an analytical model describing the relationship between these factors and the execution time. In this chapter we explain our effort in this direction by starting from a simple benchmark. We suggest a formula based on our knowledge of the behavior of the system, and the collected data. Then we will try to generalize the proposed formula to arbitrary for loops with balanced work-load for each iteration. 
 
-Definitions:
-We represent the overhead of creating one task with $\alpha$, the number of tasks created with $num\_{tasks}$, the maximum amount of work assigned to one core as $w\_c$, the number of cores that are actually doing the work as $M$, the total amount of work available as $problem\_{size}$, and the sequential execution time as $t_{seq}$.
+
+Throughout this chapter we will be using the following terms and definitions to simplify our work. We represent the number of cores available with $N$, the number of tasks created as $num\_{tasks}$, the maximum amount of work assigned to one core as $w\_c$, the number of cores that are actually doing the work as $M$ ($M\leq{N}$), the total amount of work available as $problem\_{size}$, and the sequential execution time as $t_{seq}$.
 
 In an attempt to find this analytical model, we started with looking into two major factors, the overhead of creating tasks, and the maximum amount of work assigned to one core. 
 In order to understand how these factors contribute to the execution time, we created a benchmark based on a simple \textit{for\textunderscore{loop}} with different number of iterations, iteration lengths, and chunk sizes, as shown in Listing~\ref{hpx_for_loop}. 
@@ -19,14 +19,36 @@ Each iteration consists of a while loop that makes sure the iteration lasts a ce
 problem\_size = iter\_length\times{num\_iterations}
 \end{equation}
 
-The total execution time could be assumed to be the maximum amount of time it takes for one of the cores to finish it's work. With this assumption, the execution time for this simple problem, could be estimated as summation of maximum overhead of creating tasks on one core, the overhead of managing the tasks created on one core, and the time it takes to run $w\_c$ amount of work when $M$ cores are available, shown in Formula~\ref{formula1}. 
+The total execution time could be assumed to be roughly the amount of time it takes for the core with the maximum amount of work to finish it's job. Here we call the core with maximum expected amount of work as $core_0$, and the associated amount of work as $w\_c$. 
+With this assumption, the main factors contributing to the execution time for this simple problem are the overhead of creating tasks on $core_0$, the time it takes to run $w\_c$ amount of work on $core_0$, and the number of cores that will be executing the work($M$). 
 
-While the overhead of creating a task should be constant on a specific machine architecture, we are suggesting here that the overall overhead of managing $num\_{tasks}$ tasks, is a factor($\delta$) of $N$. This effect is originated from HPX's strategy to avoid allocating new stacks by keeping the previous stack alive until new thread is created, at this point the stack is assigned to the new thread. 
 
+Formula~\ref{formula31} shows the expected formula in it's simplest form, with $q$ as a constant factor to account for unknown factors.  
+
+\begin{equation}\label{formula31}
+\begin{aligned}
+&execution\_time = 
+t\_{overhead}\:\:+\:\:w\_c\:\:+\:\:q
+\end{aligned}
+\end{equation}
+
+Looking at $t\_{overhead}$, with $num\_{tasks}$ tasks created, $\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil$ tasks would be created on $core\_0$. If we represent the overhead of creating a task on one core with $\alpha$, $t\_{overhead}$ could be stated as $\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil}$. Formula~\ref{formula31} then becomes:
+
+\begin{equation}\label{formula32}
+\begin{aligned}
+&execution\_time = 
+\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil\:\:+\:\:w\_c\:\:+\:\:q}
+\end{aligned}
+\end{equation}
+
+Here we suggest 
+While the overhead of creating a task should be constant on a specific machine architecture, we are suggesting here that the overall overhead of managing $num\_{tasks}$ tasks, is a factor($\delta$) of $N$. This effect is originated from HPX's strategy to avoid allocating new stacks by keeping the previous stack alive until new thread is created, at that point the stack is assigned to the new thread. 
+
+Meanwhile, the overhead of managing a task on a machine is shown with $\delta\times{num\_{tasks}}$. 
 %On the other hand, when number of tasks created is smaller than the number of cores, we observe continuous efforts from the idle cores to steal work from cores that are actually doing the work, interrupting the cache coherency constantly. We represent this effect with $\delta\times{(N-M)\times{M}}\times{num\_{tasks}}\times{\frac{1}{M}})$.
 
 
-We represent the overhead of creating a task on a machine with $\alpha$, and the overhead of managing a task on a machine with $\delta\times\frac{{N}\times{num\_{tasks}}}{N}=\delta\times{num\_{tasks}}$. 
+
 
 Looking at the execution time as the maximum amount of execution time among all the cores, we can formulate the execution time as:  
 
@@ -36,8 +58,8 @@ Looking at the execution time as the maximum amount of execution time among all 
 &\left\{
 \begin{aligned}
 &
-\alpha\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil +\delta\times{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{if\:\:}num\_{tasks}>N\\
-&\alpha\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\delta\times{(N-num\_{tasks})}\times{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{otherwise}
+\alpha\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil +\delta\times{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{if\:\:}num\_{tasks}>N\\
+&\alpha\left \lceil{\frac{num\_{tasks}}{N}}\right \rceil +\delta\times{(N-num\_{tasks})}\times{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{otherwise}
 \end{aligned}
 \right.
 \end{aligned}
@@ -69,6 +91,8 @@ w\_c =\left\{
 \end{aligned}
 \right.
 \end{equation}
+
+As discussed in chapter~\ref{Background}, Amdahl's law and Universal Scalibility Law, suggest that, for a fixed problem size, as we increase the number of cores in a multicore system, we do not observe a linear speedup, which is mainly resulted from latency and coherency
 
 The first and second part of Formula~\ref{formula1} is associated with the overhead of creating and managing $num\_{tasks}$ tasks on $N$ cores, while considering the effect of work stealing ,and the last part is deducted from the Universal Scalibilty Law\cite{gunther2007guerrilla}, that suggests an overhead associated with the number of cores should be added to the expected execution time. Here, we adjusted the total number of cores ($N$) to the number of cores that are actually executing the work ($M$). 
 
@@ -306,12 +330,12 @@ If there exists a $k_{min}$ (creating an imbalance ratio between $0$ and $\frac{
 
 \begin{equation}\label{formula21}
 \begin{aligned}
-imbalance\_{ratio}\leq{{\lambda_s}}\Rightarrow\\
-\frac{1}{k-1}\leq\lambda_s\\
-k\geq{1+\frac{1}{\lambda_s}}\\
-k_{min}=\left\lceil{1+\frac{1}{\lambda_s}}\right\rceil+1\\
-{g}<\frac{problem\_{size}}{(k_{min}-1)\times{N}}\\
-g_{max}=\frac{problem\_{size}}{(k_{min}-1)\times{N}}-1=\frac{problem\_{size}}{(1+\left\lceil{\frac{1}{\lambda_s}}\right\rceil)\times{N}}
+&imbalance\_{ratio}\leq{{\lambda_s}}\Rightarrow\\
+&\frac{1}{k-1}\leq\lambda_s\\
+&k\geq{1+\frac{1}{\lambda_s}}\\
+&k_{min}=\left\lceil{1+\frac{1}{\lambda_s}}\right\rceil+1\\
+&{g}<\frac{problem\_{size}}{(k_{min}-1)\times{N}}\\
+&g_{max}=\frac{problem\_{size}}{(k_{min}-1)\times{N}}-1=\frac{problem\_{size}}{(1+\left\lceil{\frac{1}{\lambda_s}}\right\rceil)\times{N}}
 \end{aligned}
 \end{equation}
 
@@ -365,7 +389,7 @@ while (true)
 {
 // Check if we've reached the specified delay.
 if ((hpx::util::high_resolution_clock::now() - start) >= delay_ns)
-break;chunk
+break;
 }
 }
 ///////////////////////////////////////////////////////////////////////////////
