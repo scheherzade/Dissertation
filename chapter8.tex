@@ -116,9 +116,22 @@ execution\_time =
 \end{aligned}
 \end{equation}
 
-Here $t\_{overhead\_{ws}}$ represents all the overhead created due to work stealing.
+Here $t\_{overhead\_{ws}}$ represents all the overhead created due to work stealing. We did some investigations on where this term is originated from for a more precise modeling, but we were not successful. In order to study this effect, we ran a set of experiments while work stealing was turned of. This is possible through adding the command line option \emph{--hpx:queuing = static-priority}.
 
-Figure shows an example of the results obtained from running the benchmark, for $problem\_size=10000$, on different number of cores.
+Figure~\ref{fig40} highlights the effect of work stealing for $problem\_size=3000$ on 4 and 8 threads. As it can be observed, in the region where the number of tasks created is same as the number of cores, this effect is more significant. Although we are not sure how work stealing is causing this effect, we used the term $n_t$.
+
+
+\vspace{\baselineskip}	
+\begin{figure}[H]
+	\centering
+	\subfloat[]{\includegraphics[scale=.4]{images/hpx_for_loop/3000_4_1_all.png}\label{fig40:a}}{\hfill}
+	\subfloat[]{\includegraphics[scale=.4]{images/hpx_for_loop/3000_8_1_all.png}\label{fig40:b}}
+	\caption{The results of running the benchmark in Listing with $problem\_size=3000$, on different (a)4 cores, and (b) 8 cores. The vertical dotted line shows the grain size that would generate same number of tasks as the number of cores, with the same amount of work for all the cores.}\label{fig40}		
+\end{figure}
+ 
+ 
+ 
+Figure~\ref{fig39} shows an example of the results obtained from running the benchmark, for $problem\_size=10000$, on different number of cores.
 
 \vspace{\baselineskip}	
 \begin{figure}[H]
@@ -134,6 +147,13 @@ On the other hand, on the left hand side of the graph, since the grain size is v
 To summarize, for this simple experiment, where we do not have to deal with the cash effects, we believe the important factors are: number of HPX threads being created, number of cores the program is ran on, the maximum amount of work one core has to perform. 
 
 The maximum number of tasks assigned to one core, and the number of cores that are actually performing the work, are two other important factors that can be deducted from the aforementioned factors. 
+
+
+\vspace{\baselineskip}
+\subsection{Validating the Proposed Model}
+In order to test how the well the suggested model could fit the data, we collected a considerable amount of data with differnet configurations of number of cores($N$), number of iterations(\emph{num\_{iterations}}), and chunk size($chunk\_{size}$). We set $iter\_{length}$ to $1\mu\text{sec}$ for simplification. For each $num\_{iterations}$, we change the $chunk\_{size}$ from 1 to $num\_{iterations}$ in logarithmic scale. 
+
+
 
 \vspace{\baselineskip}
 \subsection{Analyzing the Data}
@@ -330,7 +350,7 @@ To summarize, as the grain size increases the maximum imbalance in the loads ass
 
 We are interested in finding the maximum grain size that would generate a reasonable imbalance ($imbalance\_{ratio}\leq{\lambda_s}$), to make sure we should stay in the flat region of the bathtub curve of execution time against grain size, from load imbalance point of view.  
 
-Formula~\ref{formula14} states that for grain sizes greater than $problem\_{size}$, $imblance\_{ratio}$ increases linearly with grain size from $0$ to $N-1$. While for grain sizes smaller than $problem\_{size}$, the maximum $imbalance\_{ratio}$ depends on $k=\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil$. So, in order to assure $imbalance\_{ratio}$ is smaller than or equal to a threshold ($\lambda_s$), first we search the grain sizes smaller than $\frac{problem\_{size}}{N}$. Since $0<\lambda_s<1$, and $k\geq2$ in this region, there exists a $k$ such that $\frac{1}{k-1}\leq\lambda_s$.    
+Formula~\ref{formula14} states that for grain sizes greater than $problem\_{size}$, $imblance\_{ratio}$ increases linearly with grain size from $0$ to $N-1$. While for grain sizes smaller than $problem\_{size}$, the maximum $imbalance\_{ratio}$ depends on $k=\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil$. So, in order to assure \emph{imbalance\_{ratio}} is smaller than or equal to a threshold ($\lambda_s$), first we search the grain sizes smaller than $\frac{problem\_{size}}{N}$. Since $0<\lambda_s<1$, and $k\geq2$ in this region, there exists a $k$ such that $\frac{1}{k-1}\leq\lambda_s$.    
 If there exists a $k_{min}$ (creating an imbalance ratio between $0$ and $\frac{1}{k_{min}-1}$), where $\frac{1}{k_{min}-1}\leq{\lambda_s}$, $\forall k<k_{min}$ maximum value of $imbalance\_{ratio}$ would be greater than $\lambda_s$. So in order to find the grain size that would create maximum $imbalance\_{ratio}$ of $\lambda_s$:
 
 
