@@ -118,7 +118,7 @@ execution\_time =
 
 Here $t\_{overhead\_{ws}}$ represents all the overhead created due to work stealing. We did some investigations on where this term is originated from for a more precise modeling, but we were not successful. In order to study this effect, we ran a set of experiments while work stealing was turned of. This is possible through adding the command line option \emph{--hpx:queuing = static-priority}.
 
-Figure~\ref{fig40} highlights the effect of work stealing for $problem\_size=3000$ on 4 and 8 threads. As it can be observed, in the region where the number of tasks created is same as the number of cores, this effect is more significant. Although we are not sure how work stealing is causing this effect, we used the term $n_t$.
+Figure~\ref{fig40} highlights the effect of work stealing for $problem\_size=3000$ on 4 and 8 threads. As it can be observed, in the region where the number of tasks created is same as the number of cores, this effect is more significant. Although we are not sure how work stealing is causing this effect, \textcolor{red}{we can use a term with Normal distribution with $\mu=\frac{ps}{N}$. We believe this term is originated from HPX's implementation of work stealing, and although it affects the execution time at certain points, since it only adds to the execution time at those points, and our interest is finding the flat region of the graph with the minimum execution time, at this point and for this purpose we could ignore this term in our upcoming calculations.}  
 
 
 \vspace{\baselineskip}	
