@@ -139,12 +139,6 @@ execution\_time =
 \end{aligned}
 \end{equation}
 
-In order to test the proposed model we created a benchmark based on a simple \textit{for\textunderscore{loop}} with different number of iterations, iteration lengths, and chunk sizes, as shown in Listing~\ref{hpx_for_loop}. 
-Each iteration consists of a while loop that makes sure the iteration lasts a certain amount of time($iter\_{length}$). By changing $iter\_{length}$, $num\_{iterations}$, and $chunk\_{size}$, we can see how the execution time changes when the problem is executed on different number of cores. Here, we define \textit{problem\textunderscore{size}} as the time it takes to execute all the iterations, which is:
-
-\begin{equation}\label{problem_size}
-problem\_size = iter\_length\times{num\_iterations}
-\end{equation}
 
 Figure~\ref{fig40} highlights the effect of work stealing for $problem\_size=3000$ on 4 and 8 threads. As it can be observed, in the region where the number of tasks created is same as the number of cores, this effect is more significant. Although we are not sure how work stealing is causing this effect, \textcolor{red}{we can use a term with Normal distribution with $\mu=\frac{ps}{N}$. We believe this term is originated from HPX's implementation of work stealing, and although it affects the execution time at certain points, since it only adds to the execution time at those points, and our interest is finding the flat region of the graph with the minimum execution time, at this point and for this purpose we could ignore this term in our upcoming calculations.}  
 By ignoring the overhead caused by work stealing at this point, Formula~\ref{formula1} is simplified into Formula~\ref{formula7}, which will be referred to as our proposed analytical model in the next sections. 
@@ -186,7 +180,80 @@ The maximum number of tasks assigned to one core, and the number of cores that a
 
 \vspace{\baselineskip}
 \subsection{Validating the Proposed Model}
-In order to test how the well the suggested model in Formula~\ref{formula7} could fit the data, we collected a considerable amount of data with different configurations of number of cores($N$), number of iterations(\emph{num\_{iterations}}), and chunk size($chunk\_{size}$). We set $iter\_{length}$ to $1\mu\text{sec}$ for simplification. For each $num\_{iterations}$, we change the $chunk\_{size}$ from 1 to $num\_{iterations}$ in logarithmic scale. Each of these runs was executed for $N=1,2,3,...,8$.  
+In order to validate the proposed model, we created a benchmark based on a simple \textit{for\textunderscore{loop}} with different number of iterations, iteration lengths, and chunk sizes, as shown in Listing~\ref{hpx_for_loop}. 
+Each iteration consists of a while loop that makes sure the iteration lasts a certain amount of time($iter\_{length}$). By changing $iter\_{length}$, $num\_{iterations}$, and $chunk\_{size}$, we can see how the execution time changes when the problem is executed on different number of cores. Here, we define \textit{problem\textunderscore{size}} as the time it takes to execute all the iterations, which is:
+
+\begin{equation}\label{problem_size}
+problem\_size = iter\_length\times{num\_iterations}
+\end{equation}
+
+For this specific problem $t\_c=w\_c$ since there is no actual work happening  $t\_{seq}=problem\_{size}$ and $t\_c=w\_c$.
+ 
+In order to test how the well the suggested model in Formula~\ref{formula7} could fit the data for this problem, we collected a considerable amount of data (around 20,000 data points) with different configurations of number of cores($N$), number of iterations(\emph{num\_{iterations}}), and chunk size($chunk\_{size}$). We set $iter\_{length}$ to $1\mu\text{sec}$ for simplification. For each $num\_{iterations}$, we change the $chunk\_{size}$ from 1 to $num\_{iterations}$ in logarithmic scale. Each of these runs was executed for $N=1,2,3,...,8$.  
+
+\begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,floatplacement=H,caption= {A simple hpx for\textunderscore{loop} used to study the effect of grain size on the achieved parallelism.}, label={hpx_for_loop}]
+
+///////////////////////////////////////////////////////////////////////////////
+void measure_function_futures_for_loop(std::uint64_t count, bool csv, std::uint64_t chunk_size, std::uint64_t iter_length)
+{
+// start the clock
+high_resolution_timer walltime;
+hpx::parallel::for_loop(hpx::parallel::execution::par.with(
+hpx::parallel::execution::dynamic_chunk_size( chunk_size )),
+0, count, [&](std::uint64_t) { worker_timed(iter_length*1000); });
+// stop the clock
+const double duration = walltime.elapsed();
+print_stats("for_loop", "par", "parallel_executor", count, duration, csv);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+int hpx_main(variables_map& vm)
+{
+{
+const int repetitions = vm["repetitions"].as<int>();
+num_threads = hpx::get_num_worker_threads();
+const std::uint64_t chunk_size = vm["chunk_size"].as<std::uint64_t>();
+const std::uint64_t iter_length = vm["iter_length"].as<std::uint64_t>();
+const std::uint64_t count = vm["num_iterations"].as<std::uint64_t>();
+bool csv = vm.count("csv") != 0;
+if (HPX_UNLIKELY(0 == count))
+throw std::logic_error("error: count of 0 futures specified\n");
+for (int i = 0; i < repetitions; i++)
+{
+measure_function_futures_for_loop(count, csv, chunk_size, iter_length);
+}
+}
+return hpx::finalize();
+}
+///////////////////////////////////////////////////////////////////////////////
+inline void worker_timed(std::uint64_t delay_ns)
+{
+if (delay_ns == 0)
+return;
+std::uint64_t start = hpx::util::high_resolution_clock::now();
+while (true)
+{
+// Check if we've reached the specified delay.
+if ((hpx::util::high_resolution_clock::now() - start) >= delay_ns)
+break;
+}
+}
+///////////////////////////////////////////////////////////////////////////////
+int main(int argc, char* argv[])
+{
+// Configure application-specific options.
+options_description cmdline("usage: " HPX_APPLICATION_STRING " [options]");
+cmdline.add_options()("num_iterations",
+value<std::uint64_t>()->default_value(500000),
+"number of iterations to invoke")
+("repetitions", value<int>()->default_value(1),
+"number of repetitions of the full benchmark")
+("iter_length",value<std::uint64_t>()->default_value(1), "length of each iteration")
+("chunk_size",value<std::uint64_t>()->default_value(1), "chunk size");
+// Initialize and run HPX.
+return init(cmdline, argc, argv);
+}
+\end{lstlisting}
 
 As an example, for $problem\_{size}=100000$, we have collected 64 data points for each $N=1,2,...,8$, resulting in $512$ data points in total. Figure~\ref{fig41} shows the execution time for different grain sizes ranging from 1 to 100000 for $problem\_{size}=100,000$ with $N=8$.
 
@@ -214,28 +281,28 @@ Using all the $728$ data points for different number of cores, we used the $opti
 \begin{figure}[H]
 	\centering
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000_1.png}	
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_1.png}	
 		\label{fig43:a}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000_2.png}	
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_2.png}	
 	\label{fig43:b}}\hfill
 	\subfloat[]
-{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000_3.png}	
+{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_3.png}	
 	\label{fig43:c}}
 \subfloat[]
-{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000_4.png}	
+{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_4.png}	
 	\label{fig43:d}}\hfill
 	\subfloat[]
-{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000_5.png}	
+{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_5.png}	
 	\label{fig43:e}}
 \subfloat[]
-{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000_6.png}	
+{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_6.png}	
 	\label{fig43:f}}\hfill
 	\subfloat[]
-{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000_7.png}	
+{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_7.png}	
 	\label{fig43:g}}
 \subfloat[]
-{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000_8.png}	
+{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_8.png}	
 	\label{fig43:h}}\hfill
 	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=100,000,000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores.. The unit for execution time is microseconds.}
 	\label{fig43}	
@@ -327,14 +394,6 @@ We used $problem\_{size}=1,000,000$, and after curve fitting the parameters $\al
 	\caption{The average $R^2$ score of using the result of curve fitting for $problem\_size=100,000,000$ for predicting the execution of different $problem\_{sizes}$ for different number of cores, on \textit{Medusa} node.}\label{fig49}		
 \end{figure}
 
-
-\subsection{Generalizing the Proposed Analytical Model}
-In the previous section we proposed an analytical model to predict the execution time based on grain size for a simple for loop benchmark. In this section we aim to generalize the proposed model from the simple for loop in Listing~\ref{hpx_for_loop} in which the work executed at each iteration is actually keeping that thread busy for a certain amount of time, into loops that are performing some work. 
-
-To  
-
-
-\subsection{Applying the Proposed Model to the Blazemark Data}
 
 %\vspace{\baselineskip}	
 %\begin{table}[H]
@@ -579,69 +638,7 @@ If $g<g\_{max}$, we can assure that $imbalance\_{ratio}$ never exceeds $\lambda_
 
 
 
-\begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,floatplacement=H,caption= {A simple hpx for\textunderscore{loop} used to study the effect of grain size on the achieved parallelism.}, label={hpx_for_loop}]
 
-///////////////////////////////////////////////////////////////////////////////
-void measure_function_futures_for_loop(std::uint64_t count, bool csv, std::uint64_t chunk_size, std::uint64_t iter_length)
-{
-// start the clock
-high_resolution_timer walltime;
-hpx::parallel::for_loop(hpx::parallel::execution::par.with(
-hpx::parallel::execution::dynamic_chunk_size( chunk_size )),
-0, count, [&](std::uint64_t) { worker_timed(iter_length*1000); });
-// stop the clock
-const double duration = walltime.elapsed();
-print_stats("for_loop", "par", "parallel_executor", count, duration, csv);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-int hpx_main(variables_map& vm)
-{
-{
-const int repetitions = vm["repetitions"].as<int>();
-num_threads = hpx::get_num_worker_threads();
-const std::uint64_t chunk_size = vm["chunk_size"].as<std::uint64_t>();
-const std::uint64_t iter_length = vm["iter_length"].as<std::uint64_t>();
-const std::uint64_t count = vm["num_iterations"].as<std::uint64_t>();
-bool csv = vm.count("csv") != 0;
-if (HPX_UNLIKELY(0 == count))
-throw std::logic_error("error: count of 0 futures specified\n");
-for (int i = 0; i < repetitions; i++)
-{
-measure_function_futures_for_loop(count, csv, chunk_size, iter_length);
-}
-}
-return hpx::finalize();
-}
-///////////////////////////////////////////////////////////////////////////////
-inline void worker_timed(std::uint64_t delay_ns)
-{
-if (delay_ns == 0)
-return;
-std::uint64_t start = hpx::util::high_resolution_clock::now();
-while (true)
-{
-// Check if we've reached the specified delay.
-if ((hpx::util::high_resolution_clock::now() - start) >= delay_ns)
-break;
-}
-}
-///////////////////////////////////////////////////////////////////////////////
-int main(int argc, char* argv[])
-{
-// Configure application-specific options.
-options_description cmdline("usage: " HPX_APPLICATION_STRING " [options]");
-cmdline.add_options()("num_iterations",
-value<std::uint64_t>()->default_value(500000),
-"number of iterations to invoke")
-("repetitions", value<int>()->default_value(1),
-"number of repetitions of the full benchmark")
-("iter_length",value<std::uint64_t>()->default_value(1), "length of each iteration")
-("chunk_size",value<std::uint64_t>()->default_value(1), "chunk size");
-// Initialize and run HPX.
-return init(cmdline, argc, argv);
-}
-\end{lstlisting}
 
 \vspace{\baselineskip}
 \subsection{Identifying the range of grain size for maximum speedup}
@@ -651,13 +648,73 @@ Integrating Formula~\ref{formula4} and Formula~\ref{formula21} suggests the foll
 
 \begin{equation}\label{formula23}
 \begin{aligned}
-{\sqrt{\frac{(\frac{\alpha}{N}+\delta)\times{problem\_{size}}}{{\lambda_b}}}}\leq{g}\leq\frac{problem\_{size}}{(1+\left\lceil{\frac{1}{\lambda_s}}\right\rceil)\times{N}}
+{\sqrt{\frac{(\frac{\alpha}{N})\times{problem\_{size}}}{{\lambda_b}}}}\leq{g}\leq\frac{problem\_{size}}{(1+\left\lceil{\frac{1}{\lambda_s}}\right\rceil)\times{N}}
 \end{aligned}
 \end{equation}
  
 Where $0\leq\lambda_s\leq1$, and $\lambda_b,\lambda_s\ll1$.
 
-In this section we represent the identified range for a number of problem sizes, with different number of cores.
+Note that based on Formula~\ref{formula23} we can state,
+
+\begin{equation}\label{formula43}
+\begin{aligned}
+{\sqrt{\frac{(\frac{\alpha}{N})\times{problem\_{size}}}{{\lambda_b}}}}\leq{g}\leq\frac{problem\_{size}}{(1+\left\lceil{\frac{1}{\lambda_s}}\right\rceil)\times{N}}<\frac{problem\_{size}}{N}.
+\end{aligned}
+\end{equation}
+
+Which shows that the minimum execution time is achieved at a grain size smaller than $\frac{problem\_{size}}{N}$.
+ 
+
+\subsection{Locating the Flat Region of the Execution time vs Grain Size Graph for the Benchmark}
+
+We used Formula~\ref{formula23} to identify the flat region of the execution time vs grain size graph for the benchmark in Listing~\ref{hpx_for_loop}. We set $\lambda_{s}=0.1$ and $\lambda_{b}=0.1$ for the thresholds to find the flat region of the graph. $\lambda_{b}$ represents the minimum and $\lambda_{s}$ represents the maximum acceptable value for grain size to lay in the flat region of the graph, based on Formula~\ref{formula23}. $\lambda_{b}$ indicates the slope of the graph at the left hand side of the graph where overhead of tasks is the dominant factor. $\lambda_{b}=0.1$ shows an angle of around $5\textdegree$, which seems to be a reasonable threshold. Grain sizes smaller than $\sqrt{\frac{(\frac{\alpha}{N})\times{problem\_{size}}}{{\lambda_b}}}$ would create a slope of more than $\lambda_b$. As for $\lambda_s$, a grain size greater than       
+$\frac{problem\_{size}}{(1+\left\lceil{\frac{1}{\lambda_s}}\right\rceil)\times{N}}$ could generate an $imbalance\_{ratio}$ of greater than $\lambda_s$. Therefore, for grain sizes within the range in Formula~\ref{formula43} we are in a safe region. 
+In Figure~\ref{fig51} the identified regions for minimum execution time is shown in green, for $problem\_{size}=10000,\:100000,\:1000000,\:10000000,\:100000000$, executed on $8$ cores. 
+
+
+\begin{figure}[H]
+	\centering
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/marvin_10000_8_range_10_10.png}	
+		\label{fig51:a}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/marvin_100000_8_range_10_10.png}	
+		\label{fig51:b}}\hfill
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/marvin_1000000_8_range_10_10.png}	
+		\label{fig51:c}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/marvin_10000000_8_range_10_10.png}	
+		\label{fig51:d}}\hfill
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/marvin_100000000_8_range_10_10.png}	
+		\label{fig51:e}}
+	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=$, for (a) 10000, (b) 100000, (c) 1000000, (d) 10000000, (e) 100000000, on 8 cores, with $\lambda_{s}=0.1$ and $\lambda_{b}=0.1$. The unit for execution time is microseconds.}
+	\label{fig51}	
+\end{figure}
+
+
+
+\subsection{Applying the Proposed Model to the Blazemark Data}
+In the previous section we proposed an analytical model to predict how execution time changes with grain size, and suggested a method to estimate the range of grain size for a specific $problem\_{size}$ ran on a certain number of cores to stay in the region of minimum execution time. We then tested the proposed model on a simple for loop benchmark, an the results seemed promising.
+In this section we revisit our original problem of predicting the behavior of the Blaze linear algebra library. 
+We start by looking at the data collected from $DMATDMATADD$ benchmark, which represents addition of two row major square dense matrices.
+  
+As we previously stated in Chapter~\ref{Method}, for the collected data, the \emph{DMATDMATADD} benchmark was executed with different configurations of $block\_{size}$, $chunk\_{size}$, and number of cores, for different matrix sizes. 
+As discussed earlier the collected data suggested that instead of looking at $block\_{size}$ and then $chunk\_{size}$, we can study the effect of grain size on execution time. By identifying the range of grain size that ensures staying in the flat region of the bathtub, we can then select a reasonable value for $block\_{size}$, we can find the range of $chunk\_{sizes}$ to generate the mentioned range of grain size. A reasonable value for size a block, for an operation on row major matrices, would be a matrix with larger number of columns than number of rows, where number of columns is divisible by cache line, and the number of elements in the block multiplied by number of matrices involved in an operation, is smaller than L2 cache size. With these assumptions we selected the value of $4\times{256}$ for $block\_{size}$ for this benchmark.
+
+In the previous section we suggested Formula~\ref{formula1} as an analytical model to explain the relationship between execution time and grain size in a balanced parallel for loop.   
+
+\begin{equation}
+\begin{aligned}
+execution\_time = 
+\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_{seq}\times{\frac{w\_c}{problem\_{size}}}\times{(1\:\:+\:\:\gamma\times{(M-1)})}\:\:\\
+&+\:\:t\_{overhead\_{ws}}\\
+\end{aligned}
+\end{equation}
+
+Previously, using the benchmark we were able to find the value for the parameters of the model on $Marvin$ node as $\alpha=$ and $\gamma=$. 
+
 
 
 %\vspace{\baselineskip}
