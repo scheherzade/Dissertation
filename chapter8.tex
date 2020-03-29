@@ -140,40 +140,18 @@ execution\_time =
 \end{equation}
 
 
-Figure~\ref{fig40} highlights the effect of work stealing for $problem\_size=3000$ on 4 and 8 threads. As it can be observed, in the region where the number of tasks created is same as the number of cores, this effect is more significant. Although we are not sure how work stealing is causing this effect, \textcolor{red}{we can use a term with Normal distribution with $\mu=\frac{ps}{N}$. We believe this term is originated from HPX's implementation of work stealing, and although it affects the execution time at certain points, since it only adds to the execution time at those points, and our interest is finding the flat region of the graph with the minimum execution time, at this point and for this purpose we could ignore this term in our upcoming calculations.}  
+ Although we are not sure how work stealing is causing this effect, \textcolor{red}{we can use a term with Normal distribution with $\mu=\frac{ps}{N}$. We believe this term is originated from HPX's implementation of work stealing, and although it affects the execution time at certain points, since it only adds to the execution time at those points, and our interest is finding the flat region of the graph with the minimum execution time, at this point and for this purpose we could ignore this term in our upcoming calculations.}  
 By ignoring the overhead caused by work stealing at this point, Formula~\ref{formula1} is simplified into Formula~\ref{formula7}, which will be referred to as our proposed analytical model in the next sections. 
 
 \begin{equation}\label{formula7}
 \begin{aligned}
 execution\_time = 
-\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_c\:\:+\:\:\gamma\times{t\_c}\times{(M-1)}
+\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_c\:\:+\:\:\gamma\times{t\_c}\times{(M-1)}\\
+=\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_{seq}\times{\frac{w\_c}{problem\_{size}}}\times{(1\:\:+\:\:\gamma\times{(M-1)})}
 \end{aligned}
 \end{equation}
 
-\vspace{\baselineskip}	
-\begin{figure}[H]
-	\centering
-	\subfloat[]{\includegraphics[scale=.4]{images/hpx_for_loop/3000_4_1_all.png}\label{fig40:a}}{\hfill}
-	\subfloat[]{\includegraphics[scale=.4]{images/hpx_for_loop/3000_8_1_all.png}\label{fig40:b}}
-	\caption{The results of running the benchmark in Listing with $problem\_size=3000$, on different (a)4 cores, and (b) 8 cores. The vertical dotted line shows the grain size that would generate same number of tasks as the number of cores, with the same amount of work for all the cores.}\label{fig40}		
-\end{figure}
- 
- 
- 
-Figure~\ref{fig39} shows an example of the results obtained from running the benchmark, for $problem\_size=10000$, on different number of cores.
-
-\vspace{\baselineskip}	
-\begin{figure}[H]
-	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/10000_8_all.png}}
-	\caption{The results of running the benchmark in Listing with $problem\_size=10000$, on different number of cores.}\label{fig39}		
-\end{figure}
-
-As stated in Chapter~\ref{Background}, at the right hand side of the graph in Figure~\ref{fig39}, the number of tasks created is smaller than the number of cores which results in making at least one of the cores idle, while the other cores are assigned a rather big chunk of work. The performance degradation we observe in that points is associated with starvation, meaning that we are not utilizing our computation resources to the full extent. In these points, the number of cores actually doing the work is equal to the number of the tasks, since each core gets to execute at most one task. At this region of the graph, the time to execute the maximum assigned work to a core ($t\_c$) is the dominant factor.   
-
-On the other hand, on the left hand side of the graph, since the grain size is very small we end up with creating a large number of tasks. Since there is an overhead associated with each created task, we observe a performance degradation in that region. As the grain size increases, the number of created tasks, and the overhead associated to that decreases consequently. At this region of the graph, the overhead of creating and managing the tasks is the dominant factor.   
-
-To summarize, for this simple experiment, where we do not have to deal with the cash effects, we believe the important factors are: number of HPX threads being created, number of cores the program is ran on, the maximum amount of work one core has to perform. 
+To summarize, we believe the important factors in determining the execution time in a balanced parallel for loop are: number of HPX threads being created, number of cores the program is ran on, and the maximum amount of work one core has to perform. 
 
 The maximum number of tasks assigned to one core, and the number of cores that are actually performing the work, are two other important factors that can be deducted from the aforementioned factors. 
 
@@ -255,10 +233,9 @@ return init(cmdline, argc, argv);
 }
 \end{lstlisting}
 
-As an example, for $problem\_{size}=100000$, we have collected 64 data points for each $N=1,2,...,8$, resulting in $512$ data points in total. Figure~\ref{fig41} shows the execution time for different grain sizes ranging from 1 to 100000 for $problem\_{size}=100,000$ with $N=8$.
+%As an example, for $problem\_{size}=100000$, we have collected 64 data points for each $N=1,2,...,8$, resulting in $512$ data points in total. Figure~\ref{fig41} shows the execution time for different grain sizes ranging from 1 to 100000 for $problem\_{size}=100,000$ with $N=8$.
 
-
-
+Figure~\ref{fig39} shows an example of the results obtained from running the benchmark, for $problem\_size=100000000$, on different number of cores.
 \begin{figure}[H]
 	\centering
 	{\includegraphics[scale=.45]{images/hpx_for_loop/100000_8.png}}
@@ -266,14 +243,38 @@ As an example, for $problem\_{size}=100000$, we have collected 64 data points fo
 \end{figure}
 
 
+%\vspace{\baselineskip}	
+%\begin{figure}[H]
+%	\centering
+%	{\includegraphics[scale=.45]{images/hpx_for_loop/10000_8_all.png}}
+%	\caption{The results of running the benchmark in Listing with $problem\_size=10000$, on different number of cores.}\label{fig39}		
+%\end{figure}
+
+As stated in Chapter~\ref{Background}, at the right hand side of the graph in Figure~\ref{fig39}, the number of tasks created is smaller than the number of cores which results in making at least one of the cores idle, while the other cores are assigned a rather big chunk of work. The performance degradation we observe in that points is associated with starvation, meaning that we are not utilizing our computation resources to the full extent. In these points, the number of cores actually doing the work is equal to the number of the tasks, since each core gets to execute at most one task. At this region of the graph, the time to execute the maximum assigned work to a core ($t\_c$) is the dominant factor.   
+
+On the other hand, on the left hand side of the graph, since the grain size is very small we end up with creating a large number of tasks. Since there is an overhead associated with each created task, we observe a performance degradation in that region. As the grain size increases, the number of created tasks, and the overhead associated to that decreases consequently. At this region of the graph, the overhead of creating and managing the tasks is the dominant factor.   
+
+
+Figure~\ref{fig40} shows the effect of work stealing for $problem\_size=3000$ on 4 and 8 threads. As it can be observed, in the region where the number of tasks created is same as the number of cores, this effect is more significant.
+
+\vspace{\baselineskip}	
+\begin{figure}[H]
+	\centering
+	\subfloat[]{\includegraphics[scale=.4]{images/hpx_for_loop/3000_4_1_all.png}\label{fig40:a}}{\hfill}
+	\subfloat[]{\includegraphics[scale=.4]{images/hpx_for_loop/3000_8_1_all.png}\label{fig40:b}}
+	\caption{The results of running the benchmark in Listing with $problem\_size=3000$, on different (a)4 cores, and (b) 8 cores. The vertical dotted line shows the grain size that would generate same number of tasks as the number of cores, with the same amount of work for all the cores.}\label{fig40}		
+\end{figure}
+
+
+
 Since our proposed model does not depend on the $problem\_{size}$ but on the number of tasks created, number of cores, and the time to execute the maximum amount of work assigned to a core, we are suggesting here that it might be sufficient to use the data collected from one $problem\_{size}$ to find the parameters $\alpha$ and $\gamma$. 
 
 In order to test the viability of our proposition, we chose $problem\_{size}=100,000,000$ as a reasonable(not too small nor too large) base for our parameter estimation. Figure~\ref{fig42} shows the measured execution time in terms of grain size for $N=1,2,...,8$, with total $728$ points.
-  
+ 
 \begin{figure}[H]
 	\centering
 	{\includegraphics[scale=.45]{images/hpx_for_loop/100000000_8.png}}
-	\caption{The results of running the benchmark in Listing with $problem\_size=100,000,000$, on 8 cores. The unit for execution time is microseconds.}\label{fig42}		
+	\caption{The results of running the benchmark in Listing with $problem\_size=100,000,000$, on different number of cores. The unit for execution time is microseconds.}\label{fig42}		
 \end{figure}
 
 Using all the $728$ data points for different number of cores, we used the $optimize.curve_fit$ package from $scipy$ library in Python to fit the collected data with our model, which resulted in $alpha=3.032$ and $\gamma=0.294$. $\alpha$ represents the overhead of creating associated with creating tasks in $\mu{secs}$, and $\gamma$ represents the contention.
@@ -319,8 +320,7 @@ Relative\_{error} = \frac{1}{n}\sum_{i=1}^{n} {|1-\frac{p_i}{t_i}|}
 
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_relative_error_100000000.png}}
-	\caption{The relative error of using the result of curve fitting for predicting the execution, for different number of cores, for $problem\_size=100,000$.}\label{fig44}		
+	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_relative_error_100000000.png}}	\caption{The relative error of using the result of curve fitting for predicting the execution, calculated for each specific number of cores individually, for $problem\_size=100,000$.}\label{fig44}		
 \end{figure}
 
 
@@ -328,7 +328,7 @@ Relative\_{error} = \frac{1}{n}\sum_{i=1}^{n} {|1-\frac{p_i}{t_i}|}
 \begin{figure}[H]
 	\centering
 	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_relative_error_all.png}}
-	\caption{The average relative error of using the result of curve fitting for $problem\_size=100,000,000$ for predicting the execution of different $problem\_{sizes}$ for different number of cores.}\label{fig45}		
+	\caption{The average relative error of using the result of curve fitting for $problem\_size=100,000,000$ for predicting the execution of different $problem\_{sizes}$ calculated for each specific number of cores individually.}\label{fig45}		
 \end{figure}
 
 \begin{equation}{\label{eq5}}
@@ -338,7 +338,7 @@ R\textunderscore{squared} = 1-\frac{{\frac{1}{n}\sum_{i=1}^{n}{(t_i-p_i)}^2}}{Va
 \begin{figure}[H]
 	\centering
 	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_r2_error_all.png}}
-	\caption{The average $R^2$ score of using the result of curve fitting for $problem\_size=100,000,000$ for predicting the execution of different $problem\_{sizes}$ for different number of cores.}\label{fig46}		
+	\caption{The average $R^2$ score of using the result of curve fitting for $problem\_size=100,000,000$ for predicting the execution of different $problem\_{sizes}$ calculated for each specific number of cores individually.}\label{fig46}		
 \end{figure}
 
 At the next step we repeated the same process for the data collected from a different architecture, \textit{Medusa} node.
@@ -435,9 +435,9 @@ Taking the derivative of the function based on the grain size then leads to:
  
 \begin{equation}\label{formula3}
 \begin{aligned}
-\frac{\partial execution\_{time}}{\partial g} &= \frac{\alpha}{N}\times{\frac{\partial num\_{tasks}}{\partial g}}+\delta\times{\frac{\partial num\_{tasks}}{\partial g}} \\
-&=(\frac{\alpha}{N}+\delta)\times\frac{\partial(\frac{problem\_{size}}{g})}{\partial g} \\
-&=(\frac{\alpha}{N}+\delta)\times{problem\_{size}}\times{\frac{-1}{g^2}}
+\frac{\partial execution\_{time}}{\partial g} &= \frac{\alpha}{N}\times{\frac{\partial num\_{tasks}}{\partial g}}\\
+&=\frac{\alpha}{N}\times\frac{\partial(\frac{problem\_{size}}{g})}{\partial g} \\
+&=\frac{\alpha}{N}\times{problem\_{size}}\times{\frac{-1}{g^2}}
 \end{aligned}
 \end{equation}
 
@@ -447,7 +447,7 @@ From Formula~\ref{formula3}, it can be observed that for the left hand side of t
 \begin{equation}\label{formula4}
 \begin{aligned}
 &\frac{\alpha}{N}\times{problem\_{size}}\times{\frac{1}{g^2}}\leq{\lambda_b} \\
-{g^2}&\geq{\frac{(\frac{\alpha}{N}+\delta)\times{problem\_{size}}}{\lambda_b}}\\
+{g^2}&\geq{\frac{\frac{\alpha}{N}\times{problem\_{size}}}{\lambda_b}}\\
 {g}&\geq{\sqrt{\frac{\frac{\alpha}{N}\times{problem\_{size}}}{\lambda_b}}}
 \end{aligned}
 \end{equation}
@@ -712,11 +712,14 @@ execution\_time =
 \end{aligned}
 \end{equation}
 
+$problem\_{size}$ in Formula~\ref{formula1} refers to the total amount of work available. For $matrix\_{size}=m$, performing $DMATDMATADD$ benchmark, $problem\_{size}=2\times{m^2}$, which is the total amount of floating point operations needed to be performed.
+ 
 Previously, using the benchmark we were able to find the value for the parameters of the model on $Marvin$ node as $\alpha=3.032$ and $\gamma=0.294$. 
 
 Grain size, as the amount of work executed by one thread, for this problem is represented by the number of floating point operations performed by one thread. As an example, if $block\_{size}=4\times{256}$, and $chunk\_{size}=3$ performing $DMATDMATADD$ benchmark, would result in a $grain\_{size}$ of $2\times{4\times{256}\times{3}}=6144$. 
 
 Figure~\ref{fig52} and Figure~\ref{fig53} show the results of applying the proposed analytical model with the parameters identified through the benchmark, to $DMATDMATADD$ benchmark, alongside the true values for the execution collected, for $matrix\_{size}=690$ and $matrix\_{size}=4222$ respectively, for different number of cores. 
+
 
 \begin{figure}[H]
 	\centering
@@ -777,6 +780,63 @@ Figure~\ref{fig52} and Figure~\ref{fig53} show the results of applying the propo
 	\caption{The results of predicting execution time using the suggested analytical model with parameters identified using the benchmark compared to the original values for $matrix\_{size}=4222$, ran on (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, and (h) 8 cores. The unit for execution time is microseconds.}
 	\label{fig53}	
 \end{figure}
+
+The $DMATDMATADD$ benchmark was run on $Marvin$ node with $Sandy\:Bridge$ architecture, with $256KB$ of level 2 cache, and $20MB$ of level 3 cache. In order for the $3$ same sized square matrices involved in $DMATDMATADD$ benchmark ($C=A+B$) to fit into level3 cache, they must be smaller than $935\times{935}$ in size. 
+
+For matrix sizes greater than $935$, we observe an increase in execution time from our prediction using the proposed analytical model, as represented in Figure~\ref{fig53}. We have to pay a penalty for loading data from memory instead of cache.\textcolor{red}{why do we see the effect for all grain sizes, shouldn't it start at explain more}.
+Figure~\ref{fig54} shows the average relative error, while Figure~\ref{fig55} represents the average $R^2$ score both calculated for each specific number of cores individually, and for matrix sizes smaller than $935$.
+
+\begin{figure}[H]
+	\centering
+	{\includegraphics[scale=.45]{images/hpx_for_loop/blazemark/marvin_relative_error_less_953.png}}
+	\caption{The relative error of using the predicting the execution time based on grain size for the $DMATDMATADD$ benchmark from $Blazemark$ suite. The relative error of all matrix sizes smaller than $953$ was averaged for each specific number of cores.}\label{fig54}		
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	{\includegraphics[scale=.45]{images/hpx_for_loop/blazemark/marvin_r2_error_less_953.png}}
+	\caption{The $R^2$ score of using the predicting the execution time based on grain size for the $DMATDMATADD$ benchmark from $Blazemark$ suite. The relative error of all matrix sizes smaller than $953$ was averaged for each specific number of cores.}\label{fig55}		
+\end{figure}
+
+Although we had completely ignored cache effects up until here for simplification, Figure~\ref{fig53} suggests that these effects do not influence the location of the flat region in the graph, which is the area with very small changes in execution time over which we observe the lowest execution time.   
+
+Figure~\ref{fig56} shows the identified range for minimum execution time based on Formula~\ref{eq4}, for different matrix sizes ran on 8 cores.
+
+\begin{figure}[H]
+	\centering
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_690_8_10_500.png}	
+		\label{fig56:a}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_912_8_10_500.png}	
+		\label{fig56:b}}\hfill
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_1825_8_10_500.png}	
+		\label{fig56:c}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_3193_8_10_500.png}	
+		\label{fig56:d}}\hfill
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_4222_8_10_500.png}	
+	\label{fig56:e}}
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_4855_8_10_500.png}	
+	\label{fig56:f}}
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_6420_8_10_500.png}	
+	\label{fig56:g}}
+	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $matrix\_size=$, for (a) 690, (b) 912, (c) 1825, (d) 3193, (e) 4222, (f) 4855, (g) 6420, on 8 cores, with $\lambda_{s}=0.5$ and $\lambda_{b}=0.01$. The unit for execution time is microseconds.}
+	\label{fig56}	
+\end{figure}
+
+
+\subsection{Predicting the Range of Chunk Size for Minimum Execution Time}
+Having identified the range of minimum execution time for each matrix size, we can find the range of chunk size that would result in that range of grain size, for a specific block size.
+As stated before, block size of $4\times{256}$ was selected as a safe choice for $DMATDMATADD$ benchmark. 
+
+
+
+In the previous sections we offered an analytical model to predict the behavior of execution time vs grain size for a balanced parallel loop, and based on that model suggested a method to estimate the range of grain size to ensure staying in the flat region of the bathtub curve of execution time. The proposed model was then validated using a simple implemented benchmark. The parameters found through the benchmark was then utilized to predict the execution time of the $DMATDMATADD$ benchmark from $Blazemark$ suite. We were also able to find the range of grain size to achieve minimum execution time.   
+ 
+
 
 %\vspace{\baselineskip}
 %\subsection{Analyzing the Data}
