@@ -334,8 +334,9 @@ For our experiment, we divided the data into two sections, training and test. $6
 For the matrix size $690\times690$ our dataset contained 117 data points, 72 of which was randomly selected to build the model. The mean relative error for each number of cores, calculated using Equation~\ref{eq2}, is represented in Figure~\ref{fig11} for training and test set. In this equation, $t_i$ and $p_i$ denote the true value and the predicted value of the $i$th sample respectively, where $n$ is the number of samples with the particular number of cores. 
 
 \begin{equation}{\label{eq2}}
-Relative\:\:Error = \frac{1}{n}\sum_{i=1}^{n} {1-p_i/t_i}
+Relative\_{error} = \frac{1}{n}\sum_{i=1}^{n} {|1-\frac{p_i}{t_i}|}
 \end{equation}
+
 
 \vspace{\baselineskip}	
 \begin{figure}[H]
@@ -457,5 +458,37 @@ For example, for a $690\times690$ matrix we calculated the range of maximum perf
 \end{figure}
 
 
+\section{Conclusion}
+In this chapter we offered a simple method to estimate the range of grain size, and consequently the range of chunk size to lie in the region of the throughput against grain size graph, with the highest throughput.
 
+This quadratic model is very simple and finding the range of maximum performance is very easy due to the nature of the function. But this model has some limitations.
+First of all, it is not physical. The parameters of the model does not have a physical implication.
+The other issue is that in this method one function was fitted for each matrix size individually for simplification. Even though the characteristics of the function is the same for all matrix sizes, the fitted parameters vary from one matrix size to another. 
+
+The matrix size should somehow be integrated into the model itself. For this purpose, first we need to understand how changing the matrix size affects the relationship between grain size and performance. 
+One immediate effect of increasing the matrix size is an increase in maximum possible grain size (right hand side of Figure~\ref{fig19} ) , while the minimum possible grain size is the same.
+
+\vspace{\baselineskip}	
+\begin{figure}[H]	
+	\centering\includegraphics[scale=.75]{images/fig11.png}			
+	\caption{Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores.}
+	\label{fig19}	
+\end{figure} 
+
+Moreover, Figure~\ref{fig20} shows how the predicted grain size range changes for different matrix sizes for each number of cores.
+
+\vspace{\baselineskip}	
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.5]{images/polyfit/fig_523-912_peak_range_all.png}
+	
+	\caption{The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark for different number of cores for matrix size $523\times523$ to $912\times912$.}	
+	\label{fig20}
+\end{figure} 
+\vspace{\baselineskip}	
+Also, larger matrix sizes should be added to the experiments to validate the current results. 
+
+
+In the next section we look into a more robust and physical representation of how performance changes with grain size, and consequently predicting the range of grain size and chunk size to achieve the maximum performance. 
+ 
 \vspace{\baselineskip}	 

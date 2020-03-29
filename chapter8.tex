@@ -833,8 +833,43 @@ Having identified the range of minimum execution time for each matrix size, we c
 As stated before, block size of $4\times{256}$ was selected as a safe choice for $DMATDMATADD$ benchmark. 
 
 
+Figure~\ref{fig57} shows the identified range of chunk size for minimum execution time based on Formula~\ref{eq4}, for different matrix sizes ran on 8 cores, when $block\_{size}=4\times{256}$. Each point on the graph is the real data collected from running the $DMATDMATADD$ benchmarks. The red area denotes the proposed range for chunk size, and the red points are the data points that lie in this region. As it can be seen the predicted range for chunk size are reasonable.   
 
-In the previous sections we offered an analytical model to predict the behavior of execution time vs grain size for a balanced parallel loop, and based on that model suggested a method to estimate the range of grain size to ensure staying in the flat region of the bathtub curve of execution time. The proposed model was then validated using a simple implemented benchmark. The parameters found through the benchmark was then utilized to predict the execution time of the $DMATDMATADD$ benchmark from $Blazemark$ suite. We were also able to find the range of grain size to achieve minimum execution time.   
+\begin{figure}[H]
+	\centering
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_690_8_10_500_5_21.png}	
+		\label{fig57:a}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_912_8_10_500_6_37.png}	
+		\label{fig57:b}}\hfill
+	\subfloat[]
+	 {\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_1825_8_10_500_12_152.png}	
+		\label{fig57:c}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_3193_8_10_500_20_432.png}	
+		\label{fig57:d}}\hfill
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_4222_8_10_500_26_747.png}	
+		\label{fig57:e}}
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_4855_8_10_500_30_960.png}	
+		\label{fig57:f}}
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_6420_8_10_500_40_1737.png}	
+		\label{fig57:g}}
+	\caption{The suggested range of chunk size for minimum execution time with $block\_{size}=4\times{256}$, for $matrix\_size=$, for (a) 690, (b) 912, (c) 1825, (d) 3193, (e) 4222, (f) 4855, (g) 6420, on 8 cores, when $\lambda_{s}=0.5$ and $\lambda_{b}=0.01$. The unit for execution time is microseconds.}
+	\label{fig57}	
+\end{figure}
+
+
+\section{Conclusion}
+In the previous sections we offered an analytical model to predict the behavior of execution time vs grain size for a balanced parallel loop, and based on that model suggested a method to estimate the range of grain size to ensure staying in the flat region of the bathtub curve of execution time. The proposed model was then validated using a simple implemented benchmark. The parameters found through the benchmark was then utilized to predict the execution time of the $DMATDMATADD$ benchmark from $Blazemark$ suite. We were also able to find the range of grain size to achieve minimum execution time. 
+At this point by selecting a reasonable value for block size, the range of chunk size to ensure staying in that range of grain size could be identified.
+
+We are proposing to run the benchmark in Listing~\ref{hpx_for_loop} for a reasonable $problem\_{size}$, e.g. $100,000,000$, with different values for chunk size on different number of cores, and use the data to estimate the $\alpha$ and $\gamma$ parameters through curve fitting. This process could be added as an extra step to building process of Blaze. 
+The complexity of the expression to be evaluated is then calculated at compile time as the number of floating point operations. A block size should also be selected based on the available cache size, the cache line, and the number of matrices involved in the operation. This part could also be done at compile time.   
+At runtime, based on the matrix size and number of cores chosen to run the program on, the range of chunk size to achieve the lowest execution time for each specific expression is identified.
+
+It has to be mentioned that although the proposed formula for execution time vs grain size depends on the sequential execution time, the proposed range for minimum execution time does not rely on sequential execution time, but depends on total amount of work, number of cores, overhead of creating and managing tasks, and the values we choose for the threshold on both sides($\lambda_{b}$ and $\lambda_{s}$).
  
 
 
