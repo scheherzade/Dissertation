@@ -42,7 +42,7 @@ The second factor is the overhead caused by work stealing. Although work stealin
 
 HPX by default uses the priority local scheduling policy which creates one queue for each core. When there is no more work left in one core's queue, it will attempt to steal work from other cores starting from it's neighbors. If the attempt is not successful, it will move on to the next level neighbors. This continues until the core that initiates the steals(called the thief) is able to find a core with tasks in their queue which can be stolen(called the victim). 
 
-In HPX there is an optional command line parameter ${--hpx:numa-sensitive}$ to make sure that the thief would try the queues of the cores in the same NUMA domain first. This option is provided based on the fact that it is much faster to access the local memory of a processor than the local memory of another processor.  
+HPX provides an optional command line parameter ${--hpx:numa-sensitive}$ to make sure that the thief would try the queues of the cores in the same NUMA domain first. This option is provided based on the fact that it is much faster to access the local memory of a processor than the local memory of another processor.  
 %In our example we are only using 8 cores from the same NUMA domain 
 
 Expressing the total overhead as the summation of the overhead of creating and managing the tasks, and the overhead resulted from work stealing, as shown in Formula~\ref{formula33},
@@ -103,17 +103,40 @@ Figure~\ref{fig58} illustrates how $w\_c$ is calculated for this case. Each squa
 %\left\{
 %\begin{aligned}
 %&
-%\alpha\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil +\beta\times{(N-1)}{num\_{tasks}}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{if\:\:}num\_{tasks}>N\\
-%&\alpha\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\delta\times\frac{num\_{tasks}-1}{N}+{w\_c+\gamma\times{w\_c}\times{(M-1)}} \:\: \text{otherwise}
+%\alpha\left\lceil{\frac{num\_{tasks}}{M}}\right \rceil +\beta\times{(N-1)}{num\_{tasks}}+{w\_c+\sigma\times{w\_c}\times{(M-1)}} \:\: \text{if\:\:}num\_{tasks}>N\\
+%&\alpha\left \lceil{\frac{num\_{tasks}}{M}}\right \rceil +\delta\times\frac{num\_{tasks}-1}{N}+{w\_c+\sigma\times{w\_c}\times{(M-1)}} \:\: \text{otherwise}
 %\end{aligned}
 %\right.
 %\end{aligned}
 %\end{equation}
 \vspace{\baselineskip}
 
-As discussed in chapter~\ref{Background}, Amdahl's law and Universal Scalibility Law, suggest that, for a fixed problem size, as we increase the number of cores in a multicore system, we do not observe a linear speedup, which is mainly resulted from latency and coherency.
-Universal Scalibilty Law\cite{gunther2007guerrilla} suggests that an overhead associated with the number of cores should be added to the expected execution time. We added a term to Formula~\ref{formula2} to represent this effect. Moreover, we adjusted the formula by changing the total number of cores ($N$) to the number of cores that are actually executing the work ($M$). 
-Assuming we are running our application on $N$ cores, with a grain size equal to $g$, $num\_{tasks}$ tasks are being created, and $M$ cores are actually doing the work. If $num\_{tasks}<N$, $M$ would be equal to $num\_{tasks}$, otherwise $M=N$.
+As discussed in chapter~\ref{Background}, Amdahl's law and Universal Scalibility Law suggest that for a fixed problem size, as we increase the number of cores in a multi-core system, the observed speedup is less than the linear speedup. which is mainly resulted from latency and coherency.
+Universal Scalibilty Law\cite{gunther2007guerrilla} suggests that an overhead associated with the number of cores should be added to the expected execution time. Formula~\ref{formula16} shows the effect of contention($\sigma$) and coherency($\kappa$) in the overall execution time, with sequential execution time of $t_s$, on $N$ cores.
+
+\begin{equation}\label{formula16}
+\begin{aligned}
+ &speed\-up\:\:=\:\:\frac{t_s}{t}\:\:=\:\:\frac{N}{1+\sigma\times{(N-1)}+\kappa\times{N(N-1)}}\Rightarrow\\
+ &t\:\:=\:\:\frac{t_s}{N}\:\:+\:\:\sigma\times{(N-1)}\frac{t_s}{N}\:\:+\:\:\kappa\times{{N\times(N-1)}\frac{t_s}{N}} 
+\end{aligned}
+\end{equation}
+\vspace{\baselineskip}
+
+Formula~\ref{formula16} shows how USL models the overheads due to contention and coherency in execution time, when $\frac{t_s}{N}$ is the expected execution time on $N$ cores in ideal case when the mentioned overheads did not exist.
+
+Based on Formula~\ref{formula16}, we added the term $\sigma\times(N-1)\times{t_c}$ to Formula~\ref{formula32} to represent the overhead observed due to contention effect, assuming $t_c$ is the ideal execution time in this problem. We ignored the overhead due to coherency since we do not expect to experience any inter-process communication overheads in this problem.
+
+\begin{equation}\label{formula34}
+\begin{aligned}
+&execution\_time = 
+\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil\:\:+\:\:t\_{overhead\_{ws}}\:\:+\:\:t\_c\:\:+\:\:t\_c\times{\sigma\times(N-1)}}
+\end{aligned}
+\end{equation}
+%\vspace{\baselineskip}
+ 
+Moreover, we adjusted Formula~\ref{formula34} by changing the total number of cores ($N$) to the number of cores that are actually executing the work ($M$), since there are cases where there is not enough work for all the cores to execute, and we expect the overheads due to contention to be a factor of the cores that are actually performing the work and not just all the cores.
+
+Assuming that we are running our application on $N$ cores, with a grain size equal to $g$, $num\_{tasks}$ tasks are being created, and $M$ cores are actually doing the work. If $num\_{tasks}<N$, $M$ would be equal to $num\_{tasks}$, otherwise $M=N$.
 
 \begin{equation}\label{formula19}
 M=\left\{
@@ -125,19 +148,18 @@ M=\left\{
 \end{equation}
 
 
-Formula~\ref{formula2} is then changed into:
+Formula~\ref{formula34} is then converted into:
 
 \begin{equation}\label{formula1}
 \begin{aligned}
 execution\_time = 
-\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_c\:\:+\:\:\gamma\times{t\_c}\times{(M-1)}\:\:\\
-&+\:\:+\:\:t\_{overhead\_{ws}}
+\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_c\:\:+\:\:\sigma\times{t\_c}\times{(M-1)}\:\:\\
+&+\:\:t\_{overhead\_{ws}}
 \end{aligned}
 \end{equation}
 
-Here $t\_{overhead\_{ws}}$ represents all the overhead created due to work stealing. We did some investigations on where this term is originated from for a more precise modeling, but we were not successful. In order to study this effect, we ran a set of experiments while work stealing was turned of. This is possible through adding the command line option \emph{--hpx:queuing = static-priority}.
 
-As for $t\_{c}$, the time to execute $w\_{c}$ amount of work, where total amount of work available is $problem\_{size}$, since we are looking into balanced loops in this problem, we can estimate $t\_{c}$ as:
+As for $t\_{c}$, the time to execute $w\_{c}$ amount of work, where total amount of work available is $problem\_{size}$, since we are looking into balanced for-loops with almost same amount of work at each iteration, we can estimate $t\_{c}$ as:
 
 \begin{equation}\label{formula41}
 \begin{aligned}
@@ -150,108 +172,126 @@ Where $t\_{seq}$ is the to run the whole amount of work, $problem\_{size}$ seque
 \begin{equation}\label{formula42}
 \begin{aligned}
 execution\_time = 
-\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_{seq}\times{\frac{w\_c}{problem\_{size}}}\times{(1\:\:+\:\:\gamma\times{(M-1)})}\:\:\\
+\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_{seq}\times{\frac{w\_c}{problem\_{size}}}\times{(1\:\:+\:\:\sigma\times{(M-1)})}\:\:\\
 &+\:\:t\_{overhead\_{ws}}\\
 \end{aligned}
 \end{equation}
 
 
- Although we are not sure how work stealing is causing this effect, \textcolor{red}{we can use a term with Normal distribution with $\mu=\frac{ps}{N}$. We believe this term is originated from HPX's implementation of work stealing, and although it affects the execution time at certain points, since it only adds to the execution time at those points, and our interest is finding the flat region of the graph with the minimum execution time, at this point and for this purpose we could ignore this term in our upcoming calculations.}  
+Here $t\_{overhead\_{ws}}$ represents all the overhead created due to work stealing. We did some investigations on where this term is originated from for a more precise modeling, but we were not successful. 
+
+In order to study this effect, we ran a set of experiments while work stealing was turned of. This is possible through adding the command line option \emph{--hpx:queuing = static-priority}.
+
+Figure~\ref{fig40} shows the results of running a benchmark with and without work stealing. The benchmark consists of a HPX for-loop with $3000$ iterations and is executed with different number of chunk sizes from $1$ to $3000$. Each iteration will keep the core busy for $1\mu{sec}$. This benchmark is explained more in the next chapter.
+
+As it can be observed, in the region where the number of tasks created is same as the number of cores, this effect is more significant.
+
+\vspace{\baselineskip}	
+\begin{figure}[H]
+	\centering
+	\subfloat[]{\includegraphics[scale=.4]{images/hpx_for_loop/3000_4_1_all.png}\label{fig40:a}}{\hfill}
+	\subfloat[]{\includegraphics[scale=.4]{images/hpx_for_loop/3000_8_1_all.png}\label{fig40:b}}
+	\caption{The results of running the benchmark in Listing with $problem\_size=3000$, on different (a)4 cores, and (b) 8 cores. The vertical dotted line shows the grain size that would generate same number of tasks as the number of cores, with the same amount of work for all the cores.}\label{fig40}		
+\end{figure}
+
+Although we are not sure how work stealing is causing this effect, the effect is most  noticeable at certain points. Since it only adds to the execution time at those points, and our interest is finding the flat region of the graph with the minimum execution time, at this point and for this purpose we decided to ignore this term in our upcoming calculations. 
+
 By ignoring the overhead caused by work stealing at this point, Formula~\ref{formula1} is simplified into Formula~\ref{formula7}, which will be referred to as our proposed analytical model in the next sections. 
 
 \begin{equation}\label{formula7}
 \begin{aligned}
 execution\_time = 
-\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_c\:\:+\:\:\gamma\times{t\_c}\times{(M-1)}\\
-=\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_{seq}\times{\frac{w\_c}{problem\_{size}}}\times{(1\:\:+\:\:\gamma\times{(M-1)})}
+\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_c\:\:+\:\:\sigma\times{t\_c}\times{(M-1)}\\
+=\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_{seq}\times{\frac{w\_c}{problem\_{size}}}\times{(1\:\:+\:\:\sigma\times{(M-1)})}
 \end{aligned}
 \end{equation}
 
-To summarize, we believe the important factors in determining the execution time in a balanced parallel for-loop are: number of HPX threads being created, number of cores the program is ran on, and the maximum amount of work one core has to perform. 
+To summarize, we believe the important factors in determining the execution time in a balanced parallel for-loop are: number of tasks being created, number of cores the program is ran on, and the maximum amount of work one core has to perform. 
 
 The maximum number of tasks assigned to one core, and the number of cores that are actually performing the work, are two other important factors that can be deducted from the aforementioned factors. 
 
 
 \vspace{\baselineskip}
 \subsection{Validating the Proposed Model}
-In order to validate the proposed model, we created a benchmark based on a simple \textit{for\textunderscore{loop}} with different number of iterations, iteration lengths, and chunk sizes, as shown in Listing~\ref{hpx_for_loop}. 
-Each iteration consists of a while loop that makes sure the iteration lasts a certain amount of time($iter\_{length}$). By changing $iter\_{length}$, $num\_{iterations}$, and $chunk\_{size}$, we can see how the execution time changes when the problem is executed on different number of cores. Here, we define \textit{problem\textunderscore{size}} as the time it takes to execute all the iterations, which is:
+In order to validate the proposed model, we created a benchmark based on a simple \textit{for\textunderscore{loop}} with different number of iterations, and chunk sizes, as shown in Listing~\ref{hpx_for_loop}. 
+Each iteration consists of a while loop that makes sure the iteration lasts a certain amount of time($iter\_{length}$). By setting $iter\_{length}=1\mu{sec}$, and changing $num\_{iterations}$, and $chunk\_{size}$, we can see how the execution time changes when the problem is executed on different number of cores. Having defined $problem\_{size}$ at the total amount of work that has to be performed, for this benchmark \textit{problem\textunderscore{size}} would be the time it takes to execute all the iterations, which is:
 
 \begin{equation}\label{problem_size}
 problem\_size = iter\_length\times{num\_iterations}
 \end{equation}
 
-For this specific problem $t\_c=w\_c$ since there is no actual work happening  $t\_{seq}=problem\_{size}$ and $t\_c=w\_c$.
+Since we have set $iter\_{length}=1\mu{sec}$ in this benchmark, $problem\_size = num\_iterations$.
+  
+On the other hand, for this specific problem $t\_c=w\_c$ since there is no actual work happening  $t\_{seq}=problem\_{size}$ and $t\_c=w\_c$.
  
-In order to test how the well the suggested model in Formula~\ref{formula7} could fit the data for this problem, we collected a considerable amount of data (around 20,000 data points) with different configurations of number of cores($N$), number of iterations(\emph{num\_{iterations}}), and chunk size($chunk\_{size}$). We set $iter\_{length}$ to $1\mu\text{sec}$ for simplification. For each $num\_{iterations}$, we change the $chunk\_{size}$ from 1 to $num\_{iterations}$ in logarithmic scale. Each of these runs was executed for $N=1,2,3,...,8$.  
+In order to test how well the suggested model in Formula~\ref{formula7} could fit the data for this problem, we collected a considerable amount of data (around 20,000 data points) with different configurations of number of cores($N$), number of iterations(\emph{num\_{iterations}}), and chunk size($chunk\_{size}$).  
+
+For each $num\_{iterations}$, we change the $chunk\_{size}$ from 1 to $num\_{iterations}$ in logarithmic scale. Each of these runs was executed for $N=1,2,3,...,8$.  
 
 \begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,floatplacement=H,caption= {A simple hpx for\textunderscore{loop} used to study the effect of grain size on the achieved parallelism.}, label={hpx_for_loop}]
 
 ///////////////////////////////////////////////////////////////////////////////
 void measure_function_futures_for_loop(std::uint64_t count, bool csv, std::uint64_t chunk_size, std::uint64_t iter_length)
 {
-// start the clock
-high_resolution_timer walltime;
-hpx::parallel::for_loop(hpx::parallel::execution::par.with(
-hpx::parallel::execution::dynamic_chunk_size( chunk_size )),
-0, count, [&](std::uint64_t) { worker_timed(iter_length*1000); });
-// stop the clock
-const double duration = walltime.elapsed();
-print_stats("for_loop", "par", "parallel_executor", count, duration, csv);
+	// start the clock
+	high_resolution_timer walltime;
+	hpx::parallel::for_loop(hpx::parallel::execution::par.with(
+	hpx::parallel::execution::dynamic_chunk_size( chunk_size )),
+		0, count, [&](std::uint64_t) { worker_timed(iter_length*1000); });
+	// stop the clock
+	const double duration = walltime.elapsed();
+	print_stats("for_loop", "par", "parallel_executor", count, duration, csv);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 int hpx_main(variables_map& vm)
-{
-{
-const int repetitions = vm["repetitions"].as<int>();
-num_threads = hpx::get_num_worker_threads();
-const std::uint64_t chunk_size = vm["chunk_size"].as<std::uint64_t>();
-const std::uint64_t iter_length = vm["iter_length"].as<std::uint64_t>();
-const std::uint64_t count = vm["num_iterations"].as<std::uint64_t>();
-bool csv = vm.count("csv") != 0;
-if (HPX_UNLIKELY(0 == count))
-throw std::logic_error("error: count of 0 futures specified\n");
-for (int i = 0; i < repetitions; i++)
-{
-measure_function_futures_for_loop(count, csv, chunk_size, iter_length);
-}
-}
-return hpx::finalize();
+{	
+	const int repetitions = vm["repetitions"].as<int>();
+	num_threads = hpx::get_num_worker_threads();
+	const std::uint64_t chunk_size = vm["chunk_size"].as<std::uint64_t>();
+	const std::uint64_t iter_length = vm["iter_length"].as<std::uint64_t>();
+	const std::uint64_t count = vm["num_iterations"].as<std::uint64_t>();
+	bool csv = vm.count("csv") != 0;
+	if (HPX_UNLIKELY(0 == count))
+		throw std::logic_error("error: count of 0 futures specified\n");
+	for (int i = 0; i < repetitions; i++)
+	{
+		measure_function_futures_for_loop(count, csv, chunk_size, iter_length);
+	}	
+	return hpx::finalize();
 }
 ///////////////////////////////////////////////////////////////////////////////
 inline void worker_timed(std::uint64_t delay_ns)
 {
-if (delay_ns == 0)
-return;
-std::uint64_t start = hpx::util::high_resolution_clock::now();
-while (true)
-{
-// Check if we've reached the specified delay.
-if ((hpx::util::high_resolution_clock::now() - start) >= delay_ns)
-break;
-}
+	if (delay_ns == 0)
+		return;
+	std::uint64_t start = hpx::util::high_resolution_clock::now();
+	while (true)
+	{
+		// Check if we've reached the specified delay.
+		if ((hpx::util::high_resolution_clock::now() - start) >= delay_ns)
+			break;
+	}
 }
 ///////////////////////////////////////////////////////////////////////////////
 int main(int argc, char* argv[])
 {
 // Configure application-specific options.
-options_description cmdline("usage: " HPX_APPLICATION_STRING " [options]");
-cmdline.add_options()("num_iterations",
-value<std::uint64_t>()->default_value(500000),
-"number of iterations to invoke")
-("repetitions", value<int>()->default_value(1),
-"number of repetitions of the full benchmark")
-("iter_length",value<std::uint64_t>()->default_value(1), "length of each iteration")
-("chunk_size",value<std::uint64_t>()->default_value(1), "chunk size");
-// Initialize and run HPX.
-return init(cmdline, argc, argv);
+	options_description cmdline("usage: " HPX_APPLICATION_STRING " [options]");
+	cmdline.add_options()("num_iterations",
+		value<std::uint64_t>()->default_value(500000), "number of iterations to invoke")
+		("repetitions", value<int>()->default_value(1),
+		"number of repetitions of the full benchmark")
+		("iter_length",value<std::uint64_t>()->default_value(1), "length of each iteration")
+		("chunk_size",value<std::uint64_t>()->default_value(1), "chunk size");
+	// Initialize and run HPX.
+	return init(cmdline, argc, argv);
 }
 \end{lstlisting}
 
 %As an example, for $problem\_{size}=100000$, we have collected 64 data points for each $N=1,2,...,8$, resulting in $512$ data points in total. Figure~\ref{fig41} shows the execution time for different grain sizes ranging from 1 to 100000 for $problem\_{size}=100,000$ with $N=8$.
 
-Figure~\ref{fig39} shows an example of the results obtained from running the benchmark, for $problem\_size=100000000$, on different number of cores.
+Figure~\ref{fig41} shows an example of the results obtained from running the benchmark in Listing~\ref{hpx_for_loop}, for $problem\_size=100,000$, on 8 cores.
 \begin{figure}[H]
 	\centering
 	{\includegraphics[scale=.45]{images/hpx_for_loop/100000_8.png}}
@@ -266,24 +306,19 @@ Figure~\ref{fig39} shows an example of the results obtained from running the ben
 %	\caption{The results of running the benchmark in Listing with $problem\_size=10000$, on different number of cores.}\label{fig39}		
 %\end{figure}
 
-As stated in Chapter~\ref{Background}, at the right hand side of the graph in Figure~\ref{fig39}, the number of tasks created is smaller than the number of cores which results in making at least one of the cores idle, while the other cores are assigned a rather big chunk of work. The performance degradation we observe in that points is associated with starvation, meaning that we are not utilizing our computation resources to the full extent. In these points, the number of cores actually doing the work is equal to the number of the tasks, since each core gets to execute at most one task. At this region of the graph, the time to execute the maximum assigned work to a core ($t\_c$) is the dominant factor.   
+As stated in Chapter~\ref{Background}, the graph of execution time vs grain size looks like a bathtub curve, with three major regions we refer to as left hand side, right hand side, and the flat region of the graph. 
 
-On the other hand, on the left hand side of the graph, since the grain size is very small we end up with creating a large number of tasks. Since there is an overhead associated with each created task, we observe a performance degradation in that region. As the grain size increases, the number of created tasks, and the overhead associated to that decreases consequently. At this region of the graph, the overhead of creating and managing the tasks is the dominant factor.   
+At the right hand side of the graph in with large grain sizes, the number of tasks created is smaller than the number of cores which results in making at least one of the cores idle, while the other cores are assigned a rather big chunk of work. The performance degradation we observe at those points is associated with starvation. Starvation refers to situations where we are not utilizing our computation resources to the full extent. At these points, the number of cores actually performing the work is equal to the number of tasks, since each core gets to execute at most one task. 
 
+At this region of the graph, the time to execute the maximum assigned work to a core ($t\_c$) is the dominant factor in determining the execution time.   
 
-Figure~\ref{fig40} shows the effect of work stealing for $problem\_size=3000$ on 4 and 8 threads. As it can be observed, in the region where the number of tasks created is same as the number of cores, this effect is more significant.
+On the other hand, on the left hand side of the graph with small grain sizes, we end up with creating a large number of tasks. Since there is an overhead associated with each created task, we observe a performance degradation in that region. As the grain size increases, the number of created tasks, and the overhead associated to that decreases consequently. At this region of the graph, the overhead of creating and managing the tasks is the dominant factor in determining the execution time.   
 
-\vspace{\baselineskip}	
-\begin{figure}[H]
-	\centering
-	\subfloat[]{\includegraphics[scale=.4]{images/hpx_for_loop/3000_4_1_all.png}\label{fig40:a}}{\hfill}
-	\subfloat[]{\includegraphics[scale=.4]{images/hpx_for_loop/3000_8_1_all.png}\label{fig40:b}}
-	\caption{The results of running the benchmark in Listing with $problem\_size=3000$, on different (a)4 cores, and (b) 8 cores. The vertical dotted line shows the grain size that would generate same number of tasks as the number of cores, with the same amount of work for all the cores.}\label{fig40}		
-\end{figure}
+The third region of the graph, which we referred to as the flat region of the graph, is the area between the two mentioned areas where we observe very little change in the execution time. At this region, the overhead associated with creating and managing the tasks is amortized by the execution time and since all the cores are utilized we do not observe he effect a performance degradation due to starvation.
 
+Our intention in this thesis is to find this flat region of the bathtub curve, in order to ensure the effect of the two major sources of performance degradation (overheads of creating and managing tasks, and starvation) is minimized.
 
-
-Since our proposed model does not depend on the $problem\_{size}$ but on the number of tasks created, number of cores, and the time to execute the maximum amount of work assigned to a core, we are suggesting here that it might be sufficient to use the data collected from one $problem\_{size}$ to find the parameters $\alpha$ and $\gamma$. 
+Since our proposed model does not depend on the $problem\_{size}$ but on the number of tasks created, number of cores, and the time to execute the maximum amount of work assigned to a core, we are suggesting here that it might be sufficient to use the data collected from one $problem\_{size}$ to find the parameters $\alpha$ and $\sigma$. 
 
 In order to test the viability of our proposition, we chose $problem\_{size}=100,000,000$ as a reasonable(not too small nor too large) base for our parameter estimation. Figure~\ref{fig42} shows the measured execution time in terms of grain size for $N=1,2,...,8$, with total $728$ points.
  
@@ -293,7 +328,7 @@ In order to test the viability of our proposition, we chose $problem\_{size}=100
 	\caption{The results of running the benchmark in Listing with $problem\_size=100,000,000$, on different number of cores. The unit for execution time is microseconds.}\label{fig42}		
 \end{figure}
 
-Using all the $728$ data points for different number of cores, we used the $optimize.curve_fit$ package from $scipy$ library in Python to fit the collected data with our model, which resulted in $alpha=3.032$ and $\gamma=0.294$. $\alpha$ represents the overhead of creating associated with creating tasks in $\mu{secs}$, and $\gamma$ represents the contention.
+Using all the $728$ data points for different number of cores, we used the \emph{optimize.curve\_{fit}} package from $scipy$ library in Python to fit the collected data with our model, which resulted in $alpha=3.032$ and $\sigma=0.294$. $\alpha$ represents the overhead of creating associated with creating tasks in $\mu{secs}$, and $\sigma$ represents the contention.
 
 \begin{figure}[H]
 	\centering
@@ -321,7 +356,7 @@ Using all the $728$ data points for different number of cores, we used the $opti
 \subfloat[]
 {\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_8.png}	
 	\label{fig43:h}}\hfill
-	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=100,000,000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores.. The unit for execution time is microseconds.}
+	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=100,000,000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.}
 	\label{fig43}	
 \end{figure}
 
@@ -357,8 +392,15 @@ R\textunderscore{squared} = 1-\frac{{\frac{1}{n}\sum_{i=1}^{n}{(t_i-p_i)}^2}}{Va
 	\caption{The average $R^2$ score of using the result of curve fitting for $problem\_size=100,000,000$ for predicting the execution of different $problem\_{sizes}$ calculated for each specific number of cores individually.}\label{fig46}		
 \end{figure}
 
-At the next step we repeated the same process for the data collected from a different architecture, \textit{Medusa} node.
-We used $problem\_{size}=1,000,000$, and after curve fitting the parameters $\alpha=1.793$ and $\gamma=0.279$ were obtained. The calculated mean relative error and mean $R^2$ measure for each individual number of cores is demonstrated in Figure~\ref{fig48}, and Figure~\ref{fig49}.
+\begin{figure}[H]
+	\centering
+	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_relative_error_compared.png}}
+	\caption{The average relative error of using the result of curve fitting for $problem\_size=100,000,000$ for predicting the execution of different $problem\_{sizes}$ calculated for each specific number of cores individually.}\label{fig59}		
+\end{figure}
+\subsection{Testing the Proposed Model on Another Architecture}
+
+At the next step we repeated the same process for the data collected from a different architecture, \textit{Medusa} node with a Skylake CPU.
+We used $problem\_{size}=1,000,000$, and after curve fitting the parameters $\alpha=1.793$ and $\sigma=0.279$ were obtained. The calculated mean relative error and mean $R^2$ measure for each individual number of cores is demonstrated in Figure~\ref{fig48}, and Figure~\ref{fig49}.
 
 \begin{figure}[H]
 	\centering
@@ -724,13 +766,13 @@ In the previous section we suggested Formula~\ref{formula1} as an analytical mod
 \begin{equation}
 \begin{aligned}
 execution\_time = 
-\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_{seq}\times{\frac{w\_c}{problem\_{size}}}\times{(1\:\:+\:\:\gamma\times{(M-1)})}\:\:\\
+\alpha\times{\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil}\:\:&+\:\:t\_{seq}\times{\frac{w\_c}{problem\_{size}}}\times{(1\:\:+\:\:\sigma\times{(M-1)})}\:\:\\
 \end{aligned}
 \end{equation}
 
 $problem\_{size}$ in Formula~\ref{formula1} refers to the total amount of work available. For $matrix\_{size}=m$, performing $DMATDMATADD$ benchmark, $problem\_{size}=2\times{m^2}$, which is the total amount of floating point operations needed to be performed.
  
-Previously, using the benchmark we were able to find the value for the parameters of the model on $Marvin$ node as $\alpha=3.032$ and $\gamma=0.294$. 
+Previously, using the benchmark we were able to find the value for the parameters of the model on $Marvin$ node as $\alpha=3.032$ and $\sigma=0.294$. 
 
 Grain size, as the amount of work executed by one thread, for this problem is represented by the number of floating point operations performed by one thread. As an example, if $block\_{size}=4\times{256}$, and $chunk\_{size}=3$ performing $DMATDMATADD$ benchmark, would result in a $grain\_{size}$ of $2\times{4\times{256}\times{3}}=6144$. 
 
@@ -881,7 +923,7 @@ Figure~\ref{fig57} shows the identified range of chunk size for minimum executio
 In the previous sections we offered an analytical model to predict the behavior of execution time vs grain size for a balanced parallel loop, and based on that model suggested a method to estimate the range of grain size to ensure staying in the flat region of the bathtub curve of execution time. The proposed model was then validated using a simple implemented benchmark. The parameters found through the benchmark was then utilized to predict the execution time of the $DMATDMATADD$ benchmark from $Blazemark$ suite. We were also able to find the range of grain size to achieve minimum execution time. 
 At this point by selecting a reasonable value for block size, the range of chunk size to ensure staying in that range of grain size could be identified.
 
-We are proposing to run the benchmark in Listing~\ref{hpx_for_loop} for a reasonable $problem\_{size}$, e.g. $100,000,000$, with different values for chunk size on different number of cores, and use the data to estimate the $\alpha$ and $\gamma$ parameters through curve fitting. This process could be added as an extra step to building process of Blaze. 
+We are proposing to run the benchmark in Listing~\ref{hpx_for_loop} for a reasonable $problem\_{size}$, e.g. $100,000,000$, with different values for chunk size on different number of cores, and use the data to estimate the $\alpha$ and $\sigma$ parameters through curve fitting. This process could be added as an extra step to building process of Blaze. 
 The complexity of the expression to be evaluated is then calculated at compile time as the number of floating point operations. A block size should also be selected based on the available cache size, the cache line, and the number of matrices involved in the operation. This part could also be done at compile time.   
 At runtime, based on the matrix size and number of cores chosen to run the program on, the range of chunk size to achieve the lowest execution time for each specific expression is identified.
 
@@ -929,17 +971,17 @@ It has to be mentioned that although the proposed formula for execution time vs 
 
 
 
-%To summarize, knowing the grain size, we are expecting the execution time in a many-task runtime system to be mainly affected by these factors, the overhead of creating one task($\alpha$), the number of cores that are actually doing the work($M$), the sequential execution time($t_s$), and finally the portion of the program that could actually be parallelized($\gamma$). 
+%To summarize, knowing the grain size, we are expecting the execution time in a many-task runtime system to be mainly affected by these factors, the overhead of creating one task($\alpha$), the number of cores that are actually doing the work($M$), the sequential execution time($t_s$), and finally the portion of the program that could actually be parallelized($\sigma$). 
 %
 %If we try to integrate these information into a formula, we would expect the relation between execution time($t$) and number of tasks($n_t$) as follows:
 %\begin{equation}\label{new1}
-%t=\frac{\alpha{n_t}+t_s}{M}+\gamma
+%t=\frac{\alpha{n_t}+t_s}{M}+\sigma
 %\end{equation}
 %
 %which could be decomposed into these two equations:
 %
 %
-%Now we use this function to find the best three parameters $\alpha$, $t_s$, and $\gamma$ so that the collected data would fit this model. For this purpose we used the \textit{curve\textunderscore{fit}} package from \textit{SciPy} library in \textit{python}.
+%Now we use this function to find the best three parameters $\alpha$, $t_s$, and $\sigma$ so that the collected data would fit this model. For this purpose we used the \textit{curve\textunderscore{fit}} package from \textit{SciPy} library in \textit{python}.
 %
 %In order to make Equation~\ref{new1} differentiable, we used the softplus function(Equation~\ref{softplus1}) to represent $M$ based on $n_t$.
 %\begin{equation}\label{softplus1}
@@ -948,7 +990,7 @@ It has to be mentioned that although the proposed formula for execution time vs 
 %
 %Which results in Equation~\ref{soft_plus1}:
 %\begin{equation}\label{soft_plus1}
-%t=\frac{\alpha{n_t}+t_s}{(N-1)-Ln(1+(e^{N-1}-1)e^{-n_t})}+\gamma
+%t=\frac{\alpha{n_t}+t_s}{(N-1)-Ln(1+(e^{N-1}-1)e^{-n_t})}+\sigma
 %\end{equation}
 
 
