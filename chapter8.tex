@@ -214,7 +214,7 @@ The maximum number of tasks assigned to one core, and the number of cores that a
 \vspace{\baselineskip}
 \subsection{Validating the Proposed Model}
 In order to validate the proposed model, we created a benchmark based on a simple \textit{for\textunderscore{loop}} with different number of iterations, and chunk sizes, as shown in Listing~\ref{hpx_for_loop}. 
-Each iteration consists of a while loop that makes sure the iteration lasts a certain amount of time($iter\_{length}$). By setting $iter\_{length}=1\mu{sec}$, and changing $num\_{iterations}$, and $chunk\_{size}$, we can see how the execution time changes when the problem is executed on different number of cores. Having defined $problem\_{size}$ at the total amount of work that has to be performed, for this benchmark \textit{problem\textunderscore{size}} would be the time it takes to execute all the iterations, which is:
+Each iteration consists of a while loop that makes sure the iteration lasts a certain amount of time ($iter\_{length}$). By setting $iter\_{length}=1\mu{sec}$, and changing $num\_{iterations}$, and \emph{chunk\_{size}}, we can see how the execution time changes when the problem is executed on different number of cores. Having defined $problem\_{size}$ at the total amount of work that has to be performed, for this benchmark \textit{problem\textunderscore{size}} would be the time it takes to execute all the iterations, which is:
 
 \begin{equation}\label{problem_size}
 problem\_size = iter\_length\times{num\_iterations}
@@ -224,7 +224,7 @@ Since we have set $iter\_{length}=1\mu{sec}$ in this benchmark, $problem\_size =
   
 On the other hand, for this specific problem $t\_c=w\_c$ since there is no actual work happening  $t\_{seq}=problem\_{size}$ and $t\_c=w\_c$.
  
-In order to test how well the suggested model in Formula~\ref{formula7} could fit the data for this problem, we collected a considerable amount of data (around 20,000 data points) with different configurations of number of cores($N$), number of iterations(\emph{num\_{iterations}}), and chunk size($chunk\_{size}$).  
+In order to test how well the suggested model in Formula~\ref{formula7} could fit the data for this problem, we collected a considerable amount of data (around 50,000 data points on three different architectures) with different configurations of number of cores($N$), number of iterations(\emph{num\_{iterations}}), and chunk size ($chunk\_{size}$).  
 
 For each $num\_{iterations}$, we change the $chunk\_{size}$ from 1 to $num\_{iterations}$ in logarithmic scale. Each of these runs was executed for $N=1,2,3,...,8$.  
 
@@ -316,167 +316,202 @@ On the other hand, on the left hand side of the graph with small grain sizes, we
 
 The third region of the graph, which we referred to as the flat region of the graph, is the area between the two mentioned areas where we observe very little change in the execution time. At this region, the overhead associated with creating and managing the tasks is amortized by the execution time and since all the cores are utilized we do not observe he effect a performance degradation due to starvation.
 
-Our intention in this thesis is to find this flat region of the bathtub curve, in order to ensure the effect of the two major sources of performance degradation (overheads of creating and managing tasks, and starvation) is minimized.
+Our intention in this thesis is to find this flat region of the bathtub curve, as shown in Figure~\ref{fig60:a}, in order to ensure that the effect of the two major sources of performance degradation (overheads of creating and managing tasks, and starvation) in execution time is minimized.
 
-Since our proposed model does not depend on the $problem\_{size}$ but on the number of tasks created, number of cores, and the time to execute the maximum amount of work assigned to a core, we are suggesting here that it might be sufficient to use the data collected from one $problem\_{size}$ to find the parameters $\alpha$ and $\sigma$. 
-
-In order to test the viability of our proposition, we chose $problem\_{size}=100,000,000$ as a reasonable(not too small nor too large) base for our parameter estimation. Figure~\ref{fig42} shows the measured execution time in terms of grain size for $N=1,2,...,8$, with total $728$ points.
+In Figure~\ref{fig60} grain size is shown in logarithmic scale, but looking at Figure~\ref{fig60}, with normal scale for grain size, it can be realized that the range we are interested in is a small range of values of grain size.  
  
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/100000000_8.png}}
-	\caption{The results of running the benchmark in Listing with $problem\_size=100,000,000$, on different number of cores. The unit for execution time is microseconds.}\label{fig42}		
+	\subfloat[]
+	{\includegraphics[scale=.42]{images/hpx_for_loop/marvin_100000_8.png}\label{fig60:a}}
+	\subfloat[]
+	{\includegraphics[scale=.42]{images/hpx_for_loop/marvin_100000_8nlog.png}\label{fig60:b}}
+	\caption{The results of running the benchmark in Listing with $problem\_size=100,000$, on 8 cores. (a) represents the graph in logarithmic scale, while (b) shows the same graph in linear scale. The unit for execution time is microseconds.}\label{fig60}		
 \end{figure}
 
-Using all the $728$ data points for different number of cores, we used the \emph{optimize.curve\_{fit}} package from $scipy$ library in Python to fit the collected data with our model, which resulted in $alpha=3.032$ and $\sigma=0.294$. $\alpha$ represents the overhead of creating associated with creating tasks in $\mu{secs}$, and $\sigma$ represents the contention.
+Since our proposed model does not depend on the $problem\_{size}$ but relies on the number of tasks created, number of cores, and the time to execute the maximum amount of work assigned to a core, we are suggesting here that it might be sufficient to use the data collected from one $problem\_{size}$ to find the parameters $\alpha$ and $\sigma$. 
+ 
+In order to test the viability of our proposition, we selected 5 different $problem\_{size}$s (10000, 100000, 1000000, 10000000, 100000000) to use as our base $problem\_{size}$ for finding the parameters of our model($\alpha$ and $\sigma$). 
+Using all the collected data points for each \emph{problem\_{size}}, we utilized the \emph{optimize.curve\_{fit}} package from $scipy$ library in Python to fit our model to the collected data.
 
-\begin{figure}[H]
-	\centering
-	\subfloat[]
-	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_1.png}	
-		\label{fig43:a}}
-	\subfloat[]
-	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_2.png}	
-	\label{fig43:b}}\hfill
-	\subfloat[]
-{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_3.png}	
-	\label{fig43:c}}
-\subfloat[]
-{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_4.png}	
-	\label{fig43:d}}\hfill
-	\subfloat[]
-{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_5.png}	
-	\label{fig43:e}}
-\subfloat[]
-{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_6.png}	
-	\label{fig43:f}}\hfill
-	\subfloat[]
-{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_7.png}	
-	\label{fig43:g}}
-\subfloat[]
-{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000000_8.png}	
-	\label{fig43:h}}\hfill
-	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=100,000,000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.}
-	\label{fig43}	
-\end{figure}
-
-
-Figure~\ref{fig43} shows the fitted curves along with the original data for different number of cores.
-In order to measure how well the model is fitting the data we calculated the relative error as Formula~\ref{eq4}, where $p_i$ is the predicted value from curve fitting for sample $i$, $t_i$ is true value of that sample, and $n$ is the total number of samples.
-
+For any of the base \emph{problem\_{sizes}}, we measured the relative error and $R^2$ score of prediction for the base $problem\_{size}$ itself as shown in Formula~\ref{eq4} and Formula~\ref{eq5}. 
+$p_i$ is the predicted value from curve fitting for sample $i$, $t_i$ is true value of that sample, and $n$ is the total number of samples.
+The relative error and $R^2$ score are calculated for each specific number of cores individually. 
 
 \begin{equation}{\label{eq4}}
 Relative\_{error} = \frac{1}{n}\sum_{i=1}^{n} {|1-\frac{p_i}{t_i}|}
 \end{equation}
 
-\begin{figure}[H]
-	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_relative_error_100000000.png}}	\caption{The relative error of using the result of curve fitting for predicting the execution, calculated for each specific number of cores individually, for $problem\_size=100,000$.}\label{fig44}		
-\end{figure}
-
-
-
-\begin{figure}[H]
-	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_relative_error_all.png}}
-	\caption{The average relative error of using the result of curve fitting for $problem\_size=100,000,000$ for predicting the execution of different $problem\_{sizes}$ calculated for each specific number of cores individually.}\label{fig45}		
-\end{figure}
 
 \begin{equation}{\label{eq5}}
-R\textunderscore{squared} = 1-\frac{{\frac{1}{n}\sum_{i=1}^{n}{(t_i-p_i)}^2}}{Var(t)}
+R^2 = 1-\frac{{\frac{1}{n}\sum_{i=1}^{n}{(t_i-p_i)}^2}}{Var(t)}
 \end{equation}
 
+Figure~\ref{fig59} illustrates the calculated relative error and $R^2$ score for \emph{problem\_{size}=10000, 100000, 1000000, 1000000, 100000000}. For each of the $problem\_{size}$s, 440, 512, 440, 512, and 728 data points were collected respectively. 
+
+As the $problem\_{size}$ increases, we need to collect more data points to cover different regions of the grain size,  which results in longer total execution time of the benchmark. In order to rule out the uncertainties in our experiment as much as possible, we run each benchmark 6 times and take the average of the measured execution times. This means even larger overall execution time for data collection for larger $problem\_{sizes}$. 
+
+
+\vspace{\baselineskip}
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_r2_error_all.png}}
-	\caption{The average $R^2$ score of using the result of curve fitting for $problem\_size=100,000,000$ for predicting the execution of different $problem\_{sizes}$ calculated for each specific number of cores individually.}\label{fig46}		
+	\subfloat[]
+	{\includegraphics[scale=.8]{images/hpx_for_loop/fitted/marvin_relative_error_compared_self.png}}\label{fig59:a}
+		\subfloat[]
+	{\includegraphics[scale=.8]{images/hpx_for_loop/fitted/marvin_r2_error_compared_self.png}}\label{fig59:b}
+	\caption{The (a) relative error, and (b) $R^2$ score of fitting the collected data to the proposed analytical model for different $problem\_{sizes}$, calculated for each number of cores.}\label{fig59}		
 \end{figure}
 
+Figure~\ref{fig59} shows that for each number of cores, the calculated errors for each $problem\_{size}$ are very close to each other, and the the least amount of relative error was obtained when $problem\_{size}=100000$, which is most likely due to higher amount of data collected for this specific $problem\_{size}$. 
+
+In the next step we measured the relative error and $R^2$ score of using the model parameters found from each base $problem\_{size}$ to predict the execution time for all other $problem\_{sizes}$. The result is illustrated in Figure~\ref{fig61}.
+ 
+\vspace{\baselineskip}
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_relative_error_compared.png}}
-	\caption{The average relative error of using the result of curve fitting for $problem\_size=100,000,000$ for predicting the execution of different $problem\_{sizes}$ calculated for each specific number of cores individually.}\label{fig59}		
+	\subfloat[]
+	{\includegraphics[scale=.7]{images/hpx_for_loop/fitted/marvin_relative_error_compared_rest.png}}\label{fig61:a}
+	\subfloat[]
+	{\includegraphics[scale=.7]{images/hpx_for_loop/fitted/marvin_r2_error_compared_rest.png}}\label{fig61:b}
+	\caption{The (a)relative error and (b)$R^2$ score of using the model parameters found from each base $problem\_{size}$ fitting the proposed analytical model to the collected data for different $problem\_{sizes}$, calculated over each number of cores.}\label{fig61}		
 \end{figure}
-\subsection{Testing the Proposed Model on Another Architecture}
 
-At the next step we repeated the same process for the data collected from a different architecture, \textit{Medusa} node with a Skylake CPU.
-We used $problem\_{size}=1,000,000$, and after curve fitting the parameters $\alpha=1.793$ and $\sigma=0.279$ were obtained. The calculated mean relative error and mean $R^2$ measure for each individual number of cores is demonstrated in Figure~\ref{fig48}, and Figure~\ref{fig49}.
+Based on Figure~\ref{fig60} and Figure\ref{fig61}, we selected $problem\_{size}=100000$ as the base\emph{problem\_{size}}, since it shows similar prediction error and $R^2$ score as larger $problem\_{size}s$, while taking less time to complete.
+
+Having selected $problem\_{size}=100000$ as a reasonable(not too small nor too large) base for our parameter estimation, Figure~\ref{fig42} shows the measured execution time in terms of grain size for $problem\_{size}=100000$, with $N=1,2,...,8$.
+ 
+ 
+\begin{figure}[H]
+	\centering
+	{\includegraphics[scale=.7]{images/hpx_for_loop/marvin_100000_all.png}}
+	\caption{The results of running the benchmark in Listing with $problem\_size=100000$, on different number of cores. The unit for execution time is microseconds.}\label{fig42}		
+\end{figure}
+\vspace{\baselineskip}
+
+Fitting our model to all the $512$ data points collected resulted in model parameters $alpha=2.674$ and $\sigma=0.0268$, where $\alpha$ represents the overhead of creating and managing the tasks in $\mu{secs}$, while $\sigma$ represents the contention based on Universal Scalibility Law.
 
 \begin{figure}[H]
 	\centering
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/medusa_1000000_1.png}	
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000_1_100000.png}	
+		\label{fig43:a}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000_2_100000.png}	
+	\label{fig43:b}}\hfill
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000_3_100000.png}	
+	\label{fig43:c}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000_4_100000.png}	
+	\label{fig43:d}}\hfill
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000_5_100000.png}	
+	\label{fig43:e}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000_6_100000.png}	
+	\label{fig43:f}}\hfill
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000_7_100000.png}	
+		\label{fig43:g}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000_8_100000.png}	
+	\label{fig43:h}}\hfill
+	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=100000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.}
+	\label{fig43}	
+\end{figure}
+
+Figure~\ref{fig43} shows the fitted curves along with the original data for different number of cores.
+
+
+\begin{figure}[H]
+	\centering
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000000_1_100000.png}	
+		\label{fig62:a}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000000_2_100000.png}	
+		\label{fig62:b}}\hfill
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000000_3_100000.png}	
+		\label{fig62:c}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000000_4_100000.png}	
+		\label{fig62:d}}\hfill
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000000_5_100000.png}	
+		\label{fig62:e}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000000_6_100000.png}	
+		\label{fig62:f}}\hfill
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000000_7_100000.png}	
+		\label{fig62:g}}
+	\subfloat[]
+	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000000_8_100000.png}	
+		\label{fig62:h}}\hfill
+	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=100000000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.}
+	\label{fig62}	
+\end{figure}
+
+
+\subsection{Testing the Proposed Model on Other Architectures}
+
+At the next step we repeated the same process for the data collected from two different architectures, \textit{Medusa} node with a Skylake CPU, and a Raspberry Pi 4.
+
+\subsection{Medusa}
+We used $problem\_{size}=100000$ as the base \emph{problem\_{size}} on both architectures. The calculated relative error and $R^2$ score for each individual number of cores for $problem\_{size}=100000$ is demonstrated in Figure~\ref{fig64}, and Figure~\ref{fig63}, while the relative error and $R^2$ score calculated for all other \emph{problem\_{sizes}} is shown in Figure~\ref{fig64}, and Figure~\ref{fig63}.
+
+
+\begin{figure}[H]
+	\centering
+	\subfloat[]
+	{\includegraphics[scale=.6]{images/hpx_for_loop/fitted/marvin_relative_error_compared_self.png}}\label{fig64:a}
+	\subfloat[]
+	{\includegraphics[scale=.6]{images/hpx_for_loop/fitted/marvin_r2_error_compared_self.png}}\label{fig64:b}
+	\caption{The (a) relative error, and (b) $R^2$ score of fitting the collected data to the proposed analytical model for different $problem\_{sizes}$, calculated for each number of cores.}\label{fig64}		
+\end{figure}
+
+\vspace{\baselineskip}
+\begin{figure}[H]
+	\centering
+	\subfloat[]
+	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_relative_error_compared_rest.png}}\label{fig63:a}
+	\subfloat[]
+	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_r2_error_compared_rest.png}}\label{fig63:b}
+	\caption{The (a)relative error and (b)$R^2$ score of using the model parameters found from each base $problem\_{size}$ fitting the proposed analytical model to the collected data for different $problem\_{sizes}$, calculated over each number of cores.}\label{fig63}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\subfloat[]
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/medusa_100000_1_100000.png}	
 		\label{fig50:a}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/medusa_1000000_2.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/medusa_100000_2_100000.png}	
 		\label{fig50:b}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/medusa_1000000_3.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/medusa_100000_3_100000.png}	
 		\label{fig50:c}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/medusa_1000000_4.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/medusa_100000_4_100000.png}	
 		\label{fig50:d}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/medusa_1000000_5.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/medusa_100000_5_100000.png}	
 		\label{fig50:e}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/medusa_1000000_6.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/medusa_100000_6_100000.png}	
 		\label{fig50:f}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/medusa_1000000_7.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/medusa_100000_7_100000.png}	
 		\label{fig50:g}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/medusa_1000000_8.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/medusa_100000_8_100000.png}	
 		\label{fig50:h}}\hfill
-	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=1,000,000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.}
+	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=100000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.}
 	\label{fig50}	
 \end{figure}
 
-\begin{figure}[H]
-	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/medusa_relative_error_100000.png}}
-	\caption{The relative error of using the result of curve fitting for predicting the execution, for different number of cores, for $problem\_size=100,000$, on \textit{Medusa} node.}\label{fig47}		
-\end{figure}
-
-
-
-\begin{figure}[H]
-	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/medusa_relative_error_all.png}}
-	\caption{The average relative error of using the result of curve fitting for $problem\_size=100,000,000$ for predicting the execution of different $problem\_{sizes}$ for different number of cores, on \textit{Medusa} node.}\label{fig48}		
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/medusa_r2_error_all.png}}
-	\caption{The average $R^2$ score of using the result of curve fitting for $problem\_size=100,000,000$ for predicting the execution of different $problem\_{sizes}$ for different number of cores, on \textit{Medusa} node.}\label{fig49}		
-\end{figure}
-
-
-%\vspace{\baselineskip}	
-%\begin{table}[H]
-%	\centering
-%	\resizebox{\textwidth}{!}
-%	{\begin{tabular}{|c | c |} 
-%			\hline
-%			Category & Configuration \\
-%			\hline
-%			\hline
-%		$Problem\_{size}$ & 100000 \\ [0.5ex] 
-%			\hline
-%			$N$ & 1, 2, 3, 4, 5, 6, 7, 8 \\ 	
-%			\hline
-%			$num\_{iterations}$ & 100000 \\
-%			\hline	
-%			$chunk\_{size}$ & 1,2,3,4,5,6,7,8,9,10,20,30,...,90000,100000 \\
-%			\hline		
-%	\end{tabular}}
-%	
-%	\caption{List of different configurations used for running the benchmark in Listing for $problem\_{size}=100000$}
-%	\label{table6}
-%\end{table}
-   
-
+\subsection{Raspberry Pi 4}
 
 
 \vspace{\baselineskip}
@@ -733,19 +768,19 @@ In Figure~\ref{fig51} the identified regions for minimum execution time is shown
 \begin{figure}[H]
 	\centering
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/marvin_10000_8_range_10_10.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000/marvin_10000_8_range_10_10.png}	
 		\label{fig51:a}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/marvin_100000_8_range_10_10.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000/marvin_100000_8_range_10_10.png}	
 		\label{fig51:b}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/marvin_1000000_8_range_10_10.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000/marvin_1000000_8_range_10_10.png}	
 		\label{fig51:c}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/marvin_10000000_8_range_10_10.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000/marvin_10000000_8_range_10_10.png}	
 		\label{fig51:d}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/marvin_100000000_8_range_10_10.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000/marvin_100000000_8_range_10_10.png}	
 		\label{fig51:e}}
 	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=$, for (a) 10000, (b) 100000, (c) 1000000, (d) 10000000, (e) 100000000, on 8 cores, with $\lambda_{s}=0.1$ and $\lambda_{b}=0.1$. The unit for execution time is microseconds.}
 	\label{fig51}	
