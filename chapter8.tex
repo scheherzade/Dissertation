@@ -159,7 +159,7 @@ execution\_time =
 \end{equation}
 
 
-As for $t\_{c}$, the time to execute $w\_{c}$ amount of work, where total amount of work available is $problem\_{size}$, since we are looking into balanced for-loops with almost same amount of work at each iteration, we can estimate $t\_{c}$ as:
+As for $t\_{c}$, the time to execute $w\_{c}$ amount of work, where total amount of work available is $problem\_{size}$, since we are looking into balanced parallel for-loops with almost same amount of work at each iteration, we can estimate $t\_{c}$ as:
 
 \begin{equation}\label{formula41}
 \begin{aligned}
@@ -182,7 +182,7 @@ Here $t\_{overhead\_{ws}}$ represents all the overhead created due to work steal
 
 In order to study this effect, we ran a set of experiments while work stealing was turned of. This is possible through adding the command line option \emph{--hpx:queuing = static-priority}.
 
-Figure~\ref{fig40} shows the results of running a benchmark with and without work stealing. The benchmark consists of a HPX for-loop with $3000$ iterations and is executed with different number of chunk sizes from $1$ to $3000$. Each iteration will keep the core busy for $1\mu{sec}$. This benchmark is explained more in the next chapter.
+Figure~\ref{fig40} shows the results of running a benchmark with and without work stealing. The benchmark consists of a HPX parallel for-loop with $3000$ iterations and is executed with different number of chunk sizes from $1$ to $3000$. Each iteration will keep the core busy for $1\mu{sec}$. This benchmark is explained more in the next chapter.
 
 As it can be observed, in the region where the number of tasks created is same as the number of cores, this effect is more significant.
 
@@ -191,7 +191,7 @@ As it can be observed, in the region where the number of tasks created is same a
 	\centering
 	\subfloat[]{\includegraphics[scale=.4]{images/hpx_for_loop/3000_4_1_all.png}\label{fig40:a}}{\hfill}
 	\subfloat[]{\includegraphics[scale=.4]{images/hpx_for_loop/3000_8_1_all.png}\label{fig40:b}}
-	\caption{The results of running the benchmark in Listing with $problem\_size=3000$, on different (a)4 cores, and (b) 8 cores. The vertical dotted line shows the grain size that would generate same number of tasks as the number of cores, with the same amount of work for all the cores.}\label{fig40}		
+	\caption{The results of running the parallel for-loop benchmark with $problem\_size=3000$, on different (a)4 cores, and (b) 8 cores. The vertical dotted line shows the grain size that would generate same number of tasks as the number of cores, with the same amount of work for all the cores.}\label{fig40}		
 \end{figure}
 
 Although we are not sure how work stealing is causing this effect, the effect is most  noticeable at certain points. Since it only adds to the execution time at those points, and our interest is finding the flat region of the graph with the minimum execution time, at this point and for this purpose we decided to ignore this term in our upcoming calculations. 
@@ -213,7 +213,8 @@ The maximum number of tasks assigned to one core, and the number of cores that a
 
 \vspace{\baselineskip}
 \subsection{Validating the Proposed Model}
-In order to validate the proposed model, we created a benchmark based on a simple \textit{for\textunderscore{loop}} with different number of iterations, and chunk sizes, as shown in Listing~\ref{hpx_for_loop}. 
+In order to validate the proposed model, we created a benchmark based on a simple \textit{for\textunderscore{loop}} with different number of iterations, and chunk sizes, as shown in Listing~\ref{hpx_for_loop}. We refer to this benchmark as the parallel for-loop benchmark from now on.
+
 Each iteration consists of a while loop that makes sure the iteration lasts a certain amount of time ($iter\_{length}$). By setting $iter\_{length}=1\mu{sec}$, and changing $num\_{iterations}$, and \emph{chunk\_{size}}, we can see how the execution time changes when the problem is executed on different number of cores. Having defined $problem\_{size}$ at the total amount of work that has to be performed, for this benchmark \textit{problem\textunderscore{size}} would be the time it takes to execute all the iterations, which is:
 
 \begin{equation}\label{problem_size}
@@ -228,7 +229,7 @@ In order to test how well the suggested model in Formula~\ref{formula7} could fi
 
 For each $num\_{iterations}$, we change the $chunk\_{size}$ from 1 to $num\_{iterations}$ in logarithmic scale. Each of these runs was executed for $N=1,2,3,...,8$.  
 
-\begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,floatplacement=H,caption= {A simple hpx for\textunderscore{loop} used to study the effect of grain size on the achieved parallelism.}, label={hpx_for_loop}]
+\begin{lstlisting}[basicstyle=\fontsize{8}{9}\selectfont,float,floatplacement=H,caption= {For-loop benchmark, a simple hpx for\textunderscore{loop} used to study the effect of grain size on the achieved parallelism.}, label={hpx_for_loop}]
 
 ///////////////////////////////////////////////////////////////////////////////
 void measure_function_futures_for_loop(std::uint64_t count, bool csv, std::uint64_t chunk_size, std::uint64_t iter_length)
@@ -291,11 +292,11 @@ int main(int argc, char* argv[])
 
 %As an example, for $problem\_{size}=100000$, we have collected 64 data points for each $N=1,2,...,8$, resulting in $512$ data points in total. Figure~\ref{fig41} shows the execution time for different grain sizes ranging from 1 to 100000 for $problem\_{size}=100,000$ with $N=8$.
 
-Figure~\ref{fig41} shows an example of the results obtained from running the benchmark in Listing~\ref{hpx_for_loop}, for $problem\_size=100,000$, on 8 cores.
+Figure~\ref{fig41} shows an example of the results obtained from running the parallel for-loop benchmark in Listing~\ref{hpx_for_loop}, for $problem\_size=100,000$, on 8 cores.
 \begin{figure}[H]
 	\centering
 	{\includegraphics[scale=.45]{images/hpx_for_loop/100000_8.png}}
-	\caption{The results of running the benchmark in Listing with $problem\_size=100,000$, on 8 cores. The unit for execution time is microseconds.}\label{fig41}		
+	\caption{The results of running the parallel for-loop benchmark with $problem\_size=100,000$, on 8 cores. The unit for execution time is microseconds.}\label{fig41}		
 \end{figure}
 
 
@@ -326,7 +327,7 @@ In Figure~\ref{fig60} grain size is shown in logarithmic scale, but looking at F
 	{\includegraphics[scale=.42]{images/hpx_for_loop/marvin_100000_8.png}\label{fig60:a}}
 	\subfloat[]
 	{\includegraphics[scale=.42]{images/hpx_for_loop/marvin_100000_8nlog.png}\label{fig60:b}}
-	\caption{The results of running the benchmark in Listing with $problem\_size=100,000$, on 8 cores. (a) represents the graph in logarithmic scale, while (b) shows the same graph in linear scale. The unit for execution time is microseconds.}\label{fig60}		
+	\caption{The results of running the parallel for-loop benchmark with $problem\_size=100000$, on 8 cores. (a) represents the graph in logarithmic scale, while (b) shows the same graph in linear scale. The unit for execution time is microseconds.}\label{fig60}		
 \end{figure}
 
 Since our proposed model does not depend on the $problem\_{size}$ but relies on the number of tasks created, number of cores, and the time to execute the maximum amount of work assigned to a core, we are suggesting here that it might be sufficient to use the data collected from one $problem\_{size}$ to find the parameters $\alpha$ and $\sigma$. 
@@ -384,7 +385,7 @@ Having selected $problem\_{size}=100000$ as a reasonable(not too small nor too l
 \begin{figure}[H]
 	\centering
 	{\includegraphics[scale=.7]{images/hpx_for_loop/marvin_100000_all.png}}
-	\caption{The results of running the benchmark in Listing with $problem\_size=100000$, on different number of cores. The unit for execution time is microseconds.}\label{fig42}		
+	\caption{The results of running the parallel for-loop benchmark with $problem\_size=100000$, on different number of cores. The unit for execution time is microseconds.}\label{fig42}		
 \end{figure}
 \vspace{\baselineskip}
 
@@ -459,15 +460,16 @@ Figure~\ref{fig43} shows the fitted curves along with the original data for diff
 At the next step we repeated the same process for the data collected from two different architectures, \textit{Medusa} node with a Skylake CPU, and a Raspberry Pi 4.
 
 \subsection{Medusa}
-We used $problem\_{size}=100000$ as the base \emph{problem\_{size}} on both architectures. The calculated relative error and $R^2$ score for each individual number of cores for $problem\_{size}=100000$ is demonstrated in Figure~\ref{fig64}, and Figure~\ref{fig63}, while the relative error and $R^2$ score calculated for all other \emph{problem\_{sizes}} is shown in Figure~\ref{fig64}, and Figure~\ref{fig63}.
+We used $problem\_{size}=100000$ as the base \emph{problem\_{size}} on both architectures. On Medusa, with $problem\_{size}=100000$, the model parameters were found to be $\alpha=1.832$ and $\sigma=0.037$. 
+The calculated relative error and $R^2$ score for each individual number of cores for $problem\_{size}=100000$ is demonstrated in Figure~\ref{fig64}, and Figure~\ref{fig63}, while the relative error and $R^2$ score calculated for all other \emph{problem\_{sizes}} is shown in Figure~\ref{fig64}, and Figure~\ref{fig63}.
 
 
 \begin{figure}[H]
 	\centering
 	\subfloat[]
-	{\includegraphics[scale=.6]{images/hpx_for_loop/fitted/marvin_relative_error_compared_self.png}}\label{fig64:a}
+	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_relative_error_compared_self.png}}\label{fig64:a}
 	\subfloat[]
-	{\includegraphics[scale=.6]{images/hpx_for_loop/fitted/marvin_r2_error_compared_self.png}}\label{fig64:b}
+	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_r2_error_compared_self.png}}\label{fig64:b}
 	\caption{The (a) relative error, and (b) $R^2$ score of fitting the collected data to the proposed analytical model for different $problem\_{sizes}$, calculated for each number of cores.}\label{fig64}		
 \end{figure}
 
@@ -516,10 +518,10 @@ We used $problem\_{size}=100000$ as the base \emph{problem\_{size}} on both arch
 
 \vspace{\baselineskip}
 \subsection{Analyzing the Data}
-Assuming the proposed formula is a good fit for this problem, we can estimate the range of grain sizes for which we achieve the lowest execution time, for a specific problem size, run on specific number of cores.
+Assuming the proposed formula is a good fit for this problem, we can estimate the range of grain sizes for which we achieve the lowest execution time, for a specific problem size, ran on specific number of cores.
 
 \vspace{\baselineskip}
-\subsubsection{Left side of the graph}
+\subsubsection{Left side of the Graph}
 As stated earlier, in Formula~\ref{formula1}, for small grain sizes the first term is the dominant factor while the second term roughly stays constant. Same way, for large grain sizes the second factor is the dominant factor. 
 
 In order to find the lower-bound of the range for which the execution time stays constant, we assume the second factor is constant in that region. Also we can change $N$ to $M$, knowing that our concern is on the left hand side of the graph, where $num\_{tasks}$ is definitely greater than the number of cores. 
@@ -709,7 +711,7 @@ To summarize, as the grain size increases the maximum imbalance in the loads ass
 
 We are interested in finding the maximum grain size that would generate a reasonable imbalance ($imbalance\_{ratio}\leq{\lambda_s}$), to make sure we should stay in the flat region of the bathtub curve of execution time against grain size, from load imbalance point of view.  
 
-Formula~\ref{formula14} states that for grain sizes greater than $problem\_{size}$, $imblance\_{ratio}$ increases linearly with grain size from $0$ to $N-1$. While for grain sizes smaller than $problem\_{size}$, the maximum $imbalance\_{ratio}$ depends on $k=\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil$. So, in order to assure \emph{imbalance\_{ratio}} is smaller than or equal to a threshold ($\lambda_s$), first we search the grain sizes smaller than $\frac{problem\_{size}}{N}$. Since $0<\lambda_s<1$, and $k\geq2$ in this region, there exists a $k$ such that $\frac{1}{k-1}\leq\lambda_s$.    
+Formula~\ref{formula14} states that for grain sizes greater than $problem\_{size}$, $imblance\_{ratio}$ increases linearly with grain size from $0$ to $N-1$. While for grain sizes smaller than $problem\_{size}$, the maximum $imbalance\_{ratio}$ depends on $k=\left\lceil{\frac{num\_{tasks}}{N}}\right\rceil$. So, in order to ensure \emph{imbalance\_{ratio}} is smaller than or equal to a threshold ($\lambda_s$), first we search the grain sizes smaller than $\frac{problem\_{size}}{N}$. Since $0<\lambda_s<1$, and $k\geq2$ in this region, there exists a $k$ such that $\frac{1}{k-1}\leq\lambda_s$.    
 If there exists a $k_{min}$ (creating an imbalance ratio between $0$ and $\frac{1}{k_{min}-1}$), where $\frac{1}{k_{min}-1}\leq{\lambda_s}$, $\forall k<k_{min}$ maximum value of $imbalance\_{ratio}$ would be greater than $\lambda_s$. So in order to find the grain size that would create maximum $imbalance\_{ratio}$ of $\lambda_s$:
 
 
@@ -725,18 +727,14 @@ If there exists a $k_{min}$ (creating an imbalance ratio between $0$ and $\frac{
 \end{aligned}
 \end{equation}
 
-If $g<g\_{max}$, we can assure that $imbalance\_{ratio}$ never exceeds $\lambda_s$. Since we already found a match at grain sizes smaller than $\frac{problem\_{size}}{N}$, checking the rest of grain sizes would not be necessary.
-
-
-
-
+If $g<g\_{max}$, we can ensure that $imbalance\_{ratio}$ never exceeds $\lambda_s$. Since we already found a match at grain sizes smaller than $\frac{problem\_{size}}{N}$, checking the rest of grain sizes would not be necessary.
 
 
 
 \vspace{\baselineskip}
-\subsection{Identifying the range of grain size for maximum speedup}
-In the previous section, we proposed a method to identify the lower-bound and the upper-bound of the grain sizes for which we observe the minimum execution time. 
-Integrating Formula~\ref{formula4} and Formula~\ref{formula21} suggests the following range for maximum speedup:
+\subsection{Identifying the Range of Grain Size for Minimum Execution Time}
+In the previous section, we proposed a method to identify the lower-bound and the upper-bound of the grain sizes for which we expect to observe the minimum execution time. 
+Integrating Formula~\ref{formula4} and Formula~\ref{formula21} suggests the following range for minimum execution time:
 
 
 \begin{equation}\label{formula23}
@@ -755,41 +753,49 @@ Note that based on Formula~\ref{formula23} we can state,
 \end{aligned}
 \end{equation}
 
-Which shows that the minimum execution time is achieved at a grain size smaller than $\frac{problem\_{size}}{N}$.
- 
-
+Which shows that the identified range of minimum execution time is located at the left side of the grain size that equally divides the work between the cores, $\frac{problem\_{size}}{N}$.
+  
+\vspace{\baselineskip}
 \subsection{Locating the Flat Region of the Execution time vs Grain Size Graph for the Benchmark}
-
-We used Formula~\ref{formula23} to identify the flat region of the execution time vs grain size graph for the benchmark in Listing~\ref{hpx_for_loop}. We set $\lambda_{s}=0.1$ and $\lambda_{b}=0.1$ for the thresholds to find the flat region of the graph. $\lambda_{b}$ represents the minimum and $\lambda_{s}$ represents the maximum acceptable value for grain size to lay in the flat region of the graph, based on Formula~\ref{formula23}. $\lambda_{b}$ indicates the slope of the graph at the left hand side of the graph where overhead of tasks is the dominant factor. $\lambda_{b}=0.1$ shows an angle of around $5\textdegree$, which seems to be a reasonable threshold. Grain sizes smaller than $\sqrt{\frac{(\frac{\alpha}{N})\times{problem\_{size}}}{{\lambda_b}}}$ would create a slope of more than $\lambda_b$. As for $\lambda_s$, a grain size greater than       
+In this section we used Formula~\ref{formula23} to identify the flat region of the execution time vs grain size graph for the parallel for-loop benchmark in Listing~\ref{hpx_for_loop}. For this purpose, we set  both $\lambda_{b}$ and $\lambda_{s}$ to $0.1$. The minimum and maximum acceptable value for grain size to lay in the flat region of the graph are then calculated based on Formula~\ref{formula43}. $\lambda_{b}$ indicates the slope of the graph at the left hand side of the graph where overhead of tasks is the dominant factor. $\lambda_{b}=0.1$ shows an angle of around $5\textdegree$, which seems to be a reasonable threshold. Grain sizes smaller than $\sqrt{\frac{(\frac{\alpha}{N})\times{problem\_{size}}}{{\lambda_b}}}$ would create a slope of more than $\lambda_b$. As for $\lambda_s$, a grain size greater than       
 $\frac{problem\_{size}}{(1+\left\lceil{\frac{1}{\lambda_s}}\right\rceil)\times{N}}$ could generate an $imbalance\_{ratio}$ of greater than $\lambda_s$. Therefore, for grain sizes within the range in Formula~\ref{formula43} we are in a safe region. 
-In Figure~\ref{fig51} the identified regions for minimum execution time is shown in green, for $problem\_{size}=10000,\:100000,\:1000000,\:10000000,\:100000000$, executed on $8$ cores. 
-
+ 
+In Figure~\ref{fig51} the identified regions for minimum execution time is shown in green, for $problem\_{size}=10000,\:100000,\:1000000,\:10000000,\:100000000$, executed on $8$ cores. The gray dashed line represents the grain size where work is equally divided among the cores, $\frac{problem\_size}{N}$.
 
 \begin{figure}[H]
 	\centering
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000/marvin_10000_8_range_10_10.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/marvin_10000_8_range_10_10.png}	
 		\label{fig51:a}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000/marvin_100000_8_range_10_10.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/marvin_100000_8_range_10_10.png}	
 		\label{fig51:b}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000/marvin_1000000_8_range_10_10.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/marvin_1000000_8_range_10_10.png}	
 		\label{fig51:c}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000/marvin_10000000_8_range_10_10.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/marvin_10000000_8_range_10_10.png}	
 		\label{fig51:d}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000000/marvin_100000000_8_range_10_10.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/marvin_100000000_8_range_10_10.png}	
 		\label{fig51:e}}
-	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=$, for (a) 10000, (b) 100000, (c) 1000000, (d) 10000000, (e) 100000000, on 8 cores, with $\lambda_{s}=0.1$ and $\lambda_{b}=0.1$. The unit for execution time is microseconds.}
+	\caption{The identified range of grain size for minimum execution time for $problem\_size=$ (a) 10000, (b) 100000, (c) 1000000, (d) 10000000, (e) 100000000, on 8 cores, with $\lambda_{s}=0.1$ and $\lambda_{b}=0.1$. The gray dashed line represents the grain size where work is equally divided among the cores, $\frac{problem\_size}{N}$. The unit for execution time is microseconds.}
 	\label{fig51}	
 \end{figure}
 
+Selecting a greater value for $\lambda_b$ would move the left border of the region to left, for a larger acceptable slope of change of execution time in terms of grain size. On the other hand, selecting a smaller value for $\lambda_{s}$ would result in shifting the right border of the region to left, imposing a higher restriction on $imbalance\_{ratio}$, as shown in Figure~\ref{fig65}.
+
+\vspace{\baselineskip}	
+\begin{figure}[H]
+	\centering
+	{\includegraphics[scale=.3]{images/hpx_for_loop/fitted/100000/lb_ls.png}}
+	\caption{The change in the borders of the identified region due to change of $\lambda_b$ and $\lambda_s$. }\label{fig65}		
+\end{figure}
+    
 
 
 \subsection{Applying the Proposed Model to the Blazemark Data}
-In the previous section we proposed an analytical model to predict how execution time changes with grain size, and suggested a method to estimate the range of grain size for a specific $problem\_{size}$ ran on a certain number of cores to stay in the region of minimum execution time. We then tested the proposed model on a simple for-loop benchmark, an the results seemed promising.
+In the previous section we proposed an analytical model to predict how execution time changes with grain size, and suggested a method to estimate the range of grain size for a specific $problem\_{size}$ ran on a certain number of cores to stay in the region of minimum execution time. We then tested the proposed model on a simple parallel for-loop benchmark, an the results seemed promising.
 In this section we revisit our original problem of predicting the behavior of the Blaze linear algebra library. 
 We start by looking at the data collected from $DMATDMATADD$ benchmark, which represents addition of two row major square dense matrices.
   
@@ -955,11 +961,12 @@ Figure~\ref{fig57} shows the identified range of chunk size for minimum executio
 
 
 \section{Conclusion}
-In the previous sections we offered an analytical model to predict the behavior of execution time vs grain size for a balanced parallel loop, and based on that model suggested a method to estimate the range of grain size to ensure staying in the flat region of the bathtub curve of execution time. The proposed model was then validated using a simple implemented benchmark. The parameters found through the benchmark was then utilized to predict the execution time of the $DMATDMATADD$ benchmark from $Blazemark$ suite. We were also able to find the range of grain size to achieve minimum execution time. 
+In the previous sections we offered an analytical model to predict the behavior of execution time in terms grain size for a balanced parallel loop, and based on that model suggested a method to estimate the range of grain size to ensure staying in the flat region of the bathtub curve of execution time. The proposed model was then validated using a simple implemented benchmark. The parameters found through the benchmark was then utilized to predict the execution time of the $DMATDMATADD$ benchmark from $Blazemark$ suite. We were also able to find the range of grain size to achieve minimum execution time. 
 At this point by selecting a reasonable value for block size, the range of chunk size to ensure staying in that range of grain size could be identified.
 
-We are proposing to run the benchmark in Listing~\ref{hpx_for_loop} for a reasonable $problem\_{size}$, e.g. $100,000,000$, with different values for chunk size on different number of cores, and use the data to estimate the $\alpha$ and $\sigma$ parameters through curve fitting. This process could be added as an extra step to building process of Blaze. 
-The complexity of the expression to be evaluated is then calculated at compile time as the number of floating point operations. A block size should also be selected based on the available cache size, the cache line, and the number of matrices involved in the operation. This part could also be done at compile time.   
+We propose to run the parallel for-loop benchmark in Listing~\ref{hpx_for_loop} for a reasonable $problem\_{size}=100000$, with different values for chunk size on different number of cores, and use the collected data to estimate the $\alpha$ and $\sigma$ parameters through curve fitting. This process could be added as an extra step to building process of Blaze. 
+The complexity of the expression to be evaluated is then calculated at compile time as the number of floating point operations. 
+A block size should also be selected based on the available cache size, the cache line, and the number of matrices involved in the operation. This part could also be done at compile time.   
 At runtime, based on the matrix size and number of cores chosen to run the program on, the range of chunk size to achieve the lowest execution time for each specific expression is identified.
 
 It has to be mentioned that although the proposed formula for execution time vs grain size depends on the sequential execution time, the proposed range for minimum execution time does not rely on sequential execution time, but depends on total amount of work, number of cores, overhead of creating and managing tasks, and the values we choose for the threshold on both sides($\lambda_{b}$ and $\lambda_{s}$).
