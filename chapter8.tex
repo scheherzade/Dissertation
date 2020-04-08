@@ -788,19 +788,19 @@ Selecting a greater value for $\lambda_b$ would move the left border of the regi
 \vspace{\baselineskip}	
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.3]{images/hpx_for_loop/fitted/100000/lb_ls.png}}
-	\caption{The change in the borders of the identified region due to change of $\lambda_b$ and $\lambda_s$. }\label{fig65}		
+	{\includegraphics[scale=.6]{images/hpx_for_loop/fitted/100000/marvin_100000000_8_range_10_50_80.png}}
+	\caption{An example of the effect of $\lambda_b$ and $\lambda_s$ on the borders of the identified region for minimum execution time due to change for $problem\_{size}=100000000$ and $N=8$. }\label{fig65}		
 \end{figure}
     
 
 
 \subsection{Applying the Proposed Model to the Blazemark Data}
 In the previous section we proposed an analytical model to predict how execution time changes with grain size, and suggested a method to estimate the range of grain size for a specific $problem\_{size}$ ran on a certain number of cores to stay in the region of minimum execution time. We then tested the proposed model on a simple parallel for-loop benchmark, an the results seemed promising.
-In this section we revisit our original problem of predicting the behavior of the Blaze linear algebra library. 
+In this section we revisit our original problem of finding the range of chunk size for minimum execution time to calculate an expression using the Blaze linear algebra library. 
 We start by looking at the data collected from $DMATDMATADD$ benchmark, which represents addition of two row major square dense matrices.
   
 As we previously stated in Chapter~\ref{Method}, for the collected data, the \emph{DMATDMATADD} benchmark was executed with different configurations of $block\_{size}$, $chunk\_{size}$, and number of cores, for different matrix sizes. 
-As discussed earlier the collected data suggested that instead of looking at $block\_{size}$ and then $chunk\_{size}$, we can study the effect of grain size on execution time. By identifying the range of grain size that ensures staying in the flat region of the bathtub, we can then select a reasonable value for $block\_{size}$, we can find the range of $chunk\_{sizes}$ to generate the mentioned range of grain size. A reasonable value for size a block, for an operation on row major matrices, would be a matrix with larger number of columns than number of rows, where number of columns is divisible by cache line, and the number of elements in the block multiplied by number of matrices involved in an operation, is smaller than L2 cache size. With these assumptions we selected the value of $4\times{256}$ for $block\_{size}$ for this benchmark.
+As discussed earlier the collected data suggested that instead of looking at $block\_{size}$ and then $chunk\_{size}$, we can study the effect of grain size on execution time. By identifying the range of grain size that ensures staying in the flat region of the bathtub, we can then select a reasonable value for $block\_{size}$, we can find the range of $chunk\_{sizes}$ to generate the mentioned range of grain size. We define a reasonable value for block size for an operation on row major matrices, az the size of a matrix with larger number of columns than number of rows, where number of columns is divisible by cache line, and the number of elements in the block multiplied by number of matrices involved in an operation, is smaller than L2 cache size. With these assumptions we selected the value of $4\times{256}$ for $block\_{size}$ for this benchmark.
 
 In the previous section we suggested Formula~\ref{formula1} as an analytical model to explain the relationship between execution time and grain size in a balanced parallel for-loop.    
 
@@ -813,68 +813,68 @@ execution\_time =
 
 $problem\_{size}$ in Formula~\ref{formula1} refers to the total amount of work available. For $matrix\_{size}=m$, performing $DMATDMATADD$ benchmark, $problem\_{size}=2\times{m^2}$, which is the total amount of floating point operations needed to be performed.
  
-Previously, using the benchmark we were able to find the value for the parameters of the model on $Marvin$ node as $\alpha=3.032$ and $\sigma=0.294$. 
+Previously, using the benchmark we were able to find the value for the parameters of the model on $Marvin$ node as $\alpha=2.674$ and $\sigma=0.0268$. 
 
 Grain size, as the amount of work executed by one thread, for this problem is represented by the number of floating point operations performed by one thread. As an example, if $block\_{size}=4\times{256}$, and $chunk\_{size}=3$ performing $DMATDMATADD$ benchmark, would result in a $grain\_{size}$ of $2\times{4\times{256}\times{3}}=6144$. 
 
-Figure~\ref{fig52} and Figure~\ref{fig53} show the results of applying the proposed analytical model with the parameters identified through the benchmark, to $DMATDMATADD$ benchmark, alongside the true values for the execution collected, for $matrix\_{size}=690$ and $matrix\_{size}=4222$ respectively, for different number of cores. 
+Figure~\ref{fig52} and Figure~\ref{fig53} show the results of applying the proposed analytical model with the parameters identified through the benchmark, to $DMATDMATADD$ benchmark, alongside the true values for the execution time, for $matrix\_{size}=690$ and $matrix\_{size}=4222$ respectively, for different number of cores. 
 
 
 \begin{figure}[H]
 	\centering
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_690_1.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_690_1.png}	
 		\label{fig52:a}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_690_2.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_690_2.png}	
 		\label{fig52:b}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_690_3.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_690_3.png}	
 		\label{fig52:c}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_690_4.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_690_4.png}	
 		\label{fig52:d}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_690_5.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_690_5.png}	
 		\label{fig52:e}}
 		\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_690_6.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_690_6.png}	
 		\label{fig52:f}}\hfill
 		\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_690_7.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_690_7.png}	
 		\label{fig52:g}}
 		\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_690_8.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_690_8.png}	
 		\label{fig52:h}}
-	\caption{The results of predicting execution time using the suggested analytical model with parameters identified using the benchmark compared to the original values for $matrix\_{size}=690$, ran on (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, and (h) 8 cores. The unit for execution time is microseconds.}
+	\caption{The results of predicting execution time using the suggested analytical model with parameters identified using the parallel for-loop benchmark compared to the original values for $matrix\_{size}=690$, ran on (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, and (h) 8 cores. The unit for execution time is microseconds.}
 	\label{fig52}	
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_4222_1.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_4222_1.png}	
 		\label{fig53:a}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_4222_2.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_4222_2.png}	
 		\label{fig53:b}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_4222_3.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_4222_3.png}	
 		\label{fig53:c}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_4222_4.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_4222_4.png}	
 		\label{fig53:d}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_4222_5.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_4222_5.png}	
 		\label{fig53:e}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_4222_6.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_4222_6.png}	
 		\label{fig53:f}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_4222_7.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_4222_7.png}	
 		\label{fig53:g}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/marvin_pred_4222_8.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/marvin_pred_4222_8.png}	
 		\label{fig53:h}}
 	\caption{The results of predicting execution time using the suggested analytical model with parameters identified using the benchmark compared to the original values for $matrix\_{size}=4222$, ran on (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, and (h) 8 cores. The unit for execution time is microseconds.}
 	\label{fig53}	
@@ -887,13 +887,13 @@ Figure~\ref{fig54} shows the average relative error, while Figure~\ref{fig55} re
 
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/blazemark/marvin_relative_error_less_953.png}}
+	{\includegraphics[scale=.45]{images/hpx_for_loop/blazemark/100000000/marvin_relative_error_less_953.png}}
 	\caption{The relative error of using the predicting the execution time based on grain size for the $DMATDMATADD$ benchmark from $Blazemark$ suite. The relative error of all matrix sizes smaller than $953$ was averaged for each specific number of cores.}\label{fig54}		
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.45]{images/hpx_for_loop/blazemark/marvin_r2_error_less_953.png}}
+	{\includegraphics[scale=.45]{images/hpx_for_loop/blazemark/100000000/marvin_r2_error_less_953.png}}
 	\caption{The $R^2$ score of using the predicting the execution time based on grain size for the $DMATDMATADD$ benchmark from $Blazemark$ suite. The relative error of all matrix sizes smaller than $953$ was averaged for each specific number of cores.}\label{fig55}		
 \end{figure}
 
@@ -904,25 +904,25 @@ Figure~\ref{fig56} shows the identified range for minimum execution time based o
 \begin{figure}[H]
 	\centering
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_690_8_10_500.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/range/marvin_pred_690_8_10_500.png}	
 		\label{fig56:a}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_912_8_10_500.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/range/marvin_pred_912_8_10_500.png}	
 		\label{fig56:b}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_1825_8_10_500.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/range/marvin_pred_1825_8_10_500.png}	
 		\label{fig56:c}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_3193_8_10_500.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/range/marvin_pred_3193_8_10_500.png}	
 		\label{fig56:d}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_4222_8_10_500.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/range/marvin_pred_4222_8_10_500.png}	
 	\label{fig56:e}}
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_4855_8_10_500.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/range/marvin_pred_4855_8_10_500.png}	
 	\label{fig56:f}}
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/range/marvin_pred_6420_8_10_500.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/range/marvin_pred_6420_8_10_500.png}	
 	\label{fig56:g}}
-	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $matrix\_size=$, for (a) 690, (b) 912, (c) 1825, (d) 3193, (e) 4222, (f) 4855, (g) 6420, on 8 cores, with $\lambda_{s}=0.5$ and $\lambda_{b}=0.01$. The unit for execution time is microseconds.}
+	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $matrix\_size=$, for (a) 690, (b) 912, (c) 1825, (d) 3193, (e) 4222, (f) 4855, (g) 6420, on 8 cores, with $\lambda_{s}=0.01$ and $\lambda_{b}=0.5$. The unit for execution time is microseconds.}
 	\label{fig56}	
 \end{figure}
 
@@ -937,23 +937,23 @@ Figure~\ref{fig57} shows the identified range of chunk size for minimum executio
 \begin{figure}[H]
 	\centering
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_690_8_10_500_5_21.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/chunk_sizes/marvin_pred_690_8_10_500_5_21.png}	
 		\label{fig57:a}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_912_8_10_500_6_37.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/chunk_sizes/marvin_pred_912_8_10_500_6_37.png}	
 		\label{fig57:b}}\hfill
 	\subfloat[]
-	 {\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_1825_8_10_500_12_152.png}	
+	 {\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/chunk_sizes/marvin_pred_1825_8_10_500_12_152.png}	
 		\label{fig57:c}}
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_3193_8_10_500_20_432.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/chunk_sizes/marvin_pred_3193_8_10_500_19_432.png}	
 		\label{fig57:d}}\hfill
 	\subfloat[]
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_4222_8_10_500_26_747.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/chunk_sizes/marvin_pred_4222_8_10_500_25_747.png}	
 		\label{fig57:e}}
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_4855_8_10_500_30_960.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/chunk_sizes/marvin_pred_4855_8_10_500_28_960.png}	
 		\label{fig57:f}}
-	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/chunk_sizes/marvin_chunk_6420_8_10_500_40_1737.png}	
+	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/chunk_sizes/marvin_pred_6420_8_10_500_38_1737.png}	
 		\label{fig57:g}}
 	\caption{The suggested range of chunk size for minimum execution time with $block\_{size}=4\times{256}$, for $matrix\_size=$, for (a) 690, (b) 912, (c) 1825, (d) 3193, (e) 4222, (f) 4855, (g) 6420, on 8 cores, when $\lambda_{s}=0.5$ and $\lambda_{b}=0.01$. The unit for execution time is microseconds.}
 	\label{fig57}	
@@ -964,7 +964,7 @@ Figure~\ref{fig57} shows the identified range of chunk size for minimum executio
 In the previous sections we offered an analytical model to predict the behavior of execution time in terms grain size for a balanced parallel loop, and based on that model suggested a method to estimate the range of grain size to ensure staying in the flat region of the bathtub curve of execution time. The proposed model was then validated using a simple implemented benchmark. The parameters found through the benchmark was then utilized to predict the execution time of the $DMATDMATADD$ benchmark from $Blazemark$ suite. We were also able to find the range of grain size to achieve minimum execution time. 
 At this point by selecting a reasonable value for block size, the range of chunk size to ensure staying in that range of grain size could be identified.
 
-We propose to run the parallel for-loop benchmark in Listing~\ref{hpx_for_loop} for a reasonable $problem\_{size}=100000$, with different values for chunk size on different number of cores, and use the collected data to estimate the $\alpha$ and $\sigma$ parameters through curve fitting. This process could be added as an extra step to building process of Blaze. 
+We propose to run the parallel for-loop benchmark in Listing~\ref{hpx_for_loop} for a reasonable \emph{problem\_{size} = 100000}, with different values for chunk size on different number of cores, and use the collected data to estimate the $\alpha$ and $\sigma$ parameters through curve fitting. This process could be added as an extra step to building process of Blaze. 
 The complexity of the expression to be evaluated is then calculated at compile time as the number of floating point operations. 
 A block size should also be selected based on the available cache size, the cache line, and the number of matrices involved in the operation. This part could also be done at compile time.   
 At runtime, based on the matrix size and number of cores chosen to run the program on, the range of chunk size to achieve the lowest execution time for each specific expression is identified.
