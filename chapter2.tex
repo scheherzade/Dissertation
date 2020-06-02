@@ -149,7 +149,7 @@ As an adaptive loop scheduling technique, Guided Self-scheduling\cite{polychrono
 Very similar to Guided Self-scheduling, Factoring\cite{hummel1992factoring} also decreases the chunk size as the loop execution proceeds, with this difference that it does it in batches of equal sized chunks. If the first iterations of the loop are more time consuming then the rest of the iterations, Factoring performs better than Guided scheduling\cite{mohammed2018experimental}.  
 
 
-Along with the mentioned loop scheduling approaches, two other scheduling techniques can be utilized for load balancing. Work stealing\cite{blumofe1999scheduling} lets the processors to steal work from other processors queue, resulting in a more balanced load distribution. In work sharing on the other hand, each time a processor creates new threads, the scheduler would try to migrate some of them to other processors for a more balanced lad distribution\cite{blumofe1999scheduling}.
+Along with the mentioned loop scheduling approaches, two other scheduling techniques can be utilized for load balancing. Work stealing\cite{blumofe1999scheduling} lets the processors to steal work from other processors queue, resulting in a more balanced load distribution. In work sharing on the other hand, each time a processor creates new threads, the scheduler would try to migrate some of them to other processors for a more balanced load distribution\cite{blumofe1999scheduling}.
 
 
 

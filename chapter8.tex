@@ -320,6 +320,8 @@ The third region of the graph, which we referred to as the flat region of the gr
 Our intention in this thesis is to find this flat region of the bathtub curve, as shown in Figure~\ref{fig60:a}, in order to ensure that the effect of the two major sources of performance degradation (overheads of creating and managing tasks, and starvation) in execution time is minimized.
 
 In Figure~\ref{fig60} grain size is shown in logarithmic scale, but looking at Figure~\ref{fig60}, with normal scale for grain size, it can be realized that the range we are interested in is a small range of values of grain size.  
+
+In this thesis we propose a new methodology to study the performance based on task granularity for a balanced parallel for loop, and we suggest an approach to locate this small region of grain size in order to achieve the minimum execution time.
  
 \begin{figure}[H]
 	\centering
@@ -357,9 +359,9 @@ As the $problem\_{size}$ increases, we need to collect more data points to cover
 \begin{figure}[H]
 	\centering
 	\subfloat[]
-	{\includegraphics[scale=.8]{images/hpx_for_loop/fitted/marvin_relative_error_compared_self.png}}\label{fig59:a}
+	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_relative_error_compared_self.png}}\label{fig59:a}
 		\subfloat[]
-	{\includegraphics[scale=.8]{images/hpx_for_loop/fitted/marvin_r2_error_compared_self.png}}\label{fig59:b}
+	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_r2_error_compared_self.png}}\label{fig59:b}
 	\caption{The (a) relative error, and (b) $R^2$ score of fitting the collected data to the proposed analytical model for different $problem\_{sizes}$, calculated for each number of cores.}\label{fig59}		
 \end{figure}
 
@@ -371,9 +373,9 @@ In the next step we measured the relative error and $R^2$ score of using the mod
 \begin{figure}[H]
 	\centering
 	\subfloat[]
-	{\includegraphics[scale=.7]{images/hpx_for_loop/fitted/marvin_relative_error_compared_rest.png}}\label{fig61:a}
+	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_relative_error_compared_rest.png}}\label{fig61:a}
 	\subfloat[]
-	{\includegraphics[scale=.7]{images/hpx_for_loop/fitted/marvin_r2_error_compared_rest.png}}\label{fig61:b}
+	{\includegraphics[scale=.45]{images/hpx_for_loop/fitted/marvin_r2_error_compared_rest.png}}\label{fig61:b}
 	\caption{The (a)relative error and (b)$R^2$ score of using the model parameters found from each base $problem\_{size}$ fitting the proposed analytical model to the collected data for different $problem\_{sizes}$, calculated over each number of cores.}\label{fig61}		
 \end{figure}
 
@@ -417,7 +419,7 @@ Fitting our model to all the $512$ data points collected resulted in model param
 	\subfloat[]
 	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000_8_100000.png}	
 	\label{fig43:h}}\hfill
-	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=100000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.}
+	\caption{The results of predicted values of execution time through curve fitting vs the real data for $problem\_size=100000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.}
 	\label{fig43}	
 \end{figure}
 
@@ -450,7 +452,7 @@ Figure~\ref{fig43} shows the fitted curves along with the original data for diff
 	\subfloat[]
 	{\centering\includegraphics[scale=.35]{images/hpx_for_loop/fitted/100000/marvin_100000000_8_100000.png}	
 		\label{fig62:h}}\hfill
-	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=100000000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.}
+	\caption{The results of predicted values of execution time through curve fitting vs the real data for $problem\_size=100000000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.}
 	\label{fig62}	
 \end{figure}
 
@@ -462,7 +464,7 @@ At the next step we repeated the same process for the data collected from two di
 \subsection{Medusa}
 We used $problem\_{size}=100000$ as the base \emph{problem\_{size}} on both architectures. On Medusa, with $problem\_{size}=100000$, the model parameters were found to be $\alpha=1.832$ and $\sigma=0.037$. 
 The calculated relative error and $R^2$ score for each individual number of cores for $problem\_{size}=100000$ is demonstrated in Figure~\ref{fig64}, and Figure~\ref{fig63}, while the relative error and $R^2$ score calculated for all other \emph{problem\_{sizes}} is shown in Figure~\ref{fig64}, and Figure~\ref{fig63}.
-
+\vspace{\baselineskip}
 
 \begin{figure}[H]
 	\centering
@@ -509,7 +511,7 @@ The calculated relative error and $R^2$ score for each individual number of core
 	\subfloat[]
 	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/fitted/100000/medusa_100000_8_100000.png}	
 		\label{fig50:h}}\hfill
-	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $problem\_size=100000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.}
+	\caption{The results of predicted values of execution time through curve fitting vs the real data for $problem\_size=100000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.}
 	\label{fig50}	
 \end{figure}
 
@@ -683,8 +685,8 @@ At each of the regions with $k>1$, $\left\lceil{\frac{num\_{tasks}}{N}}\right \r
 \vspace{\baselineskip}	
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.25]{images/hpx_for_loop/w_c_all.png}}
-	\caption{The imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores, where $k=\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil$.}\label{fig38}		
+	{\includegraphics[scale=.25]{images/hpx_for_loop/imbalance_ratio_100000_8.png}}
+	\caption{The imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores. At the area between each two green lines $k=\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil$ is constant.}\label{fig38}		
 \end{figure}
 
 
@@ -695,14 +697,14 @@ At each of the regions with $k>1$, $\left\lceil{\frac{num\_{tasks}}{N}}\right \r
 %	\caption{The maximum imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores, where $k=\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil$.}\label{fig36}		
 %\end{figure}
 
-Figure~\ref{fig39} represents the imbalance ratio, along with the ratio of the sequential execution time over execution time(speed-up) against grain size for $problem\_size=10000$, ran on 8 cores.   
+Figure~\ref{fig37} represents the imbalance ratio, along with the ratio of the sequential execution time over execution time(speed-up) against grain size for $problem\_size=10000$, ran on 8 cores.   
 As it can be observed, as the $imbalance\_{ratio}$ increases, the speed-up decreases. 
 
 \vspace{\baselineskip}	
 \begin{figure}[H]
 	\centering
-	{\includegraphics[scale=.3]{images/hpx_for_loop/w_c_speedup.png}}
-	\caption{The imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores, where $k=\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil$.}\label{fig37}		
+	{\includegraphics[scale=.3]{images/hpx_for_loop/imbalance_ratio_speedup_100000_8.png}}
+	\caption{The imbalance ratio alongside speedup for different grain sizes for $problem\_size=10000$, on 8 cores, where $k=\left\lceil{\frac{num\_{tasks}}{N}}\right \rceil$.}\label{fig37}		
 \end{figure}
 
 
@@ -882,8 +884,9 @@ Figure~\ref{fig52} and Figure~\ref{fig53} show the results of applying the propo
 
 The $DMATDMATADD$ benchmark was run on $Marvin$ node with $Sandy\:Bridge$ architecture, with $256KB$ of level 2 cache, and $20MB$ of level 3 cache. In order for the $3$ same sized square matrices involved in $DMATDMATADD$ benchmark ($C=A+B$) to fit into level3 cache, they must be smaller than $935\times{935}$ in size. 
 
-For matrix sizes greater than $935$, we observe an increase in execution time from our prediction using the proposed analytical model, as represented in Figure~\ref{fig53}. We have to pay a penalty for loading data from memory instead of cache.\textcolor{red}{why do we see the effect for all grain sizes, shouldn't it start at explain more}.
-Figure~\ref{fig54} shows the average relative error, while Figure~\ref{fig55} represents the average $R^2$ score both calculated for each specific number of cores individually, and for matrix sizes smaller than $935$.
+For matrix sizes greater than $935$, we observe an increase in execution time from our prediction using the proposed analytical model, as represented in Figure~\ref{fig53}. We have to pay a penalty for loading data from memory instead of cache.
+
+Figure~\ref{fig54} shows the relative error, while Figure~\ref{fig55} represents the $R^2$ score both calculated for each specific number of cores individually, and for matrix sizes smaller than $935$.
 
 \begin{figure}[H]
 	\centering
@@ -922,7 +925,7 @@ Figure~\ref{fig56} shows the identified range for minimum execution time based o
 	\label{fig56:f}}
 	{\centering\includegraphics[scale=.4]{images/hpx_for_loop/blazemark/100000/range/marvin_pred_6420_8_10_500.png}	
 	\label{fig56:g}}
-	\caption{The results of predicted values of execution time through curve fitting vs the real data for with $matrix\_size=$, for (a) 690, (b) 912, (c) 1825, (d) 3193, (e) 4222, (f) 4855, (g) 6420, on 8 cores, with $\lambda_{s}=0.01$ and $\lambda_{b}=0.5$. The unit for execution time is microseconds.}
+	\caption{The results of predicted values of execution time through curve fitting vs the real data for $matrix\_size=$, for (a) 690, (b) 912, (c) 1825, (d) 3193, (e) 4222, (f) 4855, (g) 6420, on 8 cores, with $\lambda_{s}=0.01$ and $\lambda_{b}=0.5$. The unit for execution time is microseconds.}
 	\label{fig56}	
 \end{figure}
 
