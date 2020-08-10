@@ -1,10 +1,10 @@
 \relax 
 \catcode 95\active
 \@writefile{toc}{\contentsline {chapter}{\hspace  {-1.5em} {ACKNOWLEDGMENTS} \vspace  {12pt}}{ii}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\hspace  {-1.5em} LIST OF TABLES \vspace  {12pt}}{v}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\hspace  {-1.5em} LIST OF TABLES \vspace  {12pt}}{iv}\protected@file@percent }
 \citation{grubel2015performance}
-\@writefile{toc}{\contentsline {chapter}{\hspace  {-1.5em} LIST OF FIGURES \vspace  {12pt}}{vi}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\hspace  {-1.5em} ABSTRACT}{viii}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\hspace  {-1.5em} LIST OF FIGURES \vspace  {12pt}}{v}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\hspace  {-1.5em} ABSTRACT}{ix}\protected@file@percent }
 \citation{grubel2016using}
 \citation{kaiser2014hpx}
 \citation{bennett2015asynchronous}
@@ -286,17 +286,343 @@
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{32}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {}}}{32}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {}}}{32}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Conclusion}{32}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.16}{\ignorespaces Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores.\relax }}{33}\protected@file@percent }
+\newlabel{fig19}{{4.16}{33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.17}{\ignorespaces The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark for different number of cores for matrix size $523\times 523$ to $912\times 912$.\relax }}{34}\protected@file@percent }
+\newlabel{fig20}{{4.17}{34}}
 \@writefile{toc}{\vskip 12\p@ \relax }
-\@writefile{toc}{\contentsline {chapter}{\uppercase {\numberline {5}Understanding the effect of grain size on concurrency in an asynchronous many-task runtime system}}{33}\protected@file@percent }
-\newlabel{Bathtub}{{5}{33}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Analytical Modeling}{33}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\uppercase {\numberline {5}Understanding the effect of grain size on concurrency in an asynchronous many-task runtime system}}{35}\protected@file@percent }
+\newlabel{Bathtub}{{5}{35}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Analytical Modeling}{35}\protected@file@percent }
+\newlabel{formula31}{{5.1}{36}}
+\newlabel{formula33}{{5.2}{37}}
+\newlabel{formula32}{{5.3}{37}}
+\newlabel{formula2}{{5.4}{38}}
 \citation{gunther2007guerrilla}
-\newlabel{problem_size}{{5.1}{34}}
-\newlabel{formula1}{{5.2}{34}}
-\newlabel{fig29}{{\caption@xref {fig29}{ on input line 36}}{35}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces The results of running the benchmark in Listing with $problem\_size=10000$, on different number of cores.\relax }}{35}\protected@file@percent }
-\newlabel{hpx_for_loop}{{5.1}{36}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {5.1}A simple hpx for\textunderscore {loop} used to study the effect of grain size on the achieved parallelism.}{36}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces The way $w\_c$ is calculated illustrated for cases where $num\_{tasks}\%N=1$ and $num\_{iterations}\%chunk\_{size}\not =0$.\relax }}{39}\protected@file@percent }
+\newlabel{fig58}{{5.1}{39}}
+\newlabel{formula16}{{5.5}{39}}
+\newlabel{formula34}{{5.6}{40}}
+\newlabel{formula19}{{5.7}{40}}
+\newlabel{formula1}{{5.8}{40}}
+\newlabel{formula41}{{5.9}{40}}
+\newlabel{formula42}{{5.10}{41}}
+\newlabel{fig40:a}{{5.2a}{42}}
+\newlabel{sub@fig40:a}{{(a)}{a}}
+\newlabel{fig40:b}{{5.2b}{42}}
+\newlabel{sub@fig40:b}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces The results of running the parallel for-loop benchmark with $problem\_size=3000$, on different (a)4 cores, and (b) 8 cores. The vertical dotted line shows the grain size that would generate same number of tasks as the number of cores, with the same amount of work for all the cores.\relax }}{42}\protected@file@percent }
+\newlabel{fig40}{{5.2}{42}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{42}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{42}\protected@file@percent }
+\newlabel{formula7}{{5.11}{43}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Validating the Proposed Model}{43}\protected@file@percent }
+\newlabel{problem_size}{{5.12}{43}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces The results of running the parallel for-loop benchmark with $problem\_size=100,000$, on 8 cores. The unit for execution time is microseconds.\relax }}{44}\protected@file@percent }
+\newlabel{fig41}{{5.3}{44}}
+\newlabel{hpx_for_loop}{{5.1}{45}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {5.1}For-loop benchmark, a simple hpx for\textunderscore {loop} used to study the effect of grain size on the achieved parallelism.}{45}\protected@file@percent }
+\newlabel{fig60:a}{{5.4a}{47}}
+\newlabel{sub@fig60:a}{{(a)}{a}}
+\newlabel{fig60:b}{{5.4b}{47}}
+\newlabel{sub@fig60:b}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces The results of running the parallel for-loop benchmark with $problem\_size=100000$, on 8 cores. (a) represents the graph in logarithmic scale, while (b) shows the same graph in linear scale. The unit for execution time is microseconds.\relax }}{47}\protected@file@percent }
+\newlabel{fig60}{{5.4}{47}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{47}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{47}\protected@file@percent }
+\newlabel{eq4}{{5.13}{47}}
+\newlabel{eq5}{{5.14}{47}}
+\newlabel{fig59:a}{{\caption@xref {fig59:a}{ on input line 362}}{48}}
+\newlabel{fig59:b}{{\caption@xref {fig59:b}{ on input line 364}}{48}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces The (a) relative error, and (b) $R^2$ score of fitting the collected data to the proposed analytical model for different $problem\_{sizes}$, calculated for each number of cores.\relax }}{48}\protected@file@percent }
+\newlabel{fig59}{{5.5}{48}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{48}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{48}\protected@file@percent }
+\newlabel{fig61:a}{{\caption@xref {fig61:a}{ on input line 376}}{49}}
+\newlabel{fig61:b}{{\caption@xref {fig61:b}{ on input line 378}}{49}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces The (a)relative error and (b)$R^2$ score of using the model parameters found from each base $problem\_{size}$ fitting the proposed analytical model to the collected data for different $problem\_{sizes}$, calculated over each number of cores.\relax }}{49}\protected@file@percent }
+\newlabel{fig61}{{5.6}{49}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{49}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{49}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces The results of running the parallel for-loop benchmark with $problem\_size=100000$, on different number of cores. The unit for execution time is microseconds.\relax }}{50}\protected@file@percent }
+\newlabel{fig42}{{5.7}{50}}
+\newlabel{fig43:a}{{5.8a}{51}}
+\newlabel{sub@fig43:a}{{(a)}{a}}
+\newlabel{fig43:b}{{5.8b}{51}}
+\newlabel{sub@fig43:b}{{(b)}{b}}
+\newlabel{fig43:c}{{5.8c}{51}}
+\newlabel{sub@fig43:c}{{(c)}{c}}
+\newlabel{fig43:d}{{5.8d}{51}}
+\newlabel{sub@fig43:d}{{(d)}{d}}
+\newlabel{fig43:e}{{5.8e}{51}}
+\newlabel{sub@fig43:e}{{(e)}{e}}
+\newlabel{fig43:f}{{5.8f}{51}}
+\newlabel{sub@fig43:f}{{(f)}{f}}
+\newlabel{fig43:g}{{5.8g}{51}}
+\newlabel{sub@fig43:g}{{(g)}{g}}
+\newlabel{fig43:h}{{5.8h}{51}}
+\newlabel{sub@fig43:h}{{(h)}{h}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces The results of predicted values of execution time through curve fitting vs the real data for $problem\_size=100000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.\relax }}{51}\protected@file@percent }
+\newlabel{fig43}{{5.8}{51}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{51}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{51}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{51}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{51}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {}}}{51}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {}}}{51}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(g)}{\ignorespaces {}}}{51}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(h)}{\ignorespaces {}}}{51}\protected@file@percent }
+\newlabel{fig62:a}{{5.9a}{52}}
+\newlabel{sub@fig62:a}{{(a)}{a}}
+\newlabel{fig62:b}{{5.9b}{52}}
+\newlabel{sub@fig62:b}{{(b)}{b}}
+\newlabel{fig62:c}{{5.9c}{52}}
+\newlabel{sub@fig62:c}{{(c)}{c}}
+\newlabel{fig62:d}{{5.9d}{52}}
+\newlabel{sub@fig62:d}{{(d)}{d}}
+\newlabel{fig62:e}{{5.9e}{52}}
+\newlabel{sub@fig62:e}{{(e)}{e}}
+\newlabel{fig62:f}{{5.9f}{52}}
+\newlabel{sub@fig62:f}{{(f)}{f}}
+\newlabel{fig62:g}{{5.9g}{52}}
+\newlabel{sub@fig62:g}{{(g)}{g}}
+\newlabel{fig62:h}{{5.9h}{52}}
+\newlabel{sub@fig62:h}{{(h)}{h}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces The results of predicted values of execution time through curve fitting vs the real data for $problem\_size=100000000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.\relax }}{52}\protected@file@percent }
+\newlabel{fig62}{{5.9}{52}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{52}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{52}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{52}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{52}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {}}}{52}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {}}}{52}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(g)}{\ignorespaces {}}}{52}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(h)}{\ignorespaces {}}}{52}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Testing the Proposed Model on Other Architectures}{53}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Medusa}{53}\protected@file@percent }
+\newlabel{fig64:a}{{\caption@xref {fig64:a}{ on input line 472}}{53}}
+\newlabel{fig64:b}{{\caption@xref {fig64:b}{ on input line 474}}{53}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.10}{\ignorespaces The (a) relative error, and (b) $R^2$ score of fitting the collected data to the proposed analytical model for different $problem\_{sizes}$, calculated for each number of cores.\relax }}{53}\protected@file@percent }
+\newlabel{fig64}{{5.10}{53}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{53}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{53}\protected@file@percent }
+\newlabel{fig63:a}{{\caption@xref {fig63:a}{ on input line 482}}{54}}
+\newlabel{fig63:b}{{\caption@xref {fig63:b}{ on input line 484}}{54}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.11}{\ignorespaces The (a)relative error and (b)$R^2$ score of using the model parameters found from each base $problem\_{size}$ fitting the proposed analytical model to the collected data for different $problem\_{sizes}$, calculated over each number of cores.\relax }}{54}\protected@file@percent }
+\newlabel{fig63}{{5.11}{54}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{54}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{54}\protected@file@percent }
+\newlabel{fig50:a}{{5.12a}{55}}
+\newlabel{sub@fig50:a}{{(a)}{a}}
+\newlabel{fig50:b}{{5.12b}{55}}
+\newlabel{sub@fig50:b}{{(b)}{b}}
+\newlabel{fig50:c}{{5.12c}{55}}
+\newlabel{sub@fig50:c}{{(c)}{c}}
+\newlabel{fig50:d}{{5.12d}{55}}
+\newlabel{sub@fig50:d}{{(d)}{d}}
+\newlabel{fig50:e}{{5.12e}{55}}
+\newlabel{sub@fig50:e}{{(e)}{e}}
+\newlabel{fig50:f}{{5.12f}{55}}
+\newlabel{sub@fig50:f}{{(f)}{f}}
+\newlabel{fig50:g}{{5.12g}{55}}
+\newlabel{sub@fig50:g}{{(g)}{g}}
+\newlabel{fig50:h}{{5.12h}{55}}
+\newlabel{sub@fig50:h}{{(h)}{h}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.12}{\ignorespaces The results of predicted values of execution time through curve fitting vs the real data for $problem\_size=100000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.\relax }}{55}\protected@file@percent }
+\newlabel{fig50}{{5.12}{55}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{55}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{55}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{55}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{55}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {}}}{55}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {}}}{55}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(g)}{\ignorespaces {}}}{55}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(h)}{\ignorespaces {}}}{55}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}Raspberry Pi 4}{56}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.5}Analyzing the Data}{56}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.5.1}Left side of the Graph}{56}\protected@file@percent }
+\newlabel{formula3}{{5.15}{56}}
+\newlabel{formula4}{{5.16}{57}}
+\newlabel{formula5}{{5.17}{57}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.5.2}Right side of the graph}{57}\protected@file@percent }
+\newlabel{formula6}{{5.18}{58}}
+\newlabel{formula8}{{5.19}{58}}
+\newlabel{formula9}{{5.20}{59}}
+\newlabel{formula10}{{5.21}{59}}
+\newlabel{formula11}{{5.22}{59}}
+\newlabel{formula15}{{5.23}{59}}
+\newlabel{formula17}{{5.24}{59}}
+\newlabel{formula18}{{5.25}{60}}
+\newlabel{formula14}{{5.26}{60}}
+\newlabel{formula13}{{5.27}{60}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.13}{\ignorespaces The imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores. At the area between each two green lines $k=\left \delimiter "42643A7 {\frac  {num\_{tasks}}{N}}\right \delimiter "52653A8 $ is constant.\relax }}{61}\protected@file@percent }
+\newlabel{fig38}{{5.13}{61}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.14}{\ignorespaces The imbalance ratio alongside speedup for different grain sizes for $problem\_size=10000$, on 8 cores, where $k=\left \delimiter "42643A7 {\frac  {num\_{tasks}}{N}}\right \delimiter "52653A8 $.\relax }}{61}\protected@file@percent }
+\newlabel{fig37}{{5.14}{61}}
+\newlabel{formula21}{{5.28}{62}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.6}Identifying the Range of Grain Size for Minimum Execution Time}{62}\protected@file@percent }
+\newlabel{formula23}{{5.29}{63}}
+\newlabel{formula43}{{5.30}{63}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.7}Locating the Flat Region of the Execution time vs Grain Size Graph for the Benchmark}{63}\protected@file@percent }
+\newlabel{fig51:a}{{5.15a}{64}}
+\newlabel{sub@fig51:a}{{(a)}{a}}
+\newlabel{fig51:b}{{5.15b}{64}}
+\newlabel{sub@fig51:b}{{(b)}{b}}
+\newlabel{fig51:c}{{5.15c}{64}}
+\newlabel{sub@fig51:c}{{(c)}{c}}
+\newlabel{fig51:d}{{5.15d}{64}}
+\newlabel{sub@fig51:d}{{(d)}{d}}
+\newlabel{fig51:e}{{5.15e}{64}}
+\newlabel{sub@fig51:e}{{(e)}{e}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.15}{\ignorespaces The identified range of grain size for minimum execution time for $problem\_size=$ (a) 10000, (b) 100000, (c) 1000000, (d) 10000000, (e) 100000000, on 8 cores, with $\lambda _{s}=0.1$ and $\lambda _{b}=0.1$. The gray dashed line represents the grain size where work is equally divided among the cores, $\frac  {problem\_size}{N}$. The unit for execution time is microseconds.\relax }}{64}\protected@file@percent }
+\newlabel{fig51}{{5.15}{64}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{64}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{64}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{64}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{64}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {}}}{64}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.16}{\ignorespaces An example of the effect of $\lambda _b$ and $\lambda _s$ on the borders of the identified region for minimum execution time due to change for $problem\_{size}=100000000$ and $N=8$. \relax }}{65}\protected@file@percent }
+\newlabel{fig65}{{5.16}{65}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.8}Applying the Proposed Model to the Blazemark Data}{65}\protected@file@percent }
+\newlabel{fig52:a}{{5.17a}{67}}
+\newlabel{sub@fig52:a}{{(a)}{a}}
+\newlabel{fig52:b}{{5.17b}{67}}
+\newlabel{sub@fig52:b}{{(b)}{b}}
+\newlabel{fig52:c}{{5.17c}{67}}
+\newlabel{sub@fig52:c}{{(c)}{c}}
+\newlabel{fig52:d}{{5.17d}{67}}
+\newlabel{sub@fig52:d}{{(d)}{d}}
+\newlabel{fig52:e}{{5.17e}{67}}
+\newlabel{sub@fig52:e}{{(e)}{e}}
+\newlabel{fig52:f}{{5.17f}{67}}
+\newlabel{sub@fig52:f}{{(f)}{f}}
+\newlabel{fig52:g}{{5.17g}{67}}
+\newlabel{sub@fig52:g}{{(g)}{g}}
+\newlabel{fig52:h}{{5.17h}{67}}
+\newlabel{sub@fig52:h}{{(h)}{h}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.17}{\ignorespaces The results of predicting execution time using the suggested analytical model with parameters identified using the parallel for-loop benchmark compared to the original values for $matrix\_{size}=690$, ran on (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, and (h) 8 cores. The unit for execution time is microseconds.\relax }}{67}\protected@file@percent }
+\newlabel{fig52}{{5.17}{67}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{67}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{67}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{67}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{67}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {}}}{67}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {}}}{67}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(g)}{\ignorespaces {}}}{67}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(h)}{\ignorespaces {}}}{67}\protected@file@percent }
+\newlabel{fig53:a}{{5.18a}{68}}
+\newlabel{sub@fig53:a}{{(a)}{a}}
+\newlabel{fig53:b}{{5.18b}{68}}
+\newlabel{sub@fig53:b}{{(b)}{b}}
+\newlabel{fig53:c}{{5.18c}{68}}
+\newlabel{sub@fig53:c}{{(c)}{c}}
+\newlabel{fig53:d}{{5.18d}{68}}
+\newlabel{sub@fig53:d}{{(d)}{d}}
+\newlabel{fig53:e}{{5.18e}{68}}
+\newlabel{sub@fig53:e}{{(e)}{e}}
+\newlabel{fig53:f}{{5.18f}{68}}
+\newlabel{sub@fig53:f}{{(f)}{f}}
+\newlabel{fig53:g}{{5.18g}{68}}
+\newlabel{sub@fig53:g}{{(g)}{g}}
+\newlabel{fig53:h}{{5.18h}{68}}
+\newlabel{sub@fig53:h}{{(h)}{h}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.18}{\ignorespaces The results of predicting execution time using the suggested analytical model with parameters identified using the benchmark compared to the original values for $matrix\_{size}=4222$, ran on (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, and (h) 8 cores. The unit for execution time is microseconds.\relax }}{68}\protected@file@percent }
+\newlabel{fig53}{{5.18}{68}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{68}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{68}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{68}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{68}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {}}}{68}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {}}}{68}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(g)}{\ignorespaces {}}}{68}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(h)}{\ignorespaces {}}}{68}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.19}{\ignorespaces The relative error of using the predicting the execution time based on grain size for the $DMATDMATADD$ benchmark from $Blazemark$ suite. The relative error of all matrix sizes smaller than $953$ was averaged for each specific number of cores.\relax }}{69}\protected@file@percent }
+\newlabel{fig54}{{5.19}{69}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.20}{\ignorespaces The $R^2$ score of using the predicting the execution time based on grain size for the $DMATDMATADD$ benchmark from $Blazemark$ suite. The relative error of all matrix sizes smaller than $953$ was averaged for each specific number of cores.\relax }}{69}\protected@file@percent }
+\newlabel{fig55}{{5.20}{69}}
+\newlabel{fig56:a}{{5.21a}{71}}
+\newlabel{sub@fig56:a}{{(a)}{a}}
+\newlabel{fig56:b}{{5.21b}{71}}
+\newlabel{sub@fig56:b}{{(b)}{b}}
+\newlabel{fig56:c}{{5.21c}{71}}
+\newlabel{sub@fig56:c}{{(c)}{c}}
+\newlabel{fig56:d}{{5.21d}{71}}
+\newlabel{sub@fig56:d}{{(d)}{d}}
+\newlabel{fig56:e}{{5.21e}{71}}
+\newlabel{sub@fig56:e}{{(e)}{e}}
+\newlabel{fig56:f}{{\caption@xref {fig56:f}{ on input line 925}}{71}}
+\newlabel{fig56:g}{{\caption@xref {fig56:g}{ on input line 927}}{71}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.21}{\ignorespaces The results of predicted values of execution time through curve fitting vs the real data for $matrix\_size=$, for (a) 690, (b) 912, (c) 1825, (d) 3193, (e) 4222, (f) 4855, (g) 6420, on 8 cores, with $\lambda _{b}=0.01$ and $\lambda _{s}=0.5$. The unit for execution time is microseconds.\relax }}{71}\protected@file@percent }
+\newlabel{fig56}{{5.21}{71}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{71}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{71}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{71}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{71}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {}}}{71}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.9}Predicting the Range of Chunk Size for Minimum Execution Time}{72}\protected@file@percent }
+\newlabel{fig57:a}{{5.22a}{73}}
+\newlabel{sub@fig57:a}{{(a)}{a}}
+\newlabel{fig57:b}{{5.22b}{73}}
+\newlabel{sub@fig57:b}{{(b)}{b}}
+\newlabel{fig57:c}{{5.22c}{73}}
+\newlabel{sub@fig57:c}{{(c)}{c}}
+\newlabel{fig57:d}{{5.22d}{73}}
+\newlabel{sub@fig57:d}{{(d)}{d}}
+\newlabel{fig57:e}{{5.22e}{73}}
+\newlabel{sub@fig57:e}{{(e)}{e}}
+\newlabel{fig57:f}{{\caption@xref {fig57:f}{ on input line 958}}{73}}
+\newlabel{fig57:g}{{\caption@xref {fig57:g}{ on input line 960}}{73}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.22}{\ignorespaces The suggested range of chunk size for minimum execution time with $block\_{size}=4\times {256}$, for $matrix\_size=$, for (a) 690, (b) 912, (c) 1825, (d) 3193, (e) 4222, (f) 4855, (g) 6420, on 8 cores, when $\lambda _{s}=0.5$ and $\lambda _{b}=0.01$. The unit for execution time is microseconds.\relax }}{73}\protected@file@percent }
+\newlabel{fig57}{{5.22}{73}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{73}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{73}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{73}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{73}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {}}}{73}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Conclusion}{74}\protected@file@percent }
+\citation{thoman2013adaptive}
+\citation{thoman2013adaptive}
+\citation{tzannes2014lazy}
+\citation{prell2016embracing}
+\citation{aguilar2019line}
+\@writefile{toc}{\vskip 12\p@ \relax }
+\@writefile{toc}{\contentsline {chapter}{\uppercase {\numberline {6}Splittable Task}}{75}\protected@file@percent }
+\newlabel{splittable_task}{{6}{75}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}splittable Task}{75}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Implementation}{76}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Splitting Strategies}{76}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2.1}Splitting based on total number of cores}{77}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.2.2}Splitting based on number of idle cores}{77}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}Results}{77}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.3.1}For-loop Benchmark}{77}\protected@file@percent }
+\newlabel{fig66:a}{{6.1a}{77}}
+\newlabel{sub@fig66:a}{{(a)}{a}}
+\newlabel{fig66:b}{{6.1b}{77}}
+\newlabel{sub@fig66:b}{{(b)}{b}}
+\newlabel{fig66:c}{{6.1c}{77}}
+\newlabel{sub@fig66:c}{{(c)}{c}}
+\newlabel{fig66:d}{{6.1d}{77}}
+\newlabel{sub@fig66:d}{{(d)}{d}}
+\newlabel{fig66:e}{{6.1e}{77}}
+\newlabel{sub@fig66:e}{{(e)}{e}}
+\newlabel{fig66:f}{{6.1f}{77}}
+\newlabel{sub@fig66:f}{{(f)}{f}}
+\newlabel{fig66:g}{{6.1g}{77}}
+\newlabel{sub@fig66:g}{{(g)}{g}}
+\newlabel{fig66:h}{{6.1h}{77}}
+\newlabel{sub@fig66:h}{{(h)}{h}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces The results of running the hpx for loop using splittable tasks with all-cores and idle-cores split types compared with different grain sizes, for $problem\_size=10000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.\relax }}{77}\protected@file@percent }
+\newlabel{fig66}{{6.1}{77}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{77}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{77}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{77}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{77}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {}}}{77}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(f)}{\ignorespaces {}}}{77}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(g)}{\ignorespaces {}}}{77}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(h)}{\ignorespaces {}}}{77}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.1.3.2}Blazemark}{78}\protected@file@percent }
 \citation{Blitz}
 \citation{Boost}
 \citation{GMM++}
@@ -307,69 +633,18 @@
 \citation{gotoblas}
 \citation{MKL}
 \@writefile{toc}{\vskip 12\p@ \relax }
-\@writefile{toc}{\contentsline {chapter}{\uppercase {\numberline {6}Setup}}{37}\protected@file@percent }
-\newlabel{Results}{{6}{37}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.0.1}Blazemark}{37}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces An example of the results obtained from running $DVECDVECADD$ benchmark through Blazemark\relax }}{37}\protected@file@percent }
-\newlabel{blazemark1}{{6.1}{37}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.0.2}Configurations}{37}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Specifications of the Marvin node from Rostam cluster at CCT.\relax }}{38}\protected@file@percent }
-\newlabel{table3}{{6.1}{38}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces Cache specifications of the Marvin node from Rostam cluster at CCT.\relax }}{38}\protected@file@percent }
-\newlabel{table4}{{6.2}{38}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.3}{\ignorespaces Specifications of the libraries used to run our experiments.\relax }}{38}\protected@file@percent }
-\newlabel{table5}{{6.3}{38}}
-\@writefile{toc}{\vskip 12\p@ \relax }
-\@writefile{toc}{\contentsline {chapter}{\uppercase {\numberline {7}Proposed Study}}{39}\protected@file@percent }
-\newlabel{Future}{{7}{39}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}Studying the bathtub model}{39}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}Generalization for matrix size}{39}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores.\relax }}{40}\protected@file@percent }
-\newlabel{fig19}{{7.1}{40}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark for different number of cores for matrix size $523\times 523$ to $912\times 912$.\relax }}{40}\protected@file@percent }
-\newlabel{fig20}{{7.2}{40}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.3}Generalization for complex expressions}{41}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.4}Generalization for different architectures}{41}\protected@file@percent }
-\citation{grubel2015performance}
-\@writefile{toc}{\vskip 12\p@ \relax }
-\@writefile{toc}{\contentsline {chapter}{\uppercase {\numberline {8}Appendix}}{42}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8.1}Bathtub model}{42}\protected@file@percent }
-\newlabel{fig20:a}{{8.1a}{42}}
-\newlabel{sub@fig20:a}{{(a)}{a}}
-\newlabel{fig20:b}{{8.1b}{42}}
-\newlabel{sub@fig20:b}{{(b)}{b}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.1}{\ignorespaces (a)The execution time vs. grain size graph, and (b) execution time vs. number fo tasks graph for $DMATDMATADD$ benchmark for matrix size $690\times 690$ ran on $4$ cores.\relax }}{42}\protected@file@percent }
-\newlabel{fig21}{{8.1}{42}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{42}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{42}\protected@file@percent }
-\newlabel{new}{{8.1}{43}}
-\newlabel{softplus}{{8.3}{44}}
-\newlabel{soft_new}{{8.4}{44}}
-\newlabel{fig22:a}{{8.2a}{44}}
-\newlabel{sub@fig22:a}{{(a)}{a}}
-\newlabel{fig22:b}{{8.2b}{44}}
-\newlabel{sub@fig22:b}{{(b)}{b}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.2}{\ignorespaces The prediction of execution time based on grain size using the bathtub model, for (a)4 cores and (b)8 cores for $DMATDMATADD$ benchmark for matrix size $690\times 690$.\relax }}{44}\protected@file@percent }
-\newlabel{fig22}{{8.2}{44}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{44}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{44}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {8.3}{\ignorespaces The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times 690$ with different number of cores.\relax }}{45}\protected@file@percent }
-\newlabel{fig23}{{8.3}{45}}
-\newlabel{usl_fit}{{8.5}{45}}
-\newlabel{fig24:a}{{8.4a}{45}}
-\newlabel{sub@fig24:a}{{(a)}{a}}
-\newlabel{fig24:b}{{8.4b}{45}}
-\newlabel{sub@fig24:b}{{(b)}{b}}
-\newlabel{fig24:c}{{8.4c}{45}}
-\newlabel{sub@fig24:c}{{(c)}{c}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8.4}{\ignorespaces Fitting the three parameters (a)$\alpha $, (b)$t_s$, and (c)$\gamma $ for $DMATDMATADD$ benchmark for matrix size $690\times 690$.\relax }}{45}\protected@file@percent }
-\newlabel{fig24}{{8.4}{45}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{45}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{45}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{45}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {8.5}{\ignorespaces The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times 690$ with different number of cores.\relax }}{46}\protected@file@percent }
-\newlabel{fig25}{{8.5}{46}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1.1}Studying the effect of matrix size}{46}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\uppercase {\numberline {7}Setup}}{79}\protected@file@percent }
+\newlabel{Results}{{7}{79}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.0.1}Blazemark}{79}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces An example of the results obtained from running $DVECDVECADD$ benchmark through Blazemark\relax }}{79}\protected@file@percent }
+\newlabel{blazemark1}{{7.1}{79}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.0.2}Configurations}{79}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7.1}{\ignorespaces Specifications of the Marvin node from Rostam cluster at CCT.\relax }}{80}\protected@file@percent }
+\newlabel{table3}{{7.1}{80}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.2}{\ignorespaces Cache specifications of the Marvin node from Rostam cluster at CCT.\relax }}{80}\protected@file@percent }
+\newlabel{table4}{{7.2}{80}}
+\@writefile{lot}{\contentsline {table}{\numberline {7.3}{\ignorespaces Specifications of the libraries used to run our experiments.\relax }}{80}\protected@file@percent }
+\newlabel{table5}{{7.3}{80}}
 \bibstyle{unsrt}
 \bibdata{bibliography}
 \bibcite{grubel2015performance}{1}
@@ -387,7 +662,7 @@
 \bibcite{munshi2009opencl}{13}
 \bibcite{nvidia2011nvidia}{14}
 \@writefile{toc}{\vspace  {12pt}}
-\@writefile{toc}{\contentsline {chapter}{\hspace  {-1.6em} REFERENCES}{47}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\hspace  {-1.6em} REFERENCES}{81}\protected@file@percent }
 \bibcite{reinders2007intel}{15}
 \bibcite{blumofe1996cilk}{16}
 \bibcite{dagum1998openmp}{17}
@@ -428,10 +703,14 @@
 \bibcite{qawasmeh2015adaptive}{52}
 \bibcite{wang2009mapping}{53}
 \bibcite{Boost}{54}
-\bibcite{GMM++}{55}
-\bibcite{sanderson2016armadillo}{56}
-\bibcite{Eigen}{57}
-\bibcite{ATLAS}{58}
-\bibcite{gotoblas}{59}
-\bibcite{MKL}{60}
+\bibcite{thoman2013adaptive}{55}
+\bibcite{tzannes2014lazy}{56}
+\bibcite{prell2016embracing}{57}
+\bibcite{aguilar2019line}{58}
+\bibcite{GMM++}{59}
+\bibcite{sanderson2016armadillo}{60}
+\bibcite{Eigen}{61}
+\bibcite{ATLAS}{62}
+\bibcite{gotoblas}{63}
+\bibcite{MKL}{64}
 \@writefile{toc}{\vspace  {12pt} \hspace  {-1.8em} APPENDIX \vspace  {-1em}}

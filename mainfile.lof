@@ -45,18 +45,104 @@
 \contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{32}% 
 \contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{32}% 
 \contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{32}% 
-\contentsline {figure}{\numberline {4.16}{\ignorespaces (a)The execution time vs. grain size graph, and (b) execution time vs. number fo tasks graph for $DMATDMATADD$ benchmark for matrix size $690\times 690$ ran on $4$ cores.\relax }}{33}% 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{33}% 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{33}% 
-\contentsline {figure}{\numberline {4.17}{\ignorespaces The prediction of execution time based on grain size using the bathtub model, for (a)4 cores and (b)8 cores for $DMATDMATADD$ benchmark for matrix size $690\times 690$.\relax }}{35}% 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{35}% 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{35}% 
-\contentsline {figure}{\numberline {4.18}{\ignorespaces The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times 690$ with different number of cores.\relax }}{36}% 
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Fitting the three parameters (a)$\alpha $, (b)$t_s$, and (c)$\gamma $ for $DMATDMATADD$ benchmark for matrix size $690\times 690$.\relax }}{36}% 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{36}% 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{36}% 
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{36}% 
-\contentsline {figure}{\numberline {4.20}{\ignorespaces The error in fitting execution time with the bathtub formula for $DMATDMATADD$ benchmark for matrix size $690\times 690$ with different number of cores.\relax }}{37}% 
-\contentsline {figure}{\numberline {5.1}{\ignorespaces An example of the results obtained from running $DVECDVECADD$ benchmark through Blazemark\relax }}{38}% 
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores.\relax }}{41}% 
-\contentsline {figure}{\numberline {6.2}{\ignorespaces The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark for different number of cores for matrix size $523\times 523$ to $912\times 912$.\relax }}{41}% 
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Throughput vs. grain size graph obtained from running $DMATDMATADD$ benchmark on $4$ cores.\relax }}{33}% 
+\contentsline {figure}{\numberline {4.17}{\ignorespaces The range of grain size within $10\%$ of the maximum performance of the fitted polynomial function for $DMATDMATADD$ benchmark for different number of cores for matrix size $523\times 523$ to $912\times 912$.\relax }}{34}% 
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The way $w\_c$ is calculated illustrated for cases where $num\_{tasks}\%N=1$ and $num\_{iterations}\%chunk\_{size}\not =0$.\relax }}{39}% 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces The results of running the parallel for-loop benchmark with $problem\_size=3000$, on different (a)4 cores, and (b) 8 cores. The vertical dotted line shows the grain size that would generate same number of tasks as the number of cores, with the same amount of work for all the cores.\relax }}{42}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{42}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{42}% 
+\contentsline {figure}{\numberline {5.3}{\ignorespaces The results of running the parallel for-loop benchmark with $problem\_size=100,000$, on 8 cores. The unit for execution time is microseconds.\relax }}{44}% 
+\contentsline {figure}{\numberline {5.4}{\ignorespaces The results of running the parallel for-loop benchmark with $problem\_size=100000$, on 8 cores. (a) represents the graph in logarithmic scale, while (b) shows the same graph in linear scale. The unit for execution time is microseconds.\relax }}{47}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{47}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{47}% 
+\contentsline {figure}{\numberline {5.5}{\ignorespaces The (a) relative error, and (b) $R^2$ score of fitting the collected data to the proposed analytical model for different $problem\_{sizes}$, calculated for each number of cores.\relax }}{48}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{48}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{48}% 
+\contentsline {figure}{\numberline {5.6}{\ignorespaces The (a)relative error and (b)$R^2$ score of using the model parameters found from each base $problem\_{size}$ fitting the proposed analytical model to the collected data for different $problem\_{sizes}$, calculated over each number of cores.\relax }}{49}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{49}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{49}% 
+\contentsline {figure}{\numberline {5.7}{\ignorespaces The results of running the parallel for-loop benchmark with $problem\_size=100000$, on different number of cores. The unit for execution time is microseconds.\relax }}{50}% 
+\contentsline {figure}{\numberline {5.8}{\ignorespaces The results of predicted values of execution time through curve fitting vs the real data for $problem\_size=100000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.\relax }}{51}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{51}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{51}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{51}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{51}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{51}% 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{51}% 
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {}}}{51}% 
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {}}}{51}% 
+\contentsline {figure}{\numberline {5.9}{\ignorespaces The results of predicted values of execution time through curve fitting vs the real data for $problem\_size=100000000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.\relax }}{52}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{52}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{52}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{52}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{52}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{52}% 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{52}% 
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {}}}{52}% 
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {}}}{52}% 
+\contentsline {figure}{\numberline {5.10}{\ignorespaces The (a) relative error, and (b) $R^2$ score of fitting the collected data to the proposed analytical model for different $problem\_{sizes}$, calculated for each number of cores.\relax }}{53}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{53}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{53}% 
+\contentsline {figure}{\numberline {5.11}{\ignorespaces The (a)relative error and (b)$R^2$ score of using the model parameters found from each base $problem\_{size}$ fitting the proposed analytical model to the collected data for different $problem\_{sizes}$, calculated over each number of cores.\relax }}{54}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{54}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{54}% 
+\contentsline {figure}{\numberline {5.12}{\ignorespaces The results of predicted values of execution time through curve fitting vs the real data for $problem\_size=100000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.\relax }}{55}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{55}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{55}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{55}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{55}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{55}% 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{55}% 
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {}}}{55}% 
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {}}}{55}% 
+\contentsline {figure}{\numberline {5.13}{\ignorespaces The imbalance ratio calculated for different grain sizes for $problem\_size=10000$, on 8 cores. At the area between each two green lines $k=\left \delimiter "42643A7 {\frac {num\_{tasks}}{N}}\right \delimiter "52653A8 $ is constant.\relax }}{61}% 
+\contentsline {figure}{\numberline {5.14}{\ignorespaces The imbalance ratio alongside speedup for different grain sizes for $problem\_size=10000$, on 8 cores, where $k=\left \delimiter "42643A7 {\frac {num\_{tasks}}{N}}\right \delimiter "52653A8 $.\relax }}{61}% 
+\contentsline {figure}{\numberline {5.15}{\ignorespaces The identified range of grain size for minimum execution time for $problem\_size=$ (a) 10000, (b) 100000, (c) 1000000, (d) 10000000, (e) 100000000, on 8 cores, with $\lambda _{s}=0.1$ and $\lambda _{b}=0.1$. The gray dashed line represents the grain size where work is equally divided among the cores, $\frac {problem\_size}{N}$. The unit for execution time is microseconds.\relax }}{64}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{64}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{64}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{64}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{64}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{64}% 
+\contentsline {figure}{\numberline {5.16}{\ignorespaces An example of the effect of $\lambda _b$ and $\lambda _s$ on the borders of the identified region for minimum execution time due to change for $problem\_{size}=100000000$ and $N=8$. \relax }}{65}% 
+\contentsline {figure}{\numberline {5.17}{\ignorespaces The results of predicting execution time using the suggested analytical model with parameters identified using the parallel for-loop benchmark compared to the original values for $matrix\_{size}=690$, ran on (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, and (h) 8 cores. The unit for execution time is microseconds.\relax }}{67}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{67}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{67}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{67}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{67}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{67}% 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{67}% 
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {}}}{67}% 
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {}}}{67}% 
+\contentsline {figure}{\numberline {5.18}{\ignorespaces The results of predicting execution time using the suggested analytical model with parameters identified using the benchmark compared to the original values for $matrix\_{size}=4222$, ran on (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, and (h) 8 cores. The unit for execution time is microseconds.\relax }}{68}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{68}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{68}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{68}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{68}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{68}% 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{68}% 
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {}}}{68}% 
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {}}}{68}% 
+\contentsline {figure}{\numberline {5.19}{\ignorespaces The relative error of using the predicting the execution time based on grain size for the $DMATDMATADD$ benchmark from $Blazemark$ suite. The relative error of all matrix sizes smaller than $953$ was averaged for each specific number of cores.\relax }}{69}% 
+\contentsline {figure}{\numberline {5.20}{\ignorespaces The $R^2$ score of using the predicting the execution time based on grain size for the $DMATDMATADD$ benchmark from $Blazemark$ suite. The relative error of all matrix sizes smaller than $953$ was averaged for each specific number of cores.\relax }}{69}% 
+\contentsline {figure}{\numberline {5.21}{\ignorespaces The results of predicted values of execution time through curve fitting vs the real data for $matrix\_size=$, for (a) 690, (b) 912, (c) 1825, (d) 3193, (e) 4222, (f) 4855, (g) 6420, on 8 cores, with $\lambda _{b}=0.01$ and $\lambda _{s}=0.5$. The unit for execution time is microseconds.\relax }}{71}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{71}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{71}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{71}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{71}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{71}% 
+\contentsline {figure}{\numberline {5.22}{\ignorespaces The suggested range of chunk size for minimum execution time with $block\_{size}=4\times {256}$, for $matrix\_size=$, for (a) 690, (b) 912, (c) 1825, (d) 3193, (e) 4222, (f) 4855, (g) 6420, on 8 cores, when $\lambda _{s}=0.5$ and $\lambda _{b}=0.01$. The unit for execution time is microseconds.\relax }}{73}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{73}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{73}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{73}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{73}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{73}% 
+\contentsline {figure}{\numberline {6.1}{\ignorespaces The results of running the hpx for loop using splittable tasks with all-cores and idle-cores split types compared with different grain sizes, for $problem\_size=10000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.\relax }}{77}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{77}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{77}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{77}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{77}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{77}% 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{77}% 
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {}}}{77}% 
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {}}}{77}% 
+\contentsline {figure}{\numberline {7.1}{\ignorespaces An example of the results obtained from running $DVECDVECADD$ benchmark through Blazemark\relax }}{79}% 

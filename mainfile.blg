@@ -29,45 +29,46 @@ Repeated entry---line 639 of file bibliography.bib
 I'm skipping whatever remains of this entry
 Warning--there's a number but no volume in dagum1998openmp
 Warning--can't use both volume and number fields in wang2009mapping
-You've used 59 entries,
+Warning--empty school in prell2016embracing
+You've used 64 entries,
             1791 wiz_defined-function locations,
-            759 strings with 14108 characters,
-and the built_in function-call counts, 15231 in all, are:
-= -- 1460
-> -- 570
-< -- 27
-+ -- 217
-- -- 158
-* -- 886
-:= -- 2173
-add.period$ -- 193
-call.type$ -- 59
-change.case$ -- 56
+            783 strings with 14979 characters,
+and the built_in function-call counts, 16592 in all, are:
+= -- 1587
+> -- 633
+< -- 29
++ -- 240
+- -- 176
+* -- 971
+:= -- 2376
+add.period$ -- 210
+call.type$ -- 64
+change.case$ -- 59
 chr.to.int$ -- 0
-cite$ -- 61
-duplicate$ -- 756
-empty$ -- 1554
-format.name$ -- 158
-if$ -- 3623
+cite$ -- 67
+duplicate$ -- 824
+empty$ -- 1681
+format.name$ -- 176
+if$ -- 3940
 int.to.chr$ -- 0
-int.to.str$ -- 59
-missing$ -- 51
-newline$ -- 289
-num.names$ -- 50
-pop$ -- 255
+int.to.str$ -- 64
+missing$ -- 56
+newline$ -- 314
+num.names$ -- 55
+pop$ -- 278
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 436
+skip$ -- 471
 stack$ -- 0
-substring$ -- 985
-swap$ -- 280
-text.length$ -- 27
+substring$ -- 1065
+swap$ -- 305
+text.length$ -- 29
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 2
-while$ -- 151
-width$ -- 61
-write$ -- 633
+warning$ -- 3
+while$ -- 164
+width$ -- 66
+write$ -- 688
 (There were 6 error messages)
