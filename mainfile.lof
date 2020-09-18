@@ -136,13 +136,13 @@
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{73}% 
 \contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{73}% 
 \contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{73}% 
-\contentsline {figure}{\numberline {6.1}{\ignorespaces The results of running the hpx for loop using splittable tasks with all-cores and idle-cores split types compared with different grain sizes, for $problem\_size=10000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.\relax }}{77}% 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{77}% 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{77}% 
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{77}% 
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{77}% 
-\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{77}% 
-\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{77}% 
-\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {}}}{77}% 
-\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {}}}{77}% 
-\contentsline {figure}{\numberline {7.1}{\ignorespaces An example of the results obtained from running $DVECDVECADD$ benchmark through Blazemark\relax }}{79}% 
+\contentsline {figure}{\numberline {6.1}{\ignorespaces The results of running the hpx for loop using splittable tasks with all-cores and idle-cores split types compared with different grain sizes, for $problem\_size=10000$, for (a) 1 core, (b) 2 cores, (c) 3 cores, (d) 4 cores, (e) 5 cores, (f) 6 cores, (g) 7 cores, (h) 8 cores. The unit for execution time is microseconds.\relax }}{78}% 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{78}% 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{78}% 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{78}% 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{78}% 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {}}}{78}% 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {}}}{78}% 
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {}}}{78}% 
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {}}}{78}% 
+\contentsline {figure}{\numberline {7.1}{\ignorespaces An example of the results obtained from running $DVECDVECADD$ benchmark through Blazemark\relax }}{80}% 

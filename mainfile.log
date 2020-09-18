@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.18)  26 JUL 2020 10:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.8.10)  18 SEP 2020 10:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1644,14 +1644,19 @@ duling[[]] di-vides the re-main-
 ) [11]
 Chapter 3.
 (./chapter3.tex
-Overfull \hbox (4.10146pt too wide) in paragraph at lines 15--16
+Overfull \hbox (4.10146pt too wide) in paragraph at lines 16--17
 \T1/futs/m/n/12 ap-pli-ca-tion, a par-al-lel multi-grid solver for lin-ear syst
 ems[[]], on two dif-fer-ent plat-forms. Defin-
  []
 
 [12
 
-] [13] [14]) [15]
+] [13]
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
+
+ []
+
+[14]) [15]
 Chapter 4.
 (./chapter4.tex
 Overfull \hbox (6.6775pt too wide) in paragraph at lines 4--8
@@ -1941,7 +1946,7 @@ Package pdftex.def Info: images/polyfit/fig_523-912_peak_range_all.png  used on
 (pdftex.def)             Requested size: 255.83517pt x 132.97647pt.
  [33]) [34]
 Chapter 5.
-(./chapter8.tex [35
+(./chapter5.tex [35
 
 ] [36] [37]
 Overfull \hbox (9.83995pt too wide) in paragraph at lines 86--87
@@ -2738,107 +2743,107 @@ p/blazemark/100000/chunk_sizes/marvin_pred_4855_8_10_500_28_960.png> <./images/
 hpx_for_loop/blazemark/100000/chunk_sizes/marvin_pred_6420_8_10_500_38_1737.png
 >] [74])
 Chapter 6.
-(./chapter9.tex [75
+(./chapter6.tex [75
 
 
-]
-<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_1.png, id=511, 503.
+] [76]
+<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_1.png, id=514, 503.
 8825pt x 283.0575pt>
 File: images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_1.png Graphic 
 file (type png)
 <use images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_1.png>
 Package pdftex.def Info: images/hpx_for_loop/splittable/all_idle_cores/marvin_1
-0000_1.png  used on input line 40.
+0000_1.png  used on input line 47.
 (pdftex.def)             Requested size: 176.36151pt x 99.0716pt.
-<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_2.png, id=512, 503.
+<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_2.png, id=515, 503.
 8825pt x 283.0575pt>
 File: images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_2.png Graphic 
 file (type png)
 <use images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_2.png>
 Package pdftex.def Info: images/hpx_for_loop/splittable/all_idle_cores/marvin_1
-0000_2.png  used on input line 43.
+0000_2.png  used on input line 50.
 (pdftex.def)             Requested size: 176.36151pt x 99.0716pt.
-<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_3.png, id=513, 503.
+<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_3.png, id=516, 503.
 8825pt x 283.0575pt>
 File: images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_3.png Graphic 
 file (type png)
 <use images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_3.png>
 Package pdftex.def Info: images/hpx_for_loop/splittable/all_idle_cores/marvin_1
-0000_3.png  used on input line 46.
+0000_3.png  used on input line 53.
 (pdftex.def)             Requested size: 176.36151pt x 99.0716pt.
-<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_4.png, id=514, 503.
+<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_4.png, id=517, 503.
 8825pt x 283.0575pt>
 File: images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_4.png Graphic 
 file (type png)
 <use images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_4.png>
 Package pdftex.def Info: images/hpx_for_loop/splittable/all_idle_cores/marvin_1
-0000_4.png  used on input line 49.
+0000_4.png  used on input line 56.
 (pdftex.def)             Requested size: 176.36151pt x 99.0716pt.
-<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_5.png, id=515, 503.
+<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_5.png, id=518, 503.
 8825pt x 283.0575pt>
 File: images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_5.png Graphic 
 file (type png)
 <use images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_5.png>
 Package pdftex.def Info: images/hpx_for_loop/splittable/all_idle_cores/marvin_1
-0000_5.png  used on input line 52.
+0000_5.png  used on input line 59.
 (pdftex.def)             Requested size: 176.36151pt x 99.0716pt.
-<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_6.png, id=516, 503.
+<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_6.png, id=519, 503.
 8825pt x 283.0575pt>
 File: images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_6.png Graphic 
 file (type png)
 <use images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_6.png>
 Package pdftex.def Info: images/hpx_for_loop/splittable/all_idle_cores/marvin_1
-0000_6.png  used on input line 55.
+0000_6.png  used on input line 62.
 (pdftex.def)             Requested size: 176.36151pt x 99.0716pt.
-<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_7.png, id=517, 503.
+<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_7.png, id=520, 503.
 8825pt x 283.0575pt>
 File: images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_7.png Graphic 
 file (type png)
 <use images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_7.png>
 Package pdftex.def Info: images/hpx_for_loop/splittable/all_idle_cores/marvin_1
-0000_7.png  used on input line 58.
+0000_7.png  used on input line 65.
 (pdftex.def)             Requested size: 176.36151pt x 99.0716pt.
-<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_8.png, id=518, 503.
+<images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_8.png, id=521, 503.
 8825pt x 283.0575pt>
 File: images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_8.png Graphic 
 file (type png)
 <use images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_8.png>
 Package pdftex.def Info: images/hpx_for_loop/splittable/all_idle_cores/marvin_1
-0000_8.png  used on input line 61.
+0000_8.png  used on input line 68.
 (pdftex.def)             Requested size: 176.36151pt x 99.0716pt.
- [76]
+ [77]
 Overfull \vbox (76.66269pt too high) has occurred while \output is active []
 
 
-[77 <./images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_1.png> <./ima
+[78 <./images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_1.png> <./ima
 ges/hpx_for_loop/splittable/all_idle_cores/marvin_10000_2.png> <./images/hpx_fo
 r_loop/splittable/all_idle_cores/marvin_10000_3.png> <./images/hpx_for_loop/spl
 ittable/all_idle_cores/marvin_10000_4.png> <./images/hpx_for_loop/splittable/al
 l_idle_cores/marvin_10000_5.png> <./images/hpx_for_loop/splittable/all_idle_cor
 es/marvin_10000_6.png> <./images/hpx_for_loop/splittable/all_idle_cores/marvin_
 10000_7.png> <./images/hpx_for_loop/splittable/all_idle_cores/marvin_10000_8.pn
-g>]) [78]
+g>]) [79]
 Chapter 7.
-(./chapter5.tex
+(./chapter7.tex
 Overfull \hbox (35.81337pt too wide) in paragraph at lines 2--3
 \T1/futs/m/n/12 with other lin-ear al-ge-bra li-braries in-clud-ing Blitz++[[]]
 , Boost uBLAS[[]], GMM++[[]], Armadillo[[]],
  []
 
-<images/blazemark_1.png, id=536, 325.215pt x 449.68pt>
+<images/blazemark_1.png, id=539, 325.215pt x 449.68pt>
 File: images/blazemark_1.png Graphic file (type png)
 <use images/blazemark_1.png>
 Package pdftex.def Info: images/blazemark_1.png  used on input line 6.
 (pdftex.def)             Requested size: 162.6071pt x 224.83945pt.
-<images/blazemark_2.png, id=537, 302.12875pt x 327.2225pt>
+<images/blazemark_2.png, id=540, 302.12875pt x 327.2225pt>
 File: images/blazemark_2.png Graphic file (type png)
 <use images/blazemark_2.png>
 Package pdftex.def Info: images/blazemark_2.png  used on input line 7.
 (pdftex.def)             Requested size: 151.064pt x 163.61084pt.
-[79
+[80
 
- <./images/blazemark_1.png> <./images/blazemark_2.png>]) [80]
-(./mainfile.bbl [81
+ <./images/blazemark_1.png> <./images/blazemark_2.png>]) [81]
+(./mainfile.bbl [82
 
 ]
 LaTeX Font Info:    Try loading font information for T1+cmtt on input line 157.
@@ -2846,30 +2851,25 @@ LaTeX Font Info:    Try loading font information for T1+cmtt on input line 157.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 1701) in paragraph at lines 160--163
-[]\T1/futs/m/n/12 Boost uBLAS Li-brary.  $\T1/cmtt/m/n/12 http : / / www . boos
-t . org / doc / libs / 1 _ 45 _ 0 / libs / numeric /
- []
-
-[82] [83] [84]
-Underfull \hbox (badness 10000) in paragraph at lines 381--384
+[83] [84] [85]
+Underfull \hbox (badness 10000) in paragraph at lines 407--410
 []\T1/futs/m/n/12 GotoBLAS2.  $\T1/cmtt/m/n/12 https : / / www . tacc . utexas 
 . edu / research-[]development /
  []
 
-) [85] (./mainfile.aux)
+) [86] (./mainfile.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 40524 strings out of 494553
- 932526 string characters out of 6177318
- 1808659 words of memory out of 5000000
- 43381 multiletter control sequences out of 15000+600000
+ 40528 strings out of 494501
+ 932612 string characters out of 6175877
+ 1808881 words of memory out of 5000000
+ 43397 multiletter control sequences out of 15000+600000
  618474 words of font info for 124 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 73i,14n,127p,1210b,1366s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36 hyphenation exceptions out of 8191
+ 73i,14n,127p,1212b,1366s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr
 /share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf
 -dist/fonts/type1/public/fourier/fourier-mex.pfb></usr/share/texlive/texmf-dist
@@ -2878,10 +2878,10 @@ ts/type1/public/fourier/fourier-ms.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/adobe/utopia/putb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/uto
 pia/putr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putri8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on mainfile.pdf (95 pages, 4813937 bytes).
+Output written on mainfile.pdf (96 pages, 4815969 bytes).
 PDF statistics:
- 593 PDF objects out of 1000 (max. 8388607)
- 238 compressed objects within 3 object streams
+ 596 PDF objects out of 1000 (max. 8388607)
+ 240 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  633 words of extra memory for PDF output out of 10000 (max. 10000000)
 

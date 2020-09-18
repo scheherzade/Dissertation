@@ -1,21 +1,133 @@
-%\section{Bathtub model}
-%In the previous section we studied the possibility of using a polynomial to capture the relationship between grain size, number of cores, and throughput for a fixed matrix size, with the purpose of finding a range of grain size that leads us to maximum performance. 
-%Although the polynomial function was helpful in directing us toward our objective, it does not have a physical implication. 
+\subsection{Blazemark}
+Blazemark is a benchmark suite provided by Blaze to compare the performance of Blaze with other linear algebra libraries including Blitz++\cite{Blitz}, Boost uBLAS\cite{Boost}, GMM++\cite{GMM++}, Armadillo\cite{sanderson2016armadillo}, MTL4\cite{MTL}, and Eigen3\cite{Eigen}, alongside plain BLAS libraries like Atlas\cite{ATLAS}, Goto\cite{gotoblas}, and Intel MKL.\cite{MKL}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{images/blazemark_1.png}
+	\includegraphics[scale=0.5]{images/blazemark_2.png}
+	\caption{An example of the results obtained from running $DVECDVECADD$ benchmark through Blazemark}	
+	\label{blazemark1}
+\end{figure}
+
+
+\subsection{Configurations}
+Our experiments were run on Marvin nodes of Rostam cluster at Center for Computation and Technology(CCT) at Louisiana State University. Table~\ref{table3} and Table~\ref{table4} show some of the specifications of this node.
+
+\vspace{\baselineskip}	
+\begin{table}[H]
+	\centering
+%	\resizebox{\textwidth}{!}
+	\scalebox{0.75}
+	{\begin{tabular}{|c | c |} 
+			\hline
+
+			Category & Specification\\
+			\hline
+			\hline
+			CPU &  2 x Intel(R) Xeon(R) CPU E5-2450 0 @ 2.10GHz \\ [0.5ex] 
+			\hline
+			RAM & 48 GB\\ 	
+			\hline
+			Number of Cores & 16\\
+			\hline	
+			Hyperthreading & Off \\
+			\hline			
+	\end{tabular}}	
+	\caption{Specifications of the Marvin node from Rostam cluster at CCT.}
+	\label{table3}
+\end{table} 
+
+
+\vspace{\baselineskip}	
+\begin{table}[H]
+	\centering
+	\scalebox{0.9}
+	{\begin{tabular}{|c | c | c | c | c|} 
+			\hline
+			Cache Level &  Coherency Line Size & Number of Sets & Ways of Associativity & Size\\ [0.5ex] 
+			\hline
+			\hline
+			1 & 64 & 512 & 8 & 32KB \\	
+			\hline
+			2 & 64 & 512 & 8 & 256KB \\
+			\hline	
+			3 & 64 & 512 & 20 & 20480KB \\
+			\hline			
+	\end{tabular}}	
+	\caption{Cache specifications of the Marvin node from Rostam cluster at CCT.}
+	\label{table4}
+\end{table} 
+\vspace{\baselineskip}	
+
+\vspace{\baselineskip}	
+\begin{table}[H]
+	\centering
+	%	\resizebox{\textwidth}{!}
+	\scalebox{0.75}
+	{\begin{tabular}{|c | c |} 
+			\hline
+			Library & Version \\
+			\hline
+			\hline
+			HPX & 1.3.0 \\ 
+			\hline
+			Blaze & 3.5\\ 	
+			\hline
+			
+	\end{tabular}}	
+	\caption{Specifications of the libraries used to run our experiments.}
+	\label{table5}
+\end{table}
+%Marvin:
+%cache level 1
+%coherency line size: 64
+%number of sets: 512
+%ways of associativity: 8
+%type: Instruction
+%size: 32K
 %
-%This motivated us to change our view, and instead of looking just at the data and trying to find a function to fit the data, study the behavior of the data, and then find a function that would be likely to fit the data. That function would be a good fit mostly because that's how we expect the throughput to change with grain size, and not just how the data looks like.   
+%cache level 2
+%coherency line size: 64
+%number of sets: 512
+%ways of associativity: 8
+%type: Unified
+%size: 256K
 %
-%As stated in Section~\ref{task}, Grubel et.al.\cite{grubel2015performance} has studied the task granularity for a specific problem(1D stencil). Looking at the graph representing the execution time based on the grain size, which resembles a bathtub, we are interested in formulating this graph based on our understanding of the effect of task granularity. Figure~\ref{fig21} shows the execution time in terms of grain size for $DMATDMATADD$ benchmark for matrix size $690\times690$ on $4$ cores.
+%cache level 3
+%coherency line size: 64
+%number of sets: 512
+%ways of associativity: 20
+%type: Unified
+%size: 20480K
 %
-%\vspace{\baselineskip}	
-%\begin{figure}[H]
-%	\centering
-%	\subfloat[]{\includegraphics[scale=.5]{images/bathtub/all_690_4.png}\label{fig20:a}}
-%	\subfloat[]{\includegraphics[scale=.5]{images/bathtub/tasks_all_690_4.png}\label{fig20:b}}
-%	\caption{(a)The execution time vs. grain size graph, and (b) execution time vs. number fo tasks graph for $DMATDMATADD$ benchmark for matrix size $690\times690$ ran on $4$ cores.}	
-%	\label{fig21}
-%\end{figure}
 %
-%\vspace{\baselineskip}	
-%For the sake of simplicity, we change the x axis from grain size to number of tasks. Each specific grain size would create a specific number of tasks(HPX threads), since the parameters we are interested in are directly associated with he number of tasks, we represent execution time based on number of tasks, as shown in Figure~\ref{fig20:b}.
-% 
+%Trillian:
+%cache level 1
+%coherency line size: 64
+%number of sets: 64
+%ways of associativity: 4
+%type: Data
+%size: 16K
+%
+%cache level 1
+%coherency line size: 64
+%number of sets: 512
+%ways of associativity: 2
+%type: Instruction
+%size: 64K
+%
+%cache level 2
+%coherency line size: 64
+%number of sets: 2048
+%ways of associativity: 16
+%type: Unified
+%size: 2048K
+
+%cache level 3
+%coherency line size: 64
+%number of sets: 2048
+%ways of associativity: 48
+%type: Unified
+%size: 6144K
+
 

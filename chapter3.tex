@@ -5,7 +5,8 @@ Loop scheduling techniques has been extensively studied by different researchers
 %\cite{xue2007locality}
 % \cite{tang1986processor},\cite{polychronopoulos1987guided},\cite{hummel1992factoring},\cite{kruskal1985allocating}
 %	
-
+needs to be changed:
+/////////////////////////
 The previous work on predicting the performance of a parallel application mainly focuses on three major types of models: analytical, trace-based, and empirical models\cite{malakar2018benchmarking}. 
 
 The analytical models\cite{blagojevic2008modeling},\cite{kerbyson2001predictive},\cite{valiant1990bridging}, while providing an arithmetic formula to represent the execution time of an application, require a deep understanding of the application, to apply platform-specific optimizations, and can not be generalized to different domains and architectures\cite{lee2007methods},\cite{sun2017automated},\cite{pllana2007performance}.
@@ -23,18 +24,22 @@ In \cite{malakar2018benchmarking} the authors investigate a set of machine learn
 
 Although concentrating on GPUs,	\cite{liu2018runtime} proposes a lightweight machine learning based performance model to choose the number of threads to use for parallelization for a specific data size and operation. With the final goal of improving the training time in a neural network, \cite{liu2018runtime} selects 4 performance features collected by hardware counters namely, number of CPU cycles, number of cache misses, cache accesses for the last cache level, and number of level 1 cache hits. Then they take two different approaches to build their model. In the first on they try 10 different regression models including random forest, and in the second one they use hill climbing algorithm to choose the number of threads. In addition to hardware independent, and not requiring the training process, hill climbing algorithm achieves a much higher accuracy compared to the best performing regression model.
 
-In this paper, we suggest using machine learning to directly predict the optimal chunk size to achieve the best performance instead of predicting the execution time or the optimal number of cores to run the application on. For this purpose, we have offered a set of general features that are not specific to an application and could easily be extracted at compile time or at run time. Once the data has been collected and our model has been created, the prediction results could be easily applied to a new application with a negligible overhead. 
+/////////////////////////
 
 %\cite{sun2017automated}
 As another field to use machine learning, \cite{qawasmeh2015adaptive} collects seven runtime events and uses machine learning not to predict the performance, but to schedule the tasks. These events include, task creation, suspension, execution, completion, implicit/explicit barrier, parallel region, and finally loop/master/single region runtime events, collected through the OMPT using ORA API. Experimenting with four different machine learning techniques, including support vector machine, random forest, neural networks, and naive bayes, they would select one specific task pool configuration out of the three pre-defined options as the final classification result. Testing this framework on a real life molecular dynamics application, they observed an up to 31\% improvement in performance. 
 %Compiler-based methods:
 
-The authors of \cite{wang2009mapping} propose using machine learning to predict the optimal number of threads, and also the optimal scheduling policy for running an OpenMP application. Through that, they were able to develop an automatic compiler-based method to map a parallel application to a multicore processor. They collect three type of features namely, code, data, and runtime features. Code features are extracted from the code directly, and they include cycles per instruction, number of branches, load and store instructions, and computations per instruction. While the code features could be collected statically at compile time, the data and run-time features are collected through low-cost profiling runs. This group of features include loop iteration count, branch miss rate, and $L1$ data cache miss rate. The authors of \cite{wang2009mapping} then use an artificial neural network to predict the speedup achieved for a program with certain number of threads, and at the same time they use a support vector machine model to predict the best scheduling policy, out of block, cyclic, dynamic, and guided scheduling policies, for an unseen program.
+The authors of \cite{wang2009mapping} propose using machine learning to predict the optimal number of threads, and also the optimal scheduling policy for running an OpenMP application. Through that, they were able to develop an automatic compiler-based method to map a parallel application to a multicore processor. They collect three type of features namely, code, data, and runtime features. Code features are extracted from the code directly, and they include cycles per instruction, number of branches, load and store instructions, and computations per instruction. While the code features could be collected statically at compile time, the data and run-time features are collected through low-cost profiling runs. This group of features include loop iteration count, branch miss rate, and $L1$ data cache miss rate. The authors of \cite{wang2009mapping} then use an artificial neural network to predict the speedup achieved for a program with certain number of threads, and at the same time they use a support vector machine model to predict the best scheduling policy, out of block, cyclic, dynamic, and guided scheduling policies, for an unseen program.\\
 
+adaptive runtime solutions:
+In \cite{thoman2013adaptive}, the authors offer a combination of compile-time and run-time solution for adaptive control of task granularity. They create multiple transformed versions of the code with different levels of task unrolling at compile time and then use a heuristic based on task demand (the number of unsuccessful steal attempts by other workers) and each worker's queue length, to select one of the versions each time a new task is spawned\cite{thoman2013adaptive}. Their solution relies completely on the compiler and the run-time, and eliminates the need for manual support.
 
+Tzannes et al. proposed a scheduling technique that adjusts the available parallelism based on the inferred load at run-time, to avoid the unnecessary parallelism overhead\cite{tzannes2014lazy}. 
 
-	
-	
+\cite{moreira1995performance}
+\cite{aguilar2019line}	
+\cite{wagle2019runtime}	
 	
 	
 %\cite{treibig2012performance} 

@@ -157,9 +157,8 @@ Todd Veldhuizen.
 \newblock \url{http://www.oonumerics.org/blitz/}.
 
 \bibitem{ublas}
-{Boost uBLAS Library}.
-\newblock
-  \url{http://www.boost.org/doc/libs/1_45_0/libs/numeric/ublas/doc/index.htm.}
+J{\"o}rg Walter and Mathias Koch.
+\newblock The boost ublas library, 2002.
 
 \bibitem{MTL}
 {MTL4 Library}.
@@ -328,10 +327,6 @@ Zheng Wang and Michael~FP O'Boyle.
   approach.
 \newblock In {\em ACM Sigplan notices}, volume~44, pages 75--84. ACM, 2009.
 
-\bibitem{Boost}
-{Boost C++ Framework}.
-\newblock \url{https://www.boost.org}.
-
 \bibitem{thoman2013adaptive}
 Peter Thoman, Herbert Jordan, and Thomas Fahringer.
 \newblock Adaptive granularity control in task parallel programs using
@@ -346,11 +341,12 @@ Alexandros Tzannes, George~C Caragea, Uzi Vishkin, and Rajeev Barua.
 \newblock {\em ACM Transactions on Programming Languages and Systems (TOPLAS)},
   36(3):1--51, 2014.
 
-\bibitem{prell2016embracing}
-Andreas Prell.
-\newblock {\em Embracing explicit communication in work-stealing runtime
-  systems}.
-\newblock PhD thesis, 2016.
+\bibitem{moreira1995performance}
+Jos{\'e}~E Moreira, Dale Schouten, and Constantine Polychronopoulos.
+\newblock The performance impact of granularity control and functional
+  parallelism.
+\newblock In {\em International Workshop on Languages and Compilers for
+  Parallel Computing}, pages 581--597. Springer, 1995.
 
 \bibitem{aguilar2019line}
 Xavier Aguilar, Herbert Jordan, Thomas Heller, Alexander Hirsch, Thomas
@@ -359,6 +355,36 @@ Xavier Aguilar, Herbert Jordan, Thomas Heller, Alexander Hirsch, Thomas
   systems.
 \newblock In {\em International Conference on Computational Science}, pages
   238--252. Springer, 2019.
+
+\bibitem{wagle2019runtime}
+Bibek Wagle, Mohammad Alaul~Haque Monil, Kevin Huck, Allen~D Malony, Adrian
+  Serio, and Hartmut Kaiser.
+\newblock Runtime adaptive task inlining on asynchronous multitasking runtime
+  systems.
+\newblock In {\em Proceedings of the 48th International Conference on Parallel
+  Processing}, pages 1--10, 2019.
+
+\bibitem{Boost}
+{Boost C++ Framework}.
+\newblock \url{https://www.boost.org}.
+
+\bibitem{prell2016embracing}
+Andreas Prell.
+\newblock {\em Embracing explicit communication in work-stealing runtime
+  systems}.
+\newblock PhD thesis, 2016.
+
+\bibitem{robison2008optimization}
+Arch Robison, Michael Voss, and Alexey Kukanov.
+\newblock Optimization via reflection on work stealing in tbb.
+\newblock In {\em 2008 IEEE International Symposium on Parallel and Distributed
+  Processing}, pages 1--8. IEEE, 2008.
+
+\bibitem{huck2015autonomic}
+Kevin~A Huck, Allan Porterfield, Nick Chaimov, Hartmut Kaiser, Allen~D Malony,
+  Thomas Sterling, and Rob Fowler.
+\newblock An autonomic performance environment for exascale.
+\newblock {\em Supercomputing frontiers and innovations}, 2(3):49--66, 2015.
 
 \bibitem{GMM++}
 {Gmm++ Library}.

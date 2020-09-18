@@ -1,5 +1,5 @@
 \contentsline {table}{\numberline {4.1}{\ignorespaces List of some of the thresholds applied to the operations performed by Blaze, starting from which the operation is executed in parallel\relax }}{16}% 
 \contentsline {table}{\numberline {4.2}{\ignorespaces List of different values used for each variable for running the $DMATDMATADD$ benchmark\relax }}{20}% 
-\contentsline {table}{\numberline {7.1}{\ignorespaces Specifications of the Marvin node from Rostam cluster at CCT.\relax }}{80}% 
-\contentsline {table}{\numberline {7.2}{\ignorespaces Cache specifications of the Marvin node from Rostam cluster at CCT.\relax }}{80}% 
-\contentsline {table}{\numberline {7.3}{\ignorespaces Specifications of the libraries used to run our experiments.\relax }}{80}% 
+\contentsline {table}{\numberline {7.1}{\ignorespaces Specifications of the Marvin node from Rostam cluster at CCT.\relax }}{81}% 
+\contentsline {table}{\numberline {7.2}{\ignorespaces Cache specifications of the Marvin node from Rostam cluster at CCT.\relax }}{81}% 
+\contentsline {table}{\numberline {7.3}{\ignorespaces Specifications of the libraries used to run our experiments.\relax }}{81}% 

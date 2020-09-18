@@ -53,16 +53,17 @@
 \contentsline {chapter}{\uppercase {\numberline {6}Splittable Task}}{75}% 
 \contentsline {section}{\numberline {6.1}splittable Task}{75}% 
 \contentsline {subsection}{\numberline {6.1.1}Implementation}{76}% 
-\contentsline {subsection}{\numberline {6.1.2}Splitting Strategies}{76}% 
-\contentsline {subsubsection}{\numberline {6.1.2.1}Splitting based on total number of cores}{77}% 
-\contentsline {subsubsection}{\numberline {6.1.2.2}Splitting based on number of idle cores}{77}% 
-\contentsline {subsection}{\numberline {6.1.3}Results}{77}% 
-\contentsline {subsubsection}{\numberline {6.1.3.1}For-loop Benchmark}{77}% 
-\contentsline {subsubsection}{\numberline {6.1.3.2}Blazemark}{78}% 
+\contentsline {subsection}{\numberline {6.1.2}Splitting Strategies}{77}% 
+\contentsline {subsubsection}{\numberline {6.1.2.1}Splitting based on total number of cores}{78}% 
+\contentsline {subsubsection}{\numberline {6.1.2.2}Splitting based on number of idle cores}{78}% 
+\contentsline {subsection}{\numberline {6.1.3}Results}{78}% 
+\contentsline {subsubsection}{\numberline {6.1.3.1}For-loop Benchmark}{78}% 
+\contentsline {subsubsection}{\numberline {6.1.3.2}Blazemark}{79}% 
+\contentsline {subsubsection}{\numberline {6.1.3.3}Apex}{79}% 
 \vskip 12\p@ \relax 
-\contentsline {chapter}{\uppercase {\numberline {7}Setup}}{79}% 
-\contentsline {subsection}{\numberline {7.0.1}Blazemark}{79}% 
-\contentsline {subsection}{\numberline {7.0.2}Configurations}{79}% 
+\contentsline {chapter}{\uppercase {\numberline {7}Setup}}{80}% 
+\contentsline {subsection}{\numberline {7.0.1}Blazemark}{80}% 
+\contentsline {subsection}{\numberline {7.0.2}Configurations}{80}% 
 \vspace {12pt}
-\contentsline {chapter}{\hspace {-1.6em} REFERENCES}{81}% 
+\contentsline {chapter}{\hspace {-1.6em} REFERENCES}{82}% 
 \vspace {12pt} \hspace {-1.8em} APPENDIX \vspace {-1em}
